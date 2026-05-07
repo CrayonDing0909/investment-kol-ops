@@ -1,0 +1,61 @@
+---
+description: Enforce the ship-workflow and commit conventions for this repo
+alwaysApply: true
+---
+
+# Git Workflow Rule
+
+This repo uses the ship-workflow defined in
+[docs/WORKFLOW_PATTERNS.md](mdc:docs/WORKFLOW_PATTERNS.md). Branch and commit
+strategy lives in [docs/IMPLEMENTATION_PLAN.md](mdc:docs/IMPLEMENTATION_PLAN.md).
+
+## Mandatory Behavior
+
+- Run the ship-workflow at the end of any task with file changes.
+- Never run `git commit`, `git push`, or `git checkout -b` without the user's
+  explicit approval, even if the change looks safe.
+- Before any push to `main`, ask for an extra confirmation.
+- Never stage or commit `.env*`, credential files, private keys, or secrets.
+
+## Direct vs Branch
+
+Direct to `main`:
+
+- Typo / copy fix.
+- New doc that does not change existing flows.
+- Translation update.
+- Checkbox progress in `IMPLEMENTATION_PLAN.md`.
+
+Open a branch (`feat/`, `docs/`, `script/`, `mvp/`, `fix/`, `chore/`):
+
+- Any new script.
+- Any MVP build.
+- Changes touching more than 3 files.
+- New Cursor command or `.cursor/rules/`.
+- Any change you might want to revert.
+
+## Commit Message Convention
+
+Use conventional prefixes: `feat:`, `docs:`, `script:`, `mvp:`, `fix:`,
+`refactor:`, `chore:`. Optional scope in parens, for example
+`feat(investment-analysis): add brief template`.
+
+## Proposal Format
+
+When proposing a commit, show:
+
+1. Branch decision (direct to `main` or branch name).
+2. Files staged, grouped by area.
+3. One or more commit messages, each in conventional format.
+4. Whether to push, and to which branch.
+
+Wait for the user to approve, edit, or reject before executing any git command.
+
+## Logging
+
+After a successful commit, append one line to the Progress Log section of
+[docs/IMPLEMENTATION_PLAN.md](mdc:docs/IMPLEMENTATION_PLAN.md) in the format:
+
+```text
+YYYY-MM-DD - <milestone> - <short description>
+```
