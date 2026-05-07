@@ -1,0 +1,22 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+dist/
+build/
+.venv/
+__pycache__/
+*.pyc
+
+# Private content or raw exports
+private/
+exports/
+raw-data/
+
+# Large media drafts
+assets/raw/
+*.mov
+*.mp4
+*.psd
