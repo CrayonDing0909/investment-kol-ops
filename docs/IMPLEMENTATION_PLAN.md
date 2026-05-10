@@ -38,7 +38,7 @@ Track which milestone each skill currently lives in.
 
 | Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
 |-------|------|------|------|----|----|----|----|
-| investment-analysis | scaffold-done* | research-packet | pov-completion | shared | repurpose | command | metrics |
+| investment-analysis | scaffold-done* | research-packet-done* | pov-completion | shared | repurpose | command | metrics |
 | algorithm-research |  |  |  | shared | core | command | summary |
 | content-production |  |  |  | shared | core | command | publish-check |
 | audience-discovery |  |  |  | shared |  | command | interviews + clusters |
@@ -106,18 +106,18 @@ Required roles:
 
 Tasks:
 
-- [ ] Create `research/sources/ai-server-supply-chain/` with subfolders:
+- [x] Create `research/sources/ai-server-supply-chain/` with subfolders:
       `earnings/`, `news/`, `financials/`, `revenue`, `reports/`, `podcast-notes/`.
-- [ ] Collect source packets for at least AMD, Intel, and MediaTek:
+- [x] Collect source packets for at least AMD, Intel, and MediaTek:
       - earnings call / transcript / 8-K or official IR material
       - latest major news items
       - relevant revenue or financial data
-- [ ] Convert each source into intake notes.
-- [ ] Create `research/questions/ai-server-supply-chain/` and record Q&A for
+- [x] Convert each source into intake notes.
+- [x] Create `research/questions/ai-server-supply-chain/` and record Q&A for
       CPU, ASIC, passive components, memory, cooling, and software.
-- [ ] Update HTML knowledge pages from source-backed Q&A, not just EP659.
-- [ ] Rewrite the CPU anchor brief from the source-backed research packet.
-- [ ] Re-run IA1 dry-run with the updated source checklist.
+- [x] Update HTML knowledge pages from source-backed Q&A, not just EP659.
+- [x] Rewrite the CPU anchor brief from the source-backed research packet.
+- [x] Re-run IA1 dry-run with the updated source checklist.
 
 Definition of Done:
 
@@ -388,9 +388,23 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-10 - M1.0 - Phase B2: CPU revival anchor brief skeleton structured; live trading skill outputs marked "skill missing" pending direct invocation
 2026-05-10 - M1.0 - Phase C: IA1 dry run logged; decision = defer pending human-written POV / invalidation / reflection
 2026-05-10 - M1.0 - Phase D: branch feat/m1-investment-analysis-e2e ready for self-PR merge
+
+2026-05-10 - M1.1 - source/Q&A folder scaffold and templates created
+2026-05-10 - M1.1 - AMD / Intel / MediaTek source packets collected and converted into intake notes
+2026-05-10 - M1.1 - six tutor Q&A notes created for CPU / ASIC / memory / passive / cooling / software
+2026-05-10 - M1.1 - HTML knowledge pages updated with source-backed Q&A links
+2026-05-10 - M1.1 - CPU revival brief refreshed from source packets; IA1 remains defer pending M1.2 human POV
 ```
 
 ### Per-Skill Status Grid Footnotes
+
+`investment-analysis: research-packet-done*` — M1.1 source-backed research packet
+shipped on 2026-05-10. It includes source packets for AMD / Intel / MediaTek,
+source-derived intake notes, six tutor Q&A notes, source-backed HTML knowledge
+page updates, a refreshed CPU brief, and an IA1 re-run note. The IA1 decision
+remains `defer` until M1.2 because the user's HUMAN-WRITTEN POV / invalidation
+sections are still intentionally blank.
+
 
 `investment-analysis: scaffold-done*` — M1.0 scaffold shipped on 2026-05-10.
 It includes folders, templates, 股癌 EP659 intake notes, HTML-first knowledge
