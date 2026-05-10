@@ -35,39 +35,111 @@ flowchart LR
 
 追蹤每個 skill 目前在哪個 milestone。
 
-| Skill | M1 | M2 | M3 | M4 | M5 |
-|-------|----|----|----|----|----|
-| investment-analysis | infra-done* | shared | repurpose | command | metrics |
-| algorithm-research |  | shared | core | command | summary |
-| content-production |  | shared | core | command | publish-check |
-| audience-discovery |  | shared |  | command | interviews + clusters |
-| mvp-demo |  | shared |  |  | first spec |
-| postmortem |  | shared |  |  | first run |
+| Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
+|-------|------|------|------|----|----|----|----|
+| investment-analysis | scaffold-done* | research-packet | pov-completion | shared | repurpose | command | metrics |
+| algorithm-research |  |  |  | shared | core | command | summary |
+| content-production |  |  |  | shared | core | command | publish-check |
+| audience-discovery |  |  |  | shared |  | command | interviews + clusters |
+| mvp-demo |  |  |  | shared |  |  | first spec |
+| postmortem |  |  |  | shared |  |  | first run |
 
-## M1 - 一個 Workflow 跑通 E2E
+## M1 - Theme Knowledge Investment Workflow
 
-目標：用 investment-analysis workflow 真的產出一份過 IA1 gate 的分析 brief。
+目標：用第一個主題 `AI Server Supply Chain` 跑出一套 source-backed、learning-first
+的投資研究流程。
 
-為什麼先做：對既有 trading skill 有最高槓桿。
+M1 **不是**公開文章 milestone，而是從原料到理解的流程：
+
+```text
+sources -> intake -> knowledge architecture -> tutor Q&A -> brief -> personal POV -> gate
+```
+
+M1 拆成三個子 milestone，避免把 scaffold 誤認為完整研究流程。
+
+### M1.0 - Scaffold（目前 PR）
+
+目標：建立資料夾、templates、HTML-first knowledge skeleton、EP659 intake、第一份
+brief skeleton。
 
 任務：
 
-- [ ] 建立 stub 資料夾：`templates/`、`research/swipe/`、`research/interviews/`、
-      `research/notes/`、`research/postmortems/`、`mvp/specs/`、`mvp/builds/`、
-      `mvp/feedback/`、`ops/decisions/`。
-- [ ] 寫 `research/templates/analysis-brief.md`（對應 WORKFLOW_PATTERNS 中
-      Investment Analysis Workflow 的 output）。
-- [ ] 寫 `research/templates/source-checklist.md`。
-- [ ] 寫 `docs/analysis-skill-mapping.md`，把 playbook 各步對應到既有 trading
-      skill。
-- [ ] 手動跑一次完整的每週分析、走過 IA1 gate，把 artifact 存進 `content/drafts/`。
+- [x] 建立 M1 資料夾：`research/templates/`、`research/notes/`、
+      `research/intake/`、`research/knowledge/ai-server-supply-chain/`、
+      `content/drafts/`、`ops/decisions/`。
+- [x] 寫 `research/templates/analysis-brief.md`。
+- [x] 寫 `research/templates/source-checklist.md`。
+- [x] 寫 `docs/analysis-skill-mapping.md`。
+- [x] 寫 HTML-first knowledge templates：
+      `research/templates/knowledge-map.html` 與
+      `research/templates/knowledge-page.html`。
+- [x] 把股癌 EP659 拆成六份 intake notes：CPU、ASIC、memory、被動元件、散熱、軟體。
+- [x] 建立第一版 HTML-first knowledge map skeleton：
+      `research/knowledge/ai-server-supply-chain/index.html` + 6 topic pages。
+- [x] 建立第一份 CPU anchor brief skeleton 與 source checklist。
+- [x] 跑 IA1 dry-run gate，decision 記為 `defer`，因為 HUMAN-WRITTEN 區塊刻意留給使用者。
 
 Definition of Done：
 
-- 一份填好的分析 brief 存在 `content/drafts/`。
-- IA1 gate 決策記錄在 `ops/decisions/`。
-- Source checklist 填好。
-- Invalidation list 填好。
+- M1.0 branch / PR 明確標成 scaffold，不是完整 M1。
+- HTML knowledge skeleton 可直接用 browser 閱讀。
+- Source checklist 有區分 `known`、`inferred`、`uncertain`。
+- IA1 gate decision 記錄為 `defer`。
+
+### M1.1 - Research Packet
+
+目標：真正蒐集外部 source，把 scaffold 升級成 source-backed research packet。
+
+需要的 roles：
+
+- Source Collector Agent：蒐集法說、新聞、財報、營收、公司 IR。
+- Tutor / Q&A Agent：用白話中文回答你的知識缺口。
+- Knowledge Architecture Agent：用有來源的解釋更新 HTML pages。
+- Brief Builder Agent：根據 sources + tutor answers 重建 brief。
+
+任務：
+
+- [ ] 建立 `research/sources/ai-server-supply-chain/`，含 subfolders：
+      `earnings/`、`news/`、`financials/`、`revenue/`、`reports/`、`podcast-notes/`。
+- [ ] 至少蒐集 AMD、Intel、MediaTek 三間公司的 source packets：
+      - 法說 / transcript / 8-K 或官方 IR
+      - 最新重要新聞
+      - 相關營收或財務資料
+- [ ] 將每份 source 轉成 intake notes。
+- [ ] 建立 `research/questions/ai-server-supply-chain/`，記錄 CPU、ASIC、被動元件、memory、cooling、software 的 Q&A。
+- [ ] 用 source-backed Q&A 更新 HTML knowledge pages，不只依賴 EP659。
+- [ ] 用 source-backed research packet 重寫 CPU anchor brief。
+- [ ] 用更新後的 source checklist 重跑 IA1 dry-run。
+
+Definition of Done：
+
+- 至少 3 份 company source packets：AMD、Intel、MediaTek。
+- 至少 6 份 tutor Q&A notes（一個 theme 一份）。
+- HTML knowledge pages 用有來源的解釋更新。
+- CPU brief 不再只依賴 EP659。
+- 若人類 POV 尚未補完，IA1 可維持 `defer`；否則應轉為 `edit` 或 `approve`。
+
+### M1.2 - POV Completion
+
+目標：完成 human side 的 workflow，把 IA1 從 `defer` 轉成真正 decision。
+
+任務：
+
+- [ ] 使用者補完 CPU brief 的 HUMAN-WRITTEN 區塊：
+      - What I Learned
+      - What I Still Don't Understand
+      - My POV (≥ 200 words)
+      - My Invalidation (exactly 3 signals)
+- [ ] 使用者補完 IA1 reflection questions。
+- [ ] Agent 檢查 POV / invalidation 是否具體，不是空話。
+- [ ] 重跑 IA1 gate，把 decision 從 `defer` 改成 `approve`、`edit`、或 `reject`。
+
+Definition of Done：
+
+- 一份 filled、source-backed internal brief 在 `research/notes/`。
+- IA1 gate decision 不再是 `defer`。
+- 使用者能不照念 brief 解釋 thesis。
+- 仍不發 public article。公開內容從 M2/M3 開始。
 
 ## M2 - 共用基礎建設
 
