@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BusinessNext AI CPU Source — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 840px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.65; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  h1 { margin: 4px 0 8px; font-size: 30px; }
+  h2 { font-size: 22px; margin: 30px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  .crumb, .meta, .source { font-size: 12px; opacity: 0.72; font-family: var(--mono); }
+  .lede { opacity: 0.9; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li { margin-bottom: 4px; }
+  blockquote { border-left: 3px solid currentColor; margin: 12px 0; padding-left: 12px; opacity: 0.9; }
+  a { color: inherit; }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> / <a href="../sources.html">Sources</a> / BusinessNext AI CPU</div>
+  <h1>數位時代：為何 CPU 需求突然爆了？</h1>
+  <p class="lede">這篇不是 primary financial source，但非常適合作為中文 mental model：從 chatbot 時代走到 agentic AI 時代，CPU 負責的任務調度、工具呼叫、長時間運行變多。</p>
+  <div class="meta">source quality: secondary explainer · captured: 2026-05-10</div>
+</header>
+
+<section>
+  <h2>Why This Source Matters</h2>
+  <p>它把 CPU thesis 翻成中文投資者能理解的語言：CPU 不是要取代 GPU，而是 agentic AI 從「短跑」變「馬拉松」時，系統調度與長時間工作流的瓶頸。</p>
+</section>
+
+<section>
+  <h2>Key Points</h2>
+  <table>
+    <thead><tr><th>Point</th><th>Meaning</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>聊天機器人 → AI 代理</td><td>從單次問答變成多步驟任務。</td><td>解釋 CPU orchestration demand。</td></tr>
+      <tr><td>工具 / DB / code / self-reflection</td><td>agent 需要反覆跟系統互動。</td><td>把 CPU 從「跑模型」轉成「跑 workflow」。</td></tr>
+      <tr><td>CPU latency &gt;50%</td><td>文章引述 Georgia Tech + Intel 研究。</td><td>可做 hook，但公開前要找原始 paper。</td></tr>
+      <tr><td>短跑 → 馬拉松</td><td>從 bursty inference 到 long-running agents。</td><td>很適合大眾化比喻。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Direct Quotes</h2>
+  <blockquote>「這些涉及任務安排、資源調度與系統互動的工作，幾乎全落在CPU身上。」</blockquote>
+  <blockquote>「CPU甚至可能占據整體延遲的過半比例，成為真正影響效率的關鍵環節。」</blockquote>
+  <blockquote>「算力需求比拼爆發力的短跑，轉變為重視長時間運轉效能的馬拉松。」</blockquote>
+</section>
+
+<section>
+  <h2>Reliability</h2>
+  <ul class="tight">
+    <li><span class="pill">secondary explainer</span> 適合作 mental model，不適合作 financial source。</li>
+    <li>文中引用 Georgia Tech + Intel research，但本 packet 尚未取得原始 paper。</li>
+    <li>AMD / Intel 財務或 guidance claims 應用 AMD / Intel source packets 驗證。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Links</h2>
+  <p class="source">
+    <a href="../intakes/bnext-ai-cpu.html">HTML intake</a> ·
+    <a href="../cpu-qa.html">CPU Q&A page</a> ·
+    <a href="../../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">markdown source packet</a>
+  </p>
+</section>
+
+<footer>BusinessNext CPU Source Reading Page · <a href="../sources.html">back to sources</a></footer>
+</body>
+</html>
