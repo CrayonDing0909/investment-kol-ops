@@ -12,9 +12,15 @@ asset_universe:
   ecosystem: ["DELL", "SMCI", "HPE"]
 intake_sources:
   - research/intake/2026-05-10_gooeye-ep659_cpu.md
+  - research/intake/2026-05-10_amd-q1-2026_cpu.md
+  - research/intake/2026-05-10_intel-q1-2026_cpu.md
+  - research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md
 knowledge_pages:
   - research/knowledge/ai-server-supply-chain/index.html
   - research/knowledge/ai-server-supply-chain/cpu.html
+  - research/questions/ai-server-supply-chain/cpu.md
+  - research/questions/ai-server-supply-chain/asic.md
+  - research/questions/ai-server-supply-chain/memory.md
 sources_checklist: research/notes/2026-05-10_ai-server-supply-chain_cpu-revival_sources.md
 status: gate-pending
 gate: IA1
@@ -44,26 +50,28 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 
 ## Theme Thesis (AI-FILLED, human-reviewed)
 
-> 在 AI server 場景下，CPU 從「commodity 旁角」重新被市場推回 spend 中心；接下來 6-18 個月，AMD 透過 EPYC 在伺服器 CPU 市占有機會穩定壓過 Intel，聯發科則仍停在 I/O / memory subsystem，距離「打入主晶片」還有 1-2 年的不確定性，但個股股價已先 priced 進這條故事。
+> 在 AI server 場景下，CPU 從「commodity 旁角」重新被市場推回 spend 中心；接下來 6-18 個月，AMD 的 EPYC / Data Center 數字是最清楚的 source-backed 受惠線，Intel 的 Xeon 則被重新定位為 AI stack 的 orchestration / control plane。聯發科更像 AI ASIC + I/O / memory subsystem 的 data center optionality，不能和 server CPU 主晶片混為一談。
 
 ## Drivers (AI-FILLED, human-reviewed)
 
 ### Fundamental Drivers
 
-- AI server unit 出貨 ramp，每台仍配 1-2 顆 server CPU，CPU 需求隨 GPU/ASIC 同步成長。
-  — Source: knowledge/cpu.html (industry consensus, confidence: inferred).
-- AMD 法說 guidance 給出 2026 年營收 120B / 年增 &gt; 35% / 伺服器 CPU 市占目標 &gt; 50%。
-  — Source: gooeye-ep659 引述 AMD 法說 (confidence: known per EP659, must verify against AMD 8-K before public).
-- Intel 法說呼應 CPU 重要性，市場開始把 CPU 從「被 GPU 邊緣化」的論述拉回。
-  — Source: gooeye-ep659 (confidence: known per EP659, secondary cite).
-- 聯發科法說切入 I/O / memory subsystem，搭 AMD/Intel 周邊。
-  — Source: gooeye-ep659 (confidence: known per EP659, paths/customers not detailed).
+- AMD Q1 2026 Data Center revenue was $5.8B, up 57% YoY, driven by EPYC and Instinct demand.
+  — Source: `research/intake/2026-05-10_amd-q1-2026_cpu.md` (confidence: known).
+- AMD management said inferencing and Agentic AI increase server CPU compute needs for orchestration, data movement, parallel execution, and head-node roles.
+  — Source: AMD Q1 2026 transcript intake (confidence: known via secondary transcript; primary transcript still preferred before public).
+- AMD now expects server CPU TAM to grow at &gt;35% CAGR, reaching &gt;$120B by 2030. This corrects the earlier EP659 ambiguity: 120B refers to server CPU TAM, not AMD 2026 revenue.
+  — Source: AMD Q1 2026 transcript intake (confidence: known via secondary transcript).
+- Intel Q1 2026 DCAI revenue was $5.1B, up 22% YoY, and management framed CPU as the AI stack orchestration/control plane.
+  — Source: `research/intake/2026-05-10_intel-q1-2026_cpu.md` (confidence: known).
+- MediaTek has data center ASIC visibility and I/O / memory subsystem relevance, but its exposure is not the same as owning server CPU main silicon.
+  — Source: `research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md` (confidence: mixed; ASIC numbers secondary until official transcript verified).
 
 ### Narrative Drivers
 
-- 「資金從 GPU 大轉向，CPU 成市場核心」的市場敘事 — gooeye-ep659 主軸。
-- 美股大跌時 CPU 族群相對強勢，技術面已先反映。
-- 聯發科第一次出現多根漲停，市場對台廠切 server CPU 周邊的想像升溫。
+- 「資金從 GPU 外溢到 CPU / ASIC / server chain」仍是 EP659 的 narrative seed。
+- AMD / Intel 的 official language 都支持「agentic AI / inference 讓 CPU 重新重要」這個方向。
+- MediaTek 的故事應改寫成「data center ASIC + subsystem optionality」，不應簡化成 CPU 主晶片。
 
 ### Catalysts (next 0-6 months)
 
@@ -77,9 +85,9 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 
 | Side | Ticker / Name | One-line reason | Confidence |
 |------|---------------|-----------------|------------|
-| Winner | AMD | EPYC 市占擴張、guidance 強、AI server CPU 主受惠者 | known (per EP659 引述法說) |
-| Watch | INTC | 落後 EPYC 但仍有 foundry / 政府 / Gaudi 反擊牌 | uncertain |
-| Watch | 2454.TW 聯發科 | 從 I/O / memory subsystem 切入，但「還沒打入主晶片」、預期已打滿 | uncertain (per EP659 警語) |
+| Winner | AMD | EPYC + Data Center 數字最直接；Data Center revenue $5.8B, +57% YoY；server CPU TAM 上修 | known |
+| Watch | INTC | Xeon 作為 AI orchestration/control plane；DCAI +22% YoY，但仍有 foundry/18A/cost pressure | known + uncertain |
+| Watch | 2454.TW 聯發科 | AI ASIC revenue target / data center tech exposure明確，但不是 server CPU 主晶片 | mixed (primary revenue + secondary ASIC claims) |
 | Edge case | NVDA Grace / AWS Graviton / Ampere | ARM 路徑替代品；hyperscaler 自研 | inferred (not in EP659) |
 | Ecosystem | TSM (2330.TW) | AMD/Intel/聯發科都仰賴 TSMC | inferred |
 | Ecosystem | DELL / SMCI / HPE | server OEM，CPU + GPU 出貨同步受惠 | inferred |
@@ -89,15 +97,15 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 
 | # | Data Point | Value | Date / Period | Source | Confidence |
 |---|-----------|-------|---------------|--------|------------|
-| 1 | AMD 2026 全年營收 guidance | 120B USD | 2026 全年 | gooeye-ep659 引述 AMD 法說 | known |
-| 2 | AMD 2026 營收年增 | &gt; 35% YoY | 2026 全年 | gooeye-ep659 | known |
-| 3 | AMD 伺服器 CPU 市占目標 | &gt; 50% | 中期目標，未指定年 | gooeye-ep659 | known |
-| 4 | AMD AI 營收能見度 | 2027 年 | 中長期 | gooeye-ep659 | known |
-| 5 | 聯發科股價反應位階 | ~3000 TWD | 2026-05 EP659 錄製當週 | gooeye-ep659 | known |
-| 6 | CPU 在 AI server 的配比 | 每台 1-2 顆 | 持續 | knowledge/cpu.html (產業共識) | inferred |
-| 7 | 「CPU 復興」 theme lifecycle | unknown | 2026-05 | skill missing: theme-detector | uncertain |
-| 8 | AMD 週圖技術結構 | unknown | 2026-05 | skill missing: technical-analyst | uncertain |
-| 9 | 近 10 天 CPU 相關新聞 impact ranking | unknown | 2026-05 | skill missing: market-news-analyst | uncertain |
+| 1 | AMD total revenue | $10.253B | Q1 2026 | AMD Q1 2026 source packet | known |
+| 2 | AMD Data Center revenue | $5.8B, +57% YoY | Q1 2026 | AMD Q1 2026 source packet | known |
+| 3 | AMD server CPU TAM | &gt;$120B by 2030, &gt;35% CAGR | long-term | AMD Q1 2026 transcript intake | known via secondary transcript |
+| 4 | AMD expected server CPU revenue growth | &gt;70% YoY | Q2 2026 | AMD Q1 2026 transcript intake | known via secondary transcript |
+| 5 | Intel DCAI revenue | $5.1B, +22% YoY | Q1 2026 | Intel Q1 2026 source packet | known |
+| 6 | Intel ASIC revenue growth | &gt;30% QoQ, nearly 2x YoY | Q1 2026 | Intel transcript intake | known via secondary transcript |
+| 7 | MediaTek AI ASIC revenue target | ~$2B | Q4 2026 | MediaTek source packet (secondary) | uncertain until official transcript |
+| 8 | MediaTek Jan-Apr YTD revenue | NT$195.887B, -3.06% YoY | Jan-Apr 2026 | MediaTek IR monthly table | known |
+| 9 | CPU 在 AI server 的配比 | 每台 1-2 顆 | 持續 | knowledge/cpu.html (industry consensus) | inferred |
 | 10 | 18 個月 bull/base/bear scenarios | 見下方 Scenarios（draft） | 6-18 個月 | skill missing: scenario-analyzer (draft below by agent) | uncertain |
 
 ## Scenarios (DRAFT — pending scenario-analyzer)

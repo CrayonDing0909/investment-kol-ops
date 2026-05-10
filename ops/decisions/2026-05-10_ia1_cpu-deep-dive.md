@@ -101,3 +101,30 @@ mode: dry-run
 - POV ≥ 200 字 floor。
 
 這些必須由 CrayonDing0909 親自完成，agent 不代寫。
+
+
+## M1.1 Re-run Note (source-backed refresh)
+
+Date: 2026-05-10
+
+After M1.1 source collection, the brief is now backed by AMD, Intel, and
+MediaTek source packets instead of relying mostly on 股癌 EP659. The decision
+remains **defer** because the human-written sections are still incomplete, but
+the source checklist quality improved:
+
+- AMD source packet corrects the 120B ambiguity: it is server CPU TAM by 2030,
+  not AMD 2026 revenue.
+- Intel source packet supports the "CPU as AI orchestration/control plane"
+  framing.
+- MediaTek source packet clarifies that its current source-backed story is AI
+  ASIC + I/O / memory subsystem optionality, not server CPU main silicon.
+
+Decision after M1.1 refresh: **defer**.
+
+Remaining blockers before IA1 can approve:
+
+1. User fills What I Learned / What I Still Don't Understand / My POV / My
+   Invalidation in the CPU brief.
+2. User fills the three reflection answers in this decision log.
+3. If public publication is planned, primary verification is still needed for
+   AMD >50% server CPU share target and MediaTek $2B Q4 AI ASIC revenue target.

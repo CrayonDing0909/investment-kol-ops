@@ -37,7 +37,7 @@ flowchart LR
 
 | Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
 |-------|------|------|------|----|----|----|----|
-| investment-analysis | scaffold-done* | research-packet | pov-completion | shared | repurpose | command | metrics |
+| investment-analysis | scaffold-done* | research-packet-done* | pov-completion | shared | repurpose | command | metrics |
 | algorithm-research |  |  |  | shared | core | command | summary |
 | content-production |  |  |  | shared | core | command | publish-check |
 | audience-discovery |  |  |  | shared |  | command | interviews + clusters |
@@ -99,17 +99,17 @@ Definition of Done：
 
 任務：
 
-- [ ] 建立 `research/sources/ai-server-supply-chain/`，含 subfolders：
+- [x] 建立 `research/sources/ai-server-supply-chain/`，含 subfolders：
       `earnings/`、`news/`、`financials/`、`revenue/`、`reports/`、`podcast-notes/`。
-- [ ] 至少蒐集 AMD、Intel、MediaTek 三間公司的 source packets：
+- [x] 至少蒐集 AMD、Intel、MediaTek 三間公司的 source packets：
       - 法說 / transcript / 8-K 或官方 IR
       - 最新重要新聞
       - 相關營收或財務資料
-- [ ] 將每份 source 轉成 intake notes。
-- [ ] 建立 `research/questions/ai-server-supply-chain/`，記錄 CPU、ASIC、被動元件、memory、cooling、software 的 Q&A。
-- [ ] 用 source-backed Q&A 更新 HTML knowledge pages，不只依賴 EP659。
-- [ ] 用 source-backed research packet 重寫 CPU anchor brief。
-- [ ] 用更新後的 source checklist 重跑 IA1 dry-run。
+- [x] 將每份 source 轉成 intake notes。
+- [x] 建立 `research/questions/ai-server-supply-chain/`，記錄 CPU、ASIC、被動元件、memory、cooling、software 的 Q&A。
+- [x] 用 source-backed Q&A 更新 HTML knowledge pages，不只依賴 EP659。
+- [x] 用 source-backed research packet 重寫 CPU anchor brief。
+- [x] 用更新後的 source checklist 重跑 IA1 dry-run。
 
 Definition of Done：
 

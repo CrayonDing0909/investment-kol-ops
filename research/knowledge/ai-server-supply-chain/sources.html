@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sources Reading View — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 920px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  h1 { margin: 4px 0 8px; font-size: 30px; }
+  h2 { font-size: 22px; margin: 28px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  h3 { margin: 0 0 6px; font-size: 17px; }
+  .crumb, .meta, .source { font-size: 12px; opacity: 0.72; font-family: var(--mono); }
+  .lede { opacity: 0.9; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .card { border: 1px solid currentColor; border-radius: 10px; padding: 14px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .warn { opacity: 0.72; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li { margin-bottom: 4px; }
+  a { color: inherit; }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> / Sources Reading View</div>
+  <h1>來源閱讀頁</h1>
+  <p class="lede">
+    這頁是你要讀的 source layer，不是給 LLM 的 raw markdown。Markdown source packet 保留完整 metadata；
+    這裡把最重要的數字、quote、風險與 follow-up 集中成閱讀卡片。
+  </p>
+  <div class="meta">Last updated: 2026-05-10 · status: draft · source packet count: 3</div>
+</header>
+
+<section id="how-to-read">
+  <h2>怎麼讀這頁</h2>
+  <ol>
+    <li>先看每張卡片的 <strong>Why it matters</strong>，理解這份 source 為何重要。</li>
+    <li>看 <strong>Key numbers</strong>，確認這些數字能不能支撐 thesis。</li>
+    <li>看 <strong>Reliability</strong>，分清 primary / secondary / unverified。</li>
+    <li>看 <strong>Follow-up</strong>，這些是公開前要補的洞。</li>
+  </ol>
+</section>
+
+<section id="packets">
+  <h2>Source Packets</h2>
+  <div class="grid">
+
+    <article class="card" id="amd">
+      <h3>AMD Q1 2026 Earnings <span class="pill">primary+secondary</span></h3>
+      <p><strong>Why it matters:</strong> AMD 是 CPU 復興最乾淨的 primary source。它直接提供 Data Center 成長、EPYC 需求、server CPU TAM 上修、agentic AI 為什麼增加 CPU compute。</p>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>Total revenue</td><td>$10.253B, +38% YoY</td><td>整體成長強。</td></tr>
+          <tr><td>Data Center revenue</td><td>$5.8B, +57% YoY</td><td>Data Center 已是主成長引擎。</td></tr>
+          <tr><td>Server CPU revenue growth</td><td>&gt;50% YoY</td><td>EPYC demand 是 CPU thesis 核心。</td></tr>
+          <tr><td>Server CPU TAM</td><td>&gt;$120B by 2030, CAGR &gt;35%</td><td>修正 EP659 120B 誤讀：是 TAM，不是 AMD 2026 revenue。</td></tr>
+          <tr><td>Q2 revenue guide</td><td>$11.2B ± $300M</td><td>仍有短期成長 visibility。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Quote:</strong> “Inferencing and Agentic AI are increasing the need for server CPU compute...” — Lisa Su</p>
+      <p><strong>Reliability:</strong> financials = AMD primary；transcript quote = secondary transcript，公開前最好對 AMD IR transcript。</p>
+      <p><strong>Follow-up:</strong> 找 AMD Analyst Day source 驗證「server CPU share &gt;50%」這句，不要從 EP659 直接寫成 fact。</p>
+      <p class="source">
+        <a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_amd-q1-2026-source-packet.md">source packet</a> ·
+        <a href="../../intake/2026-05-10_amd-q1-2026_cpu.md">intake</a>
+      </p>
+    </article>
+
+    <article class="card" id="intel">
+      <h3>Intel Q1 2026 Earnings <span class="pill">primary+secondary</span></h3>
+      <p><strong>Why it matters:</strong> Intel 是 CPU thesis 的反方與防守方。它提供「CPU 是 AI stack orchestration / control plane」的語言，也揭露 Xeon、DCAI、advanced packaging 與 ASIC 成長。</p>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>Total revenue</td><td>$13.6B, +7% YoY</td><td>整體優於預期。</td></tr>
+          <tr><td>DCAI revenue</td><td>$5.1B, +22% YoY</td><td>AI / data center 仍在成長。</td></tr>
+          <tr><td>Intel Foundry revenue</td><td>$5.4B, +16% YoY</td><td>Foundry / packaging 是另一條 thesis。</td></tr>
+          <tr><td>ASIC growth</td><td>&gt;30% QoQ, nearly 2x YoY</td><td>Intel 也有 custom silicon exposure，但分類要釐清。</td></tr>
+          <tr><td>AI-driven businesses</td><td>60% of revenue, +40% YoY</td><td>需要拆組成，避免太籠統。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Quote:</strong> “The CPU now serves as the orchestration layer and critical control plane for the entire AI stack.” — Lip-Bu Tan</p>
+      <p><strong>Reliability:</strong> press release financials = primary；Q&A transcript = secondary，公開前看 official transcript / 10-Q。</p>
+      <p><strong>Follow-up:</strong> 分清 Intel Products DCAI vs Intel Foundry；ASIC growth 是 IPU/custom silicon 還是 broader ASIC？</p>
+      <p class="source">
+        <a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md">source packet</a> ·
+        <a href="../../intake/2026-05-10_intel-q1-2026_cpu.md">intake</a>
+      </p>
+    </article>
+
+    <article class="card" id="mediatek">
+      <h3>MediaTek Q1 2026 + AI ASIC Visibility <span class="pill warn">primary+secondary warning</span></h3>
+      <p><strong>Why it matters:</strong> MediaTek 是台灣 anchor。它同時連到 ASIC、I/O / memory subsystem、custom HBM、interconnect。這和 EP659 的「聯發科預期已打滿」直接相關。</p>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>Q1 revenue</td><td>NT$149.2B, -2.7% YoY</td><td>和官方 Jan-Mar 月營收加總一致。</td></tr>
+          <tr><td>Gross margin</td><td>46.3%</td><td>secondary source，待 official transcript。</td></tr>
+          <tr><td>AI ASIC revenue target</td><td>~$2B in Q4 2026</td><td>關鍵 claim，但目前 secondary，不能公開寫死。</td></tr>
+          <tr><td>Cloud ASIC TAM</td><td>$70B-$80B in 2027</td><td>secondary，需 official transcript。</td></tr>
+          <tr><td>Jan-Apr YTD revenue</td><td>NT$195.887B, -3.06% YoY</td><td>official monthly table。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Quote:</strong> “Our first AI accelerator ASIC project for a US Hyperscale customer is progressing...” — Rick Tsai, quoted by Futurum</p>
+      <p><strong>Reliability warning:</strong> 月營收是 MediaTek primary；ASIC $2B、TAM/share、Rick Tsai quote 目前是 Alpha Spread / Futurum secondary。公開前必須抓官方 transcript / presentation。</p>
+      <p><strong>Follow-up:</strong> 釐清 $2B 是 Q4 單季 revenue 還是 annualized run-rate；第一個美國 hyperscaler 客戶不能直接寫 Google。</p>
+      <p class="source">
+        <a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_mediatek-q1-2026-source-packet.md">source packet</a> ·
+        <a href="../../intake/2026-05-10_mediatek-q1-2026_cpu-asic.md">intake</a>
+      </p>
+    </article>
+
+
+    <article class="card" id="bnext-cpu">
+      <h3>BusinessNext: 為何 CPU 需求突然爆了？ <span class="pill warn">secondary explainer</span></h3>
+      <p><strong>Why it matters:</strong> 這是目前最適合中文讀者的 CPU explainer。它把 agentic AI 對 CPU 的需求講成「任務拆解、工具呼叫、資料庫查詢、程式執行、長時間代理」的問題。</p>
+      <table>
+        <thead><tr><th>Point</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>聊天機器人 → AI 代理</td><td>從單次問答變成多步驟 workflow，CPU 負責調度。</td></tr>
+          <tr><td>CPU latency &gt;50%</td><td>引用 Georgia Tech + Intel research；需找原始 paper 驗證。</td></tr>
+          <tr><td>短跑 → 馬拉松</td><td>agentic workload 長時間運行，比 bursty inference 更吃 system orchestration。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Reliability:</strong> secondary explainer。適合做中文 tutor mental model，不適合作 primary financial source。</p>
+      <p class="source">
+        <a href="../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">source packet</a> ·
+        <a href="../../intake/2026-05-10_bnext-ai-cpu_cpu.md">intake</a> ·
+        <a href="./cpu-qa.html">CPU Q&A HTML</a>
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<footer>
+  Sources Reading View · <a href="./index.html">back to index</a> ·
+  <a href="./qa.html">read Q&A view</a>
+</footer>
+
+</body>
+</html>
