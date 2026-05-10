@@ -187,13 +187,50 @@ Keep it plain and readable.
 
 Do:
 
-- High contrast.
+- Comfortable contrast for long reading. Avoid pure black / pure white pairs.
 - Clear headings.
 - Light borders.
 - Consistent spacing.
 - Breadcrumbs.
 - Source links at the bottom of sections.
 - Reliability warnings near claims.
+
+Recommended reading palette:
+
+```css
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17191d;
+    --surface: #20242a;
+    --surface-muted: #2a3038;
+    --text: #e2e8f0;
+    --muted: #a8b1bd;
+    --line: #3a424e;
+    --link: #91b7ff;
+    --warn-bg: #332813;
+    --warn-text: #f1d18a;
+  }
+}
+```
+
+Why:
+
+- Neutral off-white background avoids browser-white glare without introducing a strong yellow tint.
+- Soft dark mode reduces eye fatigue versus pure black with pure white text.
+- Muted text is used for metadata and secondary explanations, not primary claims.
+- Warning colors must be readable in both light and dark modes.
 
 Avoid:
 

@@ -186,13 +186,50 @@ Bad:
 
 要做：
 
-- 高對比。
+- 適合長時間閱讀的舒適對比。避免純黑 / 純白直接互打。
 - 清楚 headings。
 - 輕量 borders。
 - 一致 spacing。
 - Breadcrumbs。
 - Section 底部有 source links。
 - 靠近 claim 的 reliability warning。
+
+建議閱讀配色：
+
+```css
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17191d;
+    --surface: #20242a;
+    --surface-muted: #2a3038;
+    --text: #e2e8f0;
+    --muted: #a8b1bd;
+    --line: #3a424e;
+    --link: #91b7ff;
+    --warn-bg: #332813;
+    --warn-text: #f1d18a;
+  }
+}
+```
+
+原因：
+
+- Light mode 用中性 off-white，降低純白刺眼但不偏黃。
+- Dark mode 用 soft dark，避免純黑背景 + 純白字造成疲勞。
+- `muted` 只用在 metadata 與次要說明，不用在主要 claim。
+- Warning 色在 light / dark mode 都要可讀。
 
 避免：
 

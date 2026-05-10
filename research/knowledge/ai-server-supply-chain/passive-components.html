@@ -5,32 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>被動元件供需吃緊 — AI Server Supply Chain</title>
 <style>
-  :root { color-scheme: light dark; --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      color-scheme: dark;
+    }
+  }
   html, body { margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
-  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
-  header .crumb { font-size: 13px; opacity: 0.7; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.68; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
   header h1 { margin: 4px 0 8px; font-size: 28px; }
-  header .thesis { font-size: 16px; font-style: italic; opacity: 0.85; }
-  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  header .thesis { font-size: 16px; font-style: italic; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
   section { margin: 28px 0; }
-  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
-  section .lead { opacity: 0.9; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section .lead { color: var(--muted); }
   ul, ol { padding-left: 22px; }
   ul.tight li, ol.tight li { margin-bottom: 4px; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
-  .card { border: 1px solid currentColor; padding: 12px; border-radius: 8px; }
+  .card { background: var(--surface); border: 1px solid var(--line); padding: 12px; border-radius: 8px; }
   .card h3 { margin: 0 0 6px; font-size: 15px; }
-  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
   .qa { margin-bottom: 16px; }
   .qa .q { font-weight: 600; }
   .qa .a { margin-top: 4px; }
-  .source { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
-  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
-  a { color: inherit; }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
 </style>
 </head>
 <body>
