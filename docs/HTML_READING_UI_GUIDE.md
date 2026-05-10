@@ -199,35 +199,35 @@ Recommended reading palette:
 
 ```css
 :root {
-  --bg: #f7f3ea;
-  --surface: #fffaf0;
-  --surface-muted: #f0eadf;
-  --text: #2f2a22;
-  --muted: #6f6659;
-  --line: #d8cdbc;
-  --link: #5b6f9c;
-  --warn-bg: #fff3d6;
-  --warn-text: #6f4e00;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #181715;
-    --surface: #22201d;
-    --surface-muted: #2b2824;
-    --text: #e8dfd1;
-    --muted: #b8ad9c;
-    --line: #4a4238;
-    --link: #a9c1ff;
-    --warn-bg: #342910;
-    --warn-text: #f0d28a;
+    --bg: #17191d;
+    --surface: #20242a;
+    --surface-muted: #2a3038;
+    --text: #e2e8f0;
+    --muted: #a8b1bd;
+    --line: #3a424e;
+    --link: #91b7ff;
+    --warn-bg: #332813;
+    --warn-text: #f1d18a;
   }
 }
 ```
 
 Why:
 
-- Off-white / warm paper background is easier for long light-mode reading.
+- Neutral off-white background avoids browser-white glare without introducing a strong yellow tint.
 - Soft dark mode reduces eye fatigue versus pure black with pure white text.
 - Muted text is used for metadata and secondary explanations, not primary claims.
 - Warning colors must be readable in both light and dark modes.
