@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Knowledge Map Template — investment-kol-ops</title>
+<!--
+  Template: HTML-first umbrella knowledge map (index page)
+  Theme:    investment-kol-ops / AI Server Supply Chain (or other umbrella)
+  Audience: 給「你自己」反覆閱讀，作為一個 umbrella 主題的入口頁。
+  Rules:
+    - 靜態 HTML + inline CSS, no JS, no framework.
+    - 內容用繁中，保留英文專有名詞。
+    - 中央卡片連到各 topic 頁。
+    - 也是 IA1 gate 時的 review 入口。
+-->
+<style>
+  :root {
+    color-scheme: light dark;
+    --maxw: 880px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif;
+    line-height: 1.6;
+    padding: 24px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  header h1 { margin: 0; font-size: 30px; }
+  header .lede { font-size: 16px; opacity: 0.85; margin-top: 6px; }
+  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    border: 1px solid currentColor; border-radius: 10px; padding: 14px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .card h3 { margin: 0; font-size: 16px; }
+  .card .role { font-size: 13px; opacity: 0.85; }
+  .card .links { font-size: 12px; font-family: var(--mono); margin-top: auto; }
+  .card .links a { margin-right: 8px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  pre.flow {
+    border: 1px solid currentColor; border-radius: 8px; padding: 12px;
+    font-family: var(--mono); font-size: 13px;
+    overflow-x: auto;
+    background: transparent;
+  }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>{{Umbrella Theme}}</h1>
+  <div class="lede">{{One-paragraph thesis. 例：AI server 的 spend 結構正在從 GPU 外溢到 CPU、ASIC、memory、被動元件、散熱與軟體。這頁是入口，每個 topic 卡片連到細節頁。}}</div>
+  <div class="meta">
+    Last updated: {{YYYY-MM-DD}} &middot;
+    Anchor deep dive: <span class="pill">{{anchor topic}}</span> &middot;
+    Status: <span class="pill">{{draft|reviewed}}</span>
+  </div>
+</header>
+
+<section id="thesis">
+  <h2>核心 thesis</h2>
+  <p>{{一段話。從什麼資金事件 / 法說 / 報告開始的。預期會跑多久。}}</p>
+  <ul class="tight">
+    <li>{{thesis bullet 1}}</li>
+    <li>{{thesis bullet 2}}</li>
+    <li>{{thesis bullet 3}}</li>
+  </ul>
+</section>
+
+<section id="topics">
+  <h2>Topic Cards</h2>
+  <p>每張卡片連到該 topic 的 HTML 頁。卡片只顯示「角色 / 在供應鏈的位置 / 我目前最大的疑問」。</p>
+  <div class="grid">
+
+    <div class="card">
+      <h3>{{Topic name 1}}</h3>
+      <div class="role">{{角色 in supply chain}}</div>
+      <div>{{我目前最大的疑問}}</div>
+      <div class="links">
+        <a href="./{{topic-1}}.html">→ topic page</a>
+        <a href="../intake/{{intake-id}}.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>{{Topic name 2}}</h3>
+      <div class="role">{{role}}</div>
+      <div>{{open question}}</div>
+      <div class="links">
+        <a href="./{{topic-2}}.html">→ topic page</a>
+      </div>
+    </div>
+
+    <!-- 重複 N 張 card；M1 預期 6 張：cpu / asic / memory / passive-components / cooling / software -->
+
+  </div>
+</section>
+
+<section id="relationships">
+  <h2>Topics 之間的關係</h2>
+  <p>把 topics 串起來，看資金流向與依賴關係。</p>
+  <pre class="flow">
+compute  →  memory  →  server (OEM)  →  power / cooling
+   ↑                       ↓
+ software                  passive components
+  </pre>
+</section>
+
+<section id="known-narrative-unverified">
+  <h2>已知事實 / 市場敘事 / 還沒驗證</h2>
+  <table>
+    <thead>
+      <tr><th>類別</th><th>內容</th><th>來源 / 備註</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>已知事實</td><td>{{fact}}</td><td>{{source}}</td></tr>
+      <tr><td>市場敘事</td><td>{{narrative}}</td><td>{{source}}</td></tr>
+      <tr><td>還沒驗證</td><td>{{unverified}}</td><td>{{source}}</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="open-questions">
+  <h2>Open Questions Backlog</h2>
+  <p>跨所有 topic 還沒解的問題。下次補資料時優先處理。</p>
+  <ol class="tight">
+    <li>{{question 1}}</li>
+    <li>{{question 2}}</li>
+    <li>{{question 3}}</li>
+  </ol>
+</section>
+
+<section id="references">
+  <h2>來源 / 引用清單</h2>
+  <ul class="tight">
+    <li><a href="../intake/{{intake-id}}.md">{{intake title}}</a></li>
+  </ul>
+</section>
+
+<footer>
+  Knowledge map template &middot; HTML-first &middot; static, no JS &middot;
+  topics: <a href="./cpu.html">CPU</a> ·
+  <a href="./asic.html">ASIC</a> ·
+  <a href="./memory.html">Memory</a> ·
+  <a href="./passive-components.html">Passive Components</a> ·
+  <a href="./cooling.html">Cooling</a> ·
+  <a href="./software.html">Software</a>
+</footer>
+
+</body>
+</html>

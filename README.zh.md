@@ -26,6 +26,8 @@ MVP demo，以及管理發文、文章、圖片、影片、產品的整套發布
 - `docs/WORKFLOW_PATTERNS.md` - 研究、分析、內容、MVP 的標準 workflow。
 - `docs/CONTEXT_STRATEGY.md` - context pack 與 LLM 該看什麼的規則。
 - `docs/HUMAN_GATES.md` - 必須與選擇性的人類確認節點。
+- `docs/AGENT_ROLES.md` - source collection、tutor、knowledge architecture、
+  brief building、POV coaching、gate review 的 role 定義。
 - `research/ALGORITHM_RESEARCH.md` - 平台演算法研究系統。
 - `research/AUDIENCE_DISCOVERY.md` - 觀眾訪談、痛點、MVP 篩選。
 - `research/INVESTMENT_ANALYSIS_PLAYBOOK.md` - 市場分析流程與品質 gate。

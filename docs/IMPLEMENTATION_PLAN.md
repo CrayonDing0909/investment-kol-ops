@@ -7,6 +7,8 @@ Related:
 
 - [docs/ROADMAP.md](ROADMAP.md): product/business milestones (positioning, content
   sprints, MVP launch, audience growth).
+- [docs/AGENT_ROLES.md](AGENT_ROLES.md): operating roles for source collection,
+  tutoring, knowledge architecture, brief building, POV coaching, and gate review.
 - This file: engineering/operational milestones (templates, scripts, commands,
   infrastructure that make workflows actually run).
 
@@ -34,40 +36,121 @@ flowchart LR
 
 Track which milestone each skill currently lives in.
 
-| Skill | M1 | M2 | M3 | M4 | M5 |
-|-------|----|----|----|----|----|
-| investment-analysis | start | shared | repurpose | command | metrics |
-| algorithm-research |  | shared | core | command | summary |
-| content-production |  | shared | core | command | publish-check |
-| audience-discovery |  | shared |  | command | interviews + clusters |
-| mvp-demo |  | shared |  |  | first spec |
-| postmortem |  | shared |  |  | first run |
+| Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
+|-------|------|------|------|----|----|----|----|
+| investment-analysis | scaffold-done* | research-packet | pov-completion | shared | repurpose | command | metrics |
+| algorithm-research |  |  |  | shared | core | command | summary |
+| content-production |  |  |  | shared | core | command | publish-check |
+| audience-discovery |  |  |  | shared |  | command | interviews + clusters |
+| mvp-demo |  |  |  | shared |  |  | first spec |
+| postmortem |  |  |  | shared |  |  | first run |
 
-## M1 - One Workflow End-to-End
+## M1 - Theme Knowledge Investment Workflow
 
-Goal: produce one real, gate-approved investment analysis brief.
+Goal: run a source-backed, learning-first investment workflow for the first theme:
+`AI Server Supply Chain`.
 
-Why first: most leverage from existing trading skills.
+M1 is **not** a public article milestone. It is the path from raw material to
+understanding:
+
+```text
+sources -> intake -> knowledge architecture -> tutor Q&A -> brief -> personal POV -> gate
+```
+
+M1 is split into three sub-milestones so we do not pretend a scaffold is a
+finished research process.
+
+### M1.0 - Scaffold (current PR)
+
+Goal: build the folder structure, templates, HTML-first knowledge skeleton, EP659
+intake, and the first brief skeleton.
 
 Tasks:
 
-- [ ] Create stub folders: `templates/`, `research/swipe/`, `research/interviews/`,
-      `research/notes/`, `research/postmortems/`, `mvp/specs/`, `mvp/builds/`,
-      `mvp/feedback/`, `ops/decisions/`.
-- [ ] Write `research/templates/analysis-brief.md` (matches Investment Analysis
-      Workflow output in WORKFLOW_PATTERNS).
-- [ ] Write `research/templates/source-checklist.md`.
-- [ ] Write `docs/analysis-skill-mapping.md` linking each playbook step to an
-      existing trading skill.
-- [ ] Run one weekly analysis end-to-end manually, complete IA1 gate, save
-      artifact to `content/drafts/`.
+- [x] Create M1 folders: `research/templates/`, `research/notes/`,
+      `research/intake/`, `research/knowledge/ai-server-supply-chain/`,
+      `content/drafts/`, `ops/decisions/`.
+- [x] Write `research/templates/analysis-brief.md`.
+- [x] Write `research/templates/source-checklist.md`.
+- [x] Write `docs/analysis-skill-mapping.md`.
+- [x] Write HTML-first knowledge templates:
+      `research/templates/knowledge-map.html` and
+      `research/templates/knowledge-page.html`.
+- [x] Ingest 股癌 EP659 into six intake notes: CPU, ASIC, memory,
+      passive components, cooling, software.
+- [x] Build first HTML-first knowledge map skeleton:
+      `research/knowledge/ai-server-supply-chain/index.html` + 6 topic pages.
+- [x] Create first CPU anchor brief skeleton and source checklist.
+- [x] Run IA1 dry-run gate and log decision as `defer`, because the
+      HUMAN-WRITTEN sections are intentionally left for the user.
 
 Definition of Done:
 
-- One filled analysis brief in `content/drafts/`.
-- IA1 gate decision logged in `ops/decisions/`.
-- Source checklist filled.
-- Invalidation list filled.
+- M1.0 branch / PR clearly labeled as scaffold, not full M1.
+- HTML knowledge skeleton is readable in browser.
+- Source checklist exists and distinguishes `known`, `inferred`, and `uncertain`.
+- IA1 gate decision is logged as `defer`.
+
+### M1.1 - Research Packet
+
+Goal: collect real external sources and turn the scaffold into a source-backed
+research packet.
+
+Required roles:
+
+- Source Collector Agent: collect earnings calls, news, financials, revenue, and
+  company IR material.
+- Tutor / Q&A Agent: answer the user's knowledge gaps in plain Chinese.
+- Knowledge Architecture Agent: update HTML pages with sourced explanations.
+- Brief Builder Agent: rebuild the brief from collected sources and tutor answers.
+
+Tasks:
+
+- [ ] Create `research/sources/ai-server-supply-chain/` with subfolders:
+      `earnings/`, `news/`, `financials/`, `revenue`, `reports/`, `podcast-notes/`.
+- [ ] Collect source packets for at least AMD, Intel, and MediaTek:
+      - earnings call / transcript / 8-K or official IR material
+      - latest major news items
+      - relevant revenue or financial data
+- [ ] Convert each source into intake notes.
+- [ ] Create `research/questions/ai-server-supply-chain/` and record Q&A for
+      CPU, ASIC, passive components, memory, cooling, and software.
+- [ ] Update HTML knowledge pages from source-backed Q&A, not just EP659.
+- [ ] Rewrite the CPU anchor brief from the source-backed research packet.
+- [ ] Re-run IA1 dry-run with the updated source checklist.
+
+Definition of Done:
+
+- At least 3 company source packets: AMD, Intel, MediaTek.
+- At least 6 tutor Q&A notes (one per theme).
+- HTML knowledge pages updated with sourced explanations.
+- CPU brief no longer relies only on EP659.
+- IA1 decision remains `defer` only if human POV is still missing; otherwise it
+  can move to `edit` or `approve`.
+
+### M1.2 - POV Completion
+
+Goal: complete the human side of the workflow and convert IA1 from `defer` to a
+real decision.
+
+Tasks:
+
+- [ ] User fills the HUMAN-WRITTEN sections in the CPU brief:
+      - What I Learned
+      - What I Still Don't Understand
+      - My POV (≥ 200 words)
+      - My Invalidation (exactly 3 signals)
+- [ ] User fills the IA1 reflection questions.
+- [ ] Agent checks that POV/invalidation are specific and not vague.
+- [ ] IA1 gate re-runs and updates decision from `defer` to
+      `approve`, `edit`, or `reject`.
+
+Definition of Done:
+
+- One filled, source-backed internal brief in `research/notes/`.
+- IA1 gate decision is no longer `defer`.
+- The user can explain the thesis without reading the brief verbatim.
+- No public article yet. Public content starts in M2/M3.
 
 ## M2 - Shared Infrastructure
 
@@ -299,11 +382,25 @@ Use this section to record finished milestone work. Append, do not rewrite.
 YYYY-MM-DD - <milestone> - <task>
 ```
 
-Example:
-
 ```text
-2026-05-08 - M1 - analysis-brief template scaffolded
-2026-05-09 - M1 - first weekly analysis passed IA1 gate
+2026-05-10 - M1.0 - Phase A: investment-analysis templates and folders scaffolded (incl. HTML-first knowledge architecture templates)
+2026-05-10 - M1.0 - Phase B1: 股癌 EP659 ingested into 6 intake notes; AI Server Supply Chain knowledge map (index + 6 topics) built
+2026-05-10 - M1.0 - Phase B2: CPU revival anchor brief skeleton structured; live trading skill outputs marked "skill missing" pending direct invocation
+2026-05-10 - M1.0 - Phase C: IA1 dry run logged; decision = defer pending human-written POV / invalidation / reflection
+2026-05-10 - M1.0 - Phase D: branch feat/m1-investment-analysis-e2e ready for self-PR merge
 ```
 
-(Empty for now. Fill as milestones progress.)
+### Per-Skill Status Grid Footnotes
+
+`investment-analysis: scaffold-done*` — M1.0 scaffold shipped on 2026-05-10.
+It includes folders, templates, 股癌 EP659 intake notes, HTML-first knowledge
+architecture skeleton, and a CPU anchor brief skeleton. The brief at
+[research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md](../research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md)
+still has 4 HUMAN-WRITTEN sections (What I Learned / What I Don't Understand /
+My POV / My Invalidation) and 3 reflection questions to be filled by
+CrayonDing0909 in M1.2 before IA1 can convert from `defer` to `approve`.
+M1.1 must first collect real source packets (AMD / Intel / MediaTek),
+run tutor Q&A, and update the knowledge pages. Skill calls (theme-detector,
+market-news-analyst, technical-analyst, scenario-analyzer, data-quality-checker)
+are tagged `skill missing` and need real invocation before the brief becomes
+publish-eligible.

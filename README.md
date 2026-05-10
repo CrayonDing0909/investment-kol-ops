@@ -29,6 +29,8 @@ and managing the publishing workflow across articles, images, videos, and produc
 - `docs/WORKFLOW_PATTERNS.md` - canonical workflows for research, analysis, content, MVP.
 - `docs/CONTEXT_STRATEGY.md` - context packs and rules for what the LLM sees.
 - `docs/HUMAN_GATES.md` - mandatory and optional human approval points.
+- `docs/AGENT_ROLES.md` - role definitions for source collection, tutoring,
+  knowledge architecture, brief building, POV coaching, and gate review.
 - `research/ALGORITHM_RESEARCH.md` - platform algorithm research system.
 - `research/AUDIENCE_DISCOVERY.md` - audience interviews, pain points, and MVP filters.
 - `research/INVESTMENT_ANALYSIS_PLAYBOOK.md` - market analysis workflow and quality gates.
