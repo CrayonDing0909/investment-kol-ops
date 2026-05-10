@@ -37,7 +37,7 @@ flowchart LR
 
 | Skill | M1 | M2 | M3 | M4 | M5 |
 |-------|----|----|----|----|----|
-| investment-analysis | start | shared | repurpose | command | metrics |
+| investment-analysis | infra-done* | shared | repurpose | command | metrics |
 | algorithm-research |  | shared | core | command | summary |
 | content-production |  | shared | core | command | publish-check |
 | audience-discovery |  | shared |  | command | interviews + clusters |
@@ -297,11 +297,21 @@ chore: add ops/decisions folder
 YYYY-MM-DD - <milestone> - <task>
 ```
 
-範例：
-
 ```text
-2026-05-08 - M1 - analysis-brief template scaffolded
-2026-05-09 - M1 - first weekly analysis passed IA1 gate
+2026-05-10 - M1 - Phase A：investment-analysis templates 與資料夾建好（含 HTML-first knowledge architecture templates）
+2026-05-10 - M1 - Phase B1：股癌 EP659 拆成 6 份 intake notes；AI Server Supply Chain knowledge map（index + 6 topic pages）建立
+2026-05-10 - M1 - Phase B2：CPU 復興 anchor deep dive 結構完成；live trading skill outputs 標 skill missing 待 M2/M4 實際呼叫
+2026-05-10 - M1 - Phase C：IA1 dry run 紀錄；decision = defer，等人類補完 POV / invalidation / reflection
+2026-05-10 - M1 - Phase D：branch feat/m1-investment-analysis-e2e 準備 self-PR merge
 ```
 
-（目前空白，隨進度補上。）
+### Per-Skill Status Grid 註解
+
+`investment-analysis: infra-done*` — Phase A/B1/B2/C 的基礎建設已於 2026-05-10
+shipped。Brief 在
+[research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md](../research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md)
+還有 4 個 HUMAN-WRITTEN 區塊（What I Learned / What I Don't Understand / My POV /
+My Invalidation）與 3 個 reflection 問題待 CrayonDing0909 親手補完，IA1 才會從
+`defer` 轉成 `approve`。各 skill 呼叫（theme-detector / market-news-analyst /
+technical-analyst / scenario-analyzer / data-quality-checker）也標註
+`skill missing`，需要在 M2 / M4 補上真正的 invocation 後 brief 才符合公開條件。

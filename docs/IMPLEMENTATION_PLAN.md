@@ -36,7 +36,7 @@ Track which milestone each skill currently lives in.
 
 | Skill | M1 | M2 | M3 | M4 | M5 |
 |-------|----|----|----|----|----|
-| investment-analysis | start | shared | repurpose | command | metrics |
+| investment-analysis | infra-done* | shared | repurpose | command | metrics |
 | algorithm-research |  | shared | core | command | summary |
 | content-production |  | shared | core | command | publish-check |
 | audience-discovery |  | shared |  | command | interviews + clusters |
@@ -299,11 +299,22 @@ Use this section to record finished milestone work. Append, do not rewrite.
 YYYY-MM-DD - <milestone> - <task>
 ```
 
-Example:
-
 ```text
-2026-05-08 - M1 - analysis-brief template scaffolded
-2026-05-09 - M1 - first weekly analysis passed IA1 gate
+2026-05-10 - M1 - Phase A: investment-analysis templates and folders scaffolded (incl. HTML-first knowledge architecture templates)
+2026-05-10 - M1 - Phase B1: 股癌 EP659 ingested into 6 intake notes; AI Server Supply Chain knowledge map (index + 6 topics) built
+2026-05-10 - M1 - Phase B2: CPU revival anchor deep dive structured; live trading skill outputs marked "skill missing" pending direct invocation
+2026-05-10 - M1 - Phase C: IA1 dry run logged; decision = defer pending human-written POV / invalidation / reflection
+2026-05-10 - M1 - Phase D: branch feat/m1-investment-analysis-e2e ready for self-PR merge
 ```
 
-(Empty for now. Fill as milestones progress.)
+### Per-Skill Status Grid Footnotes
+
+`investment-analysis: infra-done*` — Phase A/B1/B2/C infrastructure shipped on
+2026-05-10. The brief at
+[research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md](../research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md)
+still has 4 HUMAN-WRITTEN sections (What I Learned / What I Don't Understand /
+My POV / My Invalidation) and 3 reflection questions to be filled by
+CrayonDing0909 before IA1 can convert from `defer` to `approve`. Skill calls
+(theme-detector, market-news-analyst, technical-analyst, scenario-analyzer,
+data-quality-checker) are also tagged `skill missing` and need a real invocation
+in M2 / M4 before the brief becomes publish-eligible.
