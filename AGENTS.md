@@ -85,6 +85,18 @@ done that way before the LLM is involved.
 - Prefer clear, useful content over vague market commentary.
 - Record learnings after publishing.
 
+## HTML Reading UI Rule
+
+- Human-facing knowledge artifacts are HTML-first. Follow
+  [docs/HTML_READING_UI_GUIDE.md](docs/HTML_READING_UI_GUIDE.md).
+- If the user is expected to read, learn, review, or revisit an artifact, create
+  or update an HTML reading page.
+- Markdown remains the canonical source / metadata layer and must be labeled as
+  fallback (`md source`, `markdown intake`, `markdown canonical`) inside HTML.
+- Do not send the user directly from an HTML page into raw Markdown unless it is
+  explicitly labeled as fallback.
+
+
 ## MVP Rules
 
 - For non-AI-agent users, start with pain, not technology.

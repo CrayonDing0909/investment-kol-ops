@@ -79,6 +79,16 @@ harness 運作。每個有意義的任務都要照這個 harness 跑。
 - 寧可清楚實用，不要含糊的市場 commentary。
 - 發布後要寫學習紀錄。
 
+## HTML Reading UI 規則
+
+- 人類會讀的 knowledge artifacts 採 HTML-first。遵守
+  [docs/HTML_READING_UI_GUIDE.zh.md](docs/HTML_READING_UI_GUIDE.zh.md)。
+- 如果使用者會閱讀、學習、review、或反覆回來看，就要建立或更新 HTML reading page。
+- Markdown 保留為 canonical source / metadata layer，在 HTML 中只能作 fallback，並標成
+  `md source`、`markdown intake`、或 `markdown canonical`。
+- HTML 頁不要把使用者直接丟進 raw Markdown，除非明確標示為 fallback。
+
+
 ## MVP 規則
 
 - 對非 AI agent 使用者，從痛點出發，不是從技術出發。
