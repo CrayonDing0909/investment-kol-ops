@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CPU Q&A — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 840px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.65; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  h1 { margin: 4px 0 8px; font-size: 30px; }
+  h2 { font-size: 22px; margin: 30px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  h3 { margin: 18px 0 6px; font-size: 17px; }
+  .crumb, .meta, .source { font-size: 12px; opacity: 0.72; font-family: var(--mono); }
+  .lede { opacity: 0.9; }
+  .card { border: 1px solid currentColor; border-radius: 10px; padding: 14px; margin: 14px 0; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  blockquote { border-left: 3px solid currentColor; margin: 12px 0; padding-left: 12px; opacity: 0.9; }
+  a { color: inherit; }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> / <a href="./qa.html">Tutor Q&A</a> / CPU</div>
+  <h1>CPU 在 AI server 裡還有什麼用？</h1>
+  <p class="lede">
+    這頁是 CPU Q&A 的 HTML 閱讀版。目標不是背名詞，而是建立一個能跟大眾解釋的 mental model：
+    GPU/ASIC 是做算力，CPU 是讓 agentic AI workflow 長時間穩定運作的調度層。
+  </p>
+  <div class="meta">Last updated: 2026-05-10 · status: draft · source-backed + BusinessNext reference</div>
+</header>
+
+<section id="question">
+  <h2>問題</h2>
+  <p>
+    CPU 在 AI server 裡還有什麼用？AI 工作負載不是都靠 GPU / ASIC 嗎？為什麼 AMD、Intel、Arm、甚至 NVIDIA 都開始講 CPU？
+  </p>
+</section>
+
+<section id="short-answer">
+  <h2>短答案</h2>
+  <p>
+    GPU / ASIC 負責大規模矩陣運算，但 CPU 負責「協調整台機器」：跑作業系統、處理資料搬運、I/O、前後處理、排程、呼叫工具、查資料庫、執行程式、把任務餵給 accelerators。
+    當 AI 從「問一句答一句」變成 agentic workflow，CPU 要處理的 orchestration 變多，甚至可能成為延遲瓶頸。
+  </p>
+  <p>
+    簡單說：GPU/ASIC 是算得快，CPU 是讓整套系統跑得動。
+  </p>
+</section>
+
+<section id="mental-model">
+  <h2>心智模型</h2>
+  <div class="card">
+    <h3>從聊天機器人到 AI 代理</h3>
+    <p>
+      以前的 chatbot 像「櫃檯問答」：使用者問一句，系統把任務丟給 GPU 推理，回一個答案。
+      Agentic AI 像「專案經理 + 一群員工」：它會拆任務、分派子任務、查資料、呼叫工具、寫程式、重試、自我修正。
+    </p>
+    <p>
+      這些任務安排、資源調度、系統互動，很多都不是 GPU 擅長的事，而是 CPU / system layer 的工作。
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>廚房比喻</h3>
+    <p>
+      GPU / ASIC 是一排很猛的廚師，專門快速做菜；CPU 是廚房領班，負責接單、分工、送食材、決定先做哪道、處理臨時狀況。
+      菜色越複雜、訂單越多、同時開越多工作流，領班越重要。
+    </p>
+  </div>
+</section>
+
+<section id="technical">
+  <h2>稍微技術一點</h2>
+  <ul class="tight">
+    <li><strong>GPU / ASIC</strong>：處理 tensor compute、training、inference 的高密度計算。</li>
+    <li><strong>CPU</strong>：處理 host code、資料前後處理、I/O interrupt、network stack、storage access、RPC、container orchestration、scheduler、logging、tool execution、model server control loop。</li>
+    <li><strong>Agentic AI</strong>：不是一次推理，而是多個 steps、tools、agents、memory / database / code execution 的長流程。</li>
+    <li><strong>Latency bottleneck</strong>：BusinessNext 引述 Georgia Tech + Intel research，CPU 在 agentic workload 中可能占總延遲過半。這 claim 需要原始 paper 驗證，但方向合理。</li>
+  </ul>
+</section>
+
+<section id="source-backed">
+  <h2>Source-backed 訊號</h2>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>訊號</th><th>為何重要</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AMD Q1 2026</td>
+        <td>Data Center revenue $5.8B, +57% YoY；server CPU TAM &gt;$120B by 2030；agentic AI 增加 server CPU compute。</td>
+        <td>AMD 是 CPU 復興最清楚的財報證據。</td>
+      </tr>
+      <tr>
+        <td>Intel Q1 2026</td>
+        <td>CPU 是 AI stack 的 orchestration / control plane；DCAI +22% YoY；Xeon 6 被選為 NVIDIA DGX Rubin NVL8 host CPU。</td>
+        <td>Intel 提供「CPU 不是 GPU 替代，而是控制層」的語言。</td>
+      </tr>
+      <tr>
+        <td>BusinessNext AI CPU article</td>
+        <td>AI 代理需要拆任務、呼叫工具、查資料庫、寫/執行程式、多輪修正，這些負載落在 CPU。</td>
+        <td>這篇最適合轉成中文大眾能懂的解釋。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="investor-lens">
+  <h2>投資上要看什麼？</h2>
+  <table>
+    <thead>
+      <tr><th>Signal</th><th>Why it matters</th><th>Source to monitor</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>AMD server CPU revenue growth</td><td>驗證 CPU 復興是不是財報可見。</td><td>AMD earnings / transcript</td></tr>
+      <tr><td>Intel DCAI revenue and Xeon design wins</td><td>驗證 Intel 是否守住 AI control plane。</td><td>Intel earnings / press release</td></tr>
+      <tr><td>Hyperscaler instance announcements</td><td>看 AWS / GCP / Azure 是否持續擴 EPYC / Xeon instances。</td><td>AMD / Intel press releases</td></tr>
+      <tr><td>Agentic AI workload architecture</td><td>判斷 CPU demand 是 structural 還是 narrative。</td><td>Georgia Tech + Intel paper, systems papers</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="watchouts">
+  <h2>還不該公開寫死的地方</h2>
+  <ul class="tight">
+    <li>AMD 的 &gt;50% server CPU share target：需要 Analyst Day 或 primary source，不應只靠 EP659。</li>
+    <li>BusinessNext 的「CPU latency &gt;50%」：需要找原始 Georgia Tech + Intel paper。</li>
+    <li>CPU demand 到底是 attach rate 上升、utilization 上升、還是 server unit 增加？目前三者要分開。</li>
+    <li>MediaTek 的 I/O / memory subsystem 跟 CPU control plane 有多近，仍不清楚。</li>
+  </ul>
+</section>
+
+<section id="sources">
+  <h2>來源</h2>
+  <ul class="tight source">
+    <li><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_amd-q1-2026-source-packet.md">AMD Q1 2026 source packet</a></li>
+    <li><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md">Intel Q1 2026 source packet</a></li>
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">BusinessNext AI CPU source packet</a></li>
+    <li><a href="../../questions/ai-server-supply-chain/cpu.md">Markdown canonical Q&A</a></li>
+  </ul>
+</section>
+
+<footer>
+  CPU Q&A Reading View · <a href="./qa.html">back to Q&A index</a> · <a href="./cpu.html">CPU topic page</a>
+</footer>
+
+</body>
+</html>

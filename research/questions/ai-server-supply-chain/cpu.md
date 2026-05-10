@@ -58,8 +58,10 @@ AI 訓練和推論會用 GPU / ASIC 做主要 tensor compute，但真實系統�
 
 - `research/sources/ai-server-supply-chain/earnings/2026-05-10_amd-q1-2026-source-packet.md`
 - `research/sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md`
+- `research/sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md`
 
 ## Update Targets
 
 - Knowledge page to update: `research/knowledge/ai-server-supply-chain/cpu.html`
+- HTML reading view: `research/knowledge/ai-server-supply-chain/cpu-qa.html`
 - Brief section to update: Drivers, Key Data Points, What I Still Don't Understand

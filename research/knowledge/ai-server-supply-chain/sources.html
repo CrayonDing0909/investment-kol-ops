@@ -118,6 +118,26 @@
       </p>
     </article>
 
+
+    <article class="card" id="bnext-cpu">
+      <h3>BusinessNext: 為何 CPU 需求突然爆了？ <span class="pill warn">secondary explainer</span></h3>
+      <p><strong>Why it matters:</strong> 這是目前最適合中文讀者的 CPU explainer。它把 agentic AI 對 CPU 的需求講成「任務拆解、工具呼叫、資料庫查詢、程式執行、長時間代理」的問題。</p>
+      <table>
+        <thead><tr><th>Point</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>聊天機器人 → AI 代理</td><td>從單次問答變成多步驟 workflow，CPU 負責調度。</td></tr>
+          <tr><td>CPU latency &gt;50%</td><td>引用 Georgia Tech + Intel research；需找原始 paper 驗證。</td></tr>
+          <tr><td>短跑 → 馬拉松</td><td>agentic workload 長時間運行，比 bursty inference 更吃 system orchestration。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Reliability:</strong> secondary explainer。適合做中文 tutor mental model，不適合作 primary financial source。</p>
+      <p class="source">
+        <a href="../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">source packet</a> ·
+        <a href="../../intake/2026-05-10_bnext-ai-cpu_cpu.md">intake</a> ·
+        <a href="./cpu-qa.html">CPU Q&A HTML</a>
+      </p>
+    </article>
+
   </div>
 </section>
 
