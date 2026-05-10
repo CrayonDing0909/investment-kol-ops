@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Server Supply Chain — 知識架構入口</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 880px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  header h1 { margin: 0; font-size: 30px; }
+  header .lede { font-size: 16px; opacity: 0.85; margin-top: 6px; }
+  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid currentColor; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .card h3 { margin: 0; font-size: 16px; }
+  .card .role { font-size: 13px; opacity: 0.85; }
+  .card .open { font-size: 13px; opacity: 0.75; }
+  .card .links { font-size: 12px; font-family: var(--mono); margin-top: auto; }
+  .card .links a { margin-right: 8px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { opacity: 0.6; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  pre.flow { border: 1px solid currentColor; border-radius: 8px; padding: 12px; font-family: var(--mono); font-size: 13px; overflow-x: auto; background: transparent; white-space: pre; }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI Server Supply Chain</h1>
+  <div class="lede">
+    AI server 的資金支出結構正在從 GPU 主導，外溢到 CPU、ASIC、memory、passive components、cooling、software。
+    這頁是這條供應鏈的入口；每個 topic 卡片連到細節頁。第一個 anchor deep dive 是 CPU 復興（M1）。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-10 ·
+    Anchor deep dive: <span class="pill">CPU 復興</span> ·
+    Status: <span class="pill">draft</span>
+  </div>
+</header>
+
+<section id="thesis">
+  <h2>核心 thesis</h2>
+  <p>
+    EP659 之後可以記下這條主敘事：當市場接受 AI 算力的 spend 不會單押 GPU，資金會擴散到三個方向 ——
+    （1）回到 CPU 與 ASIC 等 compute 旁支；（2）灌進 server OEM 與被動元件、散熱等基礎建設；
+    （3）回流到財務體質好的軟體股。每條都需要不同的 catalyst 才會啟動。
+  </p>
+  <ul class="tight">
+    <li>GPU 不是「死了」，是「不再是唯一買點」。</li>
+    <li>CPU 透過 AMD / Intel 法說回到敘事中心，AI server 對 CPU 的需求在 reaccelerate。</li>
+    <li>ASIC 受 hyperscaler（AWS / Google）自研晶片需求帶動，估值仍相對便宜。</li>
+    <li>被動元件（信昌電 / MLCC / 鉭電容）供需吃緊，但敘事尚未啟動，要等 catalyst。</li>
+    <li>散熱在 EP659 缺席，但是 AI server 的必經環節，需另尋 intake。</li>
+    <li>軟體裡 PLTR / NET / CRWD 被點名為「二軍」候補，前提是一軍轉弱。</li>
+  </ul>
+</section>
+
+<section id="topics">
+  <h2>Topic Cards</h2>
+  <p>每張卡片連到該 topic 的 HTML 頁。卡片只顯示「角色 / 在供應鏈位置 / 我目前最大的疑問」。</p>
+  <div class="grid">
+
+    <div class="card">
+      <h3>CPU 復興 <span class="pill">anchor</span></h3>
+      <div class="role">伺服器主晶片，AMD / Intel 雙雄；AI server 重新把 CPU 推回 spend 中心。</div>
+      <div class="open">為什麼 AI server 工作負載不是只吃 GPU？聯發科切的 I/O / memory subsystem 是什麼？</div>
+      <div class="links">
+        <a href="./cpu.html">→ cpu</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_cpu.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>ASIC 浪潮</h3>
+      <div class="role">客製化加速器，hyperscaler 自研主導：AWS Trainium、Google TPU。</div>
+      <div class="open">為什麼資金從 GPU 轉到 ASIC？「30 倍 ASIC vs 100 倍光通」是哪幾家公司？</div>
+      <div class="links">
+        <a href="./asic.html">→ asic</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_asic.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>記憶體 / HBM <span class="pill warn">needs follow-up</span></h3>
+      <div class="role">HBM3e/HBM4 是 AI server 主軸，DRAM/NAND 是周邊。</div>
+      <div class="open">EP659 沒講；HBM3e/HBM4 timeline、CoWoS 容量、誰領先？</div>
+      <div class="links">
+        <a href="./memory.html">→ memory</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_memory.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>被動元件供需吃緊</h3>
+      <div class="role">MLCC / 鉭 / 鋁電容，「大哥轉高階 → 小弟吃飽」傳導。</div>
+      <div class="open">敘事啟動的 catalyst 是什麼？2017-2018 那輪時序如何？</div>
+      <div class="links">
+        <a href="./passive-components.html">→ passive components</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_passive-components.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>散熱 <span class="pill warn">needs follow-up</span></h3>
+      <div class="role">液冷 / 3D VC / cold plate；AI server 必經環節。</div>
+      <div class="open">EP659 沒講；NVDA reference design 散熱 BOM 是哪幾家？</div>
+      <div class="links">
+        <a href="./cooling.html">→ cooling</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_cooling.md">intake</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>軟體股估值修復</h3>
+      <div class="role">AI 典範轉移後，分一軍 / 二軍；PLTR / NET / CRWD 被點為候補。</div>
+      <div class="open">「一軍」是誰？PLTR 財務數字轉折是哪一季？</div>
+      <div class="links">
+        <a href="./software.html">→ software</a>
+        <a href="../../intake/2026-05-10_gooeye-ep659_software-rebound.md">intake</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="relationships">
+  <h2>Topics 之間的關係</h2>
+  <p>把 topics 串起來看資金流向與依賴關係。</p>
+  <pre class="flow">
+                       ┌─────────────────────────────┐
+                       │     AI Server Spend Mix     │
+                       └─────────────────────────────┘
+                                    │
+              ┌────────────┬────────┴────────┬────────────┐
+              ▼            ▼                 ▼            ▼
+           Compute      Memory           Server OEM   Software
+        (GPU + CPU      (HBM, DRAM)     (DELL, SMCI,  (PLTR, NET,
+         + ASIC)             │           HPE, ...)     CRWD, ...)
+              │              │                │
+              ▼              ▼                ▼
+        Power / Cooling                   Passive Components
+        (液冷, 3D VC, CDU)                (MLCC, 鉭電, 鋁電)
+  </pre>
+</section>
+
+<section id="known-narrative-unverified">
+  <h2>已知事實 / 市場敘事 / 還沒驗證</h2>
+  <table>
+    <thead>
+      <tr><th>類別</th><th>內容</th><th>來源 / 備註</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>已知事實</td>
+        <td>AMD 法說估 2026 營收 120B、年增 &gt; 35%；目標伺服器 CPU 市占 &gt; 50%。</td>
+        <td>EP659 引述 AMD 法說</td>
+      </tr>
+      <tr>
+        <td>已知事實</td>
+        <td>信昌電發出交貨期拉長通知。</td>
+        <td>EP659 被動段</td>
+      </tr>
+      <tr>
+        <td>市場敘事</td>
+        <td>資金從 GPU 外溢到 CPU、ASIC、伺服器、被動元件。</td>
+        <td>EP659 主軸</td>
+      </tr>
+      <tr>
+        <td>市場敘事</td>
+        <td>大市值 ASIC 30 倍 vs 光通股交易兩三年後 100 倍，估值便宜。</td>
+        <td>EP659；具體公司未指名，需釐清</td>
+      </tr>
+      <tr>
+        <td>還沒驗證</td>
+        <td>聯發科切 I/O / memory subsystem 能否真打入主晶片。</td>
+        <td>EP659 警語：預期已打滿</td>
+      </tr>
+      <tr>
+        <td>還沒驗證</td>
+        <td>被動元件「大哥轉高階 → 小弟吃飽」這一輪是否會複製 2017-2018。</td>
+        <td>EP659：敘事劇本還沒開始</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="open-questions">
+  <h2>Open Questions Backlog</h2>
+  <p>跨 topics 的未解問題。下次補資料時依序處理。</p>
+  <ol class="tight">
+    <li>AI server 對 CPU 的需求是 structural（架構性）還是 cyclical（補貨循環）？</li>
+    <li>ASIC 32-倍那個對照組是哪些公司？(AVGO? MRVL? 台廠創意 / 世芯?)</li>
+    <li>HBM3e / HBM4 timeline + CoWoS bottleneck 現況？</li>
+    <li>被動元件「敘事啟動 catalyst」歷史上是哪幾種？(漲價公告 / 大廠 guidance / 庫存補貨?)</li>
+    <li>NVDA GB200 / GB300 reference design 對散熱台廠（雙鴻 / 奇鋐 / 建準）的滲透率？</li>
+    <li>股癌講的「軟體一軍」具體是誰？(MSFT / GOOGL / META / NOW / CRM?)</li>
+  </ol>
+</section>
+
+<section id="references">
+  <h2>來源 / 引用清單</h2>
+  <ul class="tight">
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_cpu.md">2026-05-10_gooeye-ep659_cpu.md</a></li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_asic.md">2026-05-10_gooeye-ep659_asic.md</a></li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_memory.md">2026-05-10_gooeye-ep659_memory.md</a> (needs follow-up)</li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_passive-components.md">2026-05-10_gooeye-ep659_passive-components.md</a></li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_cooling.md">2026-05-10_gooeye-ep659_cooling.md</a> (needs follow-up)</li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_software-rebound.md">2026-05-10_gooeye-ep659_software-rebound.md</a></li>
+  </ul>
+</section>
+
+<footer>
+  AI Server Supply Chain index · HTML-first knowledge architecture · static, no JS ·
+  topics:
+  <a href="./cpu.html">CPU</a> ·
+  <a href="./asic.html">ASIC</a> ·
+  <a href="./memory.html">Memory</a> ·
+  <a href="./passive-components.html">Passive Components</a> ·
+  <a href="./cooling.html">Cooling</a> ·
+  <a href="./software.html">Software</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CPU 復興 — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  header .crumb { font-size: 13px; opacity: 0.7; }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; opacity: 0.85; }
+  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  section .lead { opacity: 0.9; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid currentColor; padding: 12px; border-radius: 8px; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  .qa { margin-bottom: 16px; }
+  .qa .q { font-weight: 600; }
+  .qa .a { margin-top: 4px; }
+  .source { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>CPU 復興</span></div>
+  <h1>CPU 復興</h1>
+  <div class="thesis">
+    AI server 的 spend 結構讓 CPU 從「commodity 旁角」重新回到中心舞台；AMD 透過 EPYC 在伺服器 CPU 市占壓過 Intel，聯發科則試圖從 I/O / memory subsystem 切入。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-10 ·
+    Status: <span class="pill">draft</span> ·
+    Theme: <span class="pill">cpu</span>
+  </div>
+</header>
+
+<section id="what">
+  <h2>1. 這是什麼？</h2>
+  <p class="lead">
+    CPU（Central Processing Unit，中央處理器）是伺服器的「總指揮」：負責調度任務、跑作業系統、處理 I/O 與通用運算。在 AI server 裡，CPU 雖然不負責矩陣計算（那是 GPU/ASIC 的事），但仍是把資料搬給 GPU、處理控制流、跑前處理 / 後處理的關鍵零件。
+  </p>
+  <ul class="tight">
+    <li>每台 AI server 仍會配 1-2 顆 CPU，與 4-8 顆 GPU/ASIC 搭配。</li>
+    <li>主要供應商：x86 雙雄 AMD（EPYC）與 Intel（Xeon）；ARM 派系包含 NVDA Grace、AWS Graviton。</li>
+    <li>台廠目前以「I/O 與 memory subsystem」周邊切入（聯發科），尚未真正做主晶片。</li>
+  </ul>
+</section>
+
+<section id="where">
+  <h2>2. 用在哪裡？在供應鏈的位置</h2>
+  <p class="lead">CPU 在 AI server 內負責協調，是 GPU / ASIC 之外的另一條 spend 主軸。</p>
+  <table>
+    <thead>
+      <tr><th>環節</th><th>角色</th><th>代表公司</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>x86 server CPU</td><td>主晶片</td><td>AMD（EPYC）、Intel（Xeon）</td></tr>
+      <tr><td>ARM server CPU</td><td>主晶片</td><td>NVDA Grace、AWS Graviton、Ampere</td></tr>
+      <tr><td>I/O / memory subsystem</td><td>周邊 + interconnect</td><td>聯發科、Astera Labs、Marvell（部分）</td></tr>
+      <tr><td>封裝 / 代工</td><td>foundry</td><td>TSMC（2330.TW）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="why">
+  <h2>3. 為什麼現在重要？</h2>
+  <ul class="tight">
+    <li>AMD 法說：2026 估 120B 營收、年增 &gt; 35%、目標伺服器 CPU 市占 &gt; 50%、2027 年 AI 營收能見度高。</li>
+    <li>Intel 法說呼應 CPU 重要性，市場開始把 CPU 從「被 GPU 邊緣化」的論述拉回。</li>
+    <li>美股大跌時 CPU 族群相對強勢，這是技術面已先反映的訊號。</li>
+    <li>聯發科第一次出現多根漲停，市場對台廠切 server CPU 周邊的想像升溫。</li>
+  </ul>
+</section>
+
+<section id="trend">
+  <h2>4. 現在的產業趨勢</h2>
+  <p class="lead">敘事中心明確、但個股估值已開始打滿，要分清楚事實與敘事。</p>
+  <div class="grid">
+    <div class="card">
+      <h3>已知事實</h3>
+      <ul class="tight">
+        <li>AMD 法說正式給出 120B 營收 guidance、市占 &gt; 50% 目標。</li>
+        <li>聯發科股價於 EP659 錄製當週反應到 ~3000 TWD 級。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>市場敘事</h3>
+      <ul class="tight">
+        <li>「CPU 重新成為市場核心」。</li>
+        <li>AI server 的下一個 spend 環節從 GPU 走向 CPU。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>還沒驗證的假設</h3>
+      <ul class="tight">
+        <li>聯發科從 I/O / memory subsystem 走到「打入主晶片」的路徑與時間。</li>
+        <li>AMD &gt; 50% 伺服器市占目標的達成期。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>可能被否證的訊號</h3>
+      <ul class="tight">
+        <li>AMD / Intel 下一份法說的 server segment 數字弱於 guidance。</li>
+        <li>聯發科進入主晶片的進度被時間表延後或被客戶否認。</li>
+        <li>hyperscaler capex 重新偏向 GPU/ASIC，CPU 配比下調。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="companies">
+  <h2>5. 哪些公司受影響？</h2>
+  <table>
+    <thead>
+      <tr><th>Ticker / Name</th><th>角色</th><th>Bull case</th><th>Bear case</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AMD</td>
+        <td>x86 server CPU 領先者</td>
+        <td>EPYC 在伺服器市占穩定 &gt; 50%，AI 營收能見度延伸到 2027。</td>
+        <td>Guidance 過樂觀，hyperscaler 採購 ramp 比 guidance 慢。</td>
+      </tr>
+      <tr>
+        <td>INTC</td>
+        <td>x86 server CPU 防守者</td>
+        <td>製程修復後在 enterprise / 政府單位重拾市占。</td>
+        <td>Foundry 成本拖累 + Xeon 落後 EPYC，市占持續流失。</td>
+      </tr>
+      <tr>
+        <td>2454.TW（聯發科）</td>
+        <td>I/O / memory subsystem 切入者</td>
+        <td>從 I/O 路徑切到主晶片，打開新成長曲線。</td>
+        <td>預期已打滿，I/O 階段毛利不夠撐估值。</td>
+      </tr>
+      <tr>
+        <td>ARM (隱含 NVDA Grace / AWS Graviton)</td>
+        <td>非 x86 替代路徑</td>
+        <td>客戶要求多元 ISA、ARM 在 AI server 站穩。</td>
+        <td>x86 ecosystem 成熟，ARM ramp 有限。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="market-pricing">
+  <h2>6. 市場現在 pricing 什麼？</h2>
+  <p class="lead">
+    AMD 已 pricing「server CPU 市占翻身 + 2027 AI 營收能見度」；聯發科股價已先反映「未來打入 server 主晶片」這個情境，但實際進度還停在 I/O / memory subsystem，所以股癌警告「預期打太滿」。
+    Intel 估值仍偏修復題材，市場對它的 server CPU 翻身期待相對保守。
+  </p>
+  <p class="lead">不確定處：AMD 的 50% 市占目標是否已被估值反映，需要再看 forward P/E 與 hyperscaler 採購節奏。</p>
+</section>
+
+<section id="open">
+  <h2>7. 我還不懂的部分</h2>
+  <div class="qa">
+    <div class="q">Q: 為什麼 AI server 工作負載不是只吃 GPU？</div>
+    <div class="a">A (草稿)：CPU 仍負責 host code、資料 pre/post processing、I/O 排程、跨 GPU 同步。GPU 數量越多，CPU 的協調工作越關鍵；模型規模越大，CPU 與 memory subsystem 之間的資料搬運成為新瓶頸。</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: 聯發科切的 I/O / memory subsystem 是什麼？跟主晶片的距離有多遠？</div>
+    <div class="a">A: open（需要找聯發科法說 / 報告補完。可能對應 PCIe switch、CXL controller、或 memory expander。）</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: AMD 拿伺服器 CPU 市占超過 5 成，那 Intel 的反擊牌是什麼？</div>
+    <div class="a">A: open（Sierra Forest E-core / Granite Rapids、Foundry 量產、政府訂單、AI accelerator Gaudi。）</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: 「歐印」是不是指市場 narrative 已經在輪動？</div>
+    <div class="a">A: open（要區分股癌的口頭風格 vs 真實倉位行動。）</div>
+  </div>
+</section>
+
+<section id="sources">
+  <h2>8. 來源</h2>
+  <ul class="tight source">
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_cpu.md">gooeye-ep659 / CPU 段</a> — AMD 法說數字 / 聯發科漲停 / Intel 法說呼應</li>
+  </ul>
+</section>
+
+<footer>
+  CPU 復興 · AI Server Supply Chain · HTML-first knowledge page ·
+  back to <a href="./index.html">index</a>
+</footer>
+
+</body>
+</html>

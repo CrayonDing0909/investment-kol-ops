@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>記憶體 / HBM — AI Server Supply Chain (needs follow-up)</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  header .crumb { font-size: 13px; opacity: 0.7; }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; opacity: 0.85; }
+  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  .banner { border: 1px solid currentColor; border-radius: 8px; padding: 12px; margin-top: 16px; font-size: 14px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  section .lead { opacity: 0.9; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid currentColor; padding: 12px; border-radius: 8px; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { opacity: 0.65; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  .qa { margin-bottom: 16px; }
+  .qa .q { font-weight: 600; }
+  .qa .a { margin-top: 4px; }
+  .source { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>記憶體 / HBM</span></div>
+  <h1>記憶體 / HBM</h1>
+  <div class="thesis">
+    AI server 的 memory 主軸是 HBM（High Bandwidth Memory）；DRAM / NAND 是周邊。EP659 沒有獨立 memory 段落，這頁先架好結構，等補新原料填滿。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-10 ·
+    Status: <span class="pill warn">needs follow-up</span> ·
+    Theme: <span class="pill">memory</span>
+  </div>
+  <div class="banner">
+    這頁多數欄位仍是 placeholder。EP659 對 memory 唯一的訊號是「聯發科目前做 I/O、memory，還沒打入主晶片」。
+    其他欄位需要 SK Hynix / Micron / Samsung 法說、TSMC CoWoS 更新、HBM3e/HBM4 roadmap 報告作為來源。
+  </div>
+</header>
+
+<section id="what">
+  <h2>1. 這是什麼？</h2>
+  <p class="lead">
+    HBM 是把多顆 DRAM die 垂直堆疊、用 TSV（Through-Silicon Via）連接的高頻寬記憶體。它透過 CoWoS 等先進封裝直接貼到 GPU / ASIC 旁邊，提供比一般 DDR 高一個數量級的頻寬。
+    DRAM（伺服器主記憶體）與 NAND（SSD）是 AI server 內較傳統、cyclical 的記憶體層。
+  </p>
+  <ul class="tight">
+    <li>HBM 是 AI server compute 的「記憶體配對件」，與 GPU/ASIC 同封裝。</li>
+    <li>DRAM 是傳統伺服器主記憶體，週期性需求。</li>
+    <li>NAND 是儲存層，受 capex 與 inventory cycle 影響大。</li>
+  </ul>
+</section>
+
+<section id="where">
+  <h2>2. 用在哪裡？在供應鏈的位置</h2>
+  <table>
+    <thead>
+      <tr><th>環節</th><th>角色</th><th>代表公司 (待驗證)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>HBM</td><td>GPU/ASIC 配對記憶體</td><td>SK Hynix、Samsung、Micron</td></tr>
+      <tr><td>DRAM (server)</td><td>主記憶體</td><td>SK Hynix、Samsung、Micron</td></tr>
+      <tr><td>NAND</td><td>SSD 儲存層</td><td>Samsung、SK Hynix、Micron、Sandisk、Kioxia</td></tr>
+      <tr><td>先進封裝</td><td>HBM 與運算晶片連結</td><td>TSMC CoWoS</td></tr>
+      <tr><td>memory subsystem 周邊</td><td>I/O / memory 連結控制</td><td>聯發科（試圖切入）、Astera Labs、Marvell（部分）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="why">
+  <h2>3. 為什麼現在重要？</h2>
+  <ul class="tight">
+    <li>EP659：聯發科切入 I/O / memory subsystem 被市場 pricing，但「還沒打入主晶片」。這條給了一個訊號：memory subsystem 是 AI server 一個尚未被討論清楚的位置。</li>
+    <li>其餘理由（HBM3e/HBM4 timeline、CoWoS 容量、cycle 復甦）—— 這份 intake 沒涵蓋，需另行補。</li>
+  </ul>
+</section>
+
+<section id="trend">
+  <h2>4. 現在的產業趨勢</h2>
+  <p class="lead">EP659 內容不足以判斷，下面欄位多數是 open。</p>
+  <div class="grid">
+    <div class="card">
+      <h3>已知事實</h3>
+      <ul class="tight">
+        <li>聯發科正切入 I/O / memory subsystem。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>市場敘事</h3>
+      <ul class="tight">
+        <li>open — 等補。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>還沒驗證</h3>
+      <ul class="tight">
+        <li>HBM3e / HBM4 timeline。</li>
+        <li>CoWoS capacity bottleneck 何時鬆動。</li>
+        <li>DRAM / NAND cycle 何時轉折。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>否證訊號</h3>
+      <ul class="tight">
+        <li>AI server unit 出貨弱於預期 → HBM 需求降溫。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="companies">
+  <h2>5. 哪些公司受影響？</h2>
+  <p class="lead">下表為「常見候選」，待 SK Hynix / Micron / Samsung 法說補資料後確認。</p>
+  <table>
+    <thead>
+      <tr><th>Ticker / Name</th><th>角色 (待驗證)</th><th>備註</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SK Hynix（KRX 000660）</td><td>HBM 領先廠</td><td>需確認 HBM3e / HBM4 進度、客戶分配。</td></tr>
+      <tr><td>Micron（MU）</td><td>HBM 第二陣營</td><td>HBM3e 量產進度、跟 NVDA 簽約情況。</td></tr>
+      <tr><td>Samsung（KRX 005930）</td><td>HBM + DRAM</td><td>HBM 認證進度。</td></tr>
+      <tr><td>2454.TW 聯發科</td><td>memory subsystem 周邊</td><td>I/O subsystem 切入主晶片的進度。</td></tr>
+      <tr><td>2330.TW TSMC</td><td>CoWoS 先進封裝</td><td>CoWoS 容量決定 HBM/GPU/ASIC ramp。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="market-pricing">
+  <h2>6. 市場現在 pricing 什麼？</h2>
+  <p class="lead">open — 待補。</p>
+</section>
+
+<section id="open">
+  <h2>7. 我還不懂的部分</h2>
+  <div class="qa"><div class="q">Q: HBM3e / HBM4 timeline 是什麼？哪一家進度領先？</div><div class="a">A: open。</div></div>
+  <div class="qa"><div class="q">Q: HBM 跟 CoWoS 是什麼關係？bottleneck 在哪？</div><div class="a">A: open。</div></div>
+  <div class="qa"><div class="q">Q: DRAM / NAND cycle 現在到哪？</div><div class="a">A: open。</div></div>
+  <div class="qa"><div class="q">Q: 聯發科 I/O / memory subsystem 是什麼？跟 AMD / Intel CPU 的關係？</div><div class="a">A: open（也存在 CPU 頁的 open question 裡）。</div></div>
+</section>
+
+<section id="sources">
+  <h2>8. 來源</h2>
+  <ul class="tight source">
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_memory.md">gooeye-ep659 / memory intake (needs follow-up)</a></li>
+  </ul>
+  <p class="lead">需補：SK Hynix / Micron / Samsung 最新法說、TSMC CoWoS 更新、HBM 報告。</p>
+</section>
+
+<footer>
+  記憶體 / HBM · AI Server Supply Chain · needs follow-up ·
+  back to <a href="./index.html">index</a>
+</footer>
+
+</body>
+</html>

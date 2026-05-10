@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ASIC 浪潮 — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  header .crumb { font-size: 13px; opacity: 0.7; }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; opacity: 0.85; }
+  header .meta { font-size: 12px; font-family: var(--mono); opacity: 0.7; margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  section .lead { opacity: 0.9; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid currentColor; padding: 12px; border-radius: 8px; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  .qa { margin-bottom: 16px; }
+  .qa .q { font-weight: 600; }
+  .qa .a { margin-top: 4px; }
+  .source { font-size: 12px; opacity: 0.7; font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>ASIC 浪潮</span></div>
+  <h1>ASIC 浪潮</h1>
+  <div class="thesis">
+    Hyperscaler 自研 AI 加速器（AWS Trainium、Google TPU 等）正在把資金從通用 GPU 牽到客製 ASIC；台廠創意 / 世芯擔任設計服務節點，估值看起來相對便宜，但客戶集中度高。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-10 ·
+    Status: <span class="pill">draft</span> ·
+    Theme: <span class="pill">asic</span>
+  </div>
+</header>
+
+<section id="what">
+  <h2>1. 這是什麼？</h2>
+  <p class="lead">
+    ASIC（Application-Specific Integrated Circuit）是針對單一工作負載最佳化的客製晶片。對 hyperscaler 而言，自研 ASIC 可以省成本、擺脫 NVDA 議價權。
+    在 AI server 場景，ASIC 主要做 training / inference，跟通用 GPU 形成替代或互補關係。
+  </p>
+  <ul class="tight">
+    <li>客製化 → 同樣工作負載下 perf-per-dollar / perf-per-watt 比 GPU 好。</li>
+    <li>缺點：開發週期長、客戶綁死、規模不夠就不划算。</li>
+    <li>Hyperscaler 是天然客戶：採購量大、工作負載穩定、有自家工程團隊。</li>
+  </ul>
+</section>
+
+<section id="where">
+  <h2>2. 用在哪裡？在供應鏈的位置</h2>
+  <table>
+    <thead>
+      <tr><th>環節</th><th>角色</th><th>代表公司</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>ASIC 設計擁有者</td><td>定義 spec、出貨</td><td>AWS（Trainium/Inferentia）、Google（TPU）、Meta（MTIA）</td></tr>
+      <tr><td>大市值 ASIC 廠</td><td>產品 + 部分客製設計</td><td>Broadcom（AVGO）、Marvell（MRVL）</td></tr>
+      <tr><td>設計服務（台廠）</td><td>為客戶 turnkey 出 ASIC</td><td>創意（3443.TW）、世芯-KY（3661.TW）</td></tr>
+      <tr><td>晶圓代工</td><td>實際製造</td><td>TSMC（2330.TW）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="why">
+  <h2>3. 為什麼現在重要？</h2>
+  <ul class="tight">
+    <li>EP659：「現在除了 GPU 沒力氣以外，一堆資金灌進 ASIC。」</li>
+    <li>世芯漲停且高度綁定 AWS Trainium，反映市場對 ASIC theme 的認知度提升。</li>
+    <li>創意也跟著 Google TPU 故事起飛了一段。</li>
+    <li>大市值 ASIC 估值約 30 倍，相較於光通股交易兩三年後到 100 倍，風險回報比看起來便宜。</li>
+  </ul>
+</section>
+
+<section id="trend">
+  <h2>4. 現在的產業趨勢</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>已知事實</h3>
+      <ul class="tight">
+        <li>世芯與 AWS Trainium 高度綁定（公開供應關係）。</li>
+        <li>創意過去因 Google 案上漲一段。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>市場敘事</h3>
+      <ul class="tight">
+        <li>「資金從 GPU 轉到 ASIC」。</li>
+        <li>「30 倍 ASIC 比 100 倍光通便宜」。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>還沒驗證的假設</h3>
+      <ul class="tight">
+        <li>EP659 講的「30 倍 ASIC」具體是誰（AVGO？MRVL？或台廠？）。</li>
+        <li>hyperscaler 採購 ASIC 的真實 ramp 速度。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>可能被否證的訊號</h3>
+      <ul class="tight">
+        <li>AVGO / MRVL 法說 ASIC segment 弱於 guidance。</li>
+        <li>世芯 / 創意大客戶 design loss。</li>
+        <li>NVDA 推出針對 ASIC 客戶的折扣或 reference design 把 hyperscaler 拉回 GPU。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="companies">
+  <h2>5. 哪些公司受影響？</h2>
+  <table>
+    <thead>
+      <tr><th>Ticker / Name</th><th>角色</th><th>Bull case</th><th>Bear case</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>AVGO</td><td>大市值 ASIC + 網通</td><td>Hyperscaler 客戶基礎廣，ASIC + 網通雙引擎。</td><td>Custom silicon 採購節奏未如預期。</td></tr>
+      <tr><td>MRVL</td><td>大市值 ASIC + 光通</td><td>同時受惠 ASIC 與光模組需求。</td><td>客戶過度集中，個別客戶調整影響大。</td></tr>
+      <tr><td>3443.TW（創意）</td><td>設計服務</td><td>Google 案延伸 + 拿到新 hyperscaler。</td><td>單一客戶集中、毛利率低。</td></tr>
+      <tr><td>3661.TW（世芯-KY）</td><td>設計服務</td><td>AWS Trainium 案規模放大。</td><td>客戶綁死、議價力弱。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="market-pricing">
+  <h2>6. 市場現在 pricing 什麼？</h2>
+  <p class="lead">
+    Pricing 在「ASIC = 下一個 GPU」這條 narrative。AVGO / MRVL 的本益比約 30x，反映成長 + multi-product 結構；
+    台廠創意 / 世芯估值反映「拿到大案 + 客戶綁定」的故事，但毛利結構偏設計服務、不像 NVDA 是 product margin。
+  </p>
+  <p class="lead">不確定處：30x ASIC 是 forward 還是 trailing P/E、是否已 priced-in 多個未公布的 design wins，需要更精細的對照。</p>
+</section>
+
+<section id="open">
+  <h2>7. 我還不懂的部分</h2>
+  <div class="qa">
+    <div class="q">Q: ASIC 跟 GPU 的 use case 差在哪？為什麼資金會從 GPU 轉到 ASIC？</div>
+    <div class="a">A (草稿)：當工作負載穩定、規模夠大，ASIC 的 perf-per-dollar 比 GPU 好；hyperscaler 也想擺脫 NVDA 議價權。資金轉移更接近 narrative 行為，不是真正的需求替代。</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: 「30 倍 ASIC vs 100 倍光通」是哪幾家公司？</div>
+    <div class="a">A: open（最像 AVGO / MRVL，但 EP659 沒明指；需要對照當期估值表。）</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: 創意 / 世芯誰綁誰？跟 AWS Trainium / Google TPU 的客戶關係到底是什麼？</div>
+    <div class="a">A: open（需要看公司 IR / 法說重申。）</div>
+  </div>
+  <div class="qa">
+    <div class="q">Q: ASIC 供應鏈（CoWoS / HBM / 封測）有哪些 bottleneck？</div>
+    <div class="a">A: open（要看 TSMC CoWoS 容量規劃 + 三大 HBM 廠的供給。）</div>
+  </div>
+</section>
+
+<section id="sources">
+  <h2>8. 來源</h2>
+  <ul class="tight source">
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_asic.md">gooeye-ep659 / ASIC 段</a> — 創意/世芯個股、AWS Trainium、估值對照</li>
+  </ul>
+</section>
+
+<footer>
+  ASIC 浪潮 · AI Server Supply Chain · HTML-first knowledge page ·
+  back to <a href="./index.html">index</a>
+</footer>
+
+</body>
+</html>
