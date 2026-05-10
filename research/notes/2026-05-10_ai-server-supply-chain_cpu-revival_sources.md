@@ -57,3 +57,22 @@ status: draft
 - 18 個月 bull/base/bear scenarios（agent-drafted → 需 scenario-analyzer 跑一次驗證）。
 - AMD 法說數字的 primary verification（從 EP659 二手轉述 → 必須對到 AMD 8-K 或法說官方 transcript）。
 - AMD / Intel server CPU 市占的歷史對照數據（沒在 EP659 內，brief 沒用，但若公開時要補）。
+
+
+## M1.1 Source-Backed Addendum
+
+| # | Claim | Source | Captured At | Confidence | Verified By |
+|---|-------|--------|-------------|------------|-------------|
+| A1 | AMD Q1 2026 revenue was $10.253B, up 38% YoY | research/intake/2026-05-10_amd-q1-2026_cpu.md | 2026-05-10 | known | AMD press release |
+| A2 | AMD Data Center revenue was $5.8B, up 57% YoY | research/intake/2026-05-10_amd-q1-2026_cpu.md | 2026-05-10 | known | AMD press release |
+| A3 | AMD server CPU TAM expected CAGR >35%, reaching >$120B by 2030 | research/intake/2026-05-10_amd-q1-2026_cpu.md | 2026-05-10 | known via secondary transcript | Motley Fool transcript; official transcript preferred |
+| A4 | Intel Q1 2026 DCAI revenue was $5.1B, up 22% YoY | research/intake/2026-05-10_intel-q1-2026_cpu.md | 2026-05-10 | known | Intel press release |
+| A5 | Intel says CPU is the AI orchestration/control plane | research/intake/2026-05-10_intel-q1-2026_cpu.md | 2026-05-10 | known via secondary transcript | Motley Fool transcript |
+| A6 | Intel ASIC revenue grew >30% QoQ and nearly doubled YoY | research/intake/2026-05-10_intel-q1-2026_cpu.md | 2026-05-10 | known via secondary transcript | Motley Fool transcript |
+| A7 | MediaTek Jan-Apr 2026 YTD revenue was NT$195.887B, down 3.06% YoY | research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md | 2026-05-10 | known | MediaTek IR monthly table |
+| A8 | MediaTek expects around $2B AI ASIC revenue in Q4 2026 | research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md | 2026-05-10 | uncertain until official transcript | Alpha Spread / Futurum secondary |
+
+### Corrections From M1.0
+
+- EP659 note interpreted "120B" as if it were AMD 2026 revenue. M1.1 source packet corrects this: source-backed wording is **server CPU TAM >$120B by 2030**, not AMD 2026 revenue.
+- EP659 / M1.0 implied AMD server CPU share >50%. This remains a useful hypothesis, but **not source-backed by the M1.1 AMD packet**. It needs AMD Analyst Day or another primary source before public use.
