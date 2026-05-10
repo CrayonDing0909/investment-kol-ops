@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tutor Q&A Reading View — AI Server Supply Chain</title>
+<style>
+  :root { color-scheme: light dark; --maxw: 920px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.6; padding: 24px; max-width: var(--maxw); margin: 0 auto; }
+  header { border-bottom: 1px solid currentColor; padding-bottom: 12px; margin-bottom: 24px; }
+  h1 { margin: 4px 0 8px; font-size: 30px; }
+  h2 { font-size: 22px; margin: 28px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed currentColor; }
+  h3 { margin: 0 0 6px; font-size: 17px; }
+  .crumb, .meta, .source { font-size: 12px; opacity: 0.72; font-family: var(--mono); }
+  .lede { opacity: 0.9; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid currentColor; border-radius: 10px; padding: 14px; }
+  .pill { display: inline-block; border: 1px solid currentColor; border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { border: 1px solid currentColor; padding: 6px 8px; text-align: left; vertical-align: top; }
+  a { color: inherit; }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; opacity: 0.7; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> / Tutor Q&A Reading View</div>
+  <h1>Tutor Q&A 閱讀頁</h1>
+  <p class="lede">
+    這頁是你要反覆讀的 tutor layer。它不是 final article，而是把「我不懂什麼」變成可理解的 mental model。
+    詳細版仍保留在 `research/questions/` 的 Markdown，這裡是閱讀友善摘要。
+  </p>
+  <div class="meta">Last updated: 2026-05-10 · status: draft · Q&A count: 6</div>
+</header>
+
+<section id="qa-cards">
+  <h2>Q&A Cards</h2>
+  <div class="grid">
+
+    <article class="card" id="cpu">
+      <h3>CPU 在 AI server 裡還有什麼用？ <span class="pill">anchor</span></h3>
+      <p><strong>Short answer:</strong> GPU/ASIC 做 tensor compute，CPU 做 orchestration：作業系統、資料搬運、I/O、前後處理、排程、把任務餵給 accelerators。Agentic AI 任務越多步，CPU-side coordination 越重要。</p>
+      <p><strong>Mental model:</strong> GPU/ASIC 是廚師，CPU 是廚房領班。菜越多、訂單越複雜，領班越重要。</p>
+      <p><strong>Investor lens:</strong> 看 AMD server CPU revenue、Intel DCAI / Xeon design wins、hyperscaler instances。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/cpu.md">full Q&A</a> · <a href="./cpu.html">topic page</a></p>
+    </article>
+
+    <article class="card" id="asic">
+      <h3>ASIC 是什麼？跟 GPU 差在哪？</h3>
+      <p><strong>Short answer:</strong> GPU 是通用並行運算工具；ASIC 是為固定工作負載客製的晶片。客戶規模夠大、workload 夠固定時，ASIC 可能更省成本與功耗。</p>
+      <p><strong>Mental model:</strong> GPU 是瑞士刀；ASIC 是工廠裡只做一個動作的專用機台。</p>
+      <p><strong>Investor lens:</strong> 看 MediaTek AI ASIC revenue、AVGO/MRVL custom silicon、TSMC CoWoS、創意/世芯 design service。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/asic.md">full Q&A</a> · <a href="./asic.html">topic page</a></p>
+    </article>
+
+    <article class="card" id="memory">
+      <h3>HBM 跟一般 DRAM 差在哪？</h3>
+      <p><strong>Short answer:</strong> HBM 是貼在 GPU/ASIC 旁邊的高頻寬記憶體；DRAM 是伺服器主記憶體。AI 模型越大，memory bandwidth 越容易成為瓶頸。</p>
+      <p><strong>Mental model:</strong> HBM 是機器旁邊的超高速零件倉庫；DRAM 是廠房外的大倉庫。</p>
+      <p><strong>Investor lens:</strong> 看 HBM allocation、CoWoS capacity、memory cost commentary、MediaTek custom HBM / interconnect roadmap。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/memory.md">full Q&A</a> · <a href="./memory.html">topic page</a></p>
+    </article>
+
+    <article class="card" id="passive">
+      <h3>被動元件是哪些東西？</h3>
+      <p><strong>Short answer:</strong> 被動元件包含電容、電阻、電感。AI server 功率密度高，需要大量 MLCC、鉭電容、鋁電容來穩壓與濾波。</p>
+      <p><strong>Mental model:</strong> GPU/CPU/ASIC 是引擎，被動元件像油路與穩壓器；功率一上來，不穩就熄火。</p>
+      <p><strong>Investor lens:</strong> 看交期拉長、漲價公告、月營收 YoY、庫存週轉。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/passive-components.md">full Q&A</a> · <a href="./passive-components.html">topic page</a></p>
+    </article>
+
+    <article class="card" id="cooling">
+      <h3>液冷、3D VC、cold plate、CDU 差在哪？</h3>
+      <p><strong>Short answer:</strong> AI server 功率越來越高，散熱從零件變系統瓶頸。3D VC 是導熱板，cold plate 是直接貼晶片的水冷板，CDU 是 rack 級冷卻液分配設備。</p>
+      <p><strong>Mental model:</strong> AI server 像高爐；GPU/ASIC 是火，散熱是排熱系統。排熱不夠，晶片無法滿載。</p>
+      <p><strong>Investor lens:</strong> 看 NVDA reference design、液冷 attach rate、cold plate / CDU ASP、rack power density。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/cooling.md">full Q&A</a> · <a href="./cooling.html">topic page</a></p>
+    </article>
+
+    <article class="card" id="software">
+      <h3>AI 典範轉移後，軟體股會死嗎？</h3>
+      <p><strong>Short answer:</strong> 不會全死。AI 會壓迫部分 seat-based SaaS，但能把 AI 變成客戶 workflow 的公司可能提高使用量、毛利與黏著。</p>
+      <p><strong>Mental model:</strong> AI 不是讓餐廳全倒，而是淘汰只賣座位、不提升菜品質量的餐廳。</p>
+      <p><strong>Investor lens:</strong> 看 ARR growth、NRR/GRR、gross margin、AI product attach、usage revenue。</p>
+      <p class="source"><a href="../../questions/ai-server-supply-chain/software.md">full Q&A</a> · <a href="./software.html">topic page</a></p>
+    </article>
+
+  </div>
+</section>
+
+<section id="reading-order">
+  <h2>建議閱讀順序</h2>
+  <ol>
+    <li>先讀 CPU，理解「AI server 不是只有 GPU」這個底層心智模型。</li>
+    <li>再讀 ASIC，理解 hyperscaler 為什麼要自研。</li>
+    <li>讀 Memory / Passive / Cooling，理解硬體 spend 外溢到哪裡。</li>
+    <li>最後讀 Software，理解同一條 AI 資金流在硬體之外的另一端。</li>
+  </ol>
+</section>
+
+<footer>
+  Tutor Q&A Reading View · <a href="./index.html">back to index</a> ·
+  <a href="./sources.html">read sources view</a>
+</footer>
+
+</body>
+</html>
