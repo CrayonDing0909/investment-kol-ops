@@ -39,7 +39,7 @@
   <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>CPU 復興</span></div>
   <h1>CPU 復興</h1>
   <div class="thesis">
-    AI server 的 spend 結構讓 CPU 從「commodity 旁角」重新回到中心舞台；AMD 透過 EPYC 在伺服器 CPU 市占壓過 Intel，聯發科則試圖從 I/O / memory subsystem 切入。
+    AI server 的 spend 結構讓 CPU 從「commodity 旁角」重新回到中心舞台；AMD 以 EPYC 抓住 server CPU TAM 上修，Intel 則把 Xeon 重新定位成 AI stack 的 orchestration / control plane。聯發科仍偏 I/O / memory subsystem 與 ASIC exposure，尚未證明自己進入 server CPU 主晶片。
   </div>
   <div class="meta">
     Last updated: 2026-05-10 ·
@@ -79,8 +79,8 @@
 <section id="why">
   <h2>3. 為什麼現在重要？</h2>
   <ul class="tight">
-    <li>AMD 法說：2026 估 120B 營收、年增 &gt; 35%、目標伺服器 CPU 市占 &gt; 50%、2027 年 AI 營收能見度高。</li>
-    <li>Intel 法說呼應 CPU 重要性，市場開始把 CPU 從「被 GPU 邊緣化」的論述拉回。</li>
+    <li>AMD source-backed 修正：120B 指的是 server CPU TAM by 2030，不是 AMD 2026 revenue。AMD Q1 2026 Data Center revenue $5.8B、+57% YoY，並說 server CPU TAM CAGR &gt;35%。</li>
+    <li>Intel source-backed：Intel 說 CPU 是 AI stack 的 orchestration layer / control plane；Q1 2026 DCAI revenue $5.1B、+22% YoY，Xeon 6 被選為 NVIDIA DGX Rubin NVL8 host CPU。</li>
     <li>美股大跌時 CPU 族群相對強勢，這是技術面已先反映的訊號。</li>
     <li>聯發科第一次出現多根漲停，市場對台廠切 server CPU 周邊的想像升溫。</li>
   </ul>
@@ -93,7 +93,7 @@
     <div class="card">
       <h3>已知事實</h3>
       <ul class="tight">
-        <li>AMD 法說正式給出 120B 營收 guidance、市占 &gt; 50% 目標。</li>
+        <li>AMD 官方 source 支持：Data Center revenue $5.8B、+57% YoY；server CPU TAM &gt;$120B by 2030、CAGR &gt;35%。「市占 &gt;50%」仍需 Analyst Day primary source。</li>
         <li>聯發科股價於 EP659 錄製當週反應到 ~3000 TWD 級。</li>
       </ul>
     </div>
@@ -108,7 +108,7 @@
       <h3>還沒驗證的假設</h3>
       <ul class="tight">
         <li>聯發科從 I/O / memory subsystem 走到「打入主晶片」的路徑與時間。</li>
-        <li>AMD &gt; 50% 伺服器市占目標的達成期。</li>
+        <li>AMD &gt;50% 伺服器市占目標仍待 primary source；目前 source-backed 是 server CPU revenue growth / TAM 上修。</li>
       </ul>
     </div>
     <div class="card">
@@ -132,7 +132,7 @@
       <tr>
         <td>AMD</td>
         <td>x86 server CPU 領先者</td>
-        <td>EPYC 在伺服器市占穩定 &gt; 50%，AI 營收能見度延伸到 2027。</td>
+        <td>EPYC 需求強、Data Center revenue +57% YoY，server CPU TAM 上修到 &gt;$120B by 2030；&gt;50% share target 需補 primary source。</td>
         <td>Guidance 過樂觀，hyperscaler 採購 ramp 比 guidance 慢。</td>
       </tr>
       <tr>
@@ -160,8 +160,8 @@
 <section id="market-pricing">
   <h2>6. 市場現在 pricing 什麼？</h2>
   <p class="lead">
-    AMD 已 pricing「server CPU 市占翻身 + 2027 AI 營收能見度」；聯發科股價已先反映「未來打入 server 主晶片」這個情境，但實際進度還停在 I/O / memory subsystem，所以股癌警告「預期打太滿」。
-    Intel 估值仍偏修復題材，市場對它的 server CPU 翻身期待相對保守。
+    AMD 已 pricing「Data Center revenue inflection + server CPU TAM 上修 + EPYC 需求強」；聯發科股價則反映 AI ASIC / data center subsystem story，但仍要分清楚 ASIC revenue、I/O subsystem、server CPU 主晶片是三件不同事。
+    Intel 的 source-backed story 是 DCAI 復甦、Xeon 作為 AI control plane、Foundry/packaging leverage，但也有 18A ramp 和 cost pressure。
   </p>
   <p class="lead">不確定處：AMD 的 50% 市占目標是否已被估值反映，需要再看 forward P/E 與 hyperscaler 採購節奏。</p>
 </section>
@@ -189,7 +189,11 @@
 <section id="sources">
   <h2>8. 來源</h2>
   <ul class="tight source">
-    <li><a href="../../intake/2026-05-10_gooeye-ep659_cpu.md">gooeye-ep659 / CPU 段</a> — AMD 法說數字 / 聯發科漲停 / Intel 法說呼應</li>
+    <li><a href="../../intake/2026-05-10_gooeye-ep659_cpu.md">gooeye-ep659 / CPU 段</a> — narrative seed</li>
+    <li><a href="../../intake/2026-05-10_amd-q1-2026_cpu.md">AMD Q1 2026 intake</a> — Data Center / EPYC / agentic AI CPU demand</li>
+    <li><a href="../../intake/2026-05-10_intel-q1-2026_cpu.md">Intel Q1 2026 intake</a> — Xeon / AI control plane / DCAI</li>
+    <li><a href="../../intake/2026-05-10_mediatek-q1-2026_cpu-asic.md">MediaTek Q1 2026 intake</a> — ASIC / I/O / memory subsystem</li>
+    <li><a href="../../questions/ai-server-supply-chain/cpu.md">Tutor Q&A: CPU 在 AI server 裡還有什麼用？</a></li>
   </ul>
 </section>
 
