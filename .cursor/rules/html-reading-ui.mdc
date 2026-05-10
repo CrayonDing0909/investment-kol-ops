@@ -1,0 +1,57 @@
+---
+description: HTML-first reading UI rules for human-facing knowledge artifacts
+globs: "research/knowledge/**/*.html"
+alwaysApply: false
+---
+
+# HTML Reading UI Rule
+
+Human-facing knowledge artifacts in this repo are HTML-first.
+
+Canonical data still lives in Markdown (`research/sources/`, `research/intake/`,
+`research/questions/`, `research/notes/`), but the user should read HTML first.
+
+Follow [docs/HTML_READING_UI_GUIDE.md](mdc:docs/HTML_READING_UI_GUIDE.md).
+
+## Required Behavior
+
+- If a user is expected to read, learn, review, or revisit an artifact, create or
+  update an HTML reading page.
+- Prefer HTML links inside HTML pages.
+- Markdown links are allowed only as fallback and must be explicitly labeled:
+  `md source`, `markdown intake`, or `markdown canonical`.
+- Do not label a Markdown link as just `source`, `intake`, or `Q&A`.
+- If no specific HTML page exists, link to the closest HTML reading view first.
+
+## Required Page Structure
+
+Every human-facing HTML page should include:
+
+- Breadcrumb.
+- Clear H1 title.
+- One-paragraph summary / lede.
+- Status or source-quality metadata.
+- Short, scannable sections.
+- Source confidence near claims.
+- Follow-up / unknowns when applicable.
+- HTML-first links at the bottom.
+
+## Style Constraints
+
+- Static HTML only.
+- Inline CSS only.
+- No framework.
+- No external assets.
+- No JavaScript unless a later milestone explicitly requests interaction.
+- No gradients, decorative animations, heavy shadows, or emoji icons.
+- Keep it readable on mobile widths.
+
+## Review Checklist
+
+Before committing:
+
+- [ ] Can the page be understood without opening Markdown?
+- [ ] Are primary / secondary / unverified claims clearly labeled?
+- [ ] Are high-risk claims accompanied by plain-language warnings?
+- [ ] Are Markdown links explicitly fallback links?
+- [ ] Is the page useful for re-reading, not just visually nicer?
