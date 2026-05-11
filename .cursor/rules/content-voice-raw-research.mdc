@@ -1,0 +1,43 @@
+---
+description: Raw research voice rules for investment content drafts
+globs: "{content/**/*,research/notes/**/*,docs/VOICE_PROFILE*.md}"
+alwaysApply: false
+---
+
+# Raw Research Voice Rule
+
+Investment content drafts should sound like the user's research note before they
+sound like a finished article.
+
+## Required Behavior
+
+- Preserve the user's raw phrasing before polishing.
+- Start from "what I am organizing / observing", not from a teaching frame.
+- Treat early ideas as a hypothesis map, not as conclusions.
+- Keep uncertainty when it is part of the thinking: `感覺`, `我想像中`,
+  `應該比較像`, `還沒補完`, `不能寫太滿`.
+- Split narratives into branches before turning them into one clean thesis.
+- Explain what the user is trying to understand or verify before suggesting what
+  a reader should take away.
+
+## Avoid
+
+- Do not over-polish into media explainer voice.
+- Do not use generic article scaffolding like `Hook`, `Main Thesis`, or
+  `Reader Takeaway` unless the user explicitly wants a polished public draft.
+- Avoid institutional phrases such as `核心 thesis`, `底層原因`, `重新定價`,
+  and `投資機會正在擴散` when the user's thought is still forming.
+- Do not turn unverified branches into source-backed conclusions.
+
+## Preferred Shape
+
+```text
+最近整理 / 觀察到什麼
+→ 感覺大概有幾條支線
+→ 每條支線我目前怎麼想
+→ 哪些有 source，哪些還沒補完
+→ 下一步要驗證什麼
+```
+
+Use [docs/VOICE_PROFILE.zh.md](mdc:docs/VOICE_PROFILE.zh.md) as the canonical
+voice reference.

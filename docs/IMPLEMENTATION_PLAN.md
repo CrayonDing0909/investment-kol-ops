@@ -173,7 +173,7 @@ Tasks:
       `content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html`.
 - [x] Mark the draft `public_status: not-public-ready`.
 - [x] Include review checklist and public blockers inside the draft.
-- [ ] Review the draft for voice: is it useful, specific, and not too AI-like?
+- [x] Review the draft for voice: is it useful, specific, and not too AI-like?
 - [ ] Decide whether to proceed to M2.1 public-readiness hardening or M3 publish
       experiment.
 
@@ -413,6 +413,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-12 - M2 - internal article template created
 2026-05-12 - M2 - first internal article draft created in Markdown and HTML reading view
 2026-05-12 - M2 - internal article self-review added; public blockers retained
+2026-05-12 - M2 - raw research voice pass completed; content voice rule added
 ```
 
 ### Per-Skill Status Grid Footnotes
@@ -425,8 +426,9 @@ and real skill invocations are done.
 
 `content-production: article-draft-done*` — M2 internal article draft completed
 on 2026-05-12. The draft exists in Markdown and HTML reading view, includes
-public blockers, and is not scheduled or published. Voice still needs a human
-pass before public use.
+public blockers, and is not scheduled or published. A raw research voice pass
+has been completed; public use still requires source hardening and a final human
+edit.
 
 
 `investment-analysis: research-packet-done*` — M1.1 source-backed research packet
