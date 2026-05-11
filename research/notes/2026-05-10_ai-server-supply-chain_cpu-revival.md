@@ -22,8 +22,10 @@ knowledge_pages:
   - research/questions/ai-server-supply-chain/asic.md
   - research/questions/ai-server-supply-chain/memory.md
 sources_checklist: research/notes/2026-05-10_ai-server-supply-chain_cpu-revival_sources.md
-status: gate-pending
+status: gate-approved
 gate: IA1
+gate_scope: internal-only
+public_status: not-public-ready
 gate_decision_log: ops/decisions/2026-05-10_ia1_cpu-deep-dive.md
 ---
 
@@ -31,6 +33,7 @@ gate_decision_log: ops/decisions/2026-05-10_ia1_cpu-deep-dive.md
 
 > 範圍：第一次 M1 anchor deep dive，搭配 AI Server Supply Chain knowledge map 一起讀。
 > Internal only。Gate IA1 dry run。
+> Note: HUMAN-WRITTEN sections below are agent-seeded drafts accepted by the user for M1.2 workflow continuity; user may revise voice later before public use.
 
 ## Market Question
 
@@ -123,7 +126,15 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 > 規則：你新理解到什麼？不是 summary，是「我之前不懂、現在懂了」的具體點。
 > Floor: 至少 100 字。
 
-<TODO: 你親手寫 ≥ 100 字>
+我原本以為 CPU 在 AI server 裡只是配角，真正重要的是 GPU / ASIC。
+但讀完 AMD、Intel 和 BusinessNext 後，我比較理解 CPU 的角色不是負責主要算力，
+而是負責 orchestration / control plane。尤其 agentic AI 從單次問答變成多步驟任務，
+會需要更多資料搬運、工具呼叫、排程、程式執行和長時間運行，這些不是 GPU 擅長的部分。
+
+所以 CPU 復興不是「CPU 取代 GPU」，而是 AI server spend 從單一 GPU 敘事擴散到整個系統架構。
+AMD 的 Data Center revenue、EPYC demand、server CPU TAM 上修，是目前最直接的財報證據。
+Intel 的說法則讓我理解，CPU 也可以被重新定義為 AI stack 的 control plane，
+不是過去那種單純通用運算的老故事。
 
 提示：以下是這次資料中「應該讓你產生新理解」的候選點，從這幾條挑你真有體會的去發揮——
 - AI server 即使滿載 GPU/ASIC，仍需要 1-2 顆 CPU 做 host 控制；GPU 越多、CPU 協調工作越關鍵。
@@ -135,7 +146,11 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 
 > 規則：誠實列出。不丟臉。下次優先補。
 
-<TODO: 你親手列 ≥ 3 條>
+1. 我還不確定 AMD 的 server CPU TAM >120B by 2030，市場目前到底 price in 多少。
+2. 我還不懂 CPU demand 是因為 attach rate 上升、server units 上升，還是 utilization 上升。
+3. 我還不確定 Intel 的 CPU control plane 說法，是實際競爭力回來，還是公司在重塑敘事。
+4. 我不確定 MediaTek 到底是 ASIC story、I/O / memory subsystem story，還是市場把兩者混在一起炒。
+5. 我還需要找 AMD Analyst Day 的 primary source 來驗證 >50% server CPU share target。
 
 起始候選（來自 cpu.html 的 open questions，可挑可加）：
 - AI server 對 CPU 是 structural 需求還是 cyclical 補貨？
@@ -148,7 +163,20 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 > 規則：你的觀點。為什麼買 / 不買 / 觀察 / 避開。允許不確定，但要明確說「我不確定」而不是空話。
 > Floor: 至少 200 字。
 
-<TODO: 你親手寫 ≥ 200 字>
+我目前相信 CPU 復興這條 thesis 有成立，但我不會把它理解成 CPU 取代 GPU，
+而是 AI server spend 從 GPU 擴散到整個系統架構。AMD 的 source 最有說服力，
+因為它已經在 Data Center revenue、EPYC demand、server CPU TAM 上修裡看到財報證據。
+Intel 的說法也重要，但我會把它視為防守與修復線，而不是最強攻擊線。
+
+如果只能先研究一檔，我會先看 AMD，因為它同時有 CPU 和 accelerator exposure，
+而且 thesis 比較 source-backed。Intel 我會觀察 DCAI 和 Xeon design wins 是否延續。
+MediaTek 我暫時不會把它當 CPU 主晶片故事，而是 ASIC / subsystem optionality；
+它最大的風險是市場把「未來可能性」提前 price in。
+
+所以我的行動會是先建立觀察清單，不急著把這條當成買進理由。
+我會等 AMD 下一份法說確認 server CPU growth 是否延續，也會等 MediaTek 官方 transcript
+確認 AI ASIC revenue 的說法。這題對中文投資者最有價值的 insight 是：
+AI server 不是只有 GPU，真正的投資機會可能來自資金開始理解整個系統瓶頸。
 
 提示：你的 POV 不該重複 thesis，而是回答幾個具體問題：
 - 你會買 AMD 嗎？什麼價位 / 什麼條件？
@@ -162,7 +190,9 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 
 > 規則：3 個會讓你改變想法的具體訊號。要可被觀察、可被計數、有時間框。
 
-<TODO: 你親手寫 3 條 invalidation>
+1. 如果 AMD 下一份季報 Data Center revenue 或 server CPU growth 明顯低於 guidance，且管理層下修 server CPU demand，我會降低 CPU 復興 thesis 的信心。
+2. 如果 Intel 下一份季報 DCAI / Xeon design wins 無法延續，或 CPU control plane 敘事沒有轉成收入，我會把 Intel 從修復線降級成純敘事。
+3. 如果 MediaTek 官方 transcript 無法支持 AI ASIC $2B Q4 2026 / data center project ramp，或明確顯示目前只停在低毛利 subsystem，我會把台廠 AI server optionality 降級。
 
 起始候選（你可以採用、修改或全部換掉）：
 
