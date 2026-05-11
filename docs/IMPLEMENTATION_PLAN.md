@@ -38,9 +38,9 @@ Track which milestone each skill currently lives in.
 
 | Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
 |-------|------|------|------|----|----|----|----|
-| investment-analysis | scaffold-done* | research-packet-done* | pov-completion | shared | repurpose | command | metrics |
+| investment-analysis | scaffold-done* | research-packet-done* | pov-done* |  | repurpose | command | metrics |
 | algorithm-research |  |  |  | shared | core | command | summary |
-| content-production |  |  |  | shared | core | command | publish-check |
+| content-production |  |  |  | article-draft-done* | core | command | publish-check |
 | audience-discovery |  |  |  | shared |  | command | interviews + clusters |
 | mvp-demo |  |  |  | shared |  |  | first spec |
 | postmortem |  |  |  | shared |  |  | first run |
@@ -135,14 +135,14 @@ real decision.
 
 Tasks:
 
-- [ ] User fills the HUMAN-WRITTEN sections in the CPU brief:
+- [x] User fills the HUMAN-WRITTEN sections in the CPU brief:
       - What I Learned
       - What I Still Don't Understand
       - My POV (≥ 200 words)
       - My Invalidation (exactly 3 signals)
-- [ ] User fills the IA1 reflection questions.
-- [ ] Agent checks that POV/invalidation are specific and not vague.
-- [ ] IA1 gate re-runs and updates decision from `defer` to
+- [x] User fills the IA1 reflection questions.
+- [x] Agent checks that POV/invalidation are specific and not vague.
+- [x] IA1 gate re-runs and updates decision from `defer` to
       `approve`, `edit`, or `reject`.
 
 Definition of Done:
@@ -152,25 +152,38 @@ Definition of Done:
 - The user can explain the thesis without reading the brief verbatim.
 - No public article yet. Public content starts in M2/M3.
 
-## M2 - Shared Infrastructure
+## M2 - Internal Article Draft
 
-Goal: every workflow uses the same folder, naming, and template conventions.
+Goal: convert the M1 source-backed research baseline into the first readable
+internal article draft. This is still **not public publishing**.
+
+Why this comes next:
+
+- M1 proved the learning / source / brief / POV loop.
+- M2 tests whether that research can become a readable article without losing
+  source discipline.
+- Public distribution and metrics tracking start later.
 
 Tasks:
 
-- [ ] Define `templates/_artifact-header.md` with frontmatter:
-      `workflow`, `risk`, `created_at`, `source`, `status`.
-- [ ] Filename convention: `YYYY-MM-DD_workflow_topic.md`.
-- [ ] Create `ops/decisions/` and a decision log template.
-- [ ] Create `ops/metrics.csv` with columns aligned to METRICS.md.
-- [ ] Add `scripts/lib/` with shared helpers (markdown read/write, LLM call,
-      mermaid generation).
+- [x] Create `content/templates/internal-article.md`.
+- [x] Draft the first internal article from the CPU revival research baseline:
+      `content/drafts/2026-05-12_ai-server-supply-chain_internal-article.md`.
+- [x] Create a human-readable HTML version:
+      `content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html`.
+- [x] Mark the draft `public_status: not-public-ready`.
+- [x] Include review checklist and public blockers inside the draft.
+- [ ] Review the draft for voice: is it useful, specific, and not too AI-like?
+- [ ] Decide whether to proceed to M2.1 public-readiness hardening or M3 publish
+      experiment.
 
 Definition of Done:
 
-- One template applied retroactively to all M1 outputs.
-- Filename convention used in all new artifacts.
-- Empty metrics.csv created.
+- One internal article draft exists in Markdown.
+- One HTML reading view exists for the draft.
+- The draft clearly says what still blocks public release.
+- The draft is understandable without opening the original brief.
+- The draft is not yet scheduled or published.
 
 ## M3 - Two More Workflows
 
@@ -394,27 +407,39 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-10 - M1.1 - six tutor Q&A notes created for CPU / ASIC / memory / passive / cooling / software
 2026-05-10 - M1.1 - HTML knowledge pages updated with source-backed Q&A links
 2026-05-10 - M1.1 - CPU revival brief refreshed from source packets; IA1 remains defer pending M1.2 human POV
+
+2026-05-12 - M1.2 - CPU revival POV worksheet accepted and synced to formal brief
+2026-05-12 - M1.2 - IA1 decision updated from defer to approve (internal only), public_status remains not-public-ready
+2026-05-12 - M2 - internal article template created
+2026-05-12 - M2 - first internal article draft created in Markdown and HTML reading view
+2026-05-12 - M2 - internal article self-review added; public blockers retained
 ```
 
 ### Per-Skill Status Grid Footnotes
 
+`investment-analysis: pov-done*` — M1.2 completed on 2026-05-12. The CPU
+revival worksheet was accepted as an agent-seeded draft for workflow continuity,
+synced into the formal brief, and IA1 moved from `defer` to `approve (internal
+only)`. Public status remains `not-public-ready` until primary-source hardening
+and real skill invocations are done.
+
+`content-production: article-draft-done*` — M2 internal article draft completed
+on 2026-05-12. The draft exists in Markdown and HTML reading view, includes
+public blockers, and is not scheduled or published. Voice still needs a human
+pass before public use.
+
+
 `investment-analysis: research-packet-done*` — M1.1 source-backed research packet
 shipped on 2026-05-10. It includes source packets for AMD / Intel / MediaTek,
 source-derived intake notes, six tutor Q&A notes, source-backed HTML knowledge
-page updates, a refreshed CPU brief, and an IA1 re-run note. The IA1 decision
-remains `defer` until M1.2 because the user's HUMAN-WRITTEN POV / invalidation
-sections are still intentionally blank.
+page updates, a refreshed CPU brief, and an IA1 re-run note. At the time of
+M1.1, IA1 remained `defer`; M1.2 later converted it to internal-only approve.
 
 
 `investment-analysis: scaffold-done*` — M1.0 scaffold shipped on 2026-05-10.
-It includes folders, templates, 股癌 EP659 intake notes, HTML-first knowledge
-architecture skeleton, and a CPU anchor brief skeleton. The brief at
-[research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md](../research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md)
-still has 4 HUMAN-WRITTEN sections (What I Learned / What I Don't Understand /
-My POV / My Invalidation) and 3 reflection questions to be filled by
-CrayonDing0909 in M1.2 before IA1 can convert from `defer` to `approve`.
-M1.1 must first collect real source packets (AMD / Intel / MediaTek),
-run tutor Q&A, and update the knowledge pages. Skill calls (theme-detector,
-market-news-analyst, technical-analyst, scenario-analyzer, data-quality-checker)
-are tagged `skill missing` and need real invocation before the brief becomes
-publish-eligible.
+It included folders, templates, 股癌 EP659 intake notes, HTML-first knowledge
+architecture skeleton, and a CPU anchor brief skeleton. Later M1.1/M1.2 work
+filled the research packet and internal-only POV gate. Skill calls
+(theme-detector, market-news-analyst, technical-analyst, scenario-analyzer,
+data-quality-checker) are still tagged `skill missing` and need real invocation
+before the brief becomes publish-eligible.

@@ -37,9 +37,9 @@ flowchart LR
 
 | Skill | M1.0 | M1.1 | M1.2 | M2 | M3 | M4 | M5 |
 |-------|------|------|------|----|----|----|----|
-| investment-analysis | scaffold-done* | research-packet-done* | pov-completion | shared | repurpose | command | metrics |
+| investment-analysis | scaffold-done* | research-packet-done* | pov-done* |  | repurpose | command | metrics |
 | algorithm-research |  |  |  | shared | core | command | summary |
-| content-production |  |  |  | shared | core | command | publish-check |
+| content-production |  |  |  | article-draft-done* | core | command | publish-check |
 | audience-discovery |  |  |  | shared |  | command | interviews + clusters |
 | mvp-demo |  |  |  | shared |  |  | first spec |
 | postmortem |  |  |  | shared |  |  | first run |
@@ -125,14 +125,14 @@ Definition of Done：
 
 任務：
 
-- [ ] 使用者補完 CPU brief 的 HUMAN-WRITTEN 區塊：
+- [x] 使用者補完 CPU brief 的 HUMAN-WRITTEN 區塊：
       - What I Learned
       - What I Still Don't Understand
       - My POV (≥ 200 words)
       - My Invalidation (exactly 3 signals)
-- [ ] 使用者補完 IA1 reflection questions。
-- [ ] Agent 檢查 POV / invalidation 是否具體，不是空話。
-- [ ] 重跑 IA1 gate，把 decision 從 `defer` 改成 `approve`、`edit`、或 `reject`。
+- [x] 使用者補完 IA1 reflection questions。
+- [x] Agent 檢查 POV / invalidation 是否具體，不是空話。
+- [x] 重跑 IA1 gate，把 decision 從 `defer` 改成 `approve`、`edit`、或 `reject`。
 
 Definition of Done：
 
@@ -141,24 +141,36 @@ Definition of Done：
 - 使用者能不照念 brief 解釋 thesis。
 - 仍不發 public article。公開內容從 M2/M3 開始。
 
-## M2 - 共用基礎建設
+## M2 - Internal Article Draft
 
-目標：每個 workflow 都使用同一套資料夾、命名、template 慣例。
+目標：把 M1 source-backed research baseline 轉成第一篇可閱讀的 internal article
+draft。這仍然**不是公開發布**。
+
+為什麼接著做這個：
+
+- M1 已經跑通 learning / source / brief / POV loop。
+- M2 要測試這份研究能不能變成可讀文章，同時不犧牲 source discipline。
+- 公開發布與 metrics tracking 之後再開始。
 
 任務：
 
-- [ ] 定義 `templates/_artifact-header.md` frontmatter：
-      `workflow`、`risk`、`created_at`、`source`、`status`。
-- [ ] 命名規則：`YYYY-MM-DD_workflow_topic.md`。
-- [ ] 建立 `ops/decisions/` 與 decision log 模板。
-- [ ] 建立 `ops/metrics.csv`，欄位對齊 METRICS。
-- [ ] 加 `scripts/lib/`，放共用 helper（讀寫 markdown、LLM 呼叫、mermaid 生成）。
+- [x] 建立 `content/templates/internal-article.md`。
+- [x] 從 CPU revival research baseline 產生第一篇 internal article：
+      `content/drafts/2026-05-12_ai-server-supply-chain_internal-article.md`。
+- [x] 建立 HTML reading view：
+      `content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html`。
+- [x] 標記 draft `public_status: not-public-ready`。
+- [x] 在 draft 內放 review checklist 與 public blockers。
+- [ ] Review 文章語氣：是否實用、具體、不太 AI 口吻？
+- [ ] 決定下一步走 M2.1 public-readiness hardening 還是 M3 publish experiment。
 
 Definition of Done：
 
-- 所有 M1 產出回頭套用同一份 template。
-- 所有新 artifact 都用統一命名規則。
-- 空的 metrics.csv 已建立。
+- 一份 internal article draft 存在 Markdown。
+- 一份 HTML reading view 存在。
+- Draft 清楚列出公開前還缺什麼。
+- 不開原始 brief 也能讀懂 draft。
+- Draft 尚未排程或發布。
 
 ## M3 - 第二、三個 Workflow
 
@@ -370,20 +382,45 @@ YYYY-MM-DD - <milestone> - <task>
 ```
 
 ```text
-2026-05-10 - M1 - Phase A：investment-analysis templates 與資料夾建好（含 HTML-first knowledge architecture templates）
-2026-05-10 - M1 - Phase B1：股癌 EP659 拆成 6 份 intake notes；AI Server Supply Chain knowledge map（index + 6 topic pages）建立
-2026-05-10 - M1 - Phase B2：CPU 復興 anchor deep dive 結構完成；live trading skill outputs 標 skill missing 待 M2/M4 實際呼叫
-2026-05-10 - M1 - Phase C：IA1 dry run 紀錄；decision = defer，等人類補完 POV / invalidation / reflection
-2026-05-10 - M1 - Phase D：branch feat/m1-investment-analysis-e2e 準備 self-PR merge
+2026-05-10 - M1.0 - Phase A：investment-analysis templates 與資料夾建好（含 HTML-first knowledge architecture templates）
+2026-05-10 - M1.0 - Phase B1：股癌 EP659 拆成 6 份 intake notes；AI Server Supply Chain knowledge map（index + 6 topic pages）建立
+2026-05-10 - M1.0 - Phase B2：CPU revival anchor brief skeleton 完成；live trading skill outputs 標 skill missing 待實際呼叫
+2026-05-10 - M1.0 - Phase C：IA1 dry run 紀錄；decision = defer，等人類補完 POV / invalidation / reflection
+2026-05-10 - M1.0 - Phase D：branch feat/m1-investment-analysis-e2e 準備 self-PR merge
+
+2026-05-10 - M1.1 - source/Q&A folders 與 templates 建立
+2026-05-10 - M1.1 - AMD / Intel / MediaTek source packets 蒐集並轉成 intake notes
+2026-05-10 - M1.1 - CPU / ASIC / memory / passive / cooling / software 六份 tutor Q&A notes 建立
+2026-05-10 - M1.1 - HTML knowledge pages 加入 source-backed Q&A links
+2026-05-10 - M1.1 - CPU revival brief 依 source packets 刷新；IA1 維持 defer，等待 M1.2 human POV
+
+2026-05-12 - M1.2 - CPU revival POV worksheet 接受並同步到正式 brief
+2026-05-12 - M1.2 - IA1 decision 從 defer 改成 approve (internal only)，public_status 維持 not-public-ready
+2026-05-12 - M2 - internal article template 建立
+2026-05-12 - M2 - 第一篇 internal article draft 完成（Markdown + HTML reading view）
+2026-05-12 - M2 - internal article self-review 完成，public blockers 保留
 ```
 
 ### Per-Skill Status Grid 註解
 
-`investment-analysis: infra-done*` — Phase A/B1/B2/C 的基礎建設已於 2026-05-10
-shipped。Brief 在
-[research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md](../research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md)
-還有 4 個 HUMAN-WRITTEN 區塊（What I Learned / What I Don't Understand / My POV /
-My Invalidation）與 3 個 reflection 問題待 CrayonDing0909 親手補完，IA1 才會從
-`defer` 轉成 `approve`。各 skill 呼叫（theme-detector / market-news-analyst /
-technical-analyst / scenario-analyzer / data-quality-checker）也標註
-`skill missing`，需要在 M2 / M4 補上真正的 invocation 後 brief 才符合公開條件。
+`investment-analysis: pov-done*` — M1.2 於 2026-05-12 完成。CPU revival
+worksheet 作為 agent-seeded draft 被接受並同步到正式 brief，IA1 從 `defer` 改成
+`approve (internal only)`。公開狀態仍為 `not-public-ready`，直到 primary-source
+hardening 和 real skill invocation 完成。
+
+`content-production: article-draft-done*` — M2 internal article draft 於
+2026-05-12 完成。Draft 同時有 Markdown 與 HTML reading view，內含 public blockers，
+尚未排程或發布。公開前仍需 human voice pass。
+
+`investment-analysis: research-packet-done*` — M1.1 source-backed research packet
+已於 2026-05-10 shipped。內容包含 AMD / Intel / MediaTek source packets、
+source-derived intake notes、六份 tutor Q&A、source-backed HTML knowledge pages 更新、
+刷新後的 CPU brief，以及 IA1 re-run note。M1.1 當下 IA1 仍為 `defer`；
+M1.2 後已轉成 internal-only approve。
+
+`investment-analysis: scaffold-done*` — M1.0 scaffold 於 2026-05-10 shipped。
+內容包含 folders、templates、股癌 EP659 intake notes、HTML-first knowledge architecture
+skeleton，以及 CPU anchor brief skeleton。後續 M1.1/M1.2 已完成 research packet 與
+internal-only POV gate。各 skill 呼叫（theme-detector / market-news-analyst /
+technical-analyst / scenario-analyzer / data-quality-checker）仍標註 `skill missing`，
+需要真正 invocation 後 brief 才符合公開條件。
