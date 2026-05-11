@@ -4,32 +4,43 @@ artifact_type: internal-article-review
 risk: low
 created_at: 2026-05-12
 target_draft: content/drafts/2026-05-12_ai-server-supply-chain_internal-article.md
-status: draft-review
+status: voice-pass-review
 ---
 
 # Review: AI server 資金從 GPU 外溢後，市場到底在買什麼？
 
 ## Verdict
 
-Internal draft is usable as a first article-shaped artifact.
+Internal draft is now usable as a stronger internal article-shaped artifact after
+the voice pass.
 
 Do **not** publish yet.
 
 ## What Works
 
-- Hook is concrete: readers understand the question immediately — GPU 以外，市場到底在買什麼？
+- Hook now starts from a real reader confusion: GPU 之外的 AI server 輪動是不是只是資金亂找東西？
 - Structure is readable: Hook → Context → Thesis → Framework → Evidence → POV → Invalidation.
 - The article keeps the key M1 insight: AI server is a system, not a GPU-only trade.
 - AMD / Intel / MediaTek are separated into distinct roles instead of being blended into one generic AI thesis.
 - It explicitly says MediaTek is ASIC / subsystem optionality, not server CPU main silicon.
+- The article now includes a small watchlist table instead of saying "建立觀察清單" without showing it.
+- Software has been removed from the main investable supply-chain line for this draft.
 - Public blockers are listed inside the draft.
+
+## Voice Pass Changes
+
+- Replaced broad market claims like "過去一年 AI 交易幾乎等於 GPU" with a more cautious research question.
+- Reframed CPU from "system orchestration" jargon into a plainer "系統調度 / 調度器" explanation.
+- Kept first-person judgment language: "我目前會把...", "我會先...", "我暫時不會..."
+- Clarified that AMD is the cleanest source-backed line, Intel is a repair/verification line, and MediaTek is optionality.
+- Added `docs/VOICE_PROFILE.md` and `docs/VOICE_PROFILE.zh.md` so future drafts have reusable voice constraints.
 
 ## What Still Feels Weak
 
-- Voice still feels agent-seeded. It is clear, but not yet uniquely `CrayonDing0909`.
-- The article needs a sharper narrative example before public use: e.g. one concrete scenario of a reader misunderstanding CPU as "old chip" and then reframing it as "AI workflow control plane".
-- It needs one stronger chart/table if moving toward public post: AI server spend map or company-role table.
-- The current draft says "建立觀察清單" but does not include the actual watchlist table yet.
+- The draft is more natural, but the final public voice still needs the user's personal touch before publishing.
+- It needs one stronger chart or visual if moving toward public post: AI server spend map or company-role table.
+- The article still needs source-hardening before public use; the voice pass did not add new primary sources.
+- CTA is still intentionally undefined because this remains an internal draft.
 
 ## Public Blockers
 
@@ -41,16 +52,15 @@ Do **not** publish yet.
 
 ## Suggested Next Pass
 
-Before public publishing, run a voice pass:
+Before public publishing:
 
-1. Replace 2-3 generic transition sentences with the user's own phrasing.
-2. Add one simple watchlist table:
-   - AMD: server CPU growth / Data Center revenue
-   - Intel: DCAI / Xeon design wins
-   - MediaTek: official ASIC revenue target / customer confirmation
+1. User should do a personal read-through and replace any sentence that does not
+   sound like their own words.
+2. Run source hardening on AMD / MediaTek claims.
 3. Decide article format:
    - long-form blog/newsletter, or
    - X/Threads multi-post thread.
+4. Define CTA only after choosing the public format.
 
 ## Decision
 

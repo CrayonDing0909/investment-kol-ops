@@ -20,57 +20,59 @@ content_pillar: market-understanding
 
 ## Hook
 
-過去一年，AI 交易幾乎等於 GPU 交易。
+如果只看 GPU，最近很多 AI server 供應鏈的討論其實會看起來很亂。
 
-但最近市場開始出現一個變化：資金不再只買 GPU，而是開始找下一批 AI server spend 的外溢方向。
+今天有人講 CPU，明天有人講 ASIC，接著又變成 HBM、散熱、被動元件。第一反應很容易是：這是不是只是資金在找還沒漲的東西？
 
-這些方向看起來很散：CPU、ASIC、HBM、被動元件、散熱、甚至被殺過的軟體股。
+我現在比較傾向先不要這樣看。
 
-問題是：這些東西真的有關係嗎？還是只是資金在亂輪動？
+比較有用的問法應該是：
+
+> 當 GPU 已經是共識之後，AI server 裡下一個會被重新定價的瓶頸是什麼？
 
 ## Context
 
-我會先把這題理解成一個 supply chain 問題，而不是單一個股問題。
+我會先把這題理解成一個系統瓶頸問題，而不是單一晶片問題。
 
-AI server 不只是 GPU。真正的 AI infrastructure 是一整套系統：
+AI server 當然需要 GPU / accelerator，但一台 server 不是把 GPU 插上去就結束。比較完整的地圖大概長這樣：
 
 ```text
-compute → memory → server OEM → power / cooling → software
+accelerator → host CPU → memory / networking → power / cooling → server OEM
 ```
 
-GPU 仍然是最核心的算力零件，但當市場開始接受 AI capex 不會只集中在 GPU，資金就會開始尋找下一個瓶頸。
+GPU 仍然是最核心的算力零件。只是如果 AI capex 繼續往上，投資人遲早會問第二層問題：除了 GPU，還有哪些零件會因為整套系統變大、變複雜而重新變重要？
 
-這就是 CPU、ASIC、被動元件、散熱、HBM 最近會被重新討論的原因。
+這就是我會把 CPU、ASIC、HBM、散熱和被動元件放進同一張圖裡看的原因。它們不是同一種投資機會，但都跟「AI server 不只是 GPU」這個框架有關。
 
 ## Main Thesis
 
 我的初步 thesis 是：
 
-> AI server 的投資機會正在從「單一 GPU 敘事」擴散到「整個系統瓶頸敘事」。CPU 是第一個可以被財報與管理層語言支撐的外溢方向；ASIC 是下一個需要深入驗證的主線；被動元件與散熱則更像等待 catalyst 的台股支線。
+> AI server 的研究框架，正在從「GPU 供不應求」擴成「整套系統哪裡會卡住」。在目前看過的 source 裡，CPU 是第一個比較有財報與管理層語言支撐的外溢方向；ASIC 是下一條需要深入驗證的主線；被動元件與散熱比較像還在等 catalyst 的台股支線。
 
 這不是說 GPU 不重要。
 
-而是說：當所有人都知道 GPU 重要時，超額報酬可能開始出現在那些「原本被忽略，但 AI server 沒有它們也跑不起來」的環節。
+而是說：當 GPU 重要性已經變成共識，我更想找的是那些原本被視為配角、但 AI server 沒有它也跑不順的環節。
 
 ## Framework：AI server 不是只有 GPU
 
-我原本也直覺覺得，AI server 的重點應該就是 GPU / ASIC。
+我原本也直覺覺得，AI server 的重點應該就是 GPU / ASIC。CPU 聽起來比較像上一個時代的東西。
 
 但讀完 AMD、Intel 和 BusinessNext 之後，我覺得 CPU 的角色要重看。
 
 GPU / ASIC 負責 tensor compute，這沒問題。
 
-但 agentic AI 不再只是「問一句，模型答一句」。它會拆任務、呼叫工具、查資料庫、寫程式、執行程式、多輪修正，甚至長時間運行多個 agent。
+但 agentic AI 不只是「問一句，模型答一句」。它會拆任務、呼叫工具、查資料庫、寫程式、執行程式、多輪修正，甚至長時間跑多個 agent。
 
-這些事情更像 system orchestration，而不是單純 matrix multiplication。
+這些事情比較像系統調度，而不是單純做 matrix multiplication。
 
-所以 CPU 的角色不是「跟 GPU 搶主要算力」，而是讓整套 AI workflow 跑得動。
+所以 CPU 的角色不是「跟 GPU 搶主要算力」。它比較像讓整套 AI workflow 可以被餵資料、被排程、被管理、被接到外部系統的那一層。
 
-用 BusinessNext 那篇文章的比喻延伸來說，GPU / ASIC 像廚師，CPU 像廚房領班。廚師再強，如果訂單拆解、食材調度、任務安排都亂掉，整間廚房還是跑不起來。
+用工程一點的說法：GPU / ASIC 是把特定運算做很快的引擎，CPU 則更像整台機器的調度器。引擎再強，如果資料餵不進去、任務排不好、外部系統接不起來，整體 throughput 還是會被卡住。
 
 ## Evidence：目前 source-backed 的部分
 
-### AMD：目前最乾淨的 CPU 復興 source
+### AMD：目前最乾淨的 CPU revival source
 
 AMD Q1 2026 的資料最能支撐這條 thesis。
 
@@ -90,7 +92,7 @@ server CPU TAM > $120B by 2030
 
 這個修正很重要，因為它把「公司營收」和「市場規模」分清楚。
 
-### Intel：CPU 是 AI stack 的 control plane
+### Intel：CPU 是 AI stack 的 control plane，但公司線要分開看
 
 Intel 的價值不是證明它已經打贏 AMD，而是提供另一個角度：
 
@@ -105,7 +107,7 @@ Intel Q1 2026：
 
 這說明 CPU 復興不是只有 AMD 單方面在講。Intel 也在用類似語言重新定義 CPU 在 AI system 裡的位置。
 
-但我會把 Intel 視為防守 / 修復線，而不是最強攻擊線。因為它還有 Foundry、18A ramp、成本壓力等問題。
+但我會把 Intel 視為防守 / 修復線，而不是最強攻擊線。CPU 敘事變好，不等於 Intel 這家公司所有問題都解決。Foundry、18A ramp、成本壓力還是要分開看。
 
 ### MediaTek：不要把 ASIC / subsystem 誤讀成 CPU 主晶片
 
@@ -141,17 +143,23 @@ CPU 主晶片受惠股
 
 ## What I Think
 
-我目前相信 CPU 復興這條 thesis 有成立，但我不會把它理解成 CPU 取代 GPU。
+我目前會把 CPU revival 當成一條可以繼續追的 thesis，但不是「CPU 取代 GPU」。
 
-更準確地說，AI server spend 正在從 GPU 擴散到整個系統架構。AMD 的 source 最有說服力，因為它已經在 Data Center revenue、EPYC demand、server CPU TAM 上修裡看到財報證據。Intel 的說法也重要，但我會把它視為防守與修復線，而不是最強攻擊線。
+更準確地說，AI server spend 如果繼續擴張，研究重點會從單一 accelerator 擴到整個系統架構。AMD 的 source 最有說服力，因為它已經在 Data Center revenue、EPYC demand、server CPU TAM 上修裡看到比較直接的證據。
 
-如果只能先研究一檔，我會先看 AMD，因為它同時有 CPU 和 accelerator exposure，而且 thesis 比較 source-backed。Intel 我會觀察 DCAI 和 Xeon design wins 是否延續。MediaTek 我暫時不會把它當 CPU 主晶片故事，而是 ASIC / subsystem optionality；它最大的風險是市場把「未來可能性」提前 price in。
+Intel 的說法也重要，但我會把它視為修復線，而不是主攻線。MediaTek 我暫時不會把它當 CPU 主晶片故事，而是 ASIC / subsystem optionality；它最大的風險是市場把「未來可能性」提前 price in。
 
-所以我的行動會是先建立觀察清單，不急著把這條當成買進理由。
+所以我的行動不是直接把這條當成買進理由，而是先建立觀察清單：
 
-我會等 AMD 下一份法說確認 server CPU growth 是否延續，也會等 MediaTek 官方 transcript 確認 AI ASIC revenue 的說法。這題對中文投資者最有價值的 insight 是：
+| Company / line | 我會看什麼 | 目前定位 |
+| --- | --- | --- |
+| AMD | Data Center revenue、EPYC demand、server CPU TAM comment | 最乾淨的 CPU revival 主線 |
+| Intel | DCAI growth、Xeon design wins、control plane 敘事能不能轉成收入 | 修復線 / 驗證線 |
+| MediaTek | 官方 transcript 是否支持 AI ASIC revenue target、data center project ramp | ASIC / subsystem optionality |
 
-> AI server 不是只有 GPU，真正的投資機會可能來自資金開始理解整個系統瓶頸。
+這題對中文投資者最有價值的 insight 不是「去買 CPU 股」，而是：
+
+> AI server 不是只有 GPU。當 workload 從 chatbot 往 agentic AI 走，系統瓶頸可能會從單一算力，慢慢擴散到 CPU 調度、custom silicon、memory、power、cooling。
 
 ## What Would Change My Mind
 
@@ -175,11 +183,11 @@ CPU 主晶片受惠股
 而是：
 
 ```text
-AI server 的投資機會，不應該只看 GPU。
-當工作負載從 chatbot 走向 agentic AI，整個系統瓶頸會從單一算力，擴散到 orchestration、custom silicon、memory、power、cooling。
+AI server 的研究，不應該只停在 GPU。
+下一階段更值得問的是：整套系統變大以後，哪個環節會從配角變成瓶頸？
 ```
 
-這才是 CPU / ASIC / 被動元件 / 散熱重新被討論的底層原因。
+這才是我會把 CPU、ASIC、被動元件、散熱重新放回研究清單的原因。
 
 ## Draft Review Checklist
 
