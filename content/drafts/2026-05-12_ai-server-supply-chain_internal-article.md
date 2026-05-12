@@ -16,7 +16,7 @@ content_pillar: market-understanding
 > Internal draft. Not public-ready.
 >
 > 這篇是 M2 internal article draft，目標是把 M1 的 research baseline 先轉成比較像我的研究口語稿。
-> 它仍不適合公開，因為 AMD >50% server CPU share target、MediaTek AI ASIC $2B Q4 2026 等關鍵 claim 還需要 primary source hardening。
+> 它仍不適合公開，因為 HBM / 散熱 / 被動元件支線還沒有 source-backed 深挖，scenario-analyzer 也還沒有 real invocation。
 
 ## 先記一下目前的想法
 
@@ -107,7 +107,7 @@ AI ASIC + I/O / memory subsystem + high-speed interconnect + custom HBM optional
 - Cloud ASIC TAM: `$70B-$80B in 2027`
 - Cloud ASIC share target: `10%-15%`
 
-但這些還不能公開寫死，因為目前主要來自 Alpha Spread / Futurum summary，還需要 MediaTek official transcript / presentation 驗證。
+這個 `$2B Q4 2026` 數字現在已經對到 MediaTek 官方 transcript，但還是要寫成 management expectation，不是已經實現的營收。
 
 所以我暫時不會把聯發科寫成「CPU 主晶片受惠股」。
 
@@ -147,13 +147,15 @@ CPU 比較像 workload 變複雜後的調度需求；HBM、散熱、被動元件
 
 所以我先把它整理成這張表：
 
-| 支線 | 我目前怎麼想 | 目前狀態 | 下一步要看什麼 |
-| --- | --- | --- | --- |
-| CPU | 比較像 agent AI / agentic workflow 讓調度需求被重新看見 | AMD / Intel 有初步 source | AMD server CPU growth、Intel DCAI / Xeon design wins |
-| ASIC | 比較像 hyperscaler 的 custom compute / 成本 / 功耗 / 自主性需求 | MediaTek 數字還偏 secondary source | official transcript、customer / project ramp |
-| HBM | 比較像算力基建擴張後的 memory bottleneck | 這篇還沒補 source | 報價、供需、capex、AI server BOM |
-| 散熱 | 比較像 heat density 上升後的 thermal bottleneck | 這篇還沒補 source | 產品設計變化、客戶拉貨、營收驗證 |
-| 被動元件 | 可能是高階料缺貨 / lead time / 原物料漲價混在一起 | 這篇還沒補 source | lead time、漲價信、稼動率、法說 |
+
+| 支線   | 我目前怎麼想                                             | 目前狀態                                           | 下一步要看什麼                                             |
+| ---- | -------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------- |
+| CPU  | 比較像 agent AI / agentic workflow 讓調度需求被重新看見         | AMD / Intel 有初步 source                         | AMD server CPU growth、Intel DCAI / Xeon design wins |
+| ASIC | 比較像 hyperscaler 的 custom compute / 成本 / 功耗 / 自主性需求 | `$2B Q4 2026` 已對到官方 transcript，但仍是 expectation | customer / project ramp、後續營收驗證                      |
+| HBM  | 比較像算力基建擴張後的 memory bottleneck                      | 這篇還沒補 source                                   | 報價、供需、capex、AI server BOM                           |
+| 散熱   | 比較像 heat density 上升後的 thermal bottleneck           | 這篇還沒補 source                                   | 產品設計變化、客戶拉貨、營收驗證                                    |
+| 被動元件 | 可能是高階料缺貨 / lead time / 原物料漲價混在一起                   | 這篇還沒補 source                                   | lead time、漲價信、稼動率、法說                                |
+
 
 這樣寫比較接近我現在的狀態：不是已經有答案，而是先知道接下來要驗證什麼。
 
@@ -179,12 +181,12 @@ CPU 比較像 workload 變複雜後的調度需求；HBM、散熱、被動元件
 
 ## What Still Needs Verification Before Public
 
-這篇不能直接公開，原因很明確：
+這篇不能直接公開，原因還是很明確：
 
-- AMD `>50% server CPU share target` 還需要 primary source。
-- MediaTek `AI ASIC $2B Q4 2026` 仍是 secondary source，需要 official transcript / presentation。
-- scenario-analyzer / data-quality-checker 還沒有 real invocation。
-- BusinessNext 提到 CPU latency 可能超過 50%，需要找到 Georgia Tech + Intel 原始 paper。
+- AMD `>50% server CPU revenue market share` 已找到 AMD Financial Analyst Day primary source，但只能寫成 forward-looking target，不能寫成目前市占。
+- MediaTek `AI ASIC $2B Q4 2026` 已找到官方 transcript，但要寫成 management expectation，不是已實現營收。
+- BusinessNext 提到 CPU latency 的原始 paper 已找到；公開時要用 workload-specific 說法，例如 selected tool-dominated workloads up to 88%，不能寫成所有 agentic AI 都是 CPU latency >50%。
+- data-quality-checker 已跑過，報告 0 findings；scenario-analyzer 還沒有 real invocation。
 - HBM / 散熱 / 被動元件支線還沒有 source-backed 深挖，不能跟 CPU 寫成同一個確定結論。
 
 ## 先收在這裡
@@ -208,11 +210,10 @@ CPU、ASIC、HBM、散熱、被動元件背後可能是不同支線。
 - [x] Analysis is framed as research, not advice.
 - [x] Uncertainty and invalidation are included.
 - [ ] Public-ready source verification is complete.
-- [ ] Data-quality checker has run.
+- [x] Data-quality checker has run (`reports/data_quality_2026-05-12_025848.md`, 0 findings).
 - [ ] Scenario-analyzer has run.
 - [ ] CTA for public version is defined.
 
 ## Disclaimer
 
 This is research and education, not financial advice. I may be wrong. Do your own research and consider your own risk tolerance.
-

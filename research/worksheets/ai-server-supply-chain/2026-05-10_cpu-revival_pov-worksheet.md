@@ -161,6 +161,16 @@ MediaTek / 世芯 / 創意都需要先理解 ASIC 才能判斷，而且現在 AS
 需要 official transcript 或更強的 primary source 來驗證。
 ```
 
+## M2.1 Source Hardening Update
+
+2026-05-12 update:
+
+- AMD `>50% server CPU revenue market share` 已找到 AMD Financial Analyst Day 2025 primary source；公開時要寫成 forward-looking target，不是目前市占。
+- MediaTek `AI ASIC $2B Q4 2026` 已找到 MediaTek Q1 2026 official transcript；公開時要寫成 management expectation，不是已實現營收。
+- BusinessNext 的 CPU latency 敘事已找到 Georgia Tech / Intel original paper；公開時要用 workload-specific wording，不能寫成所有 agentic AI 都是 CPU latency >50%。
+
+剩下公開前還需要補的是 HBM / 散熱 / 被動元件支線，以及 scenario-analyzer / data-quality-checker real invocation。
+
 ## 6. Agent Review Checklist
 
 > 你填完後，agent 用這段檢查，不會替你重寫成 AI 口吻。

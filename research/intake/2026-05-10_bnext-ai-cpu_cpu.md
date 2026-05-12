@@ -37,6 +37,7 @@ status: draft
 - 「過程中可能會不斷呼叫工具、查詢資料庫、撰寫與執行程式，甚至進行多輪自我反思與修正。」— BusinessNext
 - 「這些涉及任務安排、資源調度與系統互動的工作，幾乎全落在 CPU 身上。」— BusinessNext
 - 「CPU 甚至可能占據整體延遲的過半比例。」— BusinessNext citing Georgia Tech + Intel research
+- Original paper check: selected tool-dominated agentic workloads can spend up to 88% of E2E latency in CPU-side tool processing; public wording should stay workload-specific.
 - 「算力需求比拼爆發力的短跑，轉變為重視長時間運轉效能的馬拉松。」— BusinessNext
 - AMD 與 Intel 管理層都承認先前低估 CPU 需求速度與規模。— BusinessNext summary
 
@@ -44,7 +45,8 @@ status: draft
 
 | Number | Unit | Subject | Date / Period | Source position |
 |--------|------|---------|---------------|-----------------|
-| >50 | % latency | CPU share of total latency in agentic AI workload | cited research | BusinessNext citing Georgia Tech + Intel |
+| >50 | % latency | CPU share of total latency in selected agentic AI workloads | cited research | BusinessNext citing Georgia Tech + Intel |
+| up to 88 | % latency | CPU-side tool processing share in selected tool-dominated workloads | original paper | Georgia Tech / Intel |
 | 10+ | agents | simultaneous long-running agents example | article example | BusinessNext |
 | 2026 | year | server CPU market double-digit growth cited by AMD | 2026 | BusinessNext summary |
 

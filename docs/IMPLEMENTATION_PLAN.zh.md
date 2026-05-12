@@ -162,7 +162,7 @@ draft。這仍然**不是公開發布**。
 - [x] 標記 draft `public_status: not-public-ready`。
 - [x] 在 draft 內放 review checklist 與 public blockers。
 - [x] Review 文章語氣：是否實用、具體、不太 AI 口吻？
-- [ ] 決定下一步走 M2.1 public-readiness hardening 還是 M3 publish experiment。
+- [x] 決定下一步走 M2.1 public-readiness hardening 還是 M3 publish experiment。
 
 Definition of Done：
 
@@ -400,6 +400,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-12 - M2 - 第一篇 internal article draft 完成（Markdown + HTML reading view）
 2026-05-12 - M2 - internal article self-review 完成，public blockers 保留
 2026-05-12 - M2 - raw research voice pass 完成，並新增 content voice rule
+2026-05-12 - M2.1 - AMD / MediaTek / CPU latency source hardening 完成，data-quality checker 0 findings
 ```
 
 ### Per-Skill Status Grid 註解
@@ -411,8 +412,9 @@ hardening 和 real skill invocation 完成。
 
 `content-production: article-draft-done*` — M2 internal article draft 於
 2026-05-12 完成。Draft 同時有 Markdown 與 HTML reading view，內含 public blockers，
-尚未排程或發布。Raw research voice pass 已完成；公開前仍需 source hardening
-與最後 human edit。
+尚未排程或發布。Raw research voice pass 已完成。M2.1 已補強 AMD / MediaTek /
+CPU latency claims，並跑過 data-quality checker（0 findings）；公開前仍需 HBM /
+散熱 / 被動元件 source packets、scenario-analyzer 與最後 human edit。
 
 `investment-analysis: research-packet-done*` — M1.1 source-backed research packet
 已於 2026-05-10 shipped。內容包含 AMD / Intel / MediaTek source packets、

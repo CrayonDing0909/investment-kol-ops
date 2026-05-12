@@ -20,18 +20,22 @@ status: draft
 - Source class: earnings
 - Source quality:
   - primary: AMD Q1 2026 financial results press release
+  - primary: AMD 2025 Financial Analyst Day press release
   - secondary: Motley Fool Q1 2026 earnings call transcript
 - Title:
   - AMD Reports First Quarter 2026 Financial Results
+  - AMD Unveils Strategy to Lead the $1 Trillion Compute Market and Accelerate Next Phase of Growth
   - AMD Q1 2026 Earnings Call Transcript
 - Publisher:
   - AMD Newsroom
   - The Motley Fool Transcribing
 - Date published:
   - 2026-05-05 (AMD press release)
+  - 2025-11-11 (AMD Financial Analyst Day press release)
   - 2026-05-06 (Motley Fool transcript)
 - URL:
   - https://www.amd.com/en/newsroom/press-releases/2026-5-5-amd-reports-first-quarter-2026-financial-results.html
+  - https://www.amd.com/en/newsroom/press-releases/2025-11-11-amd-unveils-strategy-to-lead-the-1-trillion-compu.html
   - https://www.fool.com/earnings/call-transcripts/2026/05/06/amd-amd-q1-2026-earnings-call-transcript/
 - Captured at: 2026-05-10
 
@@ -57,6 +61,7 @@ agentic AI increases CPU compute needs alongside accelerators.
 - AMD now expects server CPU TAM to grow at greater than 35% annually, reaching over $120B by 2030.
 - AMD now expects server CPU revenue to grow more than 70% YoY in Q2 2026.
 - AMD expects tens of billions of dollars in annual Data Center AI revenue in 2027.
+- AMD Financial Analyst Day 2025 press release says AMD is positioned to lead the server market and expects to achieve more than 50% server CPU revenue market share.
 
 ## Key Numbers
 
@@ -71,6 +76,7 @@ agentic AI increases CPU compute needs alongside accelerators.
 | > 35 | % CAGR | Server CPU TAM expected growth | 3-5 years / to 2030 | Transcript |
 | > 120 | B USD | Server CPU TAM | 2030 | Transcript |
 | > 70 | % YoY | Expected server CPU revenue growth | Q2 2026 | Transcript |
+| > 50 | % | Server CPU revenue market share target | 3-5 years | AMD Financial Analyst Day 2025 press release |
 | 11.2 | B USD | Q2 2026 revenue guidance midpoint | Q2 2026 | Press release / transcript |
 | 6 | GW | Meta AMD Instinct GPU deployment plan | multi-year | Press release |
 
@@ -81,18 +87,20 @@ agentic AI increases CPU compute needs alongside accelerators.
 - "Inferencing and Agentic AI are increasing the need for server CPU compute as these workloads require additional CPU processing for orchestration, data movement and parallel execution in addition to serving as the head nodes for GPUs and accelerators." — Lisa Su, transcript.
 - "We now expect the server CPU TAM to grow at greater than 35% annually, reaching over $120 billion by 2030." — Lisa Su, transcript.
 - "We now expect server CPU revenue to grow by more than 70% year-over-year in the second quarter." — Lisa Su, transcript.
+- "As AMD extends its multi-generational AMD EPYC CPU portfolio, it is positioned to lead the server market and expects to achieve more than 50% server CPU revenue market share." — AMD Financial Analyst Day 2025 press release.
 
 ## Source Reliability Notes
 
 - Primary source: AMD press release. Strong for reported financials, segment results, product announcements, and guidance.
 - Secondary source: Motley Fool transcript. Useful for management quote extraction, but publish-facing claims should eventually be cross-checked against AMD IR audio/transcript or SEC filings.
 - Forward-looking statements: Q2 guidance, TAM growth, server CPU revenue growth, Data Center AI 2027 revenue, MI450/Helios customer forecasts.
+- The `>50% server CPU revenue market share` claim is primary-source backed by AMD Financial Analyst Day 2025, but remains a forward-looking target rather than achieved share.
 
 ## Follow-up Needed
 
 - Verify whether the EP659 note "AMD 法說估 120B 年增超過 35%" referred to server CPU TAM by 2030, not AMD total revenue in 2026. The AMD primary source supports `server CPU TAM > $120B by 2030`, not `AMD 2026 revenue = $120B`.
 - Pull AMD Q1 2026 8-K or earnings slides from SEC/IR for primary transcript-like support.
-- Confirm AMD's stated >50% server CPU share target from Analyst Day source, because this source packet captures >50% server CPU revenue growth and >$120B TAM, not the share target directly.
+- If publishing, word the share claim as a forward-looking AMD target: `AMD expects to achieve >50% server CPU revenue market share`, not as current share.
 
 ## Linked Artifacts
 

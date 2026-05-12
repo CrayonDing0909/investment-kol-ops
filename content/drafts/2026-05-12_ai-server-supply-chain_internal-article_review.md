@@ -25,6 +25,7 @@ Do **not** publish yet.
 - AMD / Intel / MediaTek are still separated into distinct roles instead of being blended into one generic AI thesis.
 - It explicitly says MediaTek is ASIC / subsystem optionality, not server CPU main silicon.
 - HBM / cooling / passive components are now marked as under-verified, not treated as source-backed conclusions.
+- Data-quality-checker has run with 0 findings: `reports/data_quality_2026-05-12_025848.md`.
 - Public blockers are listed inside the draft.
 
 ## Raw Voice Changes
@@ -45,11 +46,11 @@ Do **not** publish yet.
 
 ## Public Blockers
 
-- AMD `>50% server CPU share target` still needs primary source.
-- MediaTek `AI ASIC $2B Q4 2026` still needs official transcript / presentation.
+- AMD `>50% server CPU revenue market share` now has AMD Financial Analyst Day primary source, but public wording must frame it as a forward-looking target.
+- MediaTek `AI ASIC $2B Q4 2026` now has official transcript support, but public wording must frame it as management expectation, not realized revenue.
+- CPU latency claim now has Georgia Tech / Intel original paper support, but public wording must be workload-specific.
 - HBM / cooling / passive component branches still need source-backed research.
 - Scenario-analyzer has not been run.
-- Data-quality-checker has not been run.
 - CTA is missing.
 
 ## Suggested Next Pass
@@ -57,12 +58,11 @@ Do **not** publish yet.
 Before public publishing:
 
 1. User should read the raw opening and mark sentences that still feel AI-like.
-2. Run source hardening on AMD / MediaTek claims.
-3. Build separate source packets for HBM / cooling / passive components before treating them as a confirmed branch.
-4. Decide article format:
+2. Build separate source packets for HBM / cooling / passive components before treating them as a confirmed branch.
+3. Decide article format:
    - long-form blog/newsletter, or
    - X/Threads multi-post thread.
-5. Define CTA only after choosing the public format.
+4. Define CTA only after choosing the public format.
 
 ## Decision
 

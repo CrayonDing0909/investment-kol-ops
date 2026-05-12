@@ -50,7 +50,7 @@ AI 訓練和推論會用 GPU / ASIC 做主要 tensor compute，但真實系統�
 
 ## What I Still Don't Know
 
-- AMD 的 >50% server CPU share target 需要找到 primary source（可能是 Analyst Day），不能只靠 EP659。
+- AMD 的 >50% server CPU revenue market share target 已找到 AMD Financial Analyst Day primary source；公開時要寫成 forward-looking target，不能寫成目前市占。
 - Agentic AI 到底會提高 CPU attach rate，還是只提高 server CPU utilization？這需要更細的 architecture source。
 - MediaTek 的 I/O / memory subsystem 具體是什麼產品線，和 CPU control plane 的距離仍不清楚。
 

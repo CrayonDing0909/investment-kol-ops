@@ -135,10 +135,10 @@ HBM / 散熱 / 被動元件：比較像算力基建越蓋越大後，物理瓶�
     <h3>MediaTek：ASIC / subsystem optionality，不是 CPU 主晶片</h3>
     <ul>
       <li>Q1 revenue: NT$149.2B, -2.7% YoY</li>
-      <li>AI ASIC revenue target: 約 $2B in Q4 2026（secondary source）</li>
+      <li>AI ASIC revenue target: 約 $2B in Q4 2026（official transcript; management expectation）</li>
       <li>Data center tech exposure: silicon photonics、CPO、high-speed interconnect、custom HBM、integrated voltage regulators</li>
     </ul>
-    <p>這些還不能公開寫死，因為目前主要來自 secondary source。我暫時不會把聯發科寫成「CPU 主晶片受惠股」，比較合理是先放在 data center ASIC / subsystem optionality。</p>
+    <p>這個 $2B Q4 2026 數字現在已經對到 MediaTek 官方 transcript，但還是要寫成 management expectation，不是已經實現的營收。我暫時不會把聯發科寫成「CPU 主晶片受惠股」，比較合理是先放在 data center ASIC / subsystem optionality。</p>
   </div>
 </section>
 
@@ -179,8 +179,8 @@ HBM / 散熱 / 被動元件：比較像算力基建越蓋越大後，物理瓶�
       <tr>
         <td>ASIC</td>
         <td>比較像 hyperscaler 的 custom compute / 成本 / 功耗 / 自主性需求</td>
-        <td>MediaTek 數字還偏 secondary source</td>
-        <td>official transcript、customer / project ramp</td>
+        <td>$2B Q4 2026 已對到官方 transcript，但仍是 expectation</td>
+        <td>customer / project ramp、後續營收驗證</td>
       </tr>
       <tr>
         <td>HBM</td>
@@ -233,10 +233,10 @@ HBM / 散熱 / 被動元件：比較像算力基建越蓋越大後，物理瓶�
 <section>
   <h2>What Still Needs Verification Before Public</h2>
   <ul>
-    <li>AMD &gt;50% server CPU share target primary source。</li>
-    <li>MediaTek AI ASIC $2B Q4 2026 still relies on secondary summaries。</li>
-    <li>Scenario-analyzer / data-quality-checker 還沒有 real invocation。</li>
-    <li>BusinessNext 提到 CPU latency 可能超過 50%，需要找到 Georgia Tech + Intel 原始 paper。</li>
+    <li>AMD &gt;50% server CPU revenue market share 已找到 AMD Financial Analyst Day primary source，但只能寫成 forward-looking target，不能寫成目前市占。</li>
+    <li>MediaTek AI ASIC $2B Q4 2026 已找到官方 transcript，但要寫成 management expectation，不是已實現營收。</li>
+    <li>BusinessNext 提到 CPU latency 的原始 paper 已找到；公開時要用 workload-specific 說法，例如 selected tool-dominated workloads up to 88%，不能寫成所有 agentic AI 都是 CPU latency &gt;50%。</li>
+    <li>Data-quality checker 已跑過，報告 0 findings；scenario-analyzer 還沒有 real invocation。</li>
     <li>HBM / 散熱 / 被動元件支線還沒有 source-backed 深挖，不能跟 CPU 寫成同一個確定結論。</li>
   </ul>
 </section>
@@ -259,7 +259,7 @@ CPU、ASIC、HBM、散熱、被動元件背後可能是不同支線。
     <li>[x] Analysis is framed as research, not advice.</li>
     <li>[x] Uncertainty and invalidation are included.</li>
     <li>[ ] Public-ready source verification is complete.</li>
-    <li>[ ] Data-quality checker has run.</li>
+    <li>[x] Data-quality checker has run: reports/data_quality_2026-05-12_025848.md, 0 findings.</li>
     <li>[ ] Scenario-analyzer has run.</li>
     <li>[ ] CTA for public version is defined.</li>
   </ul>
