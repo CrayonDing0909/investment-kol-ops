@@ -10,25 +10,23 @@ Source tutor runs are not summarization and not safe-wording rewrites. Their job
 is to teach the user how to read this class of source, so the lens generalizes
 to other companies and industries.
 
+Two reading modes are supported. Pick the right one before starting and set
+`reading_mode` in the frontmatter.
+
+- `single-source`: deep-read one selected source (earnings call, filing, IR
+  deck, news article, paper). Use this for first contact with a source.
+- `cross-source-synthesis`: integrate multiple sources for one company,
+  topic, or thesis. Use this once 3+ relevant sources exist for the subject
+  and the user needs an integrated picture.
+
 Follow the Source Tutor workflow in
 [docs/WORKFLOW_PATTERNS.md](mdc:docs/WORKFLOW_PATTERNS.md) and the Source Tutor
 Role in [docs/AGENT_ROLES.md](mdc:docs/AGENT_ROLES.md). Use
 [research/templates/source-tutor-reading.md](mdc:research/templates/source-tutor-reading.md)
 as the structural baseline.
 
-## Required Behavior
+## Required Behavior — Both Modes
 
-- Treat every important sentence as a six-step reading chain:
-  1. Exact source wording.
-  2. Claim type (`reported-fact`, `management-expectation`,
-     `forward-looking-target`, `secondary-interpretation`, `agent-inference`,
-     `open`).
-  3. What this sentence can support.
-  4. What this sentence does not prove.
-  5. Verification metric or future event.
-  6. Downstream routing (claim ledger, brief, article block, follow-up source).
-- Add a `Reading Lens` section explaining how this source class should be read
-  in general, not only for this specific company.
 - Produce four internalization artifacts in every tutor note:
   - `Claim Ledger`
   - `Mental Model Update`
@@ -41,6 +39,37 @@ as the structural baseline.
 - Route missing evidence to the source backlog under `research/questions/`,
   not into a fresh tutor pass.
 
+## Required Behavior — Single-Source Mode
+
+- Treat every important sentence as a six-step reading chain:
+  1. Exact source wording.
+  2. Claim type (`reported-fact`, `management-expectation`,
+     `forward-looking-target`, `secondary-interpretation`, `agent-inference`,
+     `open`).
+  3. What this sentence can support.
+  4. What this sentence does not prove.
+  5. Verification metric or future event.
+  6. Downstream routing (claim ledger, brief, article block, follow-up source).
+- Add a `Reading Lens` section explaining how this source class should be read
+  in general, not only for this specific company.
+
+## Required Behavior — Cross-Source-Synthesis Mode
+
+- Use a `Thesis-Line Reading Chain`: one row per thesis line, with supporting
+  sources, strongest claim type, multi-source consistency, public-quotable
+  flag.
+- Add a `Cross-Source Synthesis Lens` section that states the 4 principles
+  (independent evidence chain, source class hierarchy, no framing accumulation,
+  no forward-looking upgrade) plus company- or topic-specific reading rules.
+- Add a `Sub-Thesis Breakdown` section when the subject has 3+ independent
+  story lines.
+- Add `What Each Source Adds That Others Don't` and `Sources 互相強化 /
+  互相牴觸` sections.
+- Map the user's prior beliefs to specific sources; mark the strongest and
+  weakest support.
+- In the claim ledger, add a `Strength` column (strong / medium / weak) that
+  combines source class and multi-source consistency.
+
 ## Avoid
 
 - Do not stop at "here is a safer sentence." That is incomplete output.
@@ -52,6 +81,8 @@ as the structural baseline.
 
 ## Preferred Shape
 
+Single-source mode:
+
 ```text
 Source class → Reading lens
 → Source Map (sentence-level reading chain)
@@ -60,9 +91,19 @@ Source class → Reading lens
 → Downstream routing + follow-up source tasks
 ```
 
-## Review Checklist
+Cross-source-synthesis mode:
 
-Before considering a tutor note done:
+```text
+Set of sources → Cross-source synthesis lens (4 principles + reading rules)
+→ Thesis-Line Map (rows: thesis line + supporting sources + consistency)
+→ Sub-Thesis Breakdown
+→ What each source adds + Sources 互相強化 / 牴觸
+→ What the set proves / does not prove
+→ Internalization Artifacts (ledger w/ strength, mental model, watchlist, output block)
+→ Downstream routing + follow-up source tasks
+```
+
+## Review Checklist — Single-Source Mode
 
 - [ ] Does the note teach how to read this source class generally?
 - [ ] Is every important sentence walked through the six-step chain?
@@ -70,3 +111,16 @@ Before considering a tutor note done:
 - [ ] Is there a watchlist of signals that would confirm or invalidate the
       strongest claims?
 - [ ] Are downstream routing targets concrete file paths, not vague intent?
+
+## Review Checklist — Cross-Source-Synthesis Mode
+
+- [ ] Does the note state the 4 cross-source principles in the lens section?
+- [ ] Is the thesis-line map used (one row per thesis, not per sentence)?
+- [ ] Does each thesis line declare multi-source consistency (yes / partial /
+      no) and public-quotable status?
+- [ ] Are the user's prior beliefs explicitly mapped to supporting sources?
+- [ ] Are sub-theses, what-each-source-adds, and reinforcement / tension
+      sections present?
+- [ ] Does the claim ledger include a `Strength` column?
+- [ ] Does the reusable output block cover the multi-line synthesis, not a
+      single source?
