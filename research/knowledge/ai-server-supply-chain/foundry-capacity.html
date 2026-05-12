@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manufacturing Capacity — AI Server Supply Chain</title>
+<style>
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.68; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section .lead { color: var(--muted); }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { color: var(--warn-text); background: var(--warn-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>Manufacturing Capacity</span></div>
+  <h1>Manufacturing Capacity (晶圓代工 / 先進製程)</h1>
+  <div class="thesis">
+    AI server 不只看 component-level 動能，還要看誰能把這些 component 真的做出來。TSMC 仍是先進製程主幹，但 AI 算力需求 ~3x TSMC 可產能讓 Apple、Intel Foundry、Samsung 全部被推進台前；Apple-Intel 2026-05 的 preliminary 18A 合約是 capacity 重新洗牌的最強信號。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-13 ·
+    Layer: <span class="pill">manufacturing-capacity</span> ·
+    Status: <span class="pill">draft</span>
+  </div>
+</header>
+
+<section id="why-this-layer">
+  <h2>為什麼要看這一層</h2>
+  <p class="lead">
+    Component-level 故事（CPU / GPU / ASIC / HBM）告訴你「誰賣的最多」；Manufacturing Capacity 層告訴你「誰能做出來」。在 demand 超過 supply 的 2026，這層就是 share gain 與 revenue ramp 真正的限速元件。
+  </p>
+  <ul class="tight">
+    <li>TSMC 仍生產全球 ~90% 最先進 chips（CSIS）；3nm 已過載運轉、2nm 已 booked 到 2028。</li>
+    <li>Apple 是 TSMC 第二大客戶，過去近百分百依賴；2026-05 與 Intel preliminary 簽約代表 second-source 終於成形。</li>
+    <li>Intel Foundry 一直是「policy 投資 + 自家內部消化」結構；現在 18A 開始有 external customer pipeline，但 Foundry Direct Connect 2026 被取消，外界透明度反而降低。</li>
+    <li>Samsung Texas 新廠 + xAI Terafab（14A node, 2029 volume）是中期次要 second-source。</li>
+  </ul>
+</section>
+
+<section id="source-backed">
+  <h2>Source-backed 訊號</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>Claim type</th><th>意義</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Apple 與 Intel 達成 preliminary chip-making agreement（WSJ → CNBC 等多家報導），鎖定 Intel 18A / 可能 18A-P。</td>
+        <td><span class="pill">reported-fact</span><span class="pill warn">no primary press release</span></td>
+        <td>20+ 年來 Apple 第一次認真做 TSMC 之外的 second source；Intel Foundry 第一個 hyperscale 等級指標客戶。</td>
+        <td><a href="../../sources/ai-server-supply-chain/news/2026-05-13_apple-intel-foundry-deal-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Intel CFO Zinsner：18A progress 已足以考慮 external customer；early signed deals expected Q3/Q4 2026；external revenue ramp 在 2027。</td>
+        <td><span class="pill">management-expectation</span><span class="pill">forward-looking-target</span></td>
+        <td>Foundry 不再只是「政策業務」；但 ramp 時程仍是 forward-looking，需要 8-K / 法說驗證。</td>
+        <td><a href="../../sources/ai-server-supply-chain/news/2026-05-13_intel-foundry-external-customer-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Intel Foundry Direct Connect 2026 取消；CEO Lip-Bu Tan 改走 closed-door 客戶接洽。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>外界對 external customer pipeline 透明度下降；只能從財報 / 8-K 拼湊。</td>
+        <td><a href="../../sources/ai-server-supply-chain/news/2026-05-13_intel-foundry-external-customer-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Intel Foundry Q1 2026 revenue $5.4B，+16% YoY；外部 vs 內部客戶比例未拆。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>規模與成長能 verify，但「Foundry 真的變好了嗎」這題還沒分清楚 captive vs external 之前不能下結論。</td>
+        <td><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>TSMC CEO C. C. Wei：先進製程需求 ~3x 可產能；3nm 已過 100% utilization；2nm 已 booked 至 2028。</td>
+        <td><span class="pill">management-expectation</span></td>
+        <td>TSMC 是 AI server 算力出貨的真正瓶頸；這也是 Apple 重新找 Intel / Samsung 的母題。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="mental-model">
+  <h2>Mental Model</h2>
+  <ul class="tight">
+    <li>「Intel Foundry 復興」≠「Intel Products 復興」。前者看 18A external customer + EMIB 包裝營收；後者看 Xeon design win + DCAI segment。混為一談會誤判 estimate 與時序。</li>
+    <li>Apple-Intel deal 的意義不在於對 Intel 短期 revenue（2027 才開始 ramp），在於把 Intel Foundry 從「政府扶持 + 自家內部」升級成「市場真實 second source」。</li>
+    <li>TSMC 仍會是 AI 大部分 silicon 的真實主場，但 Apple 把先進邏輯一部分搬走會釋出 TSMC 部分 capacity 給 NVIDIA / AMD / Broadcom AI 客戶。</li>
+    <li>「Foundry Direct Connect 取消」是觀察 Lip-Bu Tan 領導風格的訊號：他偏好私下談 + 私下宣布；觀察者要習慣等 8-K，不再期待單一公開 event。</li>
+  </ul>
+</section>
+
+<section id="watchlist">
+  <h2>Verification Watchlist</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>為什麼</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>Apple / Intel joint 8-K 或正式 press release</td><td>把 preliminary agreement 升級為 confirmed contract</td><td>event-driven</td></tr>
+      <tr><td>Intel Q2 / Q3 2026 法說 Foundry external customer 字眼</td><td>驗證 Zinsner 的 Q3/Q4 2026 deal 時間表</td><td>quarterly</td></tr>
+      <tr><td>Intel Foundry segment external vs internal revenue split</td><td>從 16% YoY 拆出真正 external ramp</td><td>quarterly</td></tr>
+      <tr><td>TSMC 法說 Apple wafer allocation 變動評論</td><td>看 Apple 是否真把部分 mobile / Mac 矽搬到 Intel</td><td>quarterly</td></tr>
+      <tr><td>Samsung Texas 廠進度 + Apple 探訪後續</td><td>second-source 是否還有第三個玩家</td><td>quarterly / event-driven</td></tr>
+      <tr><td>Intel 14A external customer 公告</td><td>14A 量產（2029）gating 條件</td><td>event-driven</td></tr>
+      <tr><td>EMIB / 高階 packaging revenue 揭露</td><td>「包裝即服務」是否真能在 2H 2026 帶數十億</td><td>quarterly</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="tight">
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-13_apple-intel-foundry-deal-source-packet.md">2026-05-13 Apple-Intel Foundry Preliminary Agreement</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-13_intel-foundry-external-customer-source-packet.md">2026-05-13 Intel Foundry External Customer Status</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">2026-05-13 Intel CHIPS Act + Sovereign Chip Policy</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">2026-05-13 AI Chip Supply Tightness</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md">2026-05-10 Intel Q1 2026 Earnings</a>（md source）</li>
+  </ul>
+</section>
+
+<section id="follow-up">
+  <h2>Follow-up</h2>
+  <ul class="tight">
+    <li>等 Apple / Intel 雙方正式聲明，把 preliminary 升級為 confirmed。</li>
+    <li>Pull Intel Q2 / Q3 2026 earnings 直接 transcript，把 LinkedIn / TrendForce 的二手語句對到 primary。</li>
+    <li>看 TSMC Q2 2026 法說對 Apple wafer 配置的措辭。</li>
+    <li>跑 Source Tutor reading 對 Apple-Intel deal 與 Intel Foundry external customer 兩份 packet（屬於 M2.3 進度）。</li>
+  </ul>
+</section>
+
+<footer>
+  <a href="./index.html">← 回主題地圖</a> ·
+  <a href="./sources.html">→ Sources Reading Shelf</a>
+</footer>
+
+</body>
+</html>

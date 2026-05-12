@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Geopolitics &amp; Policy — AI Server Supply Chain</title>
+<style>
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.68; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section .lead { color: var(--muted); }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { color: var(--warn-text); background: var(--warn-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>Geopolitics &amp; Policy</span></div>
+  <h1>Geopolitics &amp; Policy (CHIPS Act / 美國 sovereign chip)</h1>
+  <div class="thesis">
+    當美國只生產全球 ~10% 的 chips 而 TSMC 一家做 ~90% 最先進製程，AI 算力本質上是國家安全議題。CHIPS Act 把 $7.86B 直接資金 + $3B 國防合約 + 25% 投資稅扣抵打進 Intel，使「Intel 經營表現」與「美國科技主權」綁在一起。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-13 ·
+    Layer: <span class="pill">geopolitics-and-policy</span> ·
+    Status: <span class="pill">draft</span>
+  </div>
+</header>
+
+<section id="why-this-layer">
+  <h2>為什麼要看這一層</h2>
+  <p class="lead">
+    Component layer 看公司營收，Manufacturing Capacity 層看誰能生產，這一層看「政府願意花多少錢 + 給多少政策保護」確保製造能力留在境內。對 Intel 投資 thesis 來說，這層是價值最被低估的支援結構；對 TSMC / Samsung 也是制約條件。
+  </p>
+  <ul class="tight">
+    <li>美國 chipmaking 僅占全球 ~10% capacity（CSIS）；TSMC 一家占 ~90% 最先進製程。</li>
+    <li>CHIPS Act 對 Intel 直接撥款 $7.86B，外加 $3B Secure Enclave 國防合約，外加 25% 投資稅扣抵。</li>
+    <li>政策意圖是讓 Intel 在 2027 之後重新具備 leading-edge 製造能力；目前還在投資期，Foundry segment 仍虧損。</li>
+    <li>CHIPS Act 並未保證執行成功；CSIS 直接點名「Intel 必須維持經營能力」，否則政策投資白費。</li>
+  </ul>
+</section>
+
+<section id="source-backed">
+  <h2>Source-backed 訊號</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>Claim type</th><th>意義</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>美國商務部對 Intel 撥款 up to $7.86B（CHIPS Act）；2024-11-26 finalize。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>政策資金已 commit，但分批 disbursement 依里程碑。</td>
+        <td><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>另有 $3B Secure Enclave 國防合約；25% 投資稅扣抵；Intel 計畫 $100B+ 美國投資。</td>
+        <td><span class="pill">reported-fact</span><span class="pill">management-expectation</span></td>
+        <td>「政策 + 投資稅 + 公司計畫」三層支援；計畫額是 management forward-looking。</td>
+        <td><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>投資地點：Arizona（Fab 52, 18A HVM）、New Mexico、Ohio、Oregon。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>美國本土 advanced node 製造 footprint 已成形。</td>
+        <td><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Apple-Intel preliminary deal「aligns with US efforts to onshore strategic semiconductor manufacturing」（TechPowerUp 等）。</td>
+        <td><span class="pill">secondary-interpretation</span></td>
+        <td>把 Apple-Intel deal 不只當成公司事件，而是 sovereign-chip 政策外溢的市場驗證。</td>
+        <td><a href="../../sources/ai-server-supply-chain/news/2026-05-13_apple-intel-foundry-deal-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>「By 2026, the United States has effectively decoupled a significant portion of the AI supply chain from geopolitical vulnerabilities through domestic production of advanced semiconductors at the sub-2nm level.」（FinancialContent, 2026）</td>
+        <td><span class="pill">secondary-interpretation</span><span class="pill warn">overstated framing</span></td>
+        <td>主流敘事方向已正向，但「effectively decoupled」是 overreach；US 仍仰賴台灣大部分高階產能。</td>
+        <td><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>CSIS: Intel 是「唯一一家美國總部、仍有機會重回 leading-edge 製造」的公司。</td>
+        <td><span class="pill">secondary-interpretation</span></td>
+        <td>解釋為什麼政策資源高度集中在 Intel。</td>
+        <td><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">md source</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="mental-model">
+  <h2>Mental Model</h2>
+  <ul class="tight">
+    <li>「美國科技主權」是 Intel thesis 的看不見支柱：即使 Intel Foundry 還沒大規模賺錢，CHIPS Act 等於把 downside 政策化（政府有結構性誘因不讓 Intel 倒）。</li>
+    <li>政策利多 ≠ 經營保證：CSIS 自己提醒，CHIPS Act 在 Intel 還沒站穩之前可能還需要「更多公共資源」。讀 Intel 時要把政策當成 floor，不要當 trigger。</li>
+    <li>TSMC / Samsung 在美國投資也吃 CHIPS Act 資源，但 R&D 仍留母國；Intel 的政策溢價在於「美國總部 + 美國 R&D + 美國製造」三者合一，沒有競爭對手有同樣條件。</li>
+    <li>Apple-Intel deal、xAI Terafab、Amazon / Cisco 高階 packaging 客戶都坐落在同一套政策誘因上：sovereign chip 不只是補貼，是讓美國公司願意嘗試 second source 的潤滑劑。</li>
+  </ul>
+</section>
+
+<section id="watchlist">
+  <h2>Verification Watchlist</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>為什麼</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>美國商務部 CHIPS Office 對 Intel 撥款進度公告</td><td>看資金實際 disbursement 是否跑得動</td><td>event-driven</td></tr>
+      <tr><td>新一屆美國行政部門對 CHIPS Act 立場</td><td>政策連續性風險</td><td>event-driven</td></tr>
+      <tr><td>Intel 10-K / 10-Q 中 CHIPS 撥款收到金額 + Foundry 進展揭露</td><td>把政策金額對到財務</td><td>quarterly / annual</td></tr>
+      <tr><td>CSIS / BPC / CNAS 對 Intel 與 sovereign chip 的政策報告更新</td><td>政策論述風向</td><td>event-driven</td></tr>
+      <tr><td>Apple / Amazon / Cisco / xAI / Musk Terafab 對 Intel Foundry 採用進度</td><td>政策誘因是否轉化為實際商業承諾</td><td>quarterly / event-driven</td></tr>
+      <tr><td>對中半導體出口管制更新（影響 TSMC / Samsung Korea / Intel 供應）</td><td>地緣風險側面影響</td><td>event-driven</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="tight">
+    <li><a href="../../sources/ai-server-supply-chain/policy/2026-05-13_intel-chips-act-source-packet.md">2026-05-13 Intel CHIPS Act + Sovereign Chip Policy（Intel newsroom + CSIS + FinancialContent）</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-13_apple-intel-foundry-deal-source-packet.md">2026-05-13 Apple-Intel Foundry Preliminary Agreement</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-13_intel-foundry-external-customer-source-packet.md">2026-05-13 Intel Foundry External Customer Status</a>（md source）</li>
+  </ul>
+</section>
+
+<section id="follow-up">
+  <h2>Follow-up</h2>
+  <ul class="tight">
+    <li>Pull US Commerce Department CHIPS Office 最新 award 公告。</li>
+    <li>確認 Intel 18A 真的已在 Arizona Fab 52 進入 high-volume manufacturing（FinancialContent 說已進；用 Intel IR 對齊）。</li>
+    <li>找 CSIS / Bipartisan Policy Center / BPC 對 Intel 執行狀況的 2026 後續報告。</li>
+    <li>跑 Source Tutor reading 對 CHIPS Act packet（屬於 M2.3 進度；source class 是 press-release + analysis，可順便驗證模板對「政府文件 + 智庫」這類 hybrid 是否撐得住）。</li>
+  </ul>
+</section>
+
+<footer>
+  <a href="./index.html">← 回主題地圖</a> ·
+  <a href="./sources.html">→ Sources Reading Shelf</a>
+</footer>
+
+</body>
+</html>
