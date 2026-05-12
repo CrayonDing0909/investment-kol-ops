@@ -135,6 +135,8 @@ Responsibilities:
 - Use the same teaching stance as `domain-doc-tutor`: build the user's mental
   model before summarizing details.
 - Explain what problem the source is trying to answer.
+- Explain how this class of source should generally be read so the user can
+  reuse the lens on other companies and industries, not just this one source.
 - Identify which claims the source can support and which claims it cannot.
 - Explain what kind of source this is and what it can prove.
 - Classify each important claim as:
@@ -144,15 +146,28 @@ Responsibilities:
   - `secondary-interpretation`
   - `agent-inference`
   - `open`
+- For every important sentence, walk the full reading chain:
+  source wording → claim type → what it supports → what it does not prove →
+  verification metric → downstream routing.
 - Preserve the exact source wording next to the simplified explanation.
 - Rewrite risky wording into publish-safe wording.
 - Identify the 5 sentences an investor should read most carefully.
 - List common misreads, for example treating a management target as current
   market share.
 - Turn missing evidence into follow-up source tasks.
+- Produce four internalization artifacts that turn the source into reusable
+  material:
+  - `Claim Ledger` (claim type and safe wording per claim).
+  - `Mental Model Update` (2-4 bullets that change how the user thinks).
+  - `Verification Watchlist` (next data points or sources to confirm or
+    invalidate the strongest claims).
+  - `Reusable Output Block` (one paragraph that can drop into a brief or
+    article with claim types intact).
 
 Rules:
 
+- The output must teach how to read the source, not only produce safe wording.
+  A note that ends at "here is a safer sentence" is incomplete.
 - Do not turn the source into a thesis.
 - Do not search for replacement or additional sources during the tutoring pass.
   Route missing evidence back to the Source Collector Role.

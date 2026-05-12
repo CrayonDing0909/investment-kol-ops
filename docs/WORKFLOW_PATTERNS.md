@@ -180,13 +180,35 @@ Each tutor run must capture:
 
 - Use a tutoring mode adapted from `domain-doc-tutor`, not a summary mode.
 - Explain what problem the source is trying to answer.
-- Show which claims this source can support.
+- Explain how this class of source should generally be read (earnings release,
+  IR deck, transcript, filing, news, paper, podcast), so the user can reuse the
+  lens on other companies and industries.
+- For every important sentence, walk the full reading chain:
+  1. Exact source wording.
+  2. Claim type tag (`reported-fact`, `management-expectation`,
+     `forward-looking-target`, `secondary-interpretation`, `agent-inference`,
+     `open`).
+  3. What this sentence can support.
+  4. What this sentence does not prove.
+  5. Which metric or future event would verify or invalidate it.
+  6. Where it should flow next (claim ledger, brief, article block, follow-up
+     source).
 - Separate sentences that are facts from sentences that are management
   expectations, forward-looking targets, or secondary interpretation.
 - Flag numbers that should not be copied directly into public writing.
 - Identify the 5 sentences an investor should read most carefully.
 - List what the source still cannot answer and turn those gaps into follow-up
   source tasks.
+- Produce four internalization artifacts that turn the source into reusable
+  material:
+  - `Claim Ledger`: one row per claim with claim type, source wording, and safe
+    public wording.
+  - `Mental Model Update`: 2-4 bullets that change how the user thinks about
+    the company, industry, or thesis.
+  - `Verification Watchlist`: the next data points or future sources that would
+    confirm or invalidate the strongest claims.
+  - `Reusable Output Block`: one paragraph the user can drop into a brief or
+    article with claim types intact.
 
 ### Human Gate
 
@@ -205,6 +227,10 @@ Each tutor run must capture:
   `research/knowledge/<theme>/sources/<source-id>.html`.
 - Updates to the relevant source checklist or brief only after the claim type is
   explicitly marked.
+- The note must contain a `Source Map`, a `Reading Lens`, four
+  `Internalization Artifacts` (claim ledger, mental model update, verification
+  watchlist, reusable output block), and a `Downstream Routing` section. A note
+  that only produces "safe wording" without the reading chain is incomplete.
 
 ## Investment Analysis Workflow
 
