@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Procurement &amp; Tightness — AI Server Supply Chain</title>
+<style>
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.68; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; font-style: italic; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 20px; margin: 0 0 8px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section .lead { color: var(--muted); }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { color: var(--warn-text); background: var(--warn-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="./index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>Procurement &amp; Tightness</span></div>
+  <h1>Procurement &amp; Tightness (大廠採購與供應緊張)</h1>
+  <div class="thesis">
+    2026 年 AI 算力的限速元件，已從電力轉成晶片本身。Microsoft / Alphabet / Amazon / Meta / Oracle 五家合計 capex 近 7000 億美金，需求大幅超過 TSMC 與 HBM 廠的可產能；CPU 也跟著卡。當供給比需求慢，每個 component-level 訊號都要被「供給有沒有」修正一次。
+  </div>
+  <div class="meta">
+    Last updated: 2026-05-13 ·
+    Layer: <span class="pill">procurement-and-tightness</span> ·
+    Status: <span class="pill">draft</span>
+  </div>
+</header>
+
+<section id="why-this-layer">
+  <h2>為什麼要看這一層</h2>
+  <p class="lead">
+    Component layer 告訴你「誰的營收成長最快」；Procurement layer 告訴你「他能不能拿到貨」。在 2026 這種「demand &gt; supply by 3x」的世界，share gain 通常不來自價格戰，來自誰能拿到 TSMC slot、HBM allocation、advanced packaging capacity。
+  </p>
+  <ul class="tight">
+    <li>OpenAI CEO Sam Altman：「Right now, again, it's chips.」（bottleneck 從電力轉回晶片）</li>
+    <li>Google CEO Sundar Pichai：「supply constrained even as we've been ramping up our capacity.」</li>
+    <li>Google 因為沒搶到 TSMC capacity 而無法達成 2026 AI chip production targets，正把生產分散給 Marvell + Broadcom（CNAS, CNBC 2026-04-20）。</li>
+    <li>連 server CPU 也卡：Intel 給中國客戶 6 個月 lead time；AMD lead time 拉到 8-10 週；中國 server CPU 價格 +10%。</li>
+  </ul>
+</section>
+
+<section id="source-backed">
+  <h2>Source-backed 訊號</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>Claim type</th><th>意義</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>TSMC 先進製程需求是可產能的 ~3x；3nm utilization 已突破 100%（含延後維護），2nm booked 至 2028。</td>
+        <td><span class="pill">management-expectation</span></td>
+        <td>主要 bottleneck 不是「會不會多買」而是「能不能拿到 wafer」。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Google 將 AI chip 設計分散給 Marvell（除 Broadcom 之外），含 TPU + memory processing unit。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>Hyperscaler 對單一 ASIC 設計夥伴的依賴在下降；Marvell / Broadcom / 台廠創意 / 世芯都是潛在受惠。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Anthropic 年化營收 4 個月內從 $9B 跳到 $30B；同時對 Claude 高峰時段 rate limit。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>需求爆量 + 供給跟不上 = 客戶側分配限制；產業需求面非常真實。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Intel 對中國客戶警告 server CPU 交期 6 個月；AMD lead time 拉至 8-10 週；中國 server CPU 漲 10%+。</td>
+        <td><span class="pill">secondary-interpretation</span><span class="pill warn">cross-check needed</span></td>
+        <td>連 server CPU 都進入供應緊張，呼應 AMD Q2 server CPU +>70% YoY guidance 與 Intel「demand outlook 過去 90 天改善」的雙端訊號。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>HBM 總頻寬需求年增 &gt;4x；AI 已占 DRAM 大部分需求；記憶體三巨頭（Samsung / Hynix / Micron）對擴產仍保留。</td>
+        <td><span class="pill">management-expectation</span></td>
+        <td>HBM 是 AI 算力的隱性瓶頸；分配權在三家手上，誰拿到 HBM 配額誰能出貨。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+      <tr>
+        <td>Microsoft / Alphabet / Amazon / Meta / Oracle 五家 2026 capex 合計 ~$700B，AI 為主。</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>需求面 funding 已經就位；供給才是限速元件。</td>
+        <td><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">md source</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="mental-model">
+  <h2>Mental Model</h2>
+  <ul class="tight">
+    <li>2026 的 AI 算力故事是「分配遊戲」：誰能拿到 TSMC 3nm slot、HBM allocation、CoWoS 包裝容量，就決定誰的 revenue 能 ramp。</li>
+    <li>「需求被擠出來」是真實 catalyst：當 NVIDIA / Broadcom 拿不到更多 TSMC slot，他們才會去找 Samsung / Intel；當 Apple 拿不到 TSMC，才會 Intel-Apple deal 浮上來。</li>
+    <li>不只 GPU 卡：server CPU、HBM、CoWoS、substrate、advanced packaging 整條供應鏈都卡，這也是 component-level 公司給出短期 guidance 看起來偏好的部分原因。</li>
+    <li>客戶分散是供給緊張的副作用：Google 從 Broadcom 獨家 → Broadcom + Marvell 是供給訊號，不只是「想多家供應」。</li>
+  </ul>
+</section>
+
+<section id="watchlist">
+  <h2>Verification Watchlist</h2>
+  <table>
+    <thead><tr><th>訊號</th><th>為什麼</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>TSMC quarterly 法說 utilization + capex guidance</td><td>看「3x demand / supply」是否收斂</td><td>quarterly</td></tr>
+      <tr><td>NVIDIA / AMD / Broadcom lead time + backlog 評論</td><td>客戶側分配壓力是否緩解</td><td>quarterly</td></tr>
+      <tr><td>Samsung / Hynix / Micron HBM capex + utilization</td><td>記憶體擴產是否真的跑得起來</td><td>quarterly</td></tr>
+      <tr><td>Intel server CPU lead time（China + global）</td><td>x86 server CPU 緊張是 cyclical 還是 structural</td><td>monthly / event-driven</td></tr>
+      <tr><td>Hyperscaler capex 修正</td><td>需求是否還在加速</td><td>quarterly</td></tr>
+      <tr><td>新增 ASIC 設計合作（Google-Marvell 之後是否還會出現）</td><td>客戶端是否還在分散供應</td><td>event-driven</td></tr>
+      <tr><td>CoWoS / advanced packaging capacity 評論（TSMC, Amkor, SPIL）</td><td>包裝是另一個瓶頸</td><td>quarterly</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <ul class="tight">
+    <li><a href="../../sources/ai-server-supply-chain/reports/2026-05-13_ai-chip-supply-tightness-source-packet.md">2026-05-13 AI Chip Supply Tightness（CNAS / CNBC / Quartz / Omdia）</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/news/2026-05-13_apple-intel-foundry-deal-source-packet.md">2026-05-13 Apple-Intel Foundry Preliminary Agreement</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_amd-q1-2026-source-packet.md">2026-05-10 AMD Q1 2026 Earnings</a>（md source）</li>
+    <li><a href="../../sources/ai-server-supply-chain/earnings/2026-05-10_intel-q1-2026-source-packet.md">2026-05-10 Intel Q1 2026 Earnings</a>（md source）</li>
+  </ul>
+</section>
+
+<section id="follow-up">
+  <h2>Follow-up</h2>
+  <ul class="tight">
+    <li>Pull TSMC April 2026 earnings transcript 原文（直接 C. C. Wei quotes）。</li>
+    <li>Capture Sundar Pichai Q1 2026 Alphabet 法說對 AI 供應緊張的措辭。</li>
+    <li>找 SemiAnalysis / Silicon Data 對 GPU 租賃價格 + utilization 的最新數據。</li>
+    <li>驗證 Quartz 報導的 server CPU lead time（Intel 6 個月、AMD 8-10 週）對 Intel / AMD 官方 channel 的正確性。</li>
+    <li>跑 Source Tutor reading 對 AI Chip Supply Tightness packet（屬於 M2.3 進度）。</li>
+  </ul>
+</section>
+
+<footer>
+  <a href="./index.html">← 回主題地圖</a> ·
+  <a href="./sources.html">→ Sources Reading Shelf</a>
+</footer>
+
+</body>
+</html>
