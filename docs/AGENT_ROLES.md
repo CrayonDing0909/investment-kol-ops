@@ -132,11 +132,17 @@ Input:
 - User's reading goal.
 - Claims or numbers the user is considering using.
 
-Output:
+Output (two paired artifacts, both required):
 
 ```text
-research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md
+research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md   (canonical)
+research/knowledge/<theme>/readings/<source-id>.html               (reading view)
 ```
+
+The HTML reading view is mandatory, not optional. The user reads HTML first;
+markdown is the fallback layer per the HTML reading UI rule. Link the new
+HTML page from `research/knowledge/<theme>/readings/index.html` and (when
+appropriate) from the main theme index.
 
 In cross-source mode, name the file using a `<subject>-cross-source` or
 versioned `<subject>-v<n>` pattern, and set `supersedes:` in the frontmatter

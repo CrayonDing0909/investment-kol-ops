@@ -32,6 +32,12 @@ supersedes: <optional path to previous reading this run replaces or extends>
 > Sections marked `[single]` are required for single-source mode only.
 > Sections marked `[cross]` are required for cross-source-synthesis mode only.
 > Sections without a mode tag are required for both modes.
+>
+> **HTML reading view is mandatory, not optional.** Every tutor reading note
+> must ship with a paired HTML page under
+> `research/knowledge/<theme>/readings/<note-id>.html`. The user reads HTML
+> first; the markdown file is the canonical / fallback layer. This follows
+> the HTML reading UI rule and is enforced by the source-tutor Cursor rule.
 
 ## Source Metadata
 

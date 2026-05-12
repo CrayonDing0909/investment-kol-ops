@@ -38,6 +38,12 @@ as the structural baseline.
   confidence level.
 - Route missing evidence to the source backlog under `research/questions/`,
   not into a fresh tutor pass.
+- **Ship paired HTML reading view**: every markdown tutor note must have a
+  matching HTML page at
+  `research/knowledge/<theme>/readings/<note-id>.html`. The user reads HTML
+  first; markdown is the canonical / fallback layer per the
+  [HTML reading UI rule](mdc:.cursor/rules/html-reading-ui.mdc). A tutor run
+  is incomplete without the HTML view.
 
 ## Required Behavior — Single-Source Mode
 

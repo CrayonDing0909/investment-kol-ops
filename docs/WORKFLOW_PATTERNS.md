@@ -261,13 +261,16 @@ Behavior differs by `reading_mode`.
 
 ### Output Artifact
 
-- Markdown tutor note:
+- Markdown tutor note (canonical source):
   `research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md`.
   In cross-source mode, use a `<subject>-cross-source` style source-id or a
   `<subject>-v<n>` versioned name; set `supersedes:` in the frontmatter when
   the run replaces or extends a previous note.
-- HTML reading view when the note is meant for repeated human review:
-  `research/knowledge/<theme>/sources/<source-id>.html`.
+- HTML reading view (mandatory, not optional):
+  `research/knowledge/<theme>/readings/<source-id>.html`.
+  The user reads HTML first; markdown is the fallback. A tutor run is not
+  considered complete until the HTML view is shipped and linked from the
+  theme `readings/index.html` (and the main theme index when appropriate).
 - Updates to the relevant source checklist or brief only after the claim type is
   explicitly marked.
 - The note must always contain four `Internalization Artifacts` (claim ledger,
