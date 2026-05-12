@@ -473,6 +473,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-12 - M2.1 - AMD / MediaTek / CPU latency source hardening completed; data-quality checker run with 0 findings
 2026-05-13 - M2.2 - Source Reading UX and source-tutor workflow documented; source HTML pages linked to original sources and next reading steps
 2026-05-13 - M2.2 - Source tutor upgraded with sentence-level reading chain, internalization artifacts, Cursor rule, and AMD canonical example
+2026-05-13 - M2.3 - AI server supply chain coverage expanded with 4 new source packets and 3 structural layers (manufacturing capacity, procurement & tightness, geopolitics & policy); Intel Q1 2026 source-tutor reading note added
 ```
 
 ### Per-Skill Status Grid Footnotes
