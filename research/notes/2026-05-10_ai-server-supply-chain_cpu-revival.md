@@ -68,7 +68,7 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 - Intel Q1 2026 DCAI revenue was $5.1B, up 22% YoY, and management framed CPU as the AI stack orchestration/control plane.
   — Source: `research/intake/2026-05-10_intel-q1-2026_cpu.md` (confidence: known).
 - MediaTek has data center ASIC visibility and I/O / memory subsystem relevance, but its exposure is not the same as owning server CPU main silicon.
-  — Source: `research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md` (confidence: mixed; ASIC numbers secondary until official transcript verified).
+  — Source: `research/intake/2026-05-10_mediatek-q1-2026_cpu-asic.md` and official Q1 2026 transcript (confidence: known for `$2B Q4 2026` as management expectation; still not realized revenue).
 
 ### Narrative Drivers
 
@@ -106,7 +106,7 @@ AI server 資金從 GPU 外溢後，CPU 是否重新回到核心 spend？市占�
 | 4 | AMD expected server CPU revenue growth | &gt;70% YoY | Q2 2026 | AMD Q1 2026 transcript intake | known via secondary transcript |
 | 5 | Intel DCAI revenue | $5.1B, +22% YoY | Q1 2026 | Intel Q1 2026 source packet | known |
 | 6 | Intel ASIC revenue growth | &gt;30% QoQ, nearly 2x YoY | Q1 2026 | Intel transcript intake | known via secondary transcript |
-| 7 | MediaTek AI ASIC revenue target | ~$2B | Q4 2026 | MediaTek source packet (secondary) | uncertain until official transcript |
+| 7 | MediaTek AI ASIC revenue target | ~$2B | Q4 2026 | MediaTek official Q1 2026 transcript | known as management expectation |
 | 8 | MediaTek Jan-Apr YTD revenue | NT$195.887B, -3.06% YoY | Jan-Apr 2026 | MediaTek IR monthly table | known |
 | 9 | CPU 在 AI server 的配比 | 每台 1-2 顆 | 持續 | knowledge/cpu.html (industry consensus) | inferred |
 | 10 | 18 個月 bull/base/bear scenarios | 見下方 Scenarios（draft） | 6-18 個月 | skill missing: scenario-analyzer (draft below by agent) | uncertain |
@@ -150,7 +150,7 @@ Intel 的說法則讓我理解，CPU 也可以被重新定義為 AI stack 的 co
 2. 我還不懂 CPU demand 是因為 attach rate 上升、server units 上升，還是 utilization 上升。
 3. 我還不確定 Intel 的 CPU control plane 說法，是實際競爭力回來，還是公司在重塑敘事。
 4. 我不確定 MediaTek 到底是 ASIC story、I/O / memory subsystem story，還是市場把兩者混在一起炒。
-5. 我還需要找 AMD Analyst Day 的 primary source 來驗證 >50% server CPU share target。
+5. AMD Analyst Day primary source 已驗證 `>50% server CPU revenue market share` 是 forward-looking target，不是目前市占。
 
 起始候選（來自 cpu.html 的 open questions，可挑可加）：
 - AI server 對 CPU 是 structural 需求還是 cyclical 補貨？
@@ -192,7 +192,7 @@ AI server 不是只有 GPU，真正的投資機會可能來自資金開始理解
 
 1. 如果 AMD 下一份季報 Data Center revenue 或 server CPU growth 明顯低於 guidance，且管理層下修 server CPU demand，我會降低 CPU 復興 thesis 的信心。
 2. 如果 Intel 下一份季報 DCAI / Xeon design wins 無法延續，或 CPU control plane 敘事沒有轉成收入，我會把 Intel 從修復線降級成純敘事。
-3. 如果 MediaTek 官方 transcript 無法支持 AI ASIC $2B Q4 2026 / data center project ramp，或明確顯示目前只停在低毛利 subsystem，我會把台廠 AI server optionality 降級。
+3. 如果 MediaTek 後續法說或營收無法延續 AI ASIC $2B Q4 2026 / data center project ramp 的說法，或明確顯示目前只停在低毛利 subsystem，我會把台廠 AI server optionality 降級。
 
 起始候選（你可以採用、修改或全部換掉）：
 

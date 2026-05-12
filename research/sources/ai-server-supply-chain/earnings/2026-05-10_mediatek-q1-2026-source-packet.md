@@ -20,21 +20,26 @@ status: draft
 - Source class: earnings
 - Source quality:
   - primary: MediaTek financial information page (Q1 2026 links + monthly revenue table)
+  - primary: MediaTek Q1 2026 official transcript
   - secondary: Alpha Spread Q1 2026 earnings call summary
   - secondary: Futurum Q1 FY 2026 analysis citing management commentary
 - Title:
   - MediaTek Financial Information
+  - MediaTek 1Q26 Earnings Call Transcript
   - MediaTek Inc Q1-2026 Earnings Call
   - MediaTek Q1 FY 2026 Earnings Driven by AI ASIC Ramp Visibility
 - Publisher:
+  - MediaTek Investor Relations
   - MediaTek Investor Relations
   - Alpha Spread
   - Futurum
 - Date published:
   - 2026-04-30 Q1 earnings event (from MediaTek IR page)
+  - 2026-04-30 Q1 official transcript
   - 2026-05-07 Futurum article
 - URL:
   - https://www.mediatek.com/investor-relations/financial-information?hsLang=en
+  - https://www.mediatek.com/hubfs/MediaTek%20Assets/Pdfs/Quarterly%20Earnings%20Release/2026/Quarterly%20Earnings%20Release-2026Q1/Transcript.pdf
   - https://www.alphaspread.com/security/twse/2454/investor-relations/earnings-call/q1-2026
   - https://futurumgroup.com/insights/mediatek-q1-fy-2026-earnings-driven-by-ai-asic-ramp-visibility/
 - Captured at: 2026-05-10
@@ -60,8 +65,10 @@ revenue, and AI ASIC ramp commentary.
 - Alpha Spread summary says gross margin was 46.3%, operating margin was 15.3%, net income was NT$24.4B.
 - Alpha Spread summary says mobile phone revenue fell 17% QoQ and 15% YoY, accounting for 49% of sales.
 - Alpha Spread summary says Smart Edge Platforms grew 23% QoQ and 13% YoY, accounting for 46% of sales.
-- Alpha Spread summary says first U.S. hyperscale AI accelerator ASIC project is on schedule for production.
-- Alpha Spread summary says MediaTek expects AI ASIC revenue around USD 2B in Q4 2026.
+- MediaTek official transcript says the first U.S. hyperscale AI accelerator ASIC project is progressing very well and on schedule for production.
+- MediaTek official transcript says MediaTek now expects AI ASIC business to contribute around USD 2B in revenue in Q4 2026.
+- MediaTek official transcript says the first project is expected to scale to multiple billions of US dollars in 2027 based on secured capacity.
+- MediaTek official transcript says another AI accelerator ASIC project is in design, with mass production targeted by the end of 2027.
 - Alpha Spread summary says cloud ASIC market size is estimated around USD 70B-80B in 2027 and MediaTek targets 10%-15% market share.
 - Alpha Spread summary says MediaTek is investing in silicon photonics, CPO, active optical cables with Microsoft Research, high-speed interconnects, custom HBM, and integrated voltage regulators.
 - Futurum quotes Rick Tsai saying the first AI accelerator ASIC project for a U.S. hyperscale customer is progressing well and on schedule for production, with expected AI ASIC revenue around $2B in Q4 2026.
@@ -76,9 +83,10 @@ revenue, and AI ASIC ramp commentary.
 | 46.3 | % | Gross margin | Q1 2026 | Alpha Spread summary |
 | 15.3 | % | Operating margin | Q1 2026 | Alpha Spread summary |
 | 24.4 | B TWD | Net income | Q1 2026 | Alpha Spread summary |
-| 2 | B USD | AI ASIC revenue expected | Q4 2026 | Alpha Spread / Futurum secondary summaries |
-| 70-80 | B USD | Cloud ASIC market size | 2027 | Alpha Spread summary |
-| 10-15 | % | Cloud ASIC share target | current target | Alpha Spread summary |
+| 2 | B USD | AI ASIC revenue expected | Q4 2026 | MediaTek official transcript |
+| multiple | B USD | First AI accelerator ASIC project revenue scale | 2027 | MediaTek official transcript |
+| 70-80 | B USD | Cloud ASIC market size | 2027 | MediaTek official transcript |
+| 10-15 | % | Cloud ASIC share target | current target | MediaTek official transcript |
 | 90 | M USD | Air Labs investment | Q1 2026 | Alpha Spread summary |
 | 46.977 | B TWD | Monthly revenue | Jan 2026 | MediaTek IR monthly table |
 | 38.954 | B TWD | Monthly revenue | Feb 2026 | MediaTek IR monthly table |
@@ -88,19 +96,23 @@ revenue, and AI ASIC ramp commentary.
 
 ## Direct Quotes
 
+- "Our first AI accelerator ASIC project for a US hyperscale customer is progressing very well. We are on schedule for production and now expect AI ASIC business to contribute around 2 billion US dollars in revenue in the fourth quarter of this year." — Rick Tsai, MediaTek Q1 2026 official transcript.
+- "For 2027, based on the capacity we have now secured, we are very confident that this project will scale to multiple billion US dollars." — Rick Tsai, MediaTek Q1 2026 official transcript.
+- "We now view the market size to be about $70 billion to $80 billion in 2027." — Rick Tsai, MediaTek Q1 2026 official transcript.
+- "We keep that for now, yes." — Rick Tsai, confirming 10%-15% share target in MediaTek Q1 2026 official transcript.
 - "In Data center, demand momentum is particularly strong." — Rick Tsai, quoted by Futurum.
 - "Our first AI accelerator ASIC project for a US Hyperscale customer is progressing fairly well. We are on schedule for production and now expect AI ASICs business to contribute around $2 billion in revenue in the fourth quarter of this year." — Rick Tsai, quoted by Futurum.
 
 ## Source Reliability Notes
 
 - MediaTek IR page is primary for the existence of Q1 2026 materials and monthly revenue table.
-- Alpha Spread and Futurum are secondary summaries for the Q1 2026 call details and ASIC commentary. They are useful for M1.1 but should be verified against MediaTek's official Q1 transcript / presentation before public use.
+- MediaTek official transcript is primary for Q1 2026 call details, AI ASIC Q4 2026 revenue expectation, 2027 scaling language, cloud ASIC TAM estimate, and share target confirmation.
+- Alpha Spread and Futurum remain secondary summaries. They are useful as cross-checks but are no longer needed as the primary support for the AI ASIC `$2B Q4 2026` claim.
 - The Q1 revenue number (NT$149.2B) is internally consistent with MediaTek official monthly revenues Jan-Mar 2026: 46.977 + 38.954 + 63.219 = 149.150B.
-- AI ASIC Q4 2026 $2B and 2027 cloud ASIC TAM/share targets are secondary until verified from MediaTek official transcript.
+- AI ASIC Q4 2026 `$2B` and 2027 cloud ASIC TAM/share targets are now verified against MediaTek's official Q1 2026 transcript.
 
 ## Follow-up Needed
 
-- Download or fetch MediaTek's official Q1 2026 transcript / presentation from the IR page if accessible.
 - Verify whether the first U.S. hyperscale ASIC customer is Google or another customer; do not state as fact until source confirms.
 - Clarify whether MediaTek's AI ASIC contribution is revenue or run-rate and whether Q4 2026 is quarter-only or annualized.
 - Confirm how much of "I/O / memory subsystem" in EP659 maps to MediaTek's stated data center tech: high-speed interconnect, custom HBM, silicon photonics, CPO, voltage regulators.

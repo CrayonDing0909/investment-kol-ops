@@ -53,7 +53,7 @@ ASIC 的關鍵是客製化。雲端巨頭可以根據自家模型、資料中心
 ## What I Still Don't Know
 
 - MediaTek 第一個美國 hyperscaler 客戶是否為 Google？目前不能公開寫死。
-- Q4 2026 $2B 是單季 revenue 還是 annualized run-rate，需要官方 transcript 驗證。
+- Q4 2026 `$2B` 已對到 MediaTek official transcript；仍需釐清它是單季 revenue、run-rate，還是其他口徑。
 - Intel 的 ASIC growth 到底是 IPU、DCAI custom silicon，還是 broader ASIC 分類。
 
 ## Sources
