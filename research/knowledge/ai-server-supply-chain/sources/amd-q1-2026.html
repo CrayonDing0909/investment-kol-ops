@@ -90,6 +90,60 @@
 </section>
 
 <section>
+  <h2>Sentence-Level Reading Chain</h2>
+  <p class="lede">每一句重要的話都要走完六步：原文 → claim 類型 → 它支撐什麼 → 它不能證明什麼 → 之後怎麼驗證 → 流向哪個 artifact。完整內容請看 <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_amd-q1-2026_reading.md">markdown tutor reading note</a>（md source）。</p>
+  <table>
+    <thead><tr><th>Exact wording</th><th>Claim type</th><th>What it supports</th><th>What it does not prove</th><th>Verification</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>“Data Center segment revenue was $5.8 billion, up 57% YoY, driven by EPYC + Instinct.”</td>
+        <td><span class="pill">reported-fact</span></td>
+        <td>Data Center 已是主要成長引擎</td>
+        <td>EPYC 單獨成長、server CPU 市占</td>
+        <td>下一季 DC segment revenue + 拆分</td>
+      </tr>
+      <tr>
+        <td>“We are seeing strong momentum as inferencing and agentic AI drive increasing demand for high-performance CPUs and accelerators.”</td>
+        <td><span class="pill">management-expectation</span></td>
+        <td>管理層敘事：agentic AI 同時拉 CPU 與 GPU</td>
+        <td>已量化的 CPU attach rate 提升</td>
+        <td>EPYC revenue 連續性 + 第三方 share</td>
+      </tr>
+      <tr>
+        <td>“We now expect the server CPU TAM to grow at greater than 35% annually, reaching over $120 billion by 2030.”</td>
+        <td><span class="pill">management-expectation</span></td>
+        <td>AMD 對 server CPU 市場規模的長期視角</td>
+        <td>AMD 自身 revenue 一定多少（這是 TAM，不是 AMD 公司營收）</td>
+        <td>第三方 TAM（IDC / Gartner / Mercury）</td>
+      </tr>
+      <tr>
+        <td>“…it is positioned to lead the server market and expects to achieve more than 50% server CPU revenue market share.” (Analyst Day 2025)</td>
+        <td><span class="pill">forward-looking-target</span></td>
+        <td>AMD 把 server CPU 設為 3-5 年 leadership 戰場與 KPI</td>
+        <td>任何「現在已過半」的市占敘述</td>
+        <td>Mercury Research / IDC server CPU share + Intel DCAI</td>
+      </tr>
+      <tr>
+        <td>“For the second quarter of 2026, AMD expects revenue to be approximately $11.2 billion, plus or minus $300 million.”</td>
+        <td><span class="pill">forward-looking-target</span></td>
+        <td>短期 visibility 強</td>
+        <td>全年 revenue 結構或 Q3+ trajectory</td>
+        <td>Actual Q2 print</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Internalization Cheatsheet</h2>
+  <ul class="tight">
+    <li><strong>Mental model</strong>：Q1 release = 現在進度；Analyst Day = 3-5 年戰略意圖。引用任一段都要先回答「我在說 progress 還是 intent」。</li>
+    <li><strong>Watchlist</strong>：AMD DC segment revenue、第三方 server CPU share、Intel DCAI、AMD non-GAAP gross margin（區分高價拿 share vs 低價搶 share）。</li>
+    <li><strong>Output block</strong>：公開寫法要把 reported-fact、management-expectation、forward-looking-target 三類保留可見，不要折成同一個信心等級。完整版見 <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_amd-q1-2026_reading.md">tutor reading note</a>（md source）。</li>
+  </ul>
+</section>
+
+<section>
   <h2>Reliability</h2>
   <ul class="tight">
     <li><span class="pill">primary</span> AMD press release：適合引用 financials、segment revenue、product announcements、guidance。</li>
@@ -119,8 +173,10 @@
 <section>
   <h2>Next Reading Step</h2>
   <ol class="tight">
-    <li>先回 AMD 原始 press release 確認 reported financials。</li>
-    <li>再看 Financial Analyst Day 連結，確認 &gt;50% server CPU revenue share 是 forward-looking target。</li>
+    <li>先看本頁 Sentence-Level Reading Chain，建立 claim 類型直覺。</li>
+    <li>再開 <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_amd-q1-2026_reading.md">tutor reading note</a>（md source），對齊 reading lens 與 claim ledger 全表。</li>
+    <li>回 AMD 原始 <a href="https://www.amd.com/en/newsroom/press-releases/2026-5-5-amd-reports-first-quarter-2026-financial-results.html">Q1 press release</a> 校對 reported financials。</li>
+    <li>讀 <a href="https://www.amd.com/en/newsroom/press-releases/2025-11-11-amd-unveils-strategy-to-lead-the-1-trillion-compu.html">Financial Analyst Day</a>，確認 &gt;50% server CPU revenue share 是 3-5 年 forward-looking target。</li>
     <li>如果要理解技術原因，接著讀 <a href="./agentic-ai-cpu-centric.html">Agentic AI CPU-Centric paper</a>。</li>
   </ol>
 </section>
@@ -130,6 +186,7 @@
   <p class="source">
     <a href="../intakes/amd-q1-2026.html">HTML intake</a> ·
     <a href="../cpu.html">CPU topic page</a> ·
+    <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_amd-q1-2026_reading.md">md tutor reading note</a> ·
     <a href="../../../sources/ai-server-supply-chain/earnings/2026-05-10_amd-q1-2026-source-packet.md">md source</a>
   </p>
 </section>
