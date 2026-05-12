@@ -72,7 +72,7 @@
     <tbody>
       <tr><td>聊天機器人 → AI 代理</td><td>從單次問答變成多步驟任務。</td><td>解釋 CPU orchestration demand。</td></tr>
       <tr><td>工具 / DB / code / self-reflection</td><td>agent 需要反覆跟系統互動。</td><td>把 CPU 從「跑模型」轉成「跑 workflow」。</td></tr>
-      <tr><td>CPU latency &gt;50%</td><td>文章引述 Georgia Tech + Intel 研究。</td><td>可做 hook，但公開前要找原始 paper。</td></tr>
+      <tr><td>CPU latency &gt;50%</td><td>文章引述 Georgia Tech + Intel 研究。</td><td>原始 paper 已補成 primary research source；公開時應引用 paper 並加 workload context。</td></tr>
       <tr><td>短跑 → 馬拉松</td><td>從 bursty inference 到 long-running agents。</td><td>很適合大眾化比喻。</td></tr>
     </tbody>
   </table>
@@ -89,17 +89,36 @@
   <h2>Reliability</h2>
   <ul class="tight">
     <li><span class="pill">secondary explainer</span> 適合作 mental model，不適合作 financial source。</li>
-    <li>文中引用 Georgia Tech + Intel research，但本 packet 尚未取得原始 paper。</li>
+    <li>文中引用 Georgia Tech + Intel research；原始 paper 已有 HTML reading page，可用來驗證 CPU latency 數字。</li>
     <li>AMD / Intel 財務或 guidance claims 應用 AMD / Intel source packets 驗證。</li>
   </ul>
 </section>
 
 <section>
+  <h2>Original Source Links</h2>
+  <p class="source">
+    <a href="https://www.bnext.com.tw/article/90464/ai-cpu">BusinessNext article</a> ·
+    <a href="https://arxiv.org/pdf/2511.00739">Georgia Tech / Intel paper PDF</a> ·
+    <a href="https://repository.gatech.edu/server/api/core/bitstreams/913bb86c-6bf1-4381-8ada-61de83960949/content">Georgia Tech repository PDF</a>
+  </p>
+</section>
+
+<section>
+  <h2>Next Reading Step</h2>
+  <ol class="tight">
+    <li>先用 BusinessNext 建立中文 mental model。</li>
+    <li>再切到 <a href="./agentic-ai-cpu-centric.html">Agentic AI CPU-Centric paper</a>，確認 CPU latency 數字的 workload context。</li>
+    <li>若要寫投資 claim，接著看 AMD / Intel source，不要只靠這篇中文 explainer。</li>
+  </ol>
+</section>
+
+<section>
   <h2>Links</h2>
   <p class="source">
+    <a href="./agentic-ai-cpu-centric.html">HTML paper source</a> ·
     <a href="../intakes/bnext-ai-cpu.html">HTML intake</a> ·
     <a href="../cpu-qa.html">CPU Q&A page</a> ·
-    <a href="../../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">markdown source packet</a>
+    <a href="../../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">md source</a>
   </p>
 </section>
 

@@ -41,6 +41,16 @@ status: draft | reviewed
 - <fact>
 - <fact>
 
+## Claim Classification
+
+> Preserve the source wording before simplifying. This section feeds the
+> source-tutor workflow and prevents targets or expectations from being reused as
+> reported facts.
+
+| Exact source wording | Plain meaning | Claim type | Confidence |
+|----------------------|---------------|------------|------------|
+| "<quote or wording>" | | reported-fact / management-expectation / forward-looking-target / secondary-interpretation / agent-inference / open | known / inferred / uncertain |
+
 ## Key Numbers
 
 | Number | Unit | Metric | Period | Source wording |
@@ -58,7 +68,9 @@ status: draft | reviewed
 - Primary source? yes / no
 - If secondary, what needs primary verification?
 - Any conflicts with other sources?
-- Any forward-looking language?
+- Any management expectation or guidance-like language?
+- Any forward-looking targets, plans, or aspirations?
+- Any secondary interpretation that should not be treated as primary-source fact?
 
 ## Follow-up Needed
 

@@ -15,14 +15,16 @@ status: draft | reviewed
 > - 一行 = 一個 claim。
 > - Confidence: known（直接來自 source）、inferred（推導）、uncertain（市場敘事，未驗證）。
 > - 只要 confidence ≠ known 都要在 brief 標出來。
+> - Claim type must distinguish reported facts from management expectations,
+>   forward-looking targets, secondary interpretation, and agent inference.
 
 ## Claims
 
-| # | Claim | Source | Captured At | Confidence | Verified By |
-|---|-------|--------|-------------|------------|-------------|
-| 1 | "<claim text>" | research/intake/<...>.md#L<line> | YYYY-MM-DD | known / inferred / uncertain | self / data-quality-checker / external |
-| 2 | | | | | |
-| 3 | | | | | |
+| # | Claim | Claim Type | Source | Captured At | Confidence | Safe Public Wording | Verified By |
+|---|-------|------------|--------|-------------|------------|---------------------|-------------|
+| 1 | "<claim text>" | reported-fact / management-expectation / forward-looking-target / secondary-interpretation / agent-inference / open | research/intake/<...>.md#L<line> | YYYY-MM-DD | known / inferred / uncertain | | self / source-tutor / data-quality-checker / external |
+| 2 | | | | | | | |
+| 3 | | | | | | | |
 
 ## Numbers Used
 

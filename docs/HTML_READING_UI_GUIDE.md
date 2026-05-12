@@ -103,6 +103,9 @@ Must include:
 - Direct quotes.
 - Reliability notes.
 - Follow-up tasks.
+- Original source links to the company IR page, filing, paper, transcript,
+  article, or PDF.
+- Next reading step so the user knows what to open after this page.
 - HTML intake link first.
 - Markdown source packet link second.
 

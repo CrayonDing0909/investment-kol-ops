@@ -1,0 +1,72 @@
+---
+description: Source tutor reading-chain rules for primary and high-value secondary sources
+globs: "{research/source-tutor/**/*,research/sources/**/*,research/knowledge/**/sources/**/*,research/templates/source-tutor-reading.md}"
+alwaysApply: false
+---
+
+# Source Tutor Reading Rule
+
+Source tutor runs are not summarization and not safe-wording rewrites. Their job
+is to teach the user how to read this class of source, so the lens generalizes
+to other companies and industries.
+
+Follow the Source Tutor workflow in
+[docs/WORKFLOW_PATTERNS.md](mdc:docs/WORKFLOW_PATTERNS.md) and the Source Tutor
+Role in [docs/AGENT_ROLES.md](mdc:docs/AGENT_ROLES.md). Use
+[research/templates/source-tutor-reading.md](mdc:research/templates/source-tutor-reading.md)
+as the structural baseline.
+
+## Required Behavior
+
+- Treat every important sentence as a six-step reading chain:
+  1. Exact source wording.
+  2. Claim type (`reported-fact`, `management-expectation`,
+     `forward-looking-target`, `secondary-interpretation`, `agent-inference`,
+     `open`).
+  3. What this sentence can support.
+  4. What this sentence does not prove.
+  5. Verification metric or future event.
+  6. Downstream routing (claim ledger, brief, article block, follow-up source).
+- Add a `Reading Lens` section explaining how this source class should be read
+  in general, not only for this specific company.
+- Produce four internalization artifacts in every tutor note:
+  - `Claim Ledger`
+  - `Mental Model Update`
+  - `Verification Watchlist`
+  - `Reusable Output Block`
+- Preserve the exact source wording next to every classified claim.
+- Keep claim types visible inside the `Reusable Output Block`. Do not collapse
+  `expects`, `targets`, `guides`, `reported`, `estimated` into the same
+  confidence level.
+- Route missing evidence to the source backlog under `research/questions/`,
+  not into a fresh tutor pass.
+
+## Avoid
+
+- Do not stop at "here is a safer sentence." That is incomplete output.
+- Do not turn the source into a thesis or trade idea.
+- Do not search for replacement or additional sources during the tutoring pass.
+- Do not upgrade secondary interpretation into primary-source fact.
+- Do not promote a forward-looking target into a current fact, especially for
+  market share, TAM, revenue, or growth-rate claims.
+
+## Preferred Shape
+
+```text
+Source class → Reading lens
+→ Source Map (sentence-level reading chain)
+→ What it proves / What it does not prove
+→ Internalization Artifacts (ledger, mental model, watchlist, output block)
+→ Downstream routing + follow-up source tasks
+```
+
+## Review Checklist
+
+Before considering a tutor note done:
+
+- [ ] Does the note teach how to read this source class generally?
+- [ ] Is every important sentence walked through the six-step chain?
+- [ ] Are claim types preserved inside the reusable output block?
+- [ ] Is there a watchlist of signals that would confirm or invalidate the
+      strongest claims?
+- [ ] Are downstream routing targets concrete file paths, not vague intent?
