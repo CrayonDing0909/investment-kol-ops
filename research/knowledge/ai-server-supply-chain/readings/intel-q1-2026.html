@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Intel Q1 2026 — Source Tutor Single-Source Reading</title>
+<style>
+  :root { --maxw: 880px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  --good-bg: #e7f4e0;
+  --good-text: #2b5d18;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      --good-bg: #1d2c1c;
+      --good-text: #b4d8a3;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section h3 { font-size: 17px; margin: 18px 0 6px; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .pill.warn { color: var(--warn-text); background: var(--warn-bg); }
+  .pill.good { color: var(--good-text); background: var(--good-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  blockquote { border-left: 3px solid var(--link); margin: 14px 0; padding: 8px 14px; background: var(--surface); border-radius: 0 8px 8px 0; }
+  blockquote.callout { background: var(--good-bg); border-left-color: var(--good-text); }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <a href="./index.html">Readings</a> &nbsp;/&nbsp; Intel Q1 2026 (single-source)</div>
+  <h1>Intel Q1 2026 — Single-Source Reading</h1>
+  <p class="thesis">
+    讀 Intel Q1 2026 法說（press release + transcript fallback）一份 source。重點是從新 CEO（Lip-Bu Tan）的「重定位敘事」中拆出哪些是 reported financials、哪些是 narrative framing。M2.3 第二份 single-source tutor。
+  </p>
+  <div class="meta">
+    Reading mode: <span class="pill">single-source</span> ·
+    Source class: press-release + earnings-transcript ·
+    Source quality: primary + secondary ·
+    <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_intel-q1-2026_reading.md">md source</a>
+  </div>
+</header>
+
+<section>
+  <h2>這份 Source 在解決什麼問題</h2>
+  <ul class="tight">
+    <li><strong>Q1 press release</strong>：揭露當下財務 + segment 數字（DCAI / Foundry） + CEO/CFO framing + Q2 guidance。</li>
+    <li><strong>Motley Fool transcript</strong>：補 Q&amp;A 與 commentary（CPU 是 orchestration layer、server CPU demand 過去 90 天改善）。 transcript 是 secondary，不是 SEC 文件級的 primary。</li>
+  </ul>
+  <p>核心問題：在 AMD 拿走最乾淨的 CPU 復興敘事後，Intel 是否也有 source-backed 的 CPU 防守 / 修復線？這條線是 reported 還是 narrative？</p>
+</section>
+
+<section>
+  <h2>Reading Lens — Intel 法說該怎麼讀</h2>
+  <p>新 CEO Lip-Bu Tan 第一年的法說同時是 earnings release + 公司定調場合。要分 4 種語氣：</p>
+  <table>
+    <thead><tr><th>語氣</th><th>訊號</th><th>怎麼讀</th></tr></thead>
+    <tbody>
+      <tr><td>Reported financial</td><td>數字 + 過去式 + segment</td><td>可直接引用；Intel segment 比 AMD 細（DCAI / CCG / Foundry / Altera / Mobileye），不能用 AMD 的「Data Center」一刀切</td></tr>
+      <tr><td>New CEO repositioning</td><td>"CPU now serves as...", "essential role of the CPU in the AI era"</td><td>narrative framing，不是 reported fact</td></tr>
+      <tr><td>Demand outlook commentary</td><td>"demand improved over last 90 days"</td><td>management-expectation；無量化，要對到下一季實際出貨</td></tr>
+      <tr><td>Forward-looking guidance</td><td>"Q2 revenue $13.8B–$14.8B"</td><td>短期 guidance；可引用，標 forward-looking</td></tr>
+    </tbody>
+  </table>
+  <h3>Intel 特有閱讀規則</h3>
+  <ul class="tight">
+    <li><strong>Segment 拆解</strong>：DCAI（Data Center + AI）含 Xeon + AI accelerators + IPU / ASIC；Products 與 Foundry 是兩個獨立 segment，動能不同。</li>
+    <li><strong>「CPU 是 orchestration layer」</strong>是新管理層為 Xeon 找新故事，不證明 Xeon 市占會回升。</li>
+    <li><strong>NVIDIA DGX Rubin host CPU</strong>是 design-win 等級 reported-fact；但 revenue impact 仍是 open。</li>
+    <li><strong>ASIC growth</strong>：DCAI 內 ASIC 季增 30%+、年增近一倍，不能全歸 Xeon。</li>
+    <li><strong>新 CEO 轉折期風險</strong>：所有 forward-looking 都要打折。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Sentence-Level Reading Chain（單源 6 步閱讀鏈）</h2>
+  <table>
+    <thead><tr><th>#</th><th>Exact wording</th><th>Claim type</th><th>What it supports</th><th>What it does not prove</th><th>Verification</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>"Q1 2026 revenue was $13.6B, up 7% YoY."</td><td><span class="pill">reported-fact</span></td><td>Intel 整體 revenue 規模與年增</td><td>segment-level 動能、AI exposure</td><td>10-Q + segment split</td></tr>
+      <tr><td>2</td><td>"DCAI revenue was $5.1B, up 22% YoY."</td><td><span class="pill">reported-fact</span></td><td>DCAI 是 Intel 成長最快 segment</td><td>Xeon vs ASIC / IPU 的拆分</td><td>下一季 DCAI 拆分 + Xeon shipments</td></tr>
+      <tr><td>3</td><td>"Intel Foundry revenue was $5.4B, up 16% YoY."</td><td><span class="pill">reported-fact</span></td><td>Foundry 與 DCAI 同量級</td><td>Foundry 是否賺錢；外部 vs 內部客戶比例</td><td>Foundry GM + external customer announcements</td></tr>
+      <tr><td>4</td><td>"Inferencing and Agentic AI increasing need for Intel's CPUs and wafer and advanced packaging offerings." — Lip-Bu Tan</td><td><span class="pill">management-expectation</span></td><td>新 CEO 把 inference / agentic 連到 Xeon + Foundry 雙引擎</td><td>量化 attach rate 或 design-win 數量</td><td>EPYC vs Xeon design-win pace</td></tr>
+      <tr><td>5</td><td>"The CPU now serves as the orchestration layer and critical control plane for the entire AI stack." — Lip-Bu Tan</td><td><span class="pill">management-expectation</span></td><td>Intel 對 Xeon 在 AI stack 角色的重定位</td><td>定位是否轉成 Xeon revenue / share</td><td>Server CPU revenue share (Mercury) + ASP trend</td></tr>
+      <tr><td>6</td><td>"Customers are deploying server CPUs alongside accelerators in a ratio moving back towards CPU." — Lip-Bu Tan</td><td><span class="pill">management-expectation</span></td><td>「CPU-to-accelerator ratio 回升」敘事</td><td>真實 attach rate 數字</td><td>OEM / ODM socket shipments</td></tr>
+      <tr><td>7</td><td>"Intel's server CPU demand outlook improved over the last 90 days."</td><td><span class="pill">management-expectation</span></td><td>短期 momentum 信號</td><td>連續性、ASP、誰是真實買家</td><td>下 1-2 季 server CPU 實際 revenue</td></tr>
+      <tr><td>8</td><td>"Xeon 6 was selected as the host CPU for NVIDIA's DGX Rubin NVL8 systems."</td><td><span class="pill">reported-fact</span></td><td>Intel CPU 進入競爭對手 GPU 平台 host 位置</td><td>量產時間、單位 GPU rack 帶來的 revenue、是否獨家</td><td>NVIDIA Rubin ramp + Intel DCAI disclosure</td></tr>
+      <tr><td>9</td><td>"DCAI saw strong ASIC growth with revenue up more than 30% sequentially and nearly doubling year-over-year." — Zinsner</td><td><span class="pill">reported-fact</span>（secondary 中）</td><td>DCAI 內 ASIC 動能強</td><td>Total ASIC USD、客戶、毛利</td><td>10-Q ASIC disclosure</td></tr>
+      <tr><td>10</td><td>"Q2 2026 revenue guidance $13.8B to $14.8B."</td><td><span class="pill">forward-looking-target</span></td><td>下一季 visibility</td><td>年度 trajectory</td><td>Actual Q2 print</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>What This Source Proves / Does Not Prove</h2>
+  <h3>Proves</h3>
+  <ul class="tight">
+    <li>Intel Q1 2026 total $13.6B +7% YoY；DCAI $5.1B +22% YoY；Foundry $5.4B +16% YoY。</li>
+    <li>Xeon 6 進 NVIDIA DGX Rubin NVL8 host CPU。</li>
+    <li>Intel-Google 多年 Xeon 合作 + 合作開發 IPU。</li>
+    <li>Intel-SambaNova Xeon 6 + RDU 異構 inference 架構。</li>
+    <li>新 CEO 把 Xeon 定位為「AI stack 的 orchestration layer / control plane」。</li>
+    <li>Q2 guidance $13.8B-$14.8B。</li>
+  </ul>
+  <h3>Does Not Prove</h3>
+  <ul class="tight">
+    <li>Intel 在 server CPU 市占已止跌或回升。</li>
+    <li>Xeon ASP / mix 已修復到能對抗 EPYC。</li>
+    <li>「CPU-to-accelerator ratio 回升」是結構性趨勢而非短期補貨。</li>
+    <li>Intel Foundry 賺錢，或外部客戶 revenue 規模實質改善。</li>
+    <li>DCAI 22% 是 Xeon 帶頭，還是 ASIC / IPU 帶頭。</li>
+    <li>NVIDIA Rubin host CPU win 帶來多少 USD revenue。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Common Misreads</h2>
+  <table>
+    <thead><tr><th>Misread</th><th>為什麼錯</th><th>Better wording</th></tr></thead>
+    <tbody>
+      <tr><td>Intel DCAI +22% YoY 代表 Xeon 復興</td><td>DCAI 內含 Xeon + AI accelerators + ASIC / IPU；ASIC ~2x YoY 是更大 mover</td><td>DCAI +22% YoY 由 Xeon 與 ASIC / IPU 共同推升，其中 ASIC 季增逾 30%、年增近一倍</td></tr>
+      <tr><td>Intel CPU 已重新拿回 AI server 主導權</td><td>「orchestration layer」是新 CEO 定位，不是 share / ASP 數據</td><td>Intel 把 Xeon 重新定位為 AI stack orchestration / control plane，但市占與 ASP 修復尚未證明</td></tr>
+      <tr><td>「Ratio moving back to CPU」可量化引用</td><td>管理層觀察、沒量化、沒第三方驗證</td><td>視為管理層觀察，以實際 server CPU 出貨數驗證</td></tr>
+      <tr><td>Intel Foundry +16% 等於 Foundry 轉好</td><td>Foundry revenue 含 Intel 自家 wafer</td><td>Foundry +16% 不等於外部客戶 ramp；要看 announcements 與 GM</td></tr>
+      <tr><td>Xeon 6 進 NVIDIA Rubin 等於拿回 hyperscaler</td><td>design win 等級的 reported-fact，但 ramp 時程與 USD 規模未公開</td><td>Intel Xeon 6 拿到 NVIDIA DGX Rubin NVL8 host CPU 位置；revenue impact 尚未揭露</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Internalization Artifacts</h2>
+  <h3>Claim Ledger（精選 7 條）</h3>
+  <table>
+    <thead><tr><th>Claim</th><th>Type</th><th>Safe wording</th></tr></thead>
+    <tbody>
+      <tr><td>DCAI Q1 +22% YoY $5.1B</td><td><span class="pill">reported-fact</span></td><td>Intel Q1 DCAI revenue $5.1B、年增 22%，含 Xeon 與 ASIC/IPU</td></tr>
+      <tr><td>Foundry Q1 +16% YoY $5.4B</td><td><span class="pill">reported-fact</span></td><td>Intel Foundry Q1 $5.4B、年增 16%；外部 vs 內部尚未拆分</td></tr>
+      <tr><td>Xeon 6 進 NVIDIA Rubin</td><td><span class="pill">reported-fact</span></td><td>Intel Xeon 6 被 NVIDIA 選為 DGX Rubin NVL8 host CPU；revenue 時程未揭露</td></tr>
+      <tr><td>Intel 重新定位 Xeon = orchestration layer</td><td><span class="pill">management-expectation</span></td><td>Intel 管理層把 Xeon 定位為 AI stack 的 orchestration / control plane（敘事定位）</td></tr>
+      <tr><td>CPU-to-accelerator ratio 回升</td><td><span class="pill">management-expectation</span></td><td>Intel 觀察客戶 CPU-to-accelerator 比例正回升；無量化、待驗證</td></tr>
+      <tr><td>DCAI 內 ASIC Q季增 30%+、年增近一倍</td><td><span class="pill">reported-fact</span>（secondary）</td><td>Intel CFO 法說中表示 DCAI 內 ASIC Q1 季增逾 30%、年增近一倍（transcript fallback）</td></tr>
+      <tr><td>Q2 guidance $13.8B-$14.8B</td><td><span class="pill">forward-looking-target</span></td><td>Intel 對 Q2 2026 提出 $13.8B-$14.8B 的 revenue guidance</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Mental Model Update</h3>
+  <ul class="tight">
+    <li>AMD 的 CPU 復興是「進攻線」（share gain），Intel 是「修復線」（defend share + 找新角色）。同一個 thesis，兩種 valuation 邏輯。</li>
+    <li>Intel DCAI 不等於 Xeon。當看到 DCAI +22% YoY，要再問 ASIC growth 多少（這次是 +30% QoQ / ~2x YoY），因為 ASIC 動能比 Xeon 強會改變整個故事。</li>
+    <li>Xeon 進 NVIDIA Rubin 是 architecture-level 訊號：對手平台選 Xeon 而不自製 host CPU，代表 Intel CPU 在 AI head-node 仍有 reuse value。但 design win ≠ revenue ramp。</li>
+    <li>Intel Foundry 不能用 Xeon 的方式讀。它是 multi-year 賭注，看的是 external customer announcements、18A / 14A node ramp、GM trajectory。</li>
+    <li>新 CEO Lip-Bu Tan 的「essential role」/「orchestration layer」是 narrative framing；管理層對 AI era 的字面定義權，可能比實際 share 變動更早出現。</li>
+  </ul>
+
+  <h3>Verification Watchlist</h3>
+  <table>
+    <thead><tr><th>訊號</th><th>為什麼</th><th>Cadence</th></tr></thead>
+    <tbody>
+      <tr><td>DCAI Xeon vs ASIC split</td><td>DCAI 22% 多少是 Xeon、多少是 ASIC / IPU</td><td>quarterly</td></tr>
+      <tr><td>Intel Foundry external customer revenue</td><td>Foundry +16% 多少來自外部客戶</td><td>quarterly</td></tr>
+      <tr><td>Mercury / IDC server CPU share</td><td>驗證 Intel share 止跌或回升</td><td>quarterly</td></tr>
+      <tr><td>Xeon design wins at hyperscalers</td><td>Intel CPU 在 AI rack 的續命能力</td><td>event-driven</td></tr>
+      <tr><td>Intel non-GAAP GM + Foundry GM</td><td>Foundry 是 GM 拖累還是改善動能</td><td>quarterly</td></tr>
+      <tr><td>18A node ramp + Gaudi / Falcon Shores 路線</td><td>Intel 長期 AI silicon 競爭力</td><td>semi-annual</td></tr>
+      <tr><td>Memory / wafer / substrate cost pressure</td><td>CFO 提到下半年可能影響</td><td>quarterly</td></tr>
+      <tr><td>NVIDIA Rubin shipment timing</td><td>Xeon 6 design win 何時轉 revenue</td><td>quarterly</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Reusable Output Block</h3>
+  <blockquote class="callout">
+    Intel Q1 2026 提供了 CPU 復興 thesis 的「修復線」side：DCAI segment revenue 達 $5.1B、年增 22%（reported-fact），其中 DCAI 內 ASIC 業務 Q1 季增逾 30%、年增近一倍（CFO 法說，transcript fallback）；同期 Intel Foundry revenue $5.4B、年增 16%（reported-fact），但外部與內部客戶比例尚未公開拆分。Intel 與 NVIDIA、Google、SambaNova 公布的設計與部署合作，特別是 Xeon 6 被選為 NVIDIA DGX Rubin NVL8 host CPU（reported-fact），把 Intel CPU 在 AI rack 中的 head-node / orchestration 角色具體化；新 CEO Lip-Bu Tan 將此明確定位為「AI stack 的 orchestration layer and critical control plane」（management-expectation，narrative framing）。短期上 Intel 表示 server CPU demand outlook 過去 90 天有改善（management-expectation），但這仍需用後續 server CPU 出貨數、第三方市占資料與 Foundry GM 趨勢驗證。Q2 2026 revenue guidance 為 $13.8B-$14.8B（forward-looking-target）。
+  </blockquote>
+</section>
+
+<section>
+  <h2>還不能回答 + Follow-Up</h2>
+  <ul class="tight">
+    <li>Intel server CPU 市占（vs AMD EPYC）是否止跌或回升。</li>
+    <li>DCAI 內 Xeon vs ASIC / IPU 拆分。</li>
+    <li>Intel Foundry 外部客戶 revenue 規模、18A / 14A ramp、GM 走勢。</li>
+    <li>Xeon 6 在 NVIDIA Rubin 的 USD 規模與量產時程。</li>
+    <li>「CPU-to-accelerator ratio 回升」是結構性還是短期補貨。</li>
+    <li>Gaudi 路線重整（Falcon Shores 是否成為 AI accelerator 主戰場）。</li>
+    <li>Intel 在 hyperscaler 採購節奏（Google Xeon multi-year 合約具體規模）。</li>
+  </ul>
+  <p>後續：拉 Intel 10-Q / earnings supplemental 把 transcript ASIC 與 DCAI Xeon / non-Xeon 拆分對到 primary；找 Mercury / IDC 最新 server CPU revenue share；觀察 NVIDIA Rubin 量產時程公布。</p>
+</section>
+
+<footer>
+  <a href="../index.html">← 回 AI Server 主題地圖</a> ·
+  <a href="./index.html">→ Readings index</a> ·
+  <a href="./intel-full-thesis-v2.html">→ 升級到 v2（cross-source）</a> ·
+  <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_intel-q1-2026_reading.md">md source</a>
+</footer>
+
+</body>
+</html>

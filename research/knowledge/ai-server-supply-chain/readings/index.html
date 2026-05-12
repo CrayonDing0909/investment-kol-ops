@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Source-Tutor Readings — AI Server Supply Chain</title>
+<style>
+  :root { --maxw: 880px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .thesis { font-size: 16px; color: var(--muted); }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .card { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; border-radius: 8px; margin: 10px 0; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card .role { color: var(--muted); font-size: 14px; }
+  .card .meta { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 6px; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; Readings</div>
+  <h1>Source-Tutor Readings</h1>
+  <p class="thesis">
+    Tutor readings 與 source packets 不同：packets 收原始材料；readings 教你「怎麼把這些材料讀進腦袋」。每份 reading 都會走一遍 6 步閱讀鏈（單源）或 thesis-line 整合（跨源），並產出 4 個 internalization artifacts（claim ledger / mental model / watchlist / output block）。
+  </p>
+</header>
+
+<section>
+  <h2>Reading 模式</h2>
+  <ul>
+    <li><span class="pill">single-source</span> 深讀一份既有 source（第一次接觸用）</li>
+    <li><span class="pill">cross-source-synthesis</span> 整合多份 source 看一家公司 / 主題（累積 3+ source 後用）</li>
+  </ul>
+  <p>規則細節見 <a href="../../../../.cursor/rules/source-tutor-reading.mdc">md source（Cursor rule）</a>。</p>
+</section>
+
+<section>
+  <h2>Readings</h2>
+
+  <div class="card">
+    <h3><a href="./intel-full-thesis-v2.html">Intel Full Thesis v2 — Cross-Source Synthesis</a></h3>
+    <div class="role">整合 5 份 Intel 相關 source：Q1 2026 法說 + Apple-Intel deal + Intel Foundry external + CHIPS Act + AI chip supply tightness。把 Intel 拆成 5 條 sub-thesis（Component / Manufacturing / Procurement / Geopolitics / CEO Transition）。也是 source-tutor 第一次 cross-source 案例 + 模板壓力測試。</div>
+    <div class="meta">2026-05-13 · cross-source-synthesis · supersedes intel-q1-2026 (v1)</div>
+  </div>
+
+  <div class="card">
+    <h3><a href="./intel-q1-2026.html">Intel Q1 2026 — Single-Source</a></h3>
+    <div class="role">深讀 Intel Q1 2026 法說（press release + transcript fallback）一份 source。Single-source 模式的第二份案例（第一份是 AMD canonical），重點是新 CEO 重定位敘事 vs reported financials 的區分。可與 v2 cross-source 對照閱讀。</div>
+    <div class="meta">2026-05-13 · single-source</div>
+  </div>
+
+  <div class="card">
+    <h3><a href="../sources/amd-q1-2026.html">AMD Q1 2026 — Single-Source（M2.2 canonical example）</a></h3>
+    <div class="role">M2.2 升級 source-tutor 模板的 canonical example。AMD Q1 2026 financial results + 2025 Financial Analyst Day。教 `>50% server CPU revenue market share` 該讀成 forward-looking target，不是現有市占。Sentence-Level Reading Chain 內嵌在 source HTML 頁。</div>
+    <div class="meta">2026-05-13 · single-source · 嵌入 source 頁</div>
+  </div>
+</section>
+
+<section>
+  <h2>建議閱讀路徑</h2>
+  <ol>
+    <li>第一次接觸 source-tutor → 從 AMD canonical 開始（最短、結構最乾淨）。</li>
+    <li>想看「多 source 怎麼整合」→ 開 Intel v2，先讀 §1（你的 4 個 prior 對照表）+ §4（5 條 sub-thesis）+ §7（Internalization Artifacts）。</li>
+    <li>想比較 single vs cross 兩種模式 → 開 Intel v1 + v2 對照閱讀。</li>
+  </ol>
+</section>
+
+<footer>
+  <a href="../index.html">← 回 AI Server 主題地圖</a> ·
+  <a href="../sources.html">→ Sources Reading Shelf</a>
+</footer>
+
+</body>
+</html>

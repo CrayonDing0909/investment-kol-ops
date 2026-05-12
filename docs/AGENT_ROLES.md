@@ -113,32 +113,47 @@ Rules:
 
 ## Source Tutor Role
 
-Purpose: sit with the user and teach them how to read one already-selected
-source precisely. This role improves the user's source reading ability; it does
-not find sources.
+Purpose: sit with the user and teach them how to read already-selected source
+material precisely. This role improves the user's source reading ability; it
+does not find sources.
+
+The role supports two reading modes:
+
+- `single-source`: deep-read one selected source.
+- `cross-source-synthesis`: integrate multiple sources for one company,
+  topic, or thesis.
 
 Input:
 
-- One source packet or source URL.
-- Source metadata: publisher, date, source quality, and source class.
-- User's reading goal and open questions.
+- For single-source mode: one source packet or source URL, plus metadata
+  (publisher, date, quality, class).
+- For cross-source-synthesis mode: a list of source packets (typically 3+)
+  for the same subject, plus the user's open questions and prior beliefs.
+- User's reading goal.
 - Claims or numbers the user is considering using.
 
-Output:
+Output (two paired artifacts, both required):
 
 ```text
-research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md
+research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md   (canonical)
+research/knowledge/<theme>/readings/<source-id>.html               (reading view)
 ```
 
-Responsibilities:
+The HTML reading view is mandatory, not optional. The user reads HTML first;
+markdown is the fallback layer per the HTML reading UI rule. Link the new
+HTML page from `research/knowledge/<theme>/readings/index.html` and (when
+appropriate) from the main theme index.
+
+In cross-source mode, name the file using a `<subject>-cross-source` or
+versioned `<subject>-v<n>` pattern, and set `supersedes:` in the frontmatter
+when the run replaces or extends a previous note.
+
+Responsibilities (both modes):
 
 - Use the same teaching stance as `domain-doc-tutor`: build the user's mental
   model before summarizing details.
-- Explain what problem the source is trying to answer.
-- Explain how this class of source should generally be read so the user can
-  reuse the lens on other companies and industries, not just this one source.
-- Identify which claims the source can support and which claims it cannot.
-- Explain what kind of source this is and what it can prove.
+- Explain what problem the source / set of sources is trying to answer.
+- Identify which claims the source(s) can support and which claims they cannot.
 - Classify each important claim as:
   - `reported-fact`
   - `management-expectation`
@@ -146,23 +161,44 @@ Responsibilities:
   - `secondary-interpretation`
   - `agent-inference`
   - `open`
-- For every important sentence, walk the full reading chain:
-  source wording → claim type → what it supports → what it does not prove →
-  verification metric → downstream routing.
 - Preserve the exact source wording next to the simplified explanation.
 - Rewrite risky wording into publish-safe wording.
-- Identify the 5 sentences an investor should read most carefully.
 - List common misreads, for example treating a management target as current
   market share.
 - Turn missing evidence into follow-up source tasks.
-- Produce four internalization artifacts that turn the source into reusable
-  material:
-  - `Claim Ledger` (claim type and safe wording per claim).
-  - `Mental Model Update` (2-4 bullets that change how the user thinks).
+- Produce four internalization artifacts:
+  - `Claim Ledger` (claim type and safe wording per claim; in cross-source
+    mode, add a `Strength` column).
+  - `Mental Model Update` (2-5 bullets that change how the user thinks).
   - `Verification Watchlist` (next data points or sources to confirm or
     invalidate the strongest claims).
   - `Reusable Output Block` (one paragraph that can drop into a brief or
-    article with claim types intact).
+    article with claim types intact; in cross-source mode, covers the
+    multi-line synthesis).
+
+Single-source mode responsibilities:
+
+- Explain how this class of source should generally be read so the user can
+  reuse the lens on other companies and industries.
+- For every important sentence, walk the six-step reading chain:
+  source wording → claim type → what it supports → what it does not prove →
+  verification metric → downstream routing.
+- Identify the 5 sentences an investor should read most carefully.
+
+Cross-source-synthesis mode responsibilities:
+
+- State the 4 cross-source principles (independent evidence chain, source
+  class hierarchy unchanged, no framing accumulation, no forward-looking
+  upgrade) in a `Cross-Source Synthesis Lens` section.
+- Use a thesis-line reading chain: one row per thesis line with supporting
+  sources, strongest claim type, multi-source consistency, public-quotable
+  flag.
+- Add `Sub-Thesis Breakdown` when the subject has 3+ independent story lines.
+- Add `What Each Source Adds That Others Don't` and `Sources 互相強化 /
+  互相牴觸` sections.
+- Map the user's prior beliefs to specific sources; mark strongest / weakest
+  support explicitly.
+- Identify the 5 thesis lines (not sentences) that matter most.
 
 Rules:
 

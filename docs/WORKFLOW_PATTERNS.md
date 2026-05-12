@@ -132,17 +132,32 @@ For each interview or observation:
 ## Source Tutor Workflow
 
 Goal: help the user get better at reading primary and high-value secondary
-sources. The workflow does not search for sources; it tutors an already-selected
-source so the user can distinguish facts, management expectations,
+sources. The workflow does not search for sources; it tutors already-selected
+source material so the user can distinguish facts, management expectations,
 forward-looking targets, and secondary interpretation before those claims enter
 investment analysis or public content.
 
+The workflow supports two reading modes:
+
+- `single-source`: deep-read one selected source. Use for first contact.
+- `cross-source-synthesis`: integrate multiple sources for one company,
+  topic, or thesis. Use once 3+ relevant sources exist for the subject.
+
 ### Trigger
+
+Single-source mode:
 
 - "Teach me how to read this earnings call / filing / IR deck."
 - "Run source tutor on this source packet."
 - "Is this a fact, guidance, target, or interpretation?"
 - "Help me verify whether this claim can be used in a public post."
+
+Cross-source-synthesis mode:
+
+- "What does our research actually say about <company>?"
+- "Combine all sources for <topic> and tell me the integrated picture."
+- "Cross-source tutor for <company / thesis>."
+- "Do our sources support my prior belief that ...?"
 
 ### Structured Input
 
@@ -178,12 +193,35 @@ Each tutor run must capture:
 
 ### LLM Role
 
-- Use a tutoring mode adapted from `domain-doc-tutor`, not a summary mode.
-- Explain what problem the source is trying to answer.
+Use a tutoring mode adapted from `domain-doc-tutor`, not a summary mode.
+Behavior differs by `reading_mode`.
+
+#### Both Modes
+
+- Explain what problem the source / set of sources is trying to answer.
+- Separate sentences that are facts from sentences that are management
+  expectations, forward-looking targets, or secondary interpretation.
+- Flag numbers that should not be copied directly into public writing.
+- List what the source / set still cannot answer and turn those gaps into
+  follow-up source tasks.
+- Produce four internalization artifacts that turn the source(s) into reusable
+  material:
+  - `Claim Ledger`: one row per claim with claim type, source wording, and safe
+    public wording. In cross-source mode, add a `Strength` column.
+  - `Mental Model Update`: 2-5 bullets that change how the user thinks about
+    the company, industry, or thesis.
+  - `Verification Watchlist`: the next data points or future sources that would
+    confirm or invalidate the strongest claims.
+  - `Reusable Output Block`: one paragraph the user can drop into a brief or
+    article with claim types intact. In cross-source mode, the block covers the
+    multi-line synthesis.
+
+#### Single-Source Mode
+
 - Explain how this class of source should generally be read (earnings release,
   IR deck, transcript, filing, news, paper, podcast), so the user can reuse the
   lens on other companies and industries.
-- For every important sentence, walk the full reading chain:
+- For every important sentence, walk the six-step reading chain:
   1. Exact source wording.
   2. Claim type tag (`reported-fact`, `management-expectation`,
      `forward-looking-target`, `secondary-interpretation`, `agent-inference`,
@@ -193,22 +231,24 @@ Each tutor run must capture:
   5. Which metric or future event would verify or invalidate it.
   6. Where it should flow next (claim ledger, brief, article block, follow-up
      source).
-- Separate sentences that are facts from sentences that are management
-  expectations, forward-looking targets, or secondary interpretation.
-- Flag numbers that should not be copied directly into public writing.
 - Identify the 5 sentences an investor should read most carefully.
-- List what the source still cannot answer and turn those gaps into follow-up
-  source tasks.
-- Produce four internalization artifacts that turn the source into reusable
-  material:
-  - `Claim Ledger`: one row per claim with claim type, source wording, and safe
-    public wording.
-  - `Mental Model Update`: 2-4 bullets that change how the user thinks about
-    the company, industry, or thesis.
-  - `Verification Watchlist`: the next data points or future sources that would
-    confirm or invalidate the strongest claims.
-  - `Reusable Output Block`: one paragraph the user can drop into a brief or
-    article with claim types intact.
+
+#### Cross-Source-Synthesis Mode
+
+- Add a `Cross-Source Synthesis Lens` section stating the 4 principles
+  (independent evidence chain, source class hierarchy unchanged, no framing
+  accumulation, no forward-looking upgrade across sources) plus reading rules
+  specific to this company / topic.
+- Use a `Thesis-Line Reading Chain`: one row per thesis line with supporting
+  sources, strongest claim type, multi-source consistency, public-quotable
+  flag.
+- Add a `Sub-Thesis Breakdown` section when the subject has 3+ independent
+  story lines.
+- Add `What Each Source Adds That Others Don't` and `Sources 互相強化 /
+  互相牴觸` sections.
+- Map the user's prior beliefs to specific sources and mark strongest /
+  weakest support.
+- Identify the 5 thesis lines (not sentences) that matter most.
 
 ### Human Gate
 
@@ -221,16 +261,29 @@ Each tutor run must capture:
 
 ### Output Artifact
 
-- Markdown tutor note:
+- Markdown tutor note (canonical source):
   `research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md`.
-- HTML reading view when the note is meant for repeated human review:
-  `research/knowledge/<theme>/sources/<source-id>.html`.
+  In cross-source mode, use a `<subject>-cross-source` style source-id or a
+  `<subject>-v<n>` versioned name; set `supersedes:` in the frontmatter when
+  the run replaces or extends a previous note.
+- HTML reading view (mandatory, not optional):
+  `research/knowledge/<theme>/readings/<source-id>.html`.
+  The user reads HTML first; markdown is the fallback. A tutor run is not
+  considered complete until the HTML view is shipped and linked from the
+  theme `readings/index.html` (and the main theme index when appropriate).
 - Updates to the relevant source checklist or brief only after the claim type is
   explicitly marked.
-- The note must contain a `Source Map`, a `Reading Lens`, four
-  `Internalization Artifacts` (claim ledger, mental model update, verification
-  watchlist, reusable output block), and a `Downstream Routing` section. A note
-  that only produces "safe wording" without the reading chain is incomplete.
+- The note must always contain four `Internalization Artifacts` (claim ledger,
+  mental model update, verification watchlist, reusable output block) and a
+  `Downstream Routing` section.
+- Single-source notes must also contain a `Reading Lens` (single) and a
+  sentence-level `Source Map`.
+- Cross-source notes must also contain a `Cross-Source Synthesis Lens`, a
+  thesis-line `Source Map`, a `Sub-Thesis Breakdown` (when applicable),
+  `What Each Source Adds That Others Don't`, and `Sources 互相強化 /
+  互相牴觸`.
+- A note that only produces "safe wording" without the reading chain is
+  incomplete in either mode.
 
 ## Investment Analysis Workflow
 
