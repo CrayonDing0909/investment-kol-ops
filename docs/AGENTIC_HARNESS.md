@@ -64,6 +64,7 @@ must ask the human before improvising.
 Default routing rules:
 
 - "market analysis" → investment-analysis workflow.
+- "read / verify this source" → source-tutor workflow.
 - "what should I post" → content-production workflow.
 - "study competitor / platform" → algorithm-research workflow.
 - "find a demo idea" → audience-discovery workflow.

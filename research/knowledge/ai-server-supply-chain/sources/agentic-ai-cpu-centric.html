@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agentic AI CPU-Centric Paper — AI Server Supply Chain</title>
+<style>
+  :root { --maxw: 880px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-muted: #edf1f5;
+  --text: #24272d;
+  --muted: #68707d;
+  --line: #d8dee6;
+  --link: #315f9f;
+  --warn-bg: #fff4dc;
+  --warn-text: #6b4b00;
+  color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.68; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  h1 { margin: 4px 0 8px; font-size: 30px; }
+  h2 { font-size: 22px; margin: 30px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  .crumb, .meta, .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  .lede { color: var(--muted); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 14px 0; }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; }
+  .warn { color: var(--warn-text); background: var(--warn-bg); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  blockquote { border-left: 3px solid currentColor; margin: 12px 0; padding-left: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  table { display: block; overflow-x: auto; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
+  footer { border-top: 1px solid currentColor; padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> / <a href="../sources.html">Sources</a> / Agentic AI CPU-Centric Paper</div>
+  <h1>Agentic AI Execution: CPU-Centric Perspective</h1>
+  <p class="lede">這份 Georgia Tech / Intel paper 是 BusinessNext CPU explainer 背後的 primary research source。它可以支持「agentic AI 的某些工具型工作負載會把瓶頸推回 CPU」，但不能被寫成「所有 agentic AI 都有 88% latency 在 CPU」。</p>
+  <div class="meta">source quality: primary research paper · captured: 2026-05-12 · markdown source packet retained</div>
+</header>
+
+<section>
+  <h2>Why This Source Matters</h2>
+  <p>BusinessNext 用這篇研究來解釋 CPU 為什麼在 agentic AI 時代重新重要。這個 HTML 頁把原始 paper 的數字拉回 context，避免把「特定 workload 的 up to 88%」誤寫成普遍現象。</p>
+</section>
+
+<section>
+  <h2>Key Numbers</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Value</th><th>Read-through</th></tr></thead>
+    <tbody>
+      <tr><td>CPU-side tool processing</td><td>up to 88% of end-to-end latency</td><td>只適用於 selected tool-dominated agentic workloads。</td></tr>
+      <tr><td>RAG ENNS retrieval</td><td>83%-89% of total latency</td><td>RAG bottleneck 可能在 retrieval / CPU-side search，不一定在 LLM inference。</td></tr>
+      <tr><td>Web-Augmented Agent LexRank</td><td>40%-55% of latency</td><td>summarization tool execution 會吃掉大量 latency。</td></tr>
+      <tr><td>SWE-Agent Bash/Python execution</td><td>38%-65% of latency</td><td>code execution / tool execution 是 agentic workload 的 CPU-side burden。</td></tr>
+      <tr><td>COMB optimization</td><td>up to 3.9x lower service latency</td><td>paper 不只描述瓶頸，也提出 CPU-aware scheduling optimization。</td></tr>
+      <tr><td>MAS optimization</td><td>2.37x / 2.49x lower P50 / P90 latency</td><td>heterogeneous agentic workloads 需要 mixed scheduling。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Direct Quotes</h2>
+  <blockquote>“Agentic AI serving converts monolithic LLM-based inference to autonomous problem-solvers that can plan, call tools, perform reasoning, and adapt on the fly.”</blockquote>
+  <blockquote>“The majority of the external tools responsible for agentic capability, either run on or are orchestrated by the CPU.”</blockquote>
+  <blockquote>“Tool dominated agentic AI workloads are significantly bottle-necked by tool processing on the CPU consuming up to 88% of the end-to-end latency.”</blockquote>
+  <blockquote>“HP GPU system can shift the bottleneck from GPU to CPU when tool execution latency is comparable to LLM inference latency.”</blockquote>
+</section>
+
+<section>
+  <h2>Tutor Reading</h2>
+  <div class="card">
+    <p><strong>這份 source 在解決什麼問題：</strong>當 LLM app 從單次 inference 變成多步驟 agent，瓶頸還是不是 GPU？paper 的答案是：很多工具執行、retrieval、code execution、orchestration 會落在 CPU 或 CPU-side workflow。</p>
+    <p><strong>這份 source 可以支持的 claim：</strong>某些 tool-dominated agentic AI workloads 會出現高比例 CPU-side latency；高效 GPU 反而可能把 bottleneck 往 CPU 工具執行推。</p>
+    <p><strong>不能直接公開寫的數字：</strong>不能把 up to 88% 寫成「agentic AI 88% latency 都在 CPU」。比較安全的寫法是「在 paper 測試的特定 tool-dominated workloads 中，CPU-side tool processing 最高可達 88% end-to-end latency」。</p>
+  </div>
+</section>
+
+<section>
+  <h2>Reliability</h2>
+  <ul class="tight">
+    <li><span class="pill">primary research paper</span> 適合支撐 CPU latency / bottleneck 的技術 claim。</li>
+    <li><span class="pill warn">do not overgeneralize</span> 數字高度依賴 workload、system setup、tool mix，不能外推到所有 AI inference。</li>
+    <li>BusinessNext 的「CPU latency 過半」中文 framing 有方向性支撐，但公開寫法應引用原 paper 並附 workload context。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Follow-up</h2>
+  <ul class="tight">
+    <li>公開文章要決定引用 arXiv URL 還是 Georgia Tech repository URL。</li>
+    <li>如果用於投資 thesis，還要接回 AMD / Intel / server CPU demand 的 financial source，paper 本身不證明營收轉折。</li>
+    <li>避免把 paper 的 optimization results 寫成商業產品已實現的效益。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Original Source Links</h2>
+  <p class="source">
+    <a href="https://arxiv.org/pdf/2511.00739">arXiv PDF</a> ·
+    <a href="https://repository.gatech.edu/server/api/core/bitstreams/913bb86c-6bf1-4381-8ada-61de83960949/content">Georgia Tech repository PDF</a>
+  </p>
+</section>
+
+<section>
+  <h2>Next Reading Step</h2>
+  <ol class="tight">
+    <li>先確認 up to 88% 的 workload context，不要直接外推到所有 agentic AI。</li>
+    <li>再讀 <a href="./bnext-ai-cpu.html">BusinessNext explainer</a>，學怎麼把 technical claim 翻成中文 mental model。</li>
+    <li>若要連到投資 thesis，接著讀 <a href="./amd-q1-2026.html">AMD Q1 2026</a> 或 <a href="./intel-q1-2026.html">Intel Q1 2026</a>。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Links</h2>
+  <p class="source">
+    <a href="../sources/bnext-ai-cpu.html">BusinessNext HTML source</a> ·
+    <a href="../cpu.html">CPU topic page</a> ·
+    <a href="https://arxiv.org/pdf/2511.00739">arXiv PDF</a> ·
+    <a href="../../../sources/ai-server-supply-chain/papers/2026-05-12_agentic-ai-cpu-centric-source-packet.md">md source</a>
+  </p>
+</section>
+
+<footer>Agentic AI CPU-Centric Paper Source Reading Page · <a href="../sources.html">back to sources</a></footer>
+</body>
+</html>

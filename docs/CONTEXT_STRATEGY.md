@@ -93,6 +93,32 @@ Do not load:
 - MVP specs.
 - Algorithm research swipe file.
 
+### source-tutor-pack
+
+Use for the source-tutor workflow.
+
+Required:
+
+- The source packet or source URL being tutored.
+- [research/templates/source-tutor-reading.md](../research/templates/source-tutor-reading.md).
+- [research/templates/source-packet.md](../research/templates/source-packet.md), if
+  the source has not yet been packetized.
+- The user's reading goal and open questions.
+
+Optional:
+
+- [research/templates/source-checklist.md](../research/templates/source-checklist.md),
+  only when the tutor output will update a brief or public-source checklist.
+- The related topic page under `research/knowledge/<theme>/`, only when the
+  source is being turned into a durable HTML learning page.
+
+Do not load:
+
+- Full investment analysis briefs, unless the task is explicitly to correct a
+  claim already inside a brief.
+- Content drafts.
+- Unrelated source packets from the same theme.
+
 ### content-sprint-pack
 
 Use for the content-production workflow.

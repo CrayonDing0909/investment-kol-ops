@@ -20,6 +20,7 @@ workflow definition before improvising.
 
 - [Algorithm Research Workflow](#algorithm-research-workflow)
 - [Audience Discovery Workflow](#audience-discovery-workflow)
+- [Source Tutor Workflow](#source-tutor-workflow)
 - [Investment Analysis Workflow](#investment-analysis-workflow)
 - [Content Production Workflow](#content-production-workflow)
 - [MVP Demo Workflow](#mvp-demo-workflow)
@@ -127,6 +128,83 @@ For each interview or observation:
 - Updated pain cluster doc.
 - Ranked MVP candidate list with one-line promises.
 - 3-5 content angles linked to the same pain.
+
+## Source Tutor Workflow
+
+Goal: help the user get better at reading primary and high-value secondary
+sources. The workflow does not search for sources; it tutors an already-selected
+source so the user can distinguish facts, management expectations,
+forward-looking targets, and secondary interpretation before those claims enter
+investment analysis or public content.
+
+### Trigger
+
+- "Teach me how to read this earnings call / filing / IR deck."
+- "Run source tutor on this source packet."
+- "Is this a fact, guidance, target, or interpretation?"
+- "Help me verify whether this claim can be used in a public post."
+
+### Structured Input
+
+Each tutor run must capture:
+
+- Source packet path or URL.
+- Source quality: primary, secondary, or unverified.
+- Source class: filing, earnings transcript, IR deck, press release, news,
+  research paper, report, podcast, or creator note.
+- Reading goal: learn domain context, verify a claim, extract numbers, prepare a
+  brief, or public-source hardening.
+- User's open questions.
+- Claims or numbers the user is tempted to use.
+
+### Programmatic Checks
+
+- Reject a run without source metadata, date, publisher, and URL or local path.
+- Do not search for new sources during the tutoring pass. Missing evidence becomes
+  a follow-up task for the Source Collector Role.
+- Extract all numbers with units, time periods, and source wording before
+  interpretation.
+- Tag each claim as one of:
+  - `reported-fact`: historical or current fact directly stated by the source.
+  - `management-expectation`: management's expectation, outlook, or commentary.
+  - `forward-looking-target`: target, plan, aspiration, or long-range model.
+  - `secondary-interpretation`: interpretation by media, analyst, podcast, or
+    another non-primary source.
+  - `agent-inference`: reasoning derived from source evidence but not stated by
+    the source.
+  - `open`: unclear or missing primary support.
+- Flag wording that changes claim type, especially "is" vs "expects," "will" vs
+  "targets," and current market share vs future target share.
+
+### LLM Role
+
+- Use a tutoring mode adapted from `domain-doc-tutor`, not a summary mode.
+- Explain what problem the source is trying to answer.
+- Show which claims this source can support.
+- Separate sentences that are facts from sentences that are management
+  expectations, forward-looking targets, or secondary interpretation.
+- Flag numbers that should not be copied directly into public writing.
+- Identify the 5 sentences an investor should read most carefully.
+- List what the source still cannot answer and turn those gaps into follow-up
+  source tasks.
+
+### Human Gate
+
+- Optional for internal learning notes.
+- Required before promoting any source-tutor output into public investment
+  content if the output supports a market, company, strategy, or position-related
+  claim.
+- Required if the source distinction changes the thesis materially, for example
+  correcting "current share" into "forward-looking market-share target."
+
+### Output Artifact
+
+- Markdown tutor note:
+  `research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md`.
+- HTML reading view when the note is meant for repeated human review:
+  `research/knowledge/<theme>/sources/<source-id>.html`.
+- Updates to the relevant source checklist or brief only after the claim type is
+  explicitly marked.
 
 ## Investment Analysis Workflow
 
@@ -376,6 +454,7 @@ commit message in the conventional format used in this repo.
 Most real tasks chain workflows. Examples:
 
 - Weekly publish run: investment-analysis → content-production → ship.
+- Source-backed theme learning: source-tutor → investment-analysis → content-production → ship.
 - Demo launch: audience-discovery → mvp-demo → content-production → ship.
 - Competitor sweep: algorithm-research → content-production → ship.
 - Wrong call recovery: postmortem → content-production (transparent post) →

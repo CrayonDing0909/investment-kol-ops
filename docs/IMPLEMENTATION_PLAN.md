@@ -185,6 +185,62 @@ Definition of Done:
 - The draft is understandable without opening the original brief.
 - The draft is not yet scheduled or published.
 
+### M2.1 - Public-Readiness Source Hardening
+
+Goal: harden the highest-risk claims in the internal article before any public
+repurposing.
+
+Status: done for the current CPU anchor scope.
+
+Completed:
+
+- AMD `server CPU TAM >$120B by 2030` corrected from the earlier AMD revenue
+  misread.
+- AMD `>50% server CPU revenue market share` framed as a forward-looking target.
+- MediaTek `AI ASIC ~$2B Q4 2026` verified against official transcript and
+  framed as management expectation.
+- BusinessNext CPU latency claim backed by Georgia Tech / Intel primary research
+  paper.
+- Data-quality checker run with 0 findings.
+
+Remaining before public use:
+
+- HBM source packets.
+- Cooling source packets.
+- Passive component source packets.
+- Scenario-analyzer run.
+- Final human edit.
+
+### M2.2 - Source Reading UX + Source Tutor Workflow
+
+Goal: make source-backed research readable and navigable for the user, so source
+collection improves the user's primary-source reading ability instead of only
+feeding downstream briefs.
+
+Completed:
+
+- Added the `source-tutor` workflow and context pack.
+- Added source tutor reading template and claim taxonomy fields:
+  `reported-fact`, `management-expectation`, `forward-looking-target`,
+  `secondary-interpretation`, `agent-inference`, and `open`.
+- Clarified Source Collector output ownership:
+  - canonical Markdown packets in `research/sources/<theme>/`.
+  - human-facing HTML shelf in `research/knowledge/<theme>/sources.html`.
+  - individual source pages in `research/knowledge/<theme>/sources/<source>.html`.
+- Added `Original Source Links` and `Next Reading Step` sections to individual
+  source HTML pages.
+- Added `我現在該看什麼？` guidance to the source shelf.
+- Added the missing Georgia Tech / Intel paper HTML source page.
+
+Definition of Done:
+
+- Every collected source that the user may revisit has a visible HTML path.
+- Source pages link back to the original website, filing, paper, transcript, or
+  PDF.
+- The source shelf tells the user what to read next based on intent.
+- Source tutor is documented as a reading workflow, not a source discovery
+  workflow.
+
 ## M3 - Two More Workflows
 
 Goal: algorithm-research and content-production are runnable.
@@ -415,6 +471,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-12 - M2 - internal article self-review added; public blockers retained
 2026-05-12 - M2 - raw research voice pass completed; content voice rule added
 2026-05-12 - M2.1 - AMD / MediaTek / CPU latency source hardening completed; data-quality checker run with 0 findings
+2026-05-13 - M2.2 - Source Reading UX and source-tutor workflow documented; source HTML pages linked to original sources and next reading steps
 ```
 
 ### Per-Skill Status Grid Footnotes

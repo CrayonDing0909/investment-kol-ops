@@ -64,7 +64,7 @@
     這頁是你要讀的 source layer，不是給 LLM 的 raw markdown。Markdown source packet 保留完整 metadata；
     這裡把最重要的數字、quote、風險與 follow-up 集中成閱讀卡片。
   </p>
-  <div class="meta">Last updated: 2026-05-10 · status: draft · source packet count: 4</div>
+  <div class="meta">Last updated: 2026-05-12 · status: draft · source packet count: 5</div>
 </header>
 
 <section id="how-to-read">
@@ -74,7 +74,38 @@
     <li>看 <strong>Key numbers</strong>，確認這些數字能不能支撐 thesis。</li>
     <li>看 <strong>Reliability</strong>，分清 primary / secondary / unverified。</li>
     <li>看 <strong>Follow-up</strong>，這些是公開前要補的洞。</li>
+    <li>單份 source 的深入教讀會放在各自的 <strong>HTML source</strong> 頁，不塞回 index。</li>
   </ol>
+</section>
+
+<section id="next-step">
+  <h2>我現在該看什麼？</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>如果你只想建立 CPU thesis</h3>
+      <ol class="tight">
+        <li>先讀 <a href="./sources/agentic-ai-cpu-centric.html">Agentic AI CPU-Centric paper</a>，理解「CPU bottleneck」的技術證據。</li>
+        <li>再讀 <a href="./sources/amd-q1-2026.html">AMD Q1 2026</a>，看管理層怎麼把 agentic AI 連到 server CPU demand。</li>
+        <li>最後讀 <a href="./sources/intel-q1-2026.html">Intel Q1 2026</a>，確認 CPU orchestration / control plane 是否也出現在 Intel 敘事。</li>
+      </ol>
+    </article>
+    <article class="card">
+      <h3>如果你想練 source reading</h3>
+      <ol class="tight">
+        <li>先挑一份 source，不要一次讀全部。</li>
+        <li>在該頁底部點 <strong>Original Source Links</strong> 回原始網站。</li>
+        <li>對照 HTML 的 warning，練習分辨 reported fact、management expectation、forward-looking target。</li>
+      </ol>
+    </article>
+    <article class="card">
+      <h3>如果你要準備公開文章</h3>
+      <ol class="tight">
+        <li>先看每張卡的 <strong>Reliability</strong> 和 <strong>Follow-up</strong>。</li>
+        <li>任何數字要回到原始網站確認，不要只引用 HTML 摘要。</li>
+        <li>把 safe wording 帶回 source checklist，再進入 content draft。</li>
+      </ol>
+    </article>
+  </div>
 </section>
 
 <section id="packets">
@@ -161,17 +192,40 @@
         <thead><tr><th>Point</th><th>Read-through</th></tr></thead>
         <tbody>
           <tr><td>聊天機器人 → AI 代理</td><td>從單次問答變成多步驟 workflow，CPU 負責調度。</td></tr>
-          <tr><td>CPU latency &gt;50%</td><td>引用 Georgia Tech + Intel research；需找原始 paper 驗證。</td></tr>
+          <tr><td>CPU latency &gt;50%</td><td>引用 Georgia Tech + Intel research；原始 paper 已補成 primary research source。</td></tr>
           <tr><td>短跑 → 馬拉松</td><td>agentic workload 長時間運行，比 bursty inference 更吃 system orchestration。</td></tr>
         </tbody>
       </table>
-      <p><strong>Reliability:</strong> secondary explainer。適合做中文 tutor mental model，不適合作 primary financial source。</p>
+      <p><strong>Reliability:</strong> secondary explainer。適合做中文 tutor mental model，不適合作 primary financial source；paper 數字請改看原始 research source。</p>
       <p class="source">
         <a href="./sources/bnext-ai-cpu.html">HTML source</a> ·
+        <a href="./sources/agentic-ai-cpu-centric.html">HTML paper source</a> ·
         <a href="./intakes/bnext-ai-cpu.html">HTML intake</a> ·
         <a href="./cpu-qa.html">CPU Q&A HTML</a> ·
         <a href="../../sources/ai-server-supply-chain/news/2026-05-10_bnext-ai-cpu-source-packet.md">md source</a> ·
         <a href="../../intake/2026-05-10_bnext-ai-cpu_cpu.md">md intake</a>
+      </p>
+    </article>
+
+    <article class="card" id="agentic-ai-cpu-centric">
+      <h3>Georgia Tech / Intel: Agentic AI CPU-Centric Paper <span class="pill">primary research</span></h3>
+      <p><strong>Why it matters:</strong> 這是 BusinessNext CPU explainer 背後的原始研究。它可以支持「某些 agentic AI tool workloads 會把 latency bottleneck 推到 CPU」，但不能被寫成所有 agentic AI 都 CPU-bound。</p>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th><th>Read-through</th></tr></thead>
+        <tbody>
+          <tr><td>CPU-side tool processing</td><td>up to 88% E2E latency</td><td>只適用於 selected tool-dominated workloads。</td></tr>
+          <tr><td>RAG ENNS retrieval</td><td>83%-89% total latency</td><td>retrieval / CPU-side search 可能主導 latency。</td></tr>
+          <tr><td>Web-Augmented Agent LexRank</td><td>40%-55% latency</td><td>summarization tool execution 是重要 CPU-side cost。</td></tr>
+          <tr><td>SWE-Agent Bash/Python execution</td><td>38%-65% latency</td><td>code execution 是 agentic workload 的 CPU-side burden。</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Quote:</strong> “The majority of the external tools responsible for agentic capability, either run on or are orchestrated by the CPU.”</p>
+      <p><strong>Reliability:</strong> primary research paper。適合支撐 technical bottleneck claim；不支撐 AMD / Intel 營收或市占 claim。</p>
+      <p><strong>Follow-up:</strong> 公開寫法要加 workload context；不要把 up to 88% 外推成所有 agentic AI latency。</p>
+      <p class="source">
+        <a href="./sources/agentic-ai-cpu-centric.html">HTML source</a> ·
+        <a href="./sources/bnext-ai-cpu.html">BusinessNext HTML source</a> ·
+        <a href="../../sources/ai-server-supply-chain/papers/2026-05-12_agentic-ai-cpu-centric-source-packet.md">md source</a>
       </p>
     </article>
 

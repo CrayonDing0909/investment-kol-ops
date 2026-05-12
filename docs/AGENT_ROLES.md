@@ -21,7 +21,8 @@ times and its inputs/outputs have stabilized.
 flowchart TD
     UserIntent["User Intent"] --> SourceCollector["Source Collector Role"]
     SourceCollector --> IntakeCurator["Intake Curator Role"]
-    IntakeCurator --> Tutor["Tutor / Q&A Role"]
+    IntakeCurator --> SourceTutor["Source Tutor Role"]
+    SourceTutor --> Tutor["Tutor / Q&A Role"]
     Tutor --> KnowledgeArchitect["Knowledge Architecture Role"]
     KnowledgeArchitect --> BriefBuilder["Brief Builder Role"]
     BriefBuilder --> POVCoach["POV Coach Role"]
@@ -42,7 +43,7 @@ What it collects:
 - Industry reports or technical explainers.
 - Podcasts / newsletters / creator notes.
 
-Output location:
+Canonical output location:
 
 ```text
 research/sources/<theme>/
@@ -54,6 +55,13 @@ research/sources/<theme>/
   podcast-notes/
 ```
 
+Human-facing reading location:
+
+```text
+research/knowledge/<theme>/sources.html
+research/knowledge/<theme>/sources/<source-id>.html
+```
+
 Rules:
 
 - Do not summarize into a thesis.
@@ -61,6 +69,11 @@ Rules:
 - Prefer primary sources first: company IR, filings, transcripts.
 - Mark secondary sources clearly.
 - If a source cannot be verified, label it `unverified`.
+- Markdown source packets are canonical; HTML source pages are the default place
+  for the user to read them.
+- If a collected source may be revisited by the user, add it to the theme's
+  `sources.html` shelf and create or update its `sources/<source-id>.html`
+  reading page.
 
 Promotion criteria:
 
@@ -97,6 +110,63 @@ Rules:
 - One source -> one intake note.
 - Do not merge multiple sources into one intake unless explicitly requested.
 - Do not fill the user's reaction or questions.
+
+## Source Tutor Role
+
+Purpose: sit with the user and teach them how to read one already-selected
+source precisely. This role improves the user's source reading ability; it does
+not find sources.
+
+Input:
+
+- One source packet or source URL.
+- Source metadata: publisher, date, source quality, and source class.
+- User's reading goal and open questions.
+- Claims or numbers the user is considering using.
+
+Output:
+
+```text
+research/source-tutor/<theme>/YYYY-MM-DD_<source-id>_reading.md
+```
+
+Responsibilities:
+
+- Use the same teaching stance as `domain-doc-tutor`: build the user's mental
+  model before summarizing details.
+- Explain what problem the source is trying to answer.
+- Identify which claims the source can support and which claims it cannot.
+- Explain what kind of source this is and what it can prove.
+- Classify each important claim as:
+  - `reported-fact`
+  - `management-expectation`
+  - `forward-looking-target`
+  - `secondary-interpretation`
+  - `agent-inference`
+  - `open`
+- Preserve the exact source wording next to the simplified explanation.
+- Rewrite risky wording into publish-safe wording.
+- Identify the 5 sentences an investor should read most carefully.
+- List common misreads, for example treating a management target as current
+  market share.
+- Turn missing evidence into follow-up source tasks.
+
+Rules:
+
+- Do not turn the source into a thesis.
+- Do not search for replacement or additional sources during the tutoring pass.
+  Route missing evidence back to the Source Collector Role.
+- Do not upgrade secondary interpretation into primary-source fact.
+- Do not collapse "expects," "targets," "guides," "reported," and "estimated"
+  into the same confidence level.
+- If the user is expected to revisit the explanation, update or create the
+  matching HTML source page under `research/knowledge/<theme>/sources/`.
+- Keep source-tutor output educational, not investment advice.
+
+Promotion criteria:
+
+- Promote to a real skill only after at least 5 source-tutor notes exist and the
+  claim taxonomy has stayed stable.
 
 ## Tutor / Q&A Role
 
