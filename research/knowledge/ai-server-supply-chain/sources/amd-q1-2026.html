@@ -90,6 +90,58 @@
   </p>
 </section>
 
+<section style="border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--surface);">
+  <h2>Update 2026-05-13 (later) — Primary Source Hierarchy（Gap B closed）</h2>
+  <p class="lede">Session A 第二份 patch：v1 原本主要引 Motley Fool transcript（secondary）。現在補上 SEC EDGAR / AMD IR primary anchors，並把 transcript-only quotes 以 Motley Fool + Alphastreet 雙來源交叉驗證。AMD 不自行公布 transcript 文字；真正 primary 是 AMD IR 的 webcast replay。</p>
+
+  <h3>Primary Source Inventory</h3>
+  <table>
+    <thead><tr><th>Source</th><th>Filed</th><th>Primary-confirms</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/amd-20260505.htm">8-K + press release exhibit</a></td>
+        <td>2026-05-05</td>
+        <td>headline 財務、segment revenue、Meta 6GW、cloud instance、Q2 guidance</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000072/amdq126earningsslidesfin.htm">Earnings slides (8-K exhibit)</a></td>
+        <td>2026-05-05</td>
+        <td>同上 + segment 視覺化；Meta 1GW MI450 detail</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.sec.gov/Archives/edgar/data/2488/000000248826000076/amd-20260328.htm">10-Q</a></td>
+        <td>2026-05-06</td>
+        <td>Data Center $5,775M / +57% YoY、operating income $1,599M、MD&amp;A 對 EPYC + MI350 歸因；<strong>risk factor 明確指出 Nvidia-Intel 2025-09 partnership 為 material risk</strong></td>
+      </tr>
+      <tr>
+        <td><a href="https://ir.amd.com/news-events/ir-calendar/detail/20260505-amd-fiscal-first-quarter-2026-financial-results">AMD IR Q1 2026 page (webcast replay)</a></td>
+        <td>event 2026-05-05</td>
+        <td>Lisa Su / Jean Hu 法說音檔 source-of-truth</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.fool.com/earnings/call-transcripts/2026/05/06/amd-amd-q1-2026-earnings-call-transcript/">Motley Fool transcript</a></td>
+        <td>2026-05-06</td>
+        <td>secondary transcript text（cross-validation ref 1）</td>
+      </tr>
+      <tr>
+        <td><a href="https://news.alphastreet.com/advanced-micro-devices-inc-amd-q1-2026-earnings-call-transcript/">Alphastreet transcript</a></td>
+        <td>2026-05-06</td>
+        <td>secondary transcript text（cross-validation ref 2）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>三件 transcript 深讀後新發現</h3>
+  <ol class="tight">
+    <li><strong>CPU TAM 從 `$60B / +18% CAGR` <span class="pill warn">翻倍</span>到 `>$120B / +35% CAGR`</strong>。Lisa Su 在 Q&amp;A 明確 framing 為 doubling，不是普通 upgrade。同一管理層、同一公司、6 個月之內 TAM 雙倍上修是極罕見動作。讀法：這是 AMD 自家 management-expectation，後續看 IDC / Gartner / SemiAnalysis 第三方 TAM 是否同步上修。</li>
+    <li><strong>Q1 2026 server CPU 成長主要靠 unit volume，不是 ASP</strong>。Lisa Su Q&amp;A：「actually much more unit driven...we are shipping more CPUs across, not just the high end Turing family, but we're actually shipping a lot of Genoa's, sort of the Zen 4 family as well.」修正 Mercury Q4 2025 ASP-driven 的 mental model：兩條同時成立——AMD 既有「premium installed base 高 ASP」（Q4 2025 截面），也在「邊際 unit volume 鋪量」（Q1 2026 邊際）。</li>
+    <li><strong>10-Q 自承的 Counter</strong>：AMD 自己的 10-Q risk factors 明確點名 Nvidia-Intel 2025-09 partnership 為 material risk。這是做 AMD share-gain trajectory thesis 時最具體的 Counter。</li>
+  </ol>
+
+  <h3>引用 AMD 10-Q 原文（material risk）</h3>
+  <blockquote>"in September 2025, Nvidia announced a partnership and investment in Intel to partner on new data center and client platform products. This partnership may result in increased competition and pricing pressure for our products or could prevent us from participating in other opportunities, which could materially adversely impact our business, financial condition and margins."</blockquote>
+</section>
+
 <section>
   <h2>Key Numbers</h2>
   <table>
