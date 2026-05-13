@@ -401,6 +401,9 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-12 - M2 - internal article self-review 完成，public blockers 保留
 2026-05-12 - M2 - raw research voice pass 完成，並新增 content voice rule
 2026-05-12 - M2.1 - AMD / MediaTek / CPU latency source hardening 完成，data-quality checker 0 findings
+
+2026-05-13 - strategy-pivot - analysis-reasoning v2 suggestions captured for PR #13 follow-up（ops/decisions/2026-05-13_analysis-reasoning-v2-suggestions.md）
+2026-05-13 - strategy-pivot - thesis-card template + 6 ai-server card outlines added（lens 覆蓋資金/為什麼/基本面/啟動/破局/meta，dual Counter direction）
 ```
 
 ### Per-Skill Status Grid 註解
