@@ -148,7 +148,8 @@ slope 會比這張 card 暗示的慢。
 我目前還沒驗證的是 BOM 口徑：不同公開拆解對 `$49,860 / 櫃`、`$380K / 櫃`、
 `42%` 的母體不一致，所以我不會寫「占整櫃 42%」。
 
-完整 AI server 供應鏈地圖之後會放在 library：`<library-url-pending>`
+完整 AI server 供應鏈地圖（CPU / ASIC / HBM / 散熱 / 被動 + 3 條結構性 layer）
+在 library：https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
 本內容是研究與教育，不是投資建議。
 
@@ -156,8 +157,7 @@ slope 會比這張 card 暗示的慢。
 
 ```text
 完整 8 條支線地圖（CPU / ASIC / HBM / 散熱 / 被動 + 3 條 layer）
-在 library：crayonding.io/library/ai-server-supply-chain
-（library 上線前暫填 placeholder URL）
+在 library：https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
 下一張會拆 MediaTek $2B 為什麼是 management expectation 不是 revenue。
 
@@ -186,9 +186,9 @@ slope 會比這張 card 暗示的慢。
 - [x] Counter 有 explicit threshold + time-window
 - [x] Counter direction 標明（bull-kill）
 - [x] Caveat 是具體 gap
-- [ ] CTA 連到 backbone library page（暫填 placeholder）
-- [ ] Disclaimer footer
-- [ ] 字數 350-500
+- [x] CTA 連到 backbone library page（投產 URL）
+- [x] Disclaimer footer
+- [x] 字數 350-500
 - [ ] 含投資宣稱 → 過 IA1 gate
 
 ## Pre-publish TODO
@@ -199,7 +199,8 @@ slope 會比這張 card 暗示的慢。
 - [ ] 找 1 條 primary / investor-relations source cross-check 液冷 demand
       （Vertiv backlog / NVIDIA rack power / supplier call）
 - [ ] Polish hook 措辭（測試 3 個變體：問句 / 數字驚嘆 / 直接命題）
-- [ ] 確認 backbone HTML library 部署 URL
+- [x] 確認 backbone HTML library 部署 URL — Vercel
+      `https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/`
 - [ ] 過 IA1 gate（含投資宣稱）
 
 ## Metrics（發布後填）

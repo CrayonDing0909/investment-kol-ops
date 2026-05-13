@@ -7,7 +7,7 @@
 # and git status; you don't have to edit them here.
 
 next_action = """
-對 Card #001（Cooling BOM）跑一次 IA1 / 人工 review，並解掉 BOM 分母衝突，或維持較安全的 ~$49,860 / rack 寫法。
+對 Card #001（Cooling BOM）跑 IA1 gate；CTA URL 已敲定 Vercel library，下一步是 IA1 + 解 BOM 分母衝突（或維持較安全的 ~$49,860 / rack 寫法）。
 """
 
 do_not = [

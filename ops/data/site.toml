@@ -1,0 +1,14 @@
+# Site-wide config used by content templates and the dashboard.
+#
+# library_base_url is the public root for content CTAs. Cards and articles
+# should derive their published URLs from here so we can swap hosts (custom
+# domain, etc.) in a single place.
+
+site_name = "CrayonDing Library"
+library_base_url = "https://investment-kol-ops.vercel.app"
+
+# Per-theme library landing paths (relative to library_base_url).
+[themes]
+  [themes.ai-server-supply-chain]
+  label = "AI Server Supply Chain"
+  path = "/library/ai-server-supply-chain/"

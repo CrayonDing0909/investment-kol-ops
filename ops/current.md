@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
 created_at: 2026-05-13
-last_updated: 2026-05-13 20:08
+last_updated: 2026-05-13 22:14
 generated_by: ops/build_dashboard.py
 ---
 
@@ -18,7 +18,7 @@ generated_by: ops/build_dashboard.py
 
 ## Right Now
 
-- **Next action**: 對 Card #001（Cooling BOM）跑一次 IA1 / 人工 review，並解掉 BOM 分母衝突，或維持較安全的 ~$49,860 / rack 寫法。
+- **Next action**: 對 Card #001（Cooling BOM）跑 IA1 gate；CTA URL 已敲定 Vercel library，下一步是 IA1 + 解 BOM 分母衝突（或維持較安全的 ~$49,860 / rack 寫法）。
 - **Milestone**: `M3` — 內容生產
 - **Branch**: `feat/card-001-cooling-bom`
 - **Task**: Card #001 `draft` — GB300 一櫃液冷 BOM 接近 $50K，這個錢 2026 流去哪幾家
@@ -66,7 +66,6 @@ generated_by: ops/build_dashboard.py
 ## Blockers
 
 - **BOM 分母衝突** (Card #001, `blocker`) — `$49,860 / $600,000 = 8.31%`，但 EE Times China 寫 `$380K / 42%`。發布前不要用「占整櫃 42%」。
-- **Library URL 未定** (全部 card, `decision`) — 每張 card 的 CTA 都是 placeholder，等待選 GitHub Pages 或自架 domain（如 `crayonding.io`）。
 - **IA1 gate** (Card #001, `gate-pending`) — 含投資宣稱的 card 上 ready 前要走 IA1。
 - **MediaTek 持倉揭露** (Card #002, `disclosure`) — Frontmatter 留有 placeholder，公開前必須確認。
 

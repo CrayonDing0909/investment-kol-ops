@@ -10,12 +10,6 @@ type = "blocker"
 detail = "`$49,860 / $600,000 = 8.31%`，但 EE Times China 寫 `$380K / 42%`。發布前不要用「占整櫃 42%」。"
 
 [[blockers]]
-title = "Library URL 未定"
-scope = "全部 card"
-type = "decision"
-detail = "每張 card 的 CTA 都是 placeholder，等待選 GitHub Pages 或自架 domain（如 `crayonding.io`）。"
-
-[[blockers]]
 title = "IA1 gate"
 scope = "Card #001"
 type = "gate-pending"

@@ -477,6 +477,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M2.3 - Cross-source synthesis mode added to source-tutor (template + Cursor rule + workflow + role); Intel full-thesis v2 cross-source reading note authored and used as validation case
 2026-05-13 - M3 - Repo-native dashboard cockpit shipped (ops/build_dashboard.py + data/*.toml + templates/dashboard.css; auto-generates ops/dashboard.html and ops/current.md from frontmatter)
 2026-05-13 - M3 - Card #001 (cooling BOM) outline -> draft; removed unsafe "42% of rack cost" hook after spotting denominator conflict, pre-publish blockers recorded
+2026-05-13 - M3 - Vercel library deployed (https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/); ops/build_library.sh + vercel.json + .vercelignore in place; only HTML reading subset uploaded, private trees blocked; Card #001 CTA wired to production URL
 ```
 
 ### Per-Skill Status Grid Footnotes
