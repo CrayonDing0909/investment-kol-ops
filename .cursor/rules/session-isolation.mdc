@@ -1,0 +1,55 @@
+---
+description: Keep concurrent Cursor sessions isolated and auditable
+alwaysApply: true
+---
+
+# Session Isolation Rule
+
+Use this rule whenever multiple Cursor chats, agents, worktrees, or cloud agents
+may touch this repo at the same time.
+
+## Start-of-Task Boundary
+
+Before substantial work, state the active boundary:
+
+- Workflow or intent.
+- Current branch / worktree when relevant.
+- Files or directories expected to be touched.
+- Whether this is read-only, draft-only, or write-capable work.
+
+If the task may edit files and another session may be active, prefer a separate
+git worktree or cloud agent branch. Do not create branches or worktrees without
+the user's approval.
+
+## Source of Truth
+
+- Treat repo artifacts, live file contents, git status, diffs, and explicit user
+  instructions as source of truth.
+- Do not treat another session's chat transcript as fact unless the user
+  explicitly asks to inspect it.
+- If using a transcript for handoff, summarize it into an artifact under
+  `ops/sessions/` before relying on it for future work.
+
+## File Overlap Check
+
+Before editing, check whether the intended files overlap with visible uncommitted
+changes, session status files, or user-provided boundaries. If overlap exists,
+work with the existing changes and call it out before editing.
+
+## System-Affecting Changes
+
+Flag these before editing because they affect future sessions:
+
+- `.cursor/rules/**`
+- `AGENTS.md`
+- `docs/WORKFLOW_PATTERNS.md`
+- `docs/CONTEXT_STRATEGY.md`
+- `docs/HUMAN_GATES.md`
+- shared templates under `content/templates/`, `research/templates/`, or
+  `ops/templates/`
+
+## Handoff
+
+For concurrent work, keep a small status artifact in `ops/sessions/` with goal,
+owner, branch / worktree, files touched, blockers, next step, and handoff notes.
+Update it when the task boundary changes or before ending a session.
