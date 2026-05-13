@@ -66,6 +66,30 @@
   <p>這份 source 直接支撐「CPU 重新重要」的核心論點，而且能修正 EP659 裡 AMD 120B 可能造成的誤讀：source-backed 的說法是 <strong>server CPU TAM &gt;$120B by 2030</strong>，不是 AMD 2026 revenue。</p>
 </section>
 
+<section style="border: 1px solid var(--line); border-radius: 12px; padding: 16px; background: var(--surface);">
+  <h2>Update 2026-05-13 — Third-Party Share Data（Gap A closed）</h2>
+  <p class="lede">Session A patch：原本 v1 reading 標為 highest-priority 的 follow-up「第三方 server CPU 市占（Mercury / IDC / Gartner）」現以 Mercury Research Q4 2025 資料補上。</p>
+  <table>
+    <thead><tr><th>Metric</th><th>AMD</th><th>Intel</th><th>AMD YoY</th><th>AMD QoQ</th></tr></thead>
+    <tbody>
+      <tr><td>Server CPU revenue share</td><td><strong>41.3% (record)</strong></td><td>58.7%</td><td>+4.9 ppt</td><td>+1.8 ppt</td></tr>
+      <tr><td>Server CPU unit share</td><td>28.8% (record)</td><td>71.2%</td><td>+3.1 ppt</td><td>+1.1 ppt</td></tr>
+    </tbody>
+  </table>
+  <ul class="tight">
+    <li><strong>Gap 到 AMD 3-5 年 target (&gt;50% revenue share)</strong>：~8.7 ppt。最近約 5 ppt/年；3-5 年達標機率高，但 Intel 防守 + hyperscaler 採購節奏會影響速度，不能線性外推。</li>
+    <li><strong>關鍵 mechanism note</strong>：revenue share 41.3% 顯著高於 unit share 28.8%（差 12.5 ppt）→ AMD 拿的是<strong>高價端 share</strong>，不是低價搶量。配合 non-GAAP gross margin 50%+ 一起看，這條 mental model 從 v1 假設變成 source-backed conclusion。</li>
+    <li><strong>Q1 2026 數據尚未公布</strong>：Mercury 約季後 6 週發布，預計 May 2026 才有 Q1 數字。但 AMD 自己 Q1 server CPU revenue +&gt;50% YoY；Intel CFO 直言「supply constraint 否則更高」——直接坦承 AMD 仍在 gain share。</li>
+    <li><strong>不能直接等同</strong>：AMD Q1 2026 Data Center segment $5.8B &gt; Intel DCAI $5.1B（AMD 首次超車 Intel data center revenue），但 Data Center 含 Instinct GPU，DCAI 含 ASIC/IPU，這不等於 server CPU share 也超車。Mercury 顯示 Intel 仍 58.7%。</li>
+  </ul>
+  <p class="source">
+    Sources（secondary-quoted-from-primary; Mercury 原始報告 paywalled）:<br>
+    <a href="https://www.crn.com/news/components-peripherals/2026/intel-s-supply-issues-helped-amd-grab-record-high-cpu-market-share-researcher">CRN — Intel's Supply Issues Helped AMD Grab Record-High CPU Market Share (2026-02)</a><br>
+    <a href="https://www.hexmojo.com/2026/02/amd-closes-2025-with-record-413-server.html">HEXMOJO — AMD Closes 2025 with Record 41.3% Server Revenue Share</a><br>
+    Unresolved primary (paywalled / not yet released): Mercury Q1 2026, Counterpoint Q1 2026 Data Center x86 CPU Tracker, IDC 4Q25 Worldwide Server Microprocessor.
+  </p>
+</section>
+
 <section>
   <h2>Key Numbers</h2>
   <table>
@@ -120,8 +144,8 @@
         <td>“…it is positioned to lead the server market and expects to achieve more than 50% server CPU revenue market share.” (Analyst Day 2025)</td>
         <td><span class="pill">forward-looking-target</span></td>
         <td>AMD 把 server CPU 設為 3-5 年 leadership 戰場與 KPI</td>
-        <td>任何「現在已過半」的市占敘述</td>
-        <td>Mercury Research / IDC server CPU share + Intel DCAI</td>
+        <td>任何「現在已過半」的市占敘述（Mercury Q4 2025: 當前 41.3%，gap ~8.7 ppt）</td>
+        <td>Mercury Q1 2026（待公布）+ Counterpoint Q1 2026 + IDC 4Q25</td>
       </tr>
       <tr>
         <td>“For the second quarter of 2026, AMD expects revenue to be approximately $11.2 billion, plus or minus $300 million.”</td>

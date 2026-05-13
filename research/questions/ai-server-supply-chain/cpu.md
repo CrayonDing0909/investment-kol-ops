@@ -3,6 +3,7 @@ workflow: investment-analysis
 artifact_type: tutor-qa
 risk: low
 created_at: 2026-05-10
+last_updated: 2026-05-13T18:05+08:00
 theme: ai-server-supply-chain
 topic: cpu
 status: draft
@@ -50,9 +51,43 @@ AI 訓練和推論會用 GPU / ASIC 做主要 tensor compute，但真實系統�
 
 ## What I Still Don't Know
 
-- AMD 的 >50% server CPU revenue market share target 已找到 AMD Financial Analyst Day primary source；公開時要寫成 forward-looking target，不能寫成目前市占。
+- ~~AMD 的 >50% server CPU revenue market share target 已找到 AMD Financial Analyst Day primary source；公開時要寫成 forward-looking target，不能寫成目前市占。~~ **✅ Updated 2026-05-13 (Session A)**: Mercury Research Q4 2025 顯示 AMD 當前 server CPU revenue share 41.3%、unit share 28.8%；distance to >50% target 約 8.7 ppt。AMD revenue share 顯著高於 unit share，意味是高價 share 而非低價搶量。詳見下方「Resolved 2026-05-13」段。Q1 2026 第三方數據（Mercury / Counterpoint / IDC）尚未取得，仍開放。
 - Agentic AI 到底會提高 CPU attach rate，還是只提高 server CPU utilization？這需要更細的 architecture source。
 - MediaTek 的 I/O / memory subsystem 具體是什麼產品線，和 CPU control plane 的距離仍不清楚。
+
+## Resolved 2026-05-13: AMD `>50%` Server CPU Share Gap (Session A)
+
+**Question closed (partial)**: AMD 公開目標 >50% server CPU revenue share（3-5 年）距離現況多遠？
+
+**Answer (Mercury Research Q4 2025)**:
+
+| Metric | AMD | Intel | AMD YoY | AMD QoQ |
+|--------|-----|-------|---------|---------|
+| Server CPU revenue share | **41.3% (record)** | 58.7% | +4.9 ppt | +1.8 ppt |
+| Server CPU unit share | 28.8% (record) | 71.2% | +3.1 ppt | +1.1 ppt |
+
+**Reasoning chain**:
+
+- **Observation**: Mercury Q4 2025 顯示 AMD 41.3% revenue share，距 50% target 約 8.7 ppt；revenue share > unit share 12.5 ppt。
+- **Mechanism**: (a) AMD EPYC 5th-gen Turin 已佔 AMD server CPU 營收 >50%，高階產品 mix 上升推升 ASP；(b) Intel 供給受限（Zinsner 親口承認），AMD 自然吃下被擠出來的需求；(c) AMD 同時在 unit 與 revenue 都取得 record share，且 revenue share 速度更快，代表「ASP 提升 + 客戶端高階轉換」。
+- **Implication**: 目標 >50% 在 3-5 年內機率高（按近年 ~5 ppt/年的速度，~2 年達標）；但 Intel 供給若解綁、AMD 速度可能放緩。
+- **Counter**: 若 Intel 18A / Foundry 改善後 Xeon 重新拿回 hyperscaler design wins，或 hyperscaler 大幅轉向 ASIC（不再買 x86 CPU），AMD 接近 50% 後可能停滯。
+
+**Q1 2026 數據**：Mercury 尚未公布（典型 6 週 lag）。Counterpoint Q1 2026 Data Center x86 CPU 報告存在但 paywalled，未取得。IDC 4Q25 報告同 paywalled。
+
+**Cross-check via AMD / Intel Q1 commentary**:
+
+- AMD: Q1 server CPU revenue +>50% YoY（management-expectation, AMD 自家）。
+- Intel CFO Zinsner: 「server CPU revenue would have been meaningfully higher if we had more supply.」（reported-fact, Intel earnings call）——直接坦承 Intel 在 Q1 仍 supply-constrained，AMD 應繼續 gain share。
+
+**Sources**:
+
+- CRN — Intel's Supply Issues Helped AMD Grab Record-High CPU Market Share (2026-02): <https://www.crn.com/news/components-peripherals/2026/intel-s-supply-issues-helped-amd-grab-record-high-cpu-market-share-researcher>
+- HEXMOJO — AMD Closes 2025 with Record 41.3% Server Revenue Share: <https://www.hexmojo.com/2026/02/amd-closes-2025-with-record-413-server.html>
+
+**Source quality caveat**: Mercury 原始報告 paywalled。上述兩篇是公開引用源：CRN 含 Dean McCarron（Mercury 總裁）親口 commentary email；HEXMOJO 引用 AMD spokesperson 對 Mercury 數據的官方 tabulation。視為 **secondary-quoted-from-primary**，可靠但非直接 inspect。
+
+**Unresolved (Session A 未補)**: Mercury Q1 2026、Counterpoint Q1 2026、IDC 4Q25 三份報告本身。等下季 Mercury 公布或取得 paywalled 報告權限後再回填。
 
 ## Sources
 
