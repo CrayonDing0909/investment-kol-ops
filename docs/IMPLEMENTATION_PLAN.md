@@ -476,6 +476,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M2.3 - AI server supply chain coverage expanded with 4 new source packets and 3 structural layers (manufacturing capacity, procurement & tightness, geopolitics & policy); Intel Q1 2026 source-tutor reading note added
 2026-05-13 - M2.3 - Cross-source synthesis mode added to source-tutor (template + Cursor rule + workflow + role); Intel full-thesis v2 cross-source reading note authored and used as validation case
 2026-05-13 - M3 - Repo-native dashboard cockpit shipped (ops/build_dashboard.py + data/*.toml + templates/dashboard.css; auto-generates ops/dashboard.html and ops/current.md from frontmatter)
+2026-05-13 - M3 - Card #001 (cooling BOM) outline -> draft; removed unsafe "42% of rack cost" hook after spotting denominator conflict, pre-publish blockers recorded
 ```
 
 ### Per-Skill Status Grid Footnotes
