@@ -1,22 +1,30 @@
-# HTML Reading UI Guide
+# Reading Surface Guide
 
-Purpose: define how human-facing HTML reading pages should be built in this repo.
+Purpose: define how human-facing reading surfaces should be built in this repo.
+Self-contained HTML is the current default under `research/knowledge/**`, but
+the deeper goal is readable, navigable, traceable knowledge artifacts.
 
 This is not a visual design system. The goal is reading quality: fast scanning,
-clear confidence labels, source traceability, and low cognitive load.
+clear confidence labels, source traceability, complete canonical data, useful
+indexes, and low cognitive load.
 
 ## Core Principle
 
 ```text
-Human reading path: HTML first
-Canonical source / metadata: Markdown
+Human reading path: rendered reading surface first (HTML by default today)
+Canonical source / metadata: complete Markdown or structured source files
 ```
 
 If the user is expected to read, learn, review, or revisit an artifact, it needs
-an HTML reading page. Markdown remains the canonical machine-readable source and
-the git-friendly metadata layer.
+a reading surface. Under `research/knowledge/**`, that surface is usually a
+self-contained HTML page today. Markdown or structured source files remain the
+canonical machine-readable source and the git-friendly metadata layer.
 
-## What Needs an HTML Reading Page
+The reading surface must not replace or compress away canonical detail. It
+should make complete source material easier to scan, revisit, index, and
+cross-link.
+
+## What Needs a Reading Surface
 
 Required:
 
@@ -88,7 +96,7 @@ Must include:
 - Direct quote when useful.
 - Reliability label.
 - Follow-up tasks.
-- HTML source / HTML intake links first.
+- Rendered source / rendered intake links first.
 - Markdown source links only as fallback, explicitly labeled `md source`.
 
 ### Individual Source Page
@@ -106,7 +114,7 @@ Must include:
 - Original source links to the company IR page, filing, paper, transcript,
   article, or PDF.
 - Next reading step so the user knows what to open after this page.
-- HTML intake link first.
+- Rendered intake link first.
 - Markdown source packet link second.
 
 ### Tutor Q&A Page
@@ -127,7 +135,9 @@ Must include:
 
 ## Link Rules
 
-Human-facing HTML pages must prefer HTML links.
+Human-facing HTML pages should prefer rendered links to other reading surfaces.
+Markdown links remain useful as canonical fallbacks, but must be labeled that
+way.
 
 Good:
 
@@ -172,9 +182,11 @@ For high-risk claims, write the warning in plain language, not only as a badge.
 
 ## Layout Rules
 
-- Static HTML only in M1-M2.
-- Inline CSS only.
-- No framework.
+For current self-contained HTML pages:
+
+- Prefer static HTML in M1-M2.
+- Prefer inline CSS while the repo has no shared reading renderer.
+- Avoid framework dependencies unless the workflow explicitly supports them.
 - No external assets.
 - No JS unless a later milestone explicitly requires collapsible sections.
 - Max content width around `760px-920px`.
@@ -260,12 +272,14 @@ Before delivery:
 
 ## Review Checklist
 
-Before committing a new HTML reading page:
+Before committing a new reading surface:
 
 - [ ] Does it answer what the user needs to understand?
 - [ ] Is the first screen enough to orient the reader?
 - [ ] Are primary vs secondary sources clearly separated?
 - [ ] Are follow-up questions visible?
 - [ ] Are Markdown links explicitly labeled as fallback?
+- [ ] Does the canonical Markdown or structured source still preserve the full
+      record?
 - [ ] Is the page useful without opening the markdown file?
 
