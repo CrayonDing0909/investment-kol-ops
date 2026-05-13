@@ -3,7 +3,7 @@ workflow: investment-analysis
 artifact_type: tutor-qa
 risk: low
 created_at: 2026-05-10
-last_updated: 2026-05-13T18:05+08:00
+last_updated: 2026-05-13T18:30+08:00
 theme: ai-server-supply-chain
 topic: cpu
 status: draft
@@ -52,7 +52,7 @@ AI 訓練和推論會用 GPU / ASIC 做主要 tensor compute，但真實系統�
 ## What I Still Don't Know
 
 - ~~AMD 的 >50% server CPU revenue market share target 已找到 AMD Financial Analyst Day primary source；公開時要寫成 forward-looking target，不能寫成目前市占。~~ **✅ Updated 2026-05-13 (Session A)**: Mercury Research Q4 2025 顯示 AMD 當前 server CPU revenue share 41.3%、unit share 28.8%；distance to >50% target 約 8.7 ppt。AMD revenue share 顯著高於 unit share，意味是高價 share 而非低價搶量。詳見下方「Resolved 2026-05-13」段。Q1 2026 第三方數據（Mercury / Counterpoint / IDC）尚未取得，仍開放。
-- Agentic AI 到底會提高 CPU attach rate，還是只提高 server CPU utilization？這需要更細的 architecture source。
+- Agentic AI 到底會提高 CPU attach rate，還是只提高 server CPU utilization？這需要更細的 architecture source。**Partially informed 2026-05-13 (Session A, Gap B)**: AMD Q1 2026 法說 Q&A 中 Lisa Su 提到 CPU:GPU 比例「歷史上 1:4 到 1:8 (host node 用途)，現在轉向 1:1 甚至 CPU 多於 GPU」，並把 CPU TAM 成長 framed 為「largely additive to the TAM, not at GPU expense」。這是 AMD management-expectation，不是 architecture-level 量化證據，但給了一個可追蹤的方向訊號（attach rate 上升 vs utilization 上升）。詳見 [AMD tutor reading 的 "Update 2026-05-13 (later)" 段](../../source-tutor/ai-server-supply-chain/2026-05-13_amd-q1-2026_reading.md)。
 - MediaTek 的 I/O / memory subsystem 具體是什麼產品線，和 CPU control plane 的距離仍不清楚。
 
 ## Resolved 2026-05-13: AMD `>50%` Server CPU Share Gap (Session A)
