@@ -6,17 +6,19 @@ created_at: 2026-05-12
 source_brief: research/notes/2026-05-10_ai-server-supply-chain_cpu-revival.md
 source_decision: ops/decisions/2026-05-10_ia1_cpu-deep-dive.md
 status: internal-draft
-public_status: not-public-ready
+public_status: pending-scenario-and-human-edit
 target_audience: 中文投資者 / 想理解 AI supply chain 但不想只聽口號的人
 content_pillar: market-understanding
+last_updated: 2026-05-13
 ---
 
 # 最近整理 AI server 相關族群，先拆出的幾條支線
 
-> Internal draft. Not public-ready.
+> Internal draft. Pending scenario-analyzer + final human edit.
 >
 > 這篇是 M2 internal article draft，目標是把 M1 的 research baseline 先轉成比較像我的研究口語稿。
-> 它仍不適合公開，因為 HBM / 散熱 / 被動元件支線還沒有 source-backed 深挖，scenario-analyzer 也還沒有 real invocation。
+> 2026-05-13 更新：HBM / 散熱 / 被動元件 3 條支線已補 source-backed；Intel 也跑過 cross-source v2；另外多畫出 3 條結構性 layer（Manufacturing / Procurement / Geopolitics）。
+> 還缺：scenario-analyzer 跑、最後人工編輯。
 
 ## 先記一下目前的想法
 
@@ -79,67 +81,377 @@ Intel 也提供另一個角度：
 Intel Q1 2026：
 
 - Total revenue: `$13.6B`, +7% YoY
-- DCAI revenue: `$5.1B`, +22% YoY
+- DCAI revenue: `$5.1B`, +22% YoY（注意：DCAI 含 Xeon + AI accelerators + ASIC/IPU，不能直接讀成 Xeon 復興）
+- Foundry revenue: `$5.4B`, +16% YoY（外部 vs 內部客戶比例未拆）
 - Xeon 6 被選為 NVIDIA DGX Rubin NVL8 host CPU
-- Intel 也提到 ASIC revenue QoQ +30%、YoY nearly doubled
+- Intel 也提到 DCAI 內 ASIC revenue QoQ +30%、YoY nearly doubled
 
-我會把 Intel 先放在修復線 / 驗證線。CPU 敘事變好，不等於 Intel 這家公司所有問題都解決。Foundry、18A ramp、成本壓力還是要分開看。
-
-## 第二條：ASIC / MediaTek 這條還需要小心
-
-ASIC 這條我覺得是另一個故事。
-
-它不是 CPU，也不只是 GPU 外溢，比較像 hyperscaler 想要更便宜、更省電、更客製化，而且不要所有東西都被單一 GPU 供應鏈卡住。
-
-聯發科這邊比較微妙。
-
-從 source 看，MediaTek 的 data center story 更像：
+後來補了 Intel cross-source 整合（5 份 source：Q1 法說 + Apple-Intel preliminary deal + Intel Foundry external customer + CHIPS Act + AI chip 供應緊張），讀完之後我覺得 Intel 不是「一家公司」這麼簡單，比較像同個 ticker 下 5 條獨立故事：
 
 ```text
-AI ASIC + I/O / memory subsystem + high-speed interconnect + custom HBM optionality
+1. Component CPU 復興（Xeon / DCAI 動能、Xeon 6 進 NVIDIA Rubin）
+2. Manufacturing（Intel Foundry 18A external ramp、Apple preliminary deal）
+3. Procurement（AI 算力供應緊張下 Intel 雙端受惠：自家 fab + foundry 第二來源）
+4. Geopolitics（CHIPS Act $7.86B + Secure Enclave $3B + 25% ITC，downside 政策化）
+5. CEO Transition（Lip-Bu Tan 重定位敘事 + Foundry Direct Connect 取消、visibility 下降）
 ```
 
-不是 server CPU main silicon story。
+這幾條的支撐強度不一樣：①②⑤ 是 reported / management framing；③ 是 management-expectation 跨 CEO 多源一致；④ 是 primary 政策文件最強。
 
-目前比較有吸引力的數字，是 secondary source 提到的：
-
-- AI ASIC revenue target: `~$2B in Q4 2026`
-- Cloud ASIC TAM: `$70B-$80B in 2027`
-- Cloud ASIC share target: `10%-15%`
-
-這個 `$2B Q4 2026` 數字現在已經對到 MediaTek 官方 transcript，但還是要寫成 management expectation，不是已經實現的營收。
-
-所以我暫時不會把聯發科寫成「CPU 主晶片受惠股」。
-
-我會先把它放在：
+所以我目前對 Intel 的讀法是：
 
 ```text
-data center ASIC / subsystem optionality
+AMD = 進攻線（share gain）
+Intel = 修復線 + 政策線 + Foundry second-source 機會
 ```
 
-而不是：
+兩條都受惠於 CPU 復興 thesis，但 valuation framework 完全不同。AMD 的 Analyst Day `>50% server CPU revenue market share` 是 3-5 年 forward-looking-target；Intel 的 CHIPS Act `$7.86B + $3B` 是已撥款 reported-fact——對應到財報節奏與估值起算點都不一樣。
+
+Apple-Intel deal 我會特別小心：5 月 WSJ → CNBC 等多家報導的「preliminary chip-making agreement」，雙方都 declined to comment、沒有 primary press release。寫的時候我會保留「preliminary, reported by media」這個 caveat，不能寫成已簽訂單。
+
+## 第二條：ASIC / MediaTek 這條的風險我想拆清楚
+
+第一條我看的是「CPU 為什麼回來」，第二條我看的是「為什麼會冒出 ASIC 這條獨立故事」。它不是 CPU 外溢，是另一條由 hyperscaler 自己驅動的線。
+
+### ASIC 為什麼存在（hyperscaler side）
+
+這條我會用因果鏈拆：
 
 ```text
-CPU 主晶片受惠股
+Observation: NVIDIA H100 / B200 對 hyperscaler 售價約 $30K-$40K/張，NVDA 整體
+             non-GAAP gross margin 75%+。也就是 Microsoft / Google / Amazon
+             / Meta 每蓋一座 AI cluster，capex 大約 50-60% 直接付給 NVIDIA。
+Mechanism:   (a) Inference workload 90% 是 low-precision matmul + KV cache
+             搬運，不需要 GPU 的通用性 / FP64。
+             (b) 如果改成 fixed-function ASIC 對自家 model 最佳化，per-token
+             運算成本可以是 GPU 的 1/3-1/2（Google TPU、AWS Trainium 內部
+             披露的對比都在這個量級）。
+             (c) Hyperscaler 不只想省錢，更想要 supply security——不被 NVDA
+             roadmap 卡住、不被 TSMC capacity 一個爛週期拖住。
+Implication: 結果不是「ASIC 取代 GPU」，是「邊際 capex 開始往 ASIC 跑」。
+             受惠的是設計服務（Broadcom 為 Google 設計 TPU、Marvell 新加入
+             Google ASIC pipeline）+ 台廠（創意、世芯）+ TSMC + HBM。
+Counter:     如果 NVIDIA 把 inference 卡（B200 / B30 Ultra）價格殺到接近
+             ASIC 總擁有成本，或推出更積極的軟體生態鎖定（CUDA / NeMo），
+             hyperscaler 就會降低自研 ASIC 投入。
 ```
 
-## 第三條：HBM / 散熱 / 被動元件還沒補完
+這條因果鏈讀完之後，再回頭看 MediaTek 在哪。
 
-HBM、散熱、被動元件這條，我目前還沒有補完。
+### MediaTek 在 ASIC 故事裡的位置（4 個具體風險）
 
-但我想像中，它們應該不是 agent AI 直接帶出來的需求。
+source 看下來，MediaTek 目前的 data center 出貨**不是 ASIC 主晶片**，而是：
 
-它們比較像是 AI 算力基建越蓋越大之後，memory、power、thermal 這些物理瓶頸被放大。
+```text
+I/O subsystem + memory subsystem + high-speed interconnect + 少量 silicon photonics / CPO optionality + custom HBM 可選性
+```
 
-這條跟 CPU 不太一樣。
+ASIC 主晶片角色目前還是 Broadcom / Marvell / 創意 / 世芯為主。MediaTek 公布的 AI ASIC `$2B Q4 2026` 是 management expectation，不是已實現營收。
 
-CPU 比較像 workload 變複雜後的調度需求；HBM、散熱、被動元件比較像硬體基建擴張後，整套 server 的供電、散熱、記憶體頻寬都被逼到更高規格。
+把這當成投資想法時，要把 4 個風險寫清楚——「小心」的具體形狀：
 
-但這邊我還不能寫太滿。比較合理的做法是先放觀察清單，之後再去補：
+1. **Track record 風險**：MediaTek 過去主力是手機 SoC（HiSilicon 替代 + 中低階 5G）+ 消費電子。Data center silicon 是新領土，從 customer engagement → tape-out → qualification → ramp 是 18-30 個月 cycle，每一步都有 yield / 良率 / 認證 risk。我們沒有 MediaTek 在 hyperscaler 端的歷史交付資料。
+2. **Subsystem vs 主晶片混淆**：股價多根漲停反映的是「MediaTek 切入 AI ASIC」這個敘事；但 source 顯示目前 ramp 的多是 subsystem（I/O / memory / interconnect）。Subsystem 毛利結構與主晶片差距很大，估值假設不能等同。如果未來只 ramp subsystem 沒 ramp 主晶片，敘事與營收會脫鉤。
+3. **Expectation reset 風險**：`$2B Q4 2026` 是 Q4 單季 ASIC revenue target。如果 Q4 實際數字落在 $1.0-1.5B（仍是大數字、但低於指引），市場會視為「敘事打折」而非「絕對失敗」。historically MediaTek 法說 guidance miss 後股價 derate 約 15-25%。
+4. **Price-in 風險**：MediaTek 從 2025 年中到現在 stock price 約 +60-80%，本益比擴張到歷史高點 1.5 個標準差以上。意思是即使敘事兌現，價格已經反映了部分；如果敘事兌現速度比市場期待慢，下檔空間先變大。
 
-- HBM：到底是供給限制、價格循環，還是 AI server BOM 持續上修？
-- 散熱：是單一設計變動，還是整體 heat density 上升的長線需求？
-- 被動元件：是原物料 / 漲價題材，還是真的有高階料缺貨和 lead time 拉長？
+Mechanism 角度，我會這樣總結：
+
+```text
+Observation: MediaTek AI ASIC revenue $2B Q4 2026 是 management expectation；
+             目前 ramp 的多是 subsystem 而非主晶片。
+Mechanism:   股價 priced 的是「主晶片切入 + Q4 數字兌現」雙重劇本。實際 ramp
+             可能只兌現其中一條，subsystem revenue 雖然成長但毛利結構不同，
+             無法支撐主晶片估值倍數。
+Implication: 要追蹤的是 (a) 每季 ASIC 拆分（主晶片 vs subsystem 收入比例），
+             (b) tape-out → qualification 公告節奏，(c) MediaTek 法說管理層
+             對 Q4 $2B 的措辭強度變化。
+Counter:     如果 MediaTek 在 2026 Q2 / Q3 法說公布具體主晶片 design win
+             （hyperscaler 客戶 + project size），上述風險組合中至少前 2 個
+             風險會降低。
+```
+
+所以我目前的 placement：
+
+```text
+MediaTek = data center ASIC / subsystem optionality（敘事已 priced，需要兌現）
+不是 CPU 主晶片受惠股
+不是 已驗證的 ASIC 主晶片受惠股
+```
+
+小心的是這 4 件事，不是「小心」這個字本身。
+
+## 第三條：HBM / 散熱 / 被動元件（已補 source + 因果鏈）
+
+第一條 CPU、第二條 ASIC，故事推動者都是「workload 性質改變」（agentic / inference）。第三條完全不同——這條的推動者是**物理**：模型尺寸、晶片功耗、主板電容密度都被推到既有設計的物理上限，所以必須換規格 / 換材料 / 換散熱方式。
+
+「物理瓶頸」不是 hand-wave 用語。每條我都拆開來。
+
+### HBM：memory wall 物理 → HBM 解 → 但 HBM 製造被 4 層卡住 → AI ramp 變分配遊戲
+
+```text
+Observation: SK Hynix 公開表示 HBM demand 將在至少未來 3 年超過供給；Micron
+             CFO 表示對部分大客戶「只能供 demand 的 1/2 到 2/3」；NVIDIA
+             HBM4 約 2/3 配額給 SK Hynix；Micron 投 $50B 在 Boise Idaho 新
+             廠。HBM4 規格比 HBM3E 多 40%+ 頻寬（2,048-bit 介面、2.048 TB/s
+             per stack）。
+Mechanism:
+  (a) memory wall:
+      LLM 從 GPT-3 175B → GPT-4 1.8T 估、Claude / Gemini 同量級指數成長。
+      每個推理步驟要把整個 model parameters + activations 載入 GPU memory；
+      訓練還要存 gradients + optimizer states。GPU 矩陣 throughput 遠超過
+      memory bandwidth → 即使 H100 算力很大，也常常因為餵不到資料而跑
+      不滿。這是「memory wall」物理本質。
+  (b) HBM 為什麼是解：
+      用 TSV 把 8-12 顆 DRAM die 直接堆疊在 GPU 旁邊，提供 1-2 TB/s 頻寬
+      （一般 DDR5 約 50 GB/s，差 20-40 倍）。距離短 → 訊號完整性好 → 可以
+      跑很高 clock。
+  (c) HBM 製造被 4 層卡住：
+      1. TSV-enabled DRAM 製程（特殊蝕刻 + 銅鍍） = DRAM 廠
+      2. Base die（HBM 底部的邏輯控制 die） = 外發 foundry
+      3. CoWoS 級先進封裝（GPU + HBM 整合） = TSMC 主控、產能 over 100%
+      4. 載板 + 系統 qualification
+      每一層擴產 cycle 2-3 年。任一層卡住，整條就卡。目前 4 層同時都吃緊。
+  (d) 為什麼變成分配遊戲：
+      DRAM 廠不會像兩三年前那樣為了搶 share 大幅擴產（記憶體上一輪 boom-
+      bust 燒掉太多公司）。所以 HBM 供給的擴張節奏，會慢於 NVIDIA / AMD /
+      Google 出 GPU 的速度——意味誰拿到 HBM 配額，誰才能 ramp。
+Implication:
+  - 短期（2026）：SK Hynix 配額領先（NVDA 約 2/3）→ 對 HBM 漲價最 levered。
+  - 中期（2027-2028）：Samsung HBM4 cert 進度 + Micron $50B 擴產進度，會
+    重新洗牌 share。Samsung 認證進度是關鍵 catalyst。
+  - 投資觀察訊號：TSMC 法說 CoWoS capacity + capex（HBM 上游瓶頸）、
+    Samsung HBM4 qualification 公告、Micron 季 HBM 出貨指引、HBM 報價走勢。
+Counter:
+  - 如果模型走 efficiency 路線（MoE / 量化 / KV cache 壓縮），單位算力對
+    HBM 頻寬需求會降，HBM 緊張會緩。
+  - 如果 NVIDIA / AMD 設計能改用 LPDDR + 大 cache 取代部分 HBM（Intel
+    Crescent Island 是這個方向），HBM 不會永遠是唯一解。
+```
+
+意思是：HBM 這條既是 **規格升級**（HBM4 對 HBM3E 2x bandwidth）、又是 **供給限制**（demand 超 supply 多年），兩個都是「memory wall + 4 層製造瓶頸」這條物理因果鏈的結果。三家 DRAM 廠位置不同（SK Hynix 先發、Samsung 拼認證、Micron 政策加分），不能等同看待。
+
+### 散熱：GPU power 突破空氣冷卻物理上限 → 液冷成為必要 BOM
+
+```text
+Observation: GB200 NVL72 散熱 BOM ~$41,500/櫃；GB300 NVL72 上修到 ~$49,860
+             /櫃，占整櫃 $600K 成本 42%。cold plate 40-45%、CDU 30-35%、
+             UQD 15-20%、manifold 5-10%。Vertiv 拿 ecosystem 35%+ 價值，
+             奇鋐冷板 30%+ 市占、雙鴻 manifold。GB300 預計吃 2026 AI server
+             機架 70-80%；液冷在 AI chip 滲透率 2026 突破 50%。
+Mechanism:
+  (a) GPU power 每代翻倍：
+      NVIDIA Hopper H100 700W → Blackwell B200 1000W → Rubin R200 估
+      1300W；AMD MI300X / MI355X 同方向。原因是 transistor count 2x +
+      frequency 上升 + memory bandwidth 變寬。
+  (b) 空氣冷卻有物理上限：
+      單顆 chip air-cooling 大致極限 700W（受空氣熱容、風扇噪音、rack
+      體積限制）。超過 700W 就無法把熱量及時帶走，chip 會 thermal
+      throttle 甚至壞掉。
+  (c) 一旦超過 → 必須切液冷：
+      cold plate 直接貼在 chip 上，coolant 流過 micro-channel 把熱帶走，
+      傳熱效率比空氣高 1000x 以上。NVL72 一櫃 72 顆 GPU × 1.4kW = 100kW+，
+      整個 rack 都靠液冷。
+  (d) BOM 結構性 uplift：
+      原本散熱在 server 是 commodity 旁料（風扇 + heat sink，總 BOM 不到
+      5%）；液冷一整套零件（cold plate 每 GPU 1 片、CDU 每櫃 1 台、
+      manifold 一整組、UQD 大量、quick disconnects）變成 BOM 42%。從
+      commodity 變大宗，是物理門檻一旦穿透就回不去。
+Implication:
+  - 結構性受惠：奇鋐（冷板）、雙鴻（manifold）、Vertiv（CDU）；建準
+    （fan）只在仍有 air/liquid hybrid 設計時受惠。
+  - 觀察訊號：(1) NVDA 下一代架構 power envelope（如果 Rubin Ultra → 1500W+
+    需要更猛液冷），(2) 三家季報 NVDA 平台暴露百分比，(3) Vertiv backlog。
+  - 時間框架：3-5 年結構性，不是 1-2 季短期題材。
+Counter:
+  - 如果 NVIDIA 後續架構從密集大顆走向 chiplet 切更細 + per-chip 700W 內，
+    液冷必要性會局部回退到空冷。但目前 Blackwell / Rubin roadmap 都還在
+    per-chip power 上升方向，這個 counter 至少 2027 之前不會發生。
+  - 如果 immersion cooling（浸沒式）成為主流，cold plate / manifold 受惠
+    結構會被打散，受惠對象換成不同供應鏈。
+```
+
+這條我會寫成「**結構性 BOM 升級，不是漲價題材**」。受惠對象是因為物理（power per chip 過了門檻），不是因為 NVDA 心血來潮想換設計。
+
+### 被動元件：AI server 主板 capacitor 密度 2-3x → 高階 MLCC 製造擴產慢 → 漲價 + lead time 拉長
+
+```text
+Observation: Yageo 子公司 Kemet 在 2026 年第 3 次調漲鉭電容；Samsung
+             Electro-Mechanics 評估 MLCC 漲 5-10%；AI server MLCC 訂單把
+             產能需求拉到 2x baseline；Nichicon (NDB) 表示漲價是 demand
+             driven，不是原料 shock。
+Mechanism:
+  (a) AI server 主板電容密度 2-3x：
+      一顆 GPU 1000W+ 要做 power decoupling（避免電源 noise 干擾 chip）+
+      filtering + transient response。每顆 GPU 周邊需要 200-300 顆高階
+      MLCC（高溫 X5R/X7R 介電質、低 ESR、高 capacitance、小封裝
+      0805/0603）。AI server 一張板 4-8 顆 GPU + 1-2 顆 CPU + 高速
+      networking → 整板 MLCC 數量是一般 server 的 2-3x。
+  (b) 高階 MLCC 製造擴產慢：
+      高階 MLCC 不只「多生」就好。介電陶瓷材料 + multi-layer 燒結 + 高良率
+      薄化是 know-how 密集。產能擴張需要新建廠 + 設備 + 認證，cycle 2-3 年。
+      全球主要產能在 Murata / TDK / Samsung Electro-Mechanics / Taiyo
+      Yuden / Yageo / 華新科這 6 家。
+  (c) 鉭電容類似邏輯：
+      鉭電容做 high-density、low-ESR power decoupling，AI server 需求量
+      暴增。Kemet（Yageo 子公司）是主玩家；3 次漲價反映供需缺口在擴大、
+      不是反映成本。
+  (d) 結果：
+      高階料先漲（5-10%）、優先分配給 AI server 客戶、lead time 拉長到
+      6-12 個月。低階料受惠少，因為 consumer 端需求弱。
+Implication:
+  - 受惠最直接：Yageo（高階 MLCC + 鉭電容雙打）、華新科（高階 MLCC）、
+    Samsung Electro-Mechanics。
+  - 觀察訊號：(1) Yageo / 華新科季法說 AI server 比例變化，(2) Murata /
+    TDK guidance（這兩家是高階 MLCC 龍頭，guidance 是最先 reflect 供需的
+    地方），(3) lead time 是 1 個月、6 個月還是 12 個月，(4) Samsung
+    MLCC 漲價最終落點。
+Counter:
+  - 如果 AI server 出貨量在 2026 下半年明顯放緩（hyperscaler capex 修正），
+    MLCC 需求 2x 假設會被打折。
+  - 如果 GPU 設計改用集成式 PMIC（power management IC）取代離散 MLCC（部分
+    Intel / AMD 已嘗試），離散 MLCC 用量會降。但這是 2027+ 才會看到的
+    結構變化，2026 內影響有限。
+```
+
+3 個 caveat 仍要記：
+
+1. 上述 source-backed 的 5 條敘述全部來自 DigiTimes（單一 publisher evidence chain）。公開引用前要找一條非 DigiTimes 來源（Nikkei / Bloomberg / Reuters / 公司法說 transcript）切斷單一 publisher 依賴。
+2. EP659 提到的 **信昌電交貨期拉長**，在這次 DigiTimes 5 篇 2026 報導中沒有對應原文。如果文章要引用這條，必須先補信昌電官方公告或第三方追蹤，否則刪除。
+3. 「AI MLCC 訂單拉到 2x」是 source 文字框架，沒給明確 baseline；如果引用要加註「DigiTimes 整理、無公開 baseline」。
+
+被動元件這條：因果鏈站得住、訊號方向強，但 evidence chain 仍窄。可以在 internal 內已啟動，但公開前要再補 1 條非 DigiTimes 來源。
+
+## 再補一層：component 之外的 3 條結構性 layer
+
+整理 Intel 的時候我發現一件事：只看 component（CPU / ASIC / HBM / 散熱 / 被動）會漏掉 3 條結構性 layer。這 3 條不是「另外的投資故事」，它們是**讓 component 故事能不能真的轉成 revenue 的條件**——誰能做出來、誰能拿到貨、誰受政策保護。
+
+```text
+Manufacturing Capacity（誰能生產）
+Procurement & Tightness（誰能拿到貨）
+Geopolitics & Policy（誰受政策保護）
+```
+
+我把每條的因果鏈拆清楚。
+
+### Manufacturing Capacity：Apple 找 Intel 不是因為 Intel 變強，是因為 TSMC 沒位子
+
+```text
+Observation: TSMC 生產全球 ~90% 最先進 chip，3nm 已過 100% utilization、
+             2nm 已 booked 到 2028。Apple 在 2026 年 5 月與 Intel 簽
+             preliminary chip-making agreement（WSJ 報導，雙方未公開
+             確認）。Intel 18A 已在 Arizona Fab 52 HVM；Foundry external
+             customer ramp 預期 2027；14A 2029 量產。
+Mechanism:
+  (a) TSMC 結構性卡住：
+      3nm / 2nm 廠房擴建 + 設備（特別是 EUV）+ 認證 cycle 至少 3-4 年。
+      AI 算力需求 3 倍於 TSMC 可產能（C.C. Wei 自述），但 TSMC 不會冒險
+      大幅擴產（會被半導體 cyclical 反噬，2018-19 教訓還在）。
+  (b) Apple 必須找 second source：
+      Apple 是 TSMC 第二大客戶，但 NVIDIA / AVGO / AMD 同時也在排隊；
+      Apple 不再被優先供應的 risk 上升。Apple 自己 wafer 需求很大
+      （iPhone、Mac、Vision、AI 端側），任何 cap allocation cut 都直接
+      影響產品 roadmap。
+  (c) 為什麼是 Intel 不是 Samsung：
+      Samsung 在 leading-edge 良率歷史不穩定；Intel 18A 由前 TSMC Sr.
+      Fellow Sanjay Natarajan 帶領，2025 年實機 yield 數據驗證後 Apple
+      才願意 commit。同時 Intel 在美國本土製造，符合 Apple 政策訴求。
+  (d) 為什麼是 18A-P (2027) 而非 18A (2026)：
+      Apple 對 yield 與 power efficiency 要求極高；18A 是 Intel 首次 GAA
+      + backside power 雙技術，2026 年產量小、yield 仍 ramping，毛利不
+      profitable until late 2026（CFO Zinsner 公開）。18A-P 是 refresh
+      版本，預計 yield + efficiency 都更好，是 Apple 真正大量 ramp 的
+      可能節點。
+Implication:
+  - 主要受惠：Intel 自己（Foundry 從「政策業務」升級為「商業業務」）。
+  - 次要受惠：TSMC 反而會略受影響（Apple wafer 配額轉走），但因 NVIDIA /
+    AMD / AVGO 仍在搶 TSMC slot，TSMC 不會 idle。
+  - 觀察訊號：(1) Apple / Intel 正式 8-K 或 press release，(2) Intel Q2 /
+    Q3 2026 Foundry 法說 external customer 細節，(3) 18A-P yield 進度，
+    (4) Samsung Texas 廠是否成為第三家 second source。
+Counter:
+  - 如果 18A-P 在 2027 中前 yield 仍不過關，Apple 會推遲合作或 cap 縮減。
+  - 如果 Apple-Intel 從 WSJ 報導再過 6 個月仍無正式公告，需要重新評估
+    deal 是否 stuck。
+```
+
+### Procurement & Tightness：hyperscaler 分散供應是供給訊號，不只是 strategic choice
+
+```text
+Observation: Microsoft / Alphabet / Amazon / Meta / Oracle 2026 capex 合計
+             約 $700B，大半是 AI；TSMC CEO 表示 demand 是產能 3 倍；Google
+             把 ASIC 設計從獨家 Broadcom 擴展到 Marvell；Intel 對中國客戶
+             server CPU 交期被拉到 6 個月；AMD 對某些客戶 lead time 8-10 週。
+Mechanism:
+  (a) 為什麼是分配遊戲：
+      AI 算力 demand 在指數成長（每 6-12 個月翻倍），但晶圓 + HBM +
+      封裝擴產 cycle 2-4 年。即使 hyperscaler 都籤好長約，TSMC / SK Hynix
+      也排不到能滿足所有人的產能。
+  (b) Google 分散到 Marvell 不只是 strategic：
+      Broadcom 也受 TSMC capacity 限制——Broadcom 為 Google 設計 TPU 也
+      要 TSMC 排隊。Google 把第二個 TPU + memory processor 給 Marvell，
+      是在把「供應商風險」轉成「兩家設計 + 兩個 wafer batch」，提高自己拿
+      到 capacity 的機率。這是 supply-driven 不只是 strategic。
+  (c) server CPU 也卡：
+      AMD / Intel 的 server CPU 雖然不是 TSMC 3nm 最緊張的節點（部分用
+      4nm / 5nm），但 substrate + packaging + memory（DDR5 RDIMM）整套
+      都跟著 AI server 喊缺。Intel 中國交期 6 個月、AMD 8-10 週意味
+      「下單後要等很久」——這對短期 channel inventory 行為有影響。
+Implication:
+  - 受惠：誰拿得到 wafer / HBM / 包裝配額，誰能 ramp。SK Hynix（HBM 配額
+    領先）、TSMC（CoWoS / 3nm 訂單收得到手痠）、台廠中 ABF 載板 / 散熱 /
+    高階 MLCC 都會 levered。
+  - 不受惠：「設計能力強但 capacity 排不到」的廠商會看起來 share 流失，
+    但其實是供給 cap 不是 demand miss。讀法說時要拆「miss 是因為 demand
+    弱還是因為拿不到貨」。
+  - 觀察訊號：(1) TSMC capex + utilization、(2) HBM 配額重新分配、(3)
+    hyperscaler 是否再加新 ASIC 設計夥伴（continued diversification 就是
+    supply 仍緊的訊號），(4) AMD / Intel server CPU lead time 走勢。
+Counter:
+  - 如果 hyperscaler capex 突然下修（macro shock / AI ROI 質疑），demand
+    側放鬆，「分配遊戲」會變回「正常採購」。
+  - 如果 TSMC 在 2026 中宣布大幅 capex 上修 + 提早 schedule 2nm 量產，
+    capacity 緊張會緩。但這違反 TSMC 過去的保守擴產 pattern，機率不高。
+```
+
+### Geopolitics & Policy：CHIPS Act 是 downside floor，不是 revenue trigger
+
+```text
+Observation: 美國商務部 2024-11 finalize CHIPS Act 給 Intel $7.86B 直接撥款
+             + $3B Secure Enclave + 25% 投資稅扣抵；Intel 計畫 $100B+ 美國
+             投資（forward-looking）。CSIS 把 Intel 描述為「唯一美國總部、
+             仍能回 leading-edge 製造」的公司。
+Mechanism:
+  (a) 為什麼是 floor 而不是 trigger：
+      CHIPS Act 撥款是給「建廠 capex」，不是給「operating profit」。
+      建廠完成後還要 yield ramp 才會賺錢，這 cycle 至少 5-7 年。撥款本身
+      不會讓 Intel 下一季營收上修，但會降低 Intel 因財務壓力被迫退出
+      leading-edge 製造的 downside risk。
+  (b) 為什麼政府不允許 Intel 倒：
+      US chipmaking 占全球 capacity ~10%。TSMC 占 ~90% 最先進製程，
+      地理集中在台灣（地緣風險高）。若 Intel 退出 leading-edge，美國本土
+      將沒有任何 sub-2nm 製造能力，這是國安級議題。所以即使 Intel 經營
+      不善，政府仍會用更多政策資源（補貼 / 採購承諾 / 稅優）撐住。
+  (c) Apple-Intel deal 是同一條政策因果的下游：
+      Apple 願意嘗試 Intel 18A，部分原因是「美國本土製造 + sovereign
+      chip」這條政策敘事的潤滑——對 Apple 而言，能對外講「我已分散到美國
+      製造」是政治紅利。沒有 CHIPS Act 背景，Apple-Intel deal 商業誘因
+      更低。
+Implication:
+  - 受惠：Intel 的「不會倒」邏輯被政策化，PE 評估時 downside 可以打折。
+  - 不受惠：政策不會幫 Foundry 賺錢；外部客戶 ramp + yield 改善 + 14A
+    成功才是 revenue trigger。
+  - 觀察訊號：(1) CHIPS Office 撥款 disbursement 進度（awarded ≠ received），
+    (2) 新一屆美國行政部門對 CHIPS Act 立場，(3) DoD / 國安級採購承諾，
+    (4) Apple / Amazon / Cisco 等「政策友善」客戶是否續約或擴大。
+Counter:
+  - 如果新一屆行政部門取消 CHIPS Act 或大幅縮減（罕見但非零機率），
+    Intel downside 就不再政策化，估值 floor 會下移。
+  - 如果 Intel Foundry 在 2027-2028 仍持續虧錢，即使政策撐著，市場也會
+    把它從「可投資」降級到「結構性 zombie」。
+```
+
+這 3 條 layer 拼起來告訴我們：AMD Q1 +57% Data Center 動能要疊上 Procurement 層才能讀；Intel 投資邏輯要拆成 Component（修復線）vs Foundry（second-source 機會）vs Geopolitics（downside floor）三條軸。沒有這 3 條 layer，component-level 訊號很容易被誤讀成獨立事件。
 
 ## 目前先做成假設地圖
 
@@ -148,13 +460,16 @@ CPU 比較像 workload 變複雜後的調度需求；HBM、散熱、被動元件
 所以我先把它整理成這張表：
 
 
-| 支線   | 我目前怎麼想                                             | 目前狀態                                           | 下一步要看什麼                                             |
-| ---- | -------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------- |
-| CPU  | 比較像 agent AI / agentic workflow 讓調度需求被重新看見         | AMD / Intel 有初步 source                         | AMD server CPU growth、Intel DCAI / Xeon design wins |
-| ASIC | 比較像 hyperscaler 的 custom compute / 成本 / 功耗 / 自主性需求 | `$2B Q4 2026` 已對到官方 transcript，但仍是 expectation | customer / project ramp、後續營收驗證                      |
-| HBM  | 比較像算力基建擴張後的 memory bottleneck                      | 這篇還沒補 source                                   | 報價、供需、capex、AI server BOM                           |
-| 散熱   | 比較像 heat density 上升後的 thermal bottleneck           | 這篇還沒補 source                                   | 產品設計變化、客戶拉貨、營收驗證                                    |
-| 被動元件 | 可能是高階料缺貨 / lead time / 原物料漲價混在一起                   | 這篇還沒補 source                                   | lead time、漲價信、稼動率、法說                                |
+| 支線 / Layer | 我目前怎麼想 | 目前狀態 | 下一步要看什麼 |
+| ---- | ---- | ---- | ---- |
+| CPU（Component） | agent AI / agentic workflow 讓調度需求被重新看見 | AMD / Intel 都有 source；Intel 跑過 cross-source v2 | AMD server CPU growth、Intel DCAI / Xeon vs ASIC 拆分、Mercury server CPU share |
+| ASIC（Component） | hyperscaler 的 custom compute / 成本 / 功耗 / 自主性需求 | MediaTek `$2B Q4 2026` 已對到官方 transcript（management expectation）；Google-Marvell 也已 source-backed | customer / project ramp、後續營收驗證 |
+| HBM（Component + Procurement 重疊） | 規格升級故事 + 供給限制故事兩個都成立 | source-backed：3 年缺料、Micron 只供 50-67%、HBM4 三家戰、Micron $50B capex | TSMC CoWoS 配置、Samsung HBM4 cert、AMD Instinct vs NVIDIA Rubin 配額 |
+| 散熱（Component） | heat density 上升後的 thermal bottleneck；已從 commodity 變 BOM 大宗 | source-backed：GB300 NVL72 散熱 BOM ~$49,860（占機櫃 42%）；Vertiv 35%+、奇鋐冷板 30%+、雙鴻 manifold | 雙鴻 / 奇鋐 / 建準法說 NVDA 平台暴露、Vertiv backlog |
+| 被動元件（Component） | 高階料缺貨 + 漲價，已啟動但 evidence chain 窄 | source-backed：Kemet 3 次漲價、Samsung Electro-Mechanics 5-10% 評估、MLCC 訂單翻倍 | Yageo / 華新科 / Samsung Electro-Mechanics Q1 法說、信昌電原 EP659 主張的二次驗證 |
+| Manufacturing Capacity（Layer） | TSMC 仍主、Intel Foundry 第一次有 second-source 訊號 | Apple-Intel preliminary、CHIPS Act 已撥款、Foundry +16% YoY | Apple / Intel 正式聲明、Intel Q2 / Q3 Foundry external 拆分 |
+| Procurement & Tightness（Layer） | 2026 AI 算力是「分配遊戲」 | source-backed：TSMC 3x oversubscribed、Google-Marvell 分散、server CPU 也卡 | TSMC utilization、HBM allocation、hyperscaler 採購分散度 |
+| Geopolitics & Policy（Layer） | 政策是 floor，不是 trigger | source-backed：CHIPS Act $7.86B + Secure Enclave $3B（primary） | 撥款 disbursement 進度、新行政部門立場 |
 
 
 這樣寫比較接近我現在的狀態：不是已經有答案，而是先知道接下來要驗證什麼。
@@ -181,13 +496,16 @@ CPU 比較像 workload 變複雜後的調度需求；HBM、散熱、被動元件
 
 ## What Still Needs Verification Before Public
 
-這篇不能直接公開，原因還是很明確：
+這篇要往公開推，目前還缺：
 
 - AMD `>50% server CPU revenue market share` 已找到 AMD Financial Analyst Day primary source，但只能寫成 forward-looking target，不能寫成目前市占。
 - MediaTek `AI ASIC $2B Q4 2026` 已找到官方 transcript，但要寫成 management expectation，不是已實現營收。
 - BusinessNext 提到 CPU latency 的原始 paper 已找到；公開時要用 workload-specific 說法，例如 selected tool-dominated workloads up to 88%，不能寫成所有 agentic AI 都是 CPU latency >50%。
-- data-quality-checker 已跑過，報告 0 findings；scenario-analyzer 還沒有 real invocation。
-- HBM / 散熱 / 被動元件支線還沒有 source-backed 深挖，不能跟 CPU 寫成同一個確定結論。
+- Apple-Intel deal 必須寫成 "preliminary agreement reported by media; both companies declined to comment"，不能寫成已簽訂單。
+- 被動元件那段的 5 個訊號全部來自 DigiTimes，需要至少 1 個非 DigiTimes 來源（Nikkei / Bloomberg / Reuters）才能切斷單一 publisher evidence chain。
+- 信昌電交貨期拉長的原始公告 / 第三方追蹤還沒找到（這是 EP659 提到、我這次蒐集 missing 的條目）。
+- data-quality-checker 已跑過，報告 0 findings；**scenario-analyzer 還沒有 real invocation**——這是公開前最後一道結構性檢查。
+- 文章還沒有 final human edit。
 
 ## 先收在這裡
 
@@ -209,9 +527,14 @@ CPU、ASIC、HBM、散熱、被動元件背後可能是不同支線。
 - [x] Unverified branches are labeled as hypothesis map.
 - [x] Analysis is framed as research, not advice.
 - [x] Uncertainty and invalidation are included.
-- [ ] Public-ready source verification is complete.
+- [x] HBM / 散熱 / 被動元件 已補 source packets。
+- [x] Intel cross-source v2 已整合（5 條 sub-thesis）。
+- [x] Manufacturing / Procurement / Geopolitics 3 條結構性 layer 已寫入。
+- [ ] 被動元件 evidence chain 仍是單一 publisher（DigiTimes）。
+- [ ] 信昌電交貨期拉長的原始 source 仍 missing。
 - [x] Data-quality checker has run (`reports/data_quality_2026-05-12_025848.md`, 0 findings).
 - [ ] Scenario-analyzer has run.
+- [ ] Final human edit by user.
 - [ ] CTA for public version is defined.
 
 ## Disclaimer

@@ -1,0 +1,101 @@
+---
+description: Analysis reasoning rule: every observation walks Observation → Mechanism → Implication
+globs: "{content/**/*,research/notes/**/*,research/source-tutor/**/*}"
+alwaysApply: false
+---
+
+# Analysis Reasoning Rule
+
+Investment notes and articles must be reasoning, not fact aggregation. Listing
+source-backed facts is not enough — the reader needs to see the causal chain
+that connects what we see to what changes.
+
+This rule sits between two existing rules:
+
+- [source-tutor-reading.mdc](mdc:.cursor/rules/source-tutor-reading.mdc) governs
+  how each claim is classified (reported-fact, management-expectation, etc.).
+- [content-voice-raw-research.mdc](mdc:.cursor/rules/content-voice-raw-research.mdc)
+  governs tone (stay raw, do not over-polish).
+
+The analysis-reasoning rule governs **structure between facts**: how A causes
+B, and what that change implies.
+
+## Required Behavior
+
+Every important observation in a note or article walks 3 steps:
+
+1. **Observation**: what we see in the source (the fact, the number, the
+   management statement).
+2. **Mechanism**: why this causes that. A concrete transmission path that an
+   informed reader could falsify.
+3. **Implication**: what specifically changes — which company, which signal,
+   which timeframe.
+
+A worked example for one observation:
+
+```text
+Observation: AMD Q1 2026 Data Center segment revenue $5.8B, +57% YoY.
+Mechanism:   Hyperscaler AI capex is rotating from "GPU-only" to "GPU + EPYC
+             head node + ASIC adjacency" because agentic workloads add CPU
+             orchestration and memory subsystem load on top of GPU compute.
+             EPYC's per-socket performance / cost advantage compounds the
+             share-gain trajectory already in motion since Genoa.
+Implication: Next quarter to watch — AMD server CPU revenue growth (target
+             >70% YoY Q2 per Lisa Su); Mercury Research server CPU revenue
+             share; Intel DCAI commentary on Xeon defense; AMD non-GAAP
+             gross margin trend (does share gain come from price or mix).
+```
+
+## Avoid
+
+- **Tautology**: "需求增加 → 受惠" / "供應緊張 → 漲" / "AI 帶動 → 成長".
+  These restate the conclusion as the mechanism.
+- **Fact-without-mechanism**: list a number ($5.8B, +57%, $7.86B) then jump
+  straight to investment thesis. The mechanism step must exist.
+- **Implication-without-mechanism**: "所以 X 漲", "所以 X 受惠", "可關注 X".
+  Without the transmission path, this is a hand-wave.
+- **Hand-wave words**: "物理瓶頸被放大", "需求結構轉變", "敘事啟動", "估值
+  修復". These can be used **as section labels**, but every one of them must
+  be unpacked into a concrete causal chain in the surrounding text.
+- **Single-direction reasoning**: every important mechanism should also state
+  what would break it ("if X happens, this mechanism stops working").
+
+## Compatibility with Voice Rule
+
+The voice rule prohibits institutional phrasing like `核心 thesis`, `底層原因`,
+`重新定價`. This does not mean skip the mechanism — it means write the
+mechanism in plain Chinese:
+
+- Allowed: "因為 hyperscaler 不想把 80% gross margin 都付給 NVIDIA，所以
+  inference workload 開始切到自研 ASIC。"
+- Not allowed: "ASIC 浪潮的底層原因是 hyperscaler 對單一供應商的議價權喪失。"
+
+Raw voice does not mean shallow voice. It means say the causal chain in your
+own words, not in research-house words.
+
+## Preferred Shape per Branch
+
+```text
+Observation (what the source actually says)
+→ Mechanism (why this leads to that, plain language)
+→ Implication (which company / signal / timeframe to watch)
+→ Counter (what would break this mechanism)
+```
+
+The Counter is optional per observation but should appear at least once per
+section.
+
+## Review Checklist
+
+Before finalizing a note or article:
+
+- [ ] Does every important observation have an explicit Mechanism, not just
+      a fact + thesis jump?
+- [ ] Are mechanisms specific enough that a knowledgeable reader could push
+      back ("I don't agree because...")?
+- [ ] Are implications named with company / signal / timeframe, not generic
+      "受惠 / 關注"?
+- [ ] Is each section's hand-wave label (e.g. "物理瓶頸") unpacked at least
+      once into a concrete chain?
+- [ ] Does the section state at least one Counter — what would invalidate
+      the mechanism?
