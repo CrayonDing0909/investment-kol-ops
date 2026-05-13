@@ -1,10 +1,15 @@
 ---
 artifact_type: sessions-index
 created_at: 2026-05-13
-last_updated: 2026-05-13T18:45+08:00
+last_updated: 2026-05-13T19:10+08:00
 ---
 
 # Session Status Index
+
+> **Read first**: open the [Now Page (HTML cockpit)](../dashboard.html) or its
+> markdown canonical [`ops/current.md`](../current.md) before this index.
+> The Now Page tells you the active milestone, branch, task, and what not to
+> start. This file is the deeper drill-down into individual sessions.
 
 Use this folder when multiple Cursor sessions, agents, worktrees, or cloud agents
 are active around the same repo.
@@ -50,4 +55,6 @@ Use `ops/templates/session-status.md` as the template.
 
 | Session | Status | Branch / Worktree | Scope | Last Updated |
 |---|---|---|---|---|
-| [Session A — Source Tutor / AMD](./2026-05-13_session-a-source-tutor.md) | paused | Gap A PR #15 merged; Gap B PR #16 merged; log/infra on `chore/session-isolation-cowork` pending PR | AMD `>50% server CPU revenue share` gap closure + Q1 2026 primary-source upgrade; no active research branch | 2026-05-13T18:45+08:00 |
+| [Session A — Source Tutor / AMD](./2026-05-13_session-a-source-tutor.md) | paused | Gap A PR #15 merged; Gap B PR #16 merged; no active research branch | AMD `>50% server CPU revenue share` gap closure + Q1 2026 primary-source upgrade | 2026-05-13T18:45+08:00 |
+| [Session B — Thesis Cards Scaffold](./2026-05-13_session-b-thesis-cards.md) | completed | PR #14 merged to `main` | Thesis-card template + 6 outline cards scaffolded | 2026-05-13T18:58+08:00 |
+| [Session C — Card #001 Cooling BOM](./2026-05-13_session-c-card-001.md) | active | `feat/card-001-cooling-bom` | Move Card #001 from outline toward first publishable draft | 2026-05-13T18:58+08:00 |

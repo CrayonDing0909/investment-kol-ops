@@ -5,6 +5,27 @@ Purpose: define how human-facing HTML reading pages should be built in this repo
 This is not a visual design system. The goal is reading quality: fast scanning,
 clear confidence labels, source traceability, and low cognitive load.
 
+## Scope
+
+This guide applies to **knowledge reading artifacts** under `research/knowledge/**`
+and any other HTML pages whose primary job is "read this content carefully":
+
+- Knowledge maps, topic pages, tutor Q&A views.
+- Source reading views and individual source packet pages.
+- Intake pages.
+- Cross-source reading notes.
+
+It does **not** apply to:
+
+- Ops / cockpit dashboards (e.g. `ops/dashboard.html`).
+- Decision log dashboards or ops index pages.
+- Status / monitoring views whose primary job is "scan and act."
+
+Those follow [Ops Dashboard UI](#ops-dashboard-ui-different-rules) below, with
+more visual freedom. The reasoning: research pages are read slowly and need
+flat, predictable typography; ops dashboards are scanned quickly and benefit
+from elevation, hover affordances, and a bit of polish.
+
 ## Core Principle
 
 ```text
@@ -268,4 +289,53 @@ Before committing a new HTML reading page:
 - [ ] Are follow-up questions visible?
 - [ ] Are Markdown links explicitly labeled as fallback?
 - [ ] Is the page useful without opening the markdown file?
+
+## Ops Dashboard UI (Different Rules)
+
+Pages under `ops/` whose primary job is to scan status and act
+(e.g. `ops/dashboard.html`) follow a separate, looser set of rules.
+
+### Why a Separate Set
+
+Research pages must be readable, calm, and slow — so they stay close to
+plain typographic text. Ops dashboards must surface "what is happening now"
+in 3 seconds, which benefits from elevation, status colors, hover
+affordances, and a modern visual hierarchy. Forcing both to share one rule
+makes one of them worse.
+
+### Allowed (Ops Only)
+
+- Subtle box-shadows for cards and hero (light elevation, not heavy).
+- Hover transitions on interactive cards (lift, border highlight).
+- Modern accent color (e.g. indigo) used sparingly for status emphasis.
+- Multiple status colors (active / blocked / done / paused / draft) with
+  paired bg + text + border tokens.
+- Inter-first system font stack with antialiasing.
+- Larger maximum content width (`~1120px`) and denser layout.
+- Sticky topbars or progress strips if they actually help scanning.
+- Slightly larger headline in a hero section that names the one next action.
+
+### Still Forbidden (Ops Too)
+
+- External assets (no remote fonts, images, or CSS).
+- JavaScript, unless a milestone explicitly approves it.
+- Decorative gradients across whole surfaces (a 1-2px accent strip is fine).
+- Emoji as functional icons.
+- Marketing-style copy or vague status words ("amazing progress").
+
+### Required (Ops Dashboards)
+
+- Top hero section that states the single next action in plain words.
+- Visible milestone / pipeline status, ideally as a progress strip.
+- Clear separation between active, blocked, and done work.
+- Pointer block back to canonical markdown sources.
+- Last-updated timestamp.
+- Inline CSS only; one self-contained HTML file.
+
+### Canonical Pair
+
+Each ops dashboard should have a markdown canonical companion
+(e.g. `ops/current.md` for `ops/dashboard.html`). Update both manually until
+M4 introduces a generator. If they drift, the markdown wins for facts; the
+HTML wins for "what should I look at first."
 

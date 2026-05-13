@@ -1,17 +1,30 @@
 ---
-description: HTML-first reading UI rules for human-facing knowledge artifacts
+description: HTML-first reading UI rules for human-facing knowledge artifacts (research/knowledge/**)
 globs: "research/knowledge/**/*.html"
 alwaysApply: false
 ---
 
 # HTML Reading UI Rule
 
-Human-facing knowledge artifacts in this repo are HTML-first.
+Human-facing **knowledge artifacts** in this repo are HTML-first.
 
 Canonical data still lives in Markdown (`research/sources/`, `research/intake/`,
 `research/questions/`, `research/notes/`), but the user should read HTML first.
 
 Follow [docs/HTML_READING_UI_GUIDE.md](mdc:docs/HTML_READING_UI_GUIDE.md).
+
+## Scope
+
+This rule applies **only** to `research/knowledge/**/*.html` and similar
+slow-reading research artifacts. It does **not** apply to:
+
+- `ops/dashboard.html` and other ops cockpit pages.
+- Decision-log dashboards or status views.
+
+Those follow the "Ops Dashboard UI" section of
+[docs/HTML_READING_UI_GUIDE.md](mdc:docs/HTML_READING_UI_GUIDE.md), which
+allows subtle elevation, hover transitions, and a modern accent palette.
+Do not apply the strict reading-page constraints below to those files.
 
 ## Required Behavior
 

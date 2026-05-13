@@ -1,0 +1,18 @@
+# "Right now" hero content for the dashboard.
+#
+# next_action: one sentence (the single thing to do next)
+# do_not:      bullet list (what to NOT start)
+#
+# Active milestone / branch / card / session are auto-derived from frontmatter
+# and git status; you don't have to edit them here.
+
+next_action = """
+對 Card #001（Cooling BOM）跑一次 IA1 / 人工 review，並解掉 BOM 分母衝突，或維持較安全的 ~$49,860 / rack 寫法。
+"""
+
+do_not = [
+  "不要開新研究分支（Gap C / D / E / AMD cross-source v2）",
+  "不要同時推第二張 card",
+  "不要新增 worktree",
+  "先把 #001 推到 ready 或明確 archive",
+]
