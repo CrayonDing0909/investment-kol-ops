@@ -1,7 +1,7 @@
 ---
 artifact_type: sessions-index
 created_at: 2026-05-13
-last_updated: 2026-05-13T18:10+08:00
+last_updated: 2026-05-13T18:45+08:00
 ---
 
 # Session Status Index
@@ -50,4 +50,4 @@ Use `ops/templates/session-status.md` as the template.
 
 | Session | Status | Branch / Worktree | Scope | Last Updated |
 |---|---|---|---|---|
-| [Session A — Source Tutor / AMD](./2026-05-13_session-a-source-tutor.md) | handed-off | work branch `feat/session-a-amd-share-gap` → PR #15; log/infra stay untracked until isolation-setup PR | AMD `>50% server CPU revenue share` claim gap closure (Mercury Q4 2025) | 2026-05-13 |
+| [Session A — Source Tutor / AMD](./2026-05-13_session-a-source-tutor.md) | paused | Gap A PR #15 merged; Gap B PR #16 merged; log/infra on `chore/session-isolation-cowork` pending PR | AMD `>50% server CPU revenue share` gap closure + Q1 2026 primary-source upgrade; no active research branch | 2026-05-13T18:45+08:00 |
