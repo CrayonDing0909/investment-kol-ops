@@ -7,7 +7,7 @@
 # and git status; you don't have to edit them here.
 
 next_action = """
-Review Threads UI pattern pass and native long-form version: research/swipe/reviews/2026-05-15_threads-ui-patterns-card-001_review.html. Next step after this PR is real swipe examples (3 X + 2 Threads) before publishing.
+Review the real swipe synthesis for Card #001: research/swipe/reviews/2026-05-15_real-swipe-card-001_review.html. It integrates 5 X + 5 Threads examples and the updated platform versions before publishing.
 """
 
 do_not = [

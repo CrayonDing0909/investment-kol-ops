@@ -319,15 +319,19 @@ This official-doc pass supports creating:
 - X long post version
 - Threads segmented version
 
-Not yet done in this artifact:
+Completed after this artifact:
 
-- 5 real swipe entries
+- 5+5 real swipe synthesis:
+  - [X real swipe pass](./2026-05-15_x-real-swipe-card-001.md)
+  - [Threads real swipe pass](./2026-05-15_threads-real-swipe-card-001.md)
+  - [HTML review](./reviews/2026-05-15_real-swipe-card-001_review.html)
+- Threads native long-form / collapsed-preview direction:
+  - [Threads UI patterns](./2026-05-15_threads-ui-patterns-card-001.md)
+
+Not yet done:
+
 - post-publish metric capture
 
-Partially completed after this pass:
-
-- Threads native long-form / collapsed-preview direction is handled in
-  [2026-05-15_threads-ui-patterns-card-001.md](./2026-05-15_threads-ui-patterns-card-001.md).
 - Card #001 now includes both X version and Threads native long-form version.
 
 ## Next Step

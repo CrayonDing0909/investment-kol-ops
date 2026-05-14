@@ -181,10 +181,14 @@ https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
 ## Platform Ship Versions
 
-> Status: draft platform adaptation based on official X / Threads ranking docs.
-> Not yet validated against real swipe examples.
+> Status: draft platform adaptation based on official X / Threads ranking docs
+> plus 5+5 real swipe examples. Still not published.
 >
-> Source: `research/swipe/2026-05-14_x-threads-card-001-official-platform-pass.md`
+> Sources:
+> - `research/swipe/2026-05-14_x-threads-card-001-official-platform-pass.md`
+> - `research/swipe/2026-05-15_x-real-swipe-card-001.md`
+> - `research/swipe/2026-05-15_threads-real-swipe-card-001.md`
+> - `research/swipe/2026-05-15_threads-ui-patterns-card-001.md`
 
 ### X Version
 
@@ -358,17 +362,20 @@ https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 ### Publish Hypothesis
 
 ```text
-Concrete BOM number + raw research voice will create more depth signal than a
-generic AI server supply-chain post.
+Concrete BOM number + raw research voice + saveable mechanism chain will create
+more depth signal than a generic AI server supply-chain post. Threads should use
+native long-form attachment rather than a fragmented multi-reply thread.
 ```
 
 Expected mechanism:
 
-- X: first-line number drives stop/click; question CTA invites replies; author
-  should reply to early comments.
+- X: first-line number drives stop/click; mechanism chain drives saves; question
+  CTA invites replies; author should reply to early comments.
 - Threads: native long-form text attachment keeps the full reasoning intact
   while the outer post and gray preview create a stronger feed hook; CTA asks
   readers which AI server branch they would follow first.
+- Real swipe check: X examples favor concrete numbers / saveable maps; Threads
+  examples favor outer hook + gray long-form text attachment.
 
 ### Success Metrics
 

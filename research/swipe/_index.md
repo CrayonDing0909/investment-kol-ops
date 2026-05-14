@@ -24,6 +24,7 @@ status: draft
 |---|---|---|---|---|---|
 | 2026-05-14 | X + Threads | Official docs | Ranking / recommendation signals for Card #001 | draft | [official platform pass](./2026-05-14_x-threads-card-001-official-platform-pass.md) · [HTML review](./reviews/2026-05-14_x-threads-card-001-platform-pass_review.html) |
 | 2026-05-15 | Threads | UI pattern / screenshots + long-form text attachment docs | Native long-form / collapsed-preview pattern for Card #001 | draft | [Threads UI patterns](./2026-05-15_threads-ui-patterns-card-001.md) · [HTML review](./reviews/2026-05-15_threads-ui-patterns-card-001_review.html) |
+| 2026-05-15 | X + Threads | Real swipe examples | 5 X + 5 Threads examples synthesized for Card #001 | draft | [X examples](./2026-05-15_x-real-swipe-card-001.md) · [Threads examples](./2026-05-15_threads-real-swipe-card-001.md) · [HTML review](./reviews/2026-05-15_real-swipe-card-001_review.html) |
 
 ## Open Queue
 

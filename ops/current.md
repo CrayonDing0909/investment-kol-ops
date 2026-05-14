@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
 created_at: 2026-05-15
-last_updated: 2026-05-15 00:39
+last_updated: 2026-05-15 01:14
 generated_by: ops/build_dashboard.py
 ---
 
@@ -18,7 +18,7 @@ generated_by: ops/build_dashboard.py
 
 ## Right Now
 
-- **Next action**: Review Threads UI pattern pass and native long-form version: research/swipe/reviews/2026-05-15_threads-ui-patterns-card-001_review.html. Next step after this PR is real swipe examples (3 X + 2 Threads) before publishing.
+- **Next action**: Review the real swipe synthesis for Card #001: research/swipe/reviews/2026-05-15_real-swipe-card-001_review.html. It integrates 5 X + 5 Threads examples and the updated platform versions before publishing.
 - **Milestone**: `M3` — 內容生產
 - **Branch**: `research/x-threads-card-001-platform-pass`
 
@@ -66,7 +66,7 @@ generated_by: ops/build_dashboard.py
 
 ## Blockers
 
-- **Real swipe examples pending** (Card #001, `gate-pending`) — Official X/Threads docs and Threads UI pattern pass are summarized; native Threads long-form version added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions.
+- **Real swipe synthesis review pending** (Card #001, `gate-pending`) — 5 X + 5 Threads examples have been collected and synthesized. User should review `research/swipe/reviews/2026-05-15_real-swipe-card-001_review.html` before publishing.
 - **MediaTek 持倉揭露** (Card #002, `disclosure`) — Frontmatter 留有 placeholder，公開前必須確認。
 
 ## Recently Merged PRs

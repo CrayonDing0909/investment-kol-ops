@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Real Swipe Review — Card #001</title>
+<style>
+  :root { --maxw: 920px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9; --surface: #ffffff; --surface-muted: #edf1f5; --text: #24272d;
+    --muted: #68707d; --line: #d8dee6; --link: #315f9f; --warn-bg: #fff4dc;
+    --warn-text: #6b4b00; --good-bg: #e9f5ec; --good-text: #1f6b3a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17191d; --surface: #20242a;
+    --surface-muted: #2a3038; --text: #e2e8f0; --muted: #a8b1bd; --line: #3a424e;
+    --link: #91b7ff; --warn-bg: #332813; --warn-text: #f1d18a; --good-bg: #1c3326;
+    --good-text: #9ed7af; } }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb, .meta, .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  h1 { margin: 4px 0 8px; font-size: 28px; }
+  h2 { font-size: 22px; margin: 28px 0 12px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  h3 { font-size: 17px; margin: 18px 0 8px; }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .box, .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; }
+  a { color: var(--link); text-underline-offset: 2px; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  @media (max-width: 700px) { body { padding: 18px; } .grid { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb">Research / Swipe / Real Examples / Card #001</div>
+  <h1>Real Swipe Review — X 5 + Threads 5</h1>
+  <p>這頁把兩個 subagent 的 real swipe 結果整合成可 review 的結論。重點不是列 10 個案例，而是回答：這 10 個例子要不要改 Card #001？怎麼改？</p>
+  <div class="meta">
+    Status: <span class="pill warn">draft</span> ·
+    Scope: <span class="pill">5 X + 5 Threads</span> ·
+    Canonical: <a href="../2026-05-15_x-real-swipe-card-001.md">X markdown</a> / <a href="../2026-05-15_threads-real-swipe-card-001.md">Threads markdown</a>
+  </div>
+</header>
+
+<section>
+  <h2>1. 一句話結論</h2>
+  <div class="box">
+    <strong>X</strong> 要保留完整推理鏈，但第一行要強、結尾要問問題、最好有一張可收藏的 BOM map。<br />
+    <strong>Threads</strong> 不應拆成多則留言串，應用 outer post + long-form text attachment，讓長文像原生灰底卡片。
+  </div>
+</section>
+
+<section>
+  <h2>2. X — 5 個案例整理</h2>
+  <table>
+    <thead><tr><th>#</th><th>Creator / topic</th><th>Pattern</th><th>Card #001 adaptation</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Kobeissi / AI data center power</td><td>一個巨大數字 + power bottleneck</td><td>保留 $50K cooling BOM 作為第一行記憶點</td></tr>
+      <tr><td>2</td><td>The Transcript / Meta compute quote</td><td>管理層 quote + ticker relevance</td><td>未來可用法說 quote 驗證供應商 exposure，不要純 quote dump</td></tr>
+      <tr><td>3</td><td>SemiAnalysis / CPO testing</td><td>技術流程 + failure cost</td><td>液冷也要寫成 flow：cold plate → CDU → manifold → UQD</td></tr>
+      <tr><td>4</td><td>Dylan Patel / AI datacenter myth</td><td>反 hype / debunk common narrative</td><td>保留「不要急著喊散熱概念股」的 anti-hype stance</td></tr>
+      <tr><td>5</td><td>Quartr / AWS revenue chart</td><td>單一商業數字 + visual proof</td><td>之後加簡單 BOM map 圖，讓內容更 saveable</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>3. Threads — 5 個案例整理</h2>
+  <table>
+    <thead><tr><th>#</th><th>Creator / source</th><th>Pattern</th><th>Card #001 adaptation</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>@threads official</td><td>outer hook + gray text attachment</td><td>用 short outer post + long-form attachment，不拆一堆留言</td></tr>
+      <tr><td>2</td><td>@metanewsroom</td><td>takeaways first + official source link</td><td>附件前幾行先講「你第一個反應可能是...」</td></tr>
+      <tr><td>3</td><td>@conno_r / TechCrunch</td><td>outer post frames value; attachment gives depth</td><td>outer post 不塞 source caveat，正文再拆邏輯</td></tr>
+      <tr><td>4</td><td>@steadycompound</td><td>knowledge-gap hook + taxonomy</td><td>用「散熱不只是風扇」作為知識 gap</td></tr>
+      <tr><td>5</td><td>@benedictevans</td><td>one-sentence strategic frame + link</td><td>結尾用簡潔 frame，不要 hard sell</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>4. 對 Card #001 的實際修改</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>X Version</h3>
+      <ul>
+        <li>保留完整 long-post 推理鏈，不裁短。</li>
+        <li>第一行維持 $50K 數字。</li>
+        <li>CTA 問「散熱、HBM、ASIC 先追哪條？」</li>
+        <li>下一步可加 BOM map 圖。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Threads Version</h3>
+      <ul>
+        <li>改為 native long-form text attachment。</li>
+        <li>Outer post 短，attachment 前幾行用心理反應開頭。</li>
+        <li>不拆成 7-11 則留言。</li>
+        <li>Link / disclosure 放 attachment 末尾。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>5. 還沒做完什麼</h2>
+  <div class="box warn">
+    <p>這次 real swipe 受到 X / Threads public access 限制，很多 metrics 不完整。它足夠修正格式方向，但還不足以當作完整平台 benchmark。</p>
+    <p>發布後要用自己的 metrics 驗證：reply、save、profile click、library click 哪個真的動。</p>
+  </div>
+</section>
+
+<footer>
+  Real swipe review · 5 X + 5 Threads · ready for user review before publishing
+</footer>
+</body>
+</html>

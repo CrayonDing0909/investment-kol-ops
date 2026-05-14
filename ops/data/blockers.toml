@@ -4,10 +4,10 @@
 # scope: free-form (Card #001, 全部 card, ...)
 
 [[blockers]]
-title = "Real swipe examples pending"
+title = "Real swipe synthesis review pending"
 scope = "Card #001"
 type = "gate-pending"
-detail = "Official X/Threads docs and Threads UI pattern pass are summarized; native Threads long-form version added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions."
+detail = "5 X + 5 Threads examples have been collected and synthesized. User should review `research/swipe/reviews/2026-05-15_real-swipe-card-001_review.html` before publishing."
 
 [[blockers]]
 title = "MediaTek 持倉揭露"

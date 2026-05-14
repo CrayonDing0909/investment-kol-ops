@@ -532,6 +532,7 @@ def render_reference(
         ("html", "content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html", "Step 3 · Card #001 審稿頁 — 回兩個 reviewer 問題"),
         ("html", "research/swipe/reviews/2026-05-14_x-threads-card-001-platform-pass_review.html", "X/Threads official platform pass review（發布前平台版本審閱）"),
         ("html", "research/swipe/reviews/2026-05-15_threads-ui-patterns-card-001_review.html", "Threads UI pattern review（long-form card / collapsed preview）"),
+        ("html", "research/swipe/reviews/2026-05-15_real-swipe-card-001_review.html", "Real swipe review（5 X + 5 Threads examples）"),
         ("md", "ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md", "Card #001 IA1 decision file"),
         ("md", "ops/decisions/2026-05-14_card-writing-voice-lessons.md", "Card writing voice lessons（future #002/#003 先讀）"),
         ("md", "ops/current.md", "本頁的 markdown 來源"),
