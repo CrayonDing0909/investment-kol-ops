@@ -116,9 +116,8 @@ GB300 一櫃要花接近 **$50K** 在液冷上。
 
 這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
 
-先翻成人話。
-
-GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
+一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
 
 140kW 是什麼概念？
 
@@ -216,22 +215,24 @@ GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃�
 
 BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收，但它告訴我：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
 
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。這套系統不是只有一顆風扇，而是 cold plate、CDU、manifold、UQD 這些零件加起來的一包 BOM。
+
 對應到公司，先粗分會是：
 
 - 奇鋐 / AVC：cold plate、液冷模組
 - 雙鴻 / Auras：manifold、液冷 solution
 - Vertiv：rack / data center 層級 cooling infrastructure
 
-所以這條線我會這樣看：
+所以這條線我就會這樣理解：
 
-AI 算力需求上升
+現在很明顯大家都在用 AI，算力需求上升這件事應該是不爭的事實
 → GPU power density 上升
 → rack cooling 從 optional 變 required
 → cooling BOM per rack 上升
 → 對應零件供應商的 ASP / volume 有機會上升
 → 最後回到法說驗證 revenue、margin、backlog
 
-我目前比較想追三個訊號：
+如果要進行後續追蹤的話，我目前比較想追三個訊號：
 
 1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
 2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
@@ -249,7 +250,7 @@ AI 算力需求上升
 
 但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。
 
-如果你也在看 AI server 供應鏈，你會把散熱這條放在「基本面升級」還是「題材輪動」？
+這邊我比較好奇的是：如果你也在看 AI server 供應鏈，你會先追散熱、HBM，還是 ASIC 這幾條線？
 
 完整 AI server 供應鏈地圖：
 https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
@@ -266,15 +267,11 @@ GB300 一櫃要花接近 $50K 在液冷上。
 
 這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
 
-2/
-
-先翻成人話。
-
 GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
 
-一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
 
-3/
+2/
 
 140kW 這件事，對我來說重點不是工程數字。
 
@@ -282,7 +279,7 @@ GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
 
 熱排不出去，GPU 會 thermal throttle。你買了很貴的算力，但跑不滿，就是在浪費錢。
 
-4/
+3/
 
 所以液冷開始從 optional 變 required。
 
@@ -297,7 +294,7 @@ GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
 
 這些東西開始變成 AI rack 的必要 BOM。
 
-5/
+4/
 
 BOM 就是零件成本表。
 
@@ -308,7 +305,11 @@ BOM 就是零件成本表。
 
 我不會拿它算很精準的模型，但它至少說明：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
 
-6/
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。
+
+這套系統不是只有一顆風扇，而是 cold plate、CDU、manifold、UQD 這些零件加起來的一包 BOM。
+
+5/
 
 對應到公司，先粗分：
 
@@ -318,21 +319,21 @@ BOM 就是零件成本表。
 
 這不是「看到名字就買」，而是先放進 watchlist。
 
-7/
+6/
 
-我會追的訊號：
+如果要進行後續追蹤的話，我會追三個訊號：
 
 1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
 2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
 3. Vertiv 的 cooling infrastructure backlog 有沒有真的放大
 
-8/
+7/
 
 反向檢查點（算一種利多出盡吧）：
 
 如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
 
-9/
+8/
 
 所以我目前的結論是：
 
@@ -342,7 +343,7 @@ BOM 就是零件成本表。
 
 只要 rack-level system 出貨，這些零件就會有連帶關係。
 
-10/
+9/
 
 如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。
 
@@ -350,12 +351,12 @@ BOM 就是零件成本表。
 
 但本質上，只要算力還短缺、rack power 還往上，液冷應該會是 AI server 基本面裡一個值得追的支撐點。
 
-11/
+10/
 
 完整 AI server 供應鏈地圖：
 https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
-你會把散熱這條放在「基本面升級」還是「題材輪動」？
+如果你也在看 AI server 供應鏈，你會先追散熱、HBM，還是 ASIC 這幾條線？
 
 持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
 ```
