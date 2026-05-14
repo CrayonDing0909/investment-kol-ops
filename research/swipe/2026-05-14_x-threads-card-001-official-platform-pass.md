@@ -136,6 +136,60 @@ The post cannot only be a polished essay. It should create at least one of:
 - link click to library
 - dwell / read-through
 
+## Signal → Content Change Map
+
+這一段才是這份研究最重要的輸出：不是「X / Threads 有哪些 signals」，
+而是「因為這些 signals，我們實際改 Card #001 哪裡」。
+
+| Platform | Official signal / prediction | 我們推導出的內容動作 | 改到 Card #001 哪裡 | Why |
+|---|---|---|---|---|
+| X | `reply`, `reply engaged by author` | 結尾要有可回答的問題，不只放 link | X version 結尾加「你會把散熱這條放在基本面升級還是題材輪動？」 | 回覆是 X 官方模型明確預測的 engagement；作者之後回覆早期留言，也比較符合 reply-engaged-by-author 的方向 |
+| X | `good profile click`, `good click`, `good click v2` | 第一行要讓人停下來、點進去、想看作者是誰 | 第一行保留「GB300 一櫃要花接近 $50K 在液冷上」 | 一個具體數字比「最近整理散熱」更容易產生 curiosity / profile click |
+| X | `bookmark`, `tweet click` | 內容要有可保存的框架，而不是只有一句觀點 | 保留「AI 算力需求 → GPU power density → cooling BOM → supplier ASP / volume → 財報驗證」鏈條 | 這種鏈條是讀者會收藏的東西，比單純 ticker list 更有保存價值 |
+| X | negative feedback / report | 不要寫成喊單或誇大確定性 | 加持倉揭露、保留「watchlist / 驗證訊號」語氣 | 降低被視為 stock pumping 的風險 |
+| Threads | likelihood to create reply | 用分段 conversational format，讓每段都像可以被回覆 | Threads version 拆成 11 段，最後問同一個分類問題 | Threads 官方 ranking 看 reply creation；分段降低回覆門檻 |
+| Threads | post click / profile click / viewing time | 每段只講一個概念，讓人容易連續看完 | Threads version: number → rack → heat → liquid cooling → BOM → companies → watchlist → counter | 長文直接貼會壓縮閱讀；分段能增加 dwell / post click |
+| Threads | engagement with similar accounts/content | 不要過度金融黑話，保持白話研究口吻 | 保留「先翻成人話」「這不是看到名字就買」 | 讓非專業投資者也能進入，不只服務既有金融圈讀者 |
+| Both | user controls / negative feedback | 不要為演算法犧牲 trust | source caveat 留在 library / review，不把 `42%` 寫進公開稿 | 如果被發現算術不通，信任會受損；比短期 reach 更重要 |
+
+### Practical implication
+
+這次平台調整不是把文章變短而已，而是把同一個內容分成兩種任務：
+
+```text
+X: 用強第一句 + 完整推理鏈 + 可回覆問題，測 conversation / profile click。
+Threads: 用分段教學 + 每段一個概念 + 低門檻問題，測 read-through / reply。
+```
+
+## What We Still Need Real Swipe To Validate
+
+官方文件只能告訴我們「平台大概看哪些 signals」，不能告訴我們「投資 / AI infra
+內容在 2026 現場長什麼樣」。所以下一步要看真實案例。
+
+### X examples should answer
+
+- 強第一行通常是數字、反直覺、還是個人觀察？
+- 長文裡 link 通常放哪裡？最後一行、回覆、還是 profile？
+- 投資內容的 CTA 是問問題、請收藏、還是直接引導 newsletter？
+- 有 source caveat 的文章，會不會降低互動？
+- 作者是否在早期留言互動？互動方式是補充資料還是聊天？
+
+### Threads examples should answer
+
+- 好的 Threads 長文是一則長 post，還是多則串？
+- 每則最佳長度大概多長？
+- 分段標號（1/、2/）是否常見？
+- 投資 / 科技內容在 Threads 上要不要放 ticker？
+- CTA 問題更像「你怎麼看」還是「你會怎麼分類」？
+
+### Swipe acceptance criteria
+
+每個 swipe 不是抓爆文截圖而已，必須能回到這個問題：
+
+```text
+這個例子會讓我們改 Card #001 的哪一段？
+```
+
 ### X adaptation
 
 X should optimize for:
