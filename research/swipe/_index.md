@@ -22,7 +22,7 @@ status: draft
 
 | Date | Platform | Creator / Source | Topic | Status | Link |
 |---|---|---|---|---|---|
-| 2026-05-14 | X + Threads | Official docs | Ranking / recommendation signals for Card #001 | draft | [official platform pass](./2026-05-14_x-threads-card-001-official-platform-pass.md) |
+| 2026-05-14 | X + Threads | Official docs | Ranking / recommendation signals for Card #001 | draft | [official platform pass](./2026-05-14_x-threads-card-001-official-platform-pass.md) · [HTML review](./reviews/2026-05-14_x-threads-card-001-platform-pass_review.html) |
 
 ## Open Queue
 

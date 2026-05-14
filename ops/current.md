@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
 created_at: 2026-05-14
-last_updated: 2026-05-14 23:07
+last_updated: 2026-05-14 23:27
 generated_by: ops/build_dashboard.py
 ---
 
@@ -76,6 +76,10 @@ generated_by: ops/build_dashboard.py
 - PR #17 — Session isolation cowork setup (https://github.com/CrayonDing0909/investment-kol-ops/pull/17)
 - PR #16 — Session A Gap B: upgrade AMD Q1 2026 sourcing to SEC primary (https://github.com/CrayonDing0909/investment-kol-ops/pull/16)
 - PR #15 — Session A: close AMD >50% server CPU share gap with Mercury Q4 2025 (https://github.com/CrayonDing0909/investment-kol-ops/pull/15)
+
+## Open PRs
+
+- PR #20 — Algorithm research: X and Threads platform pass for Card #001 (https://github.com/CrayonDing0909/investment-kol-ops/pull/20)
 
 ## Working Rule
 

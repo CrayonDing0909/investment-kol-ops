@@ -14,6 +14,9 @@ status: draft
 > before publishing. This is **not** the swipe file phase yet. It uses official
 > sources first, then converts platform mechanics into draft-level formatting
 > hypotheses.
+>
+> Human-facing review surface:
+> [research/swipe/reviews/2026-05-14_x-threads-card-001-platform-pass_review.html](./reviews/2026-05-14_x-threads-card-001-platform-pass_review.html)
 
 ## Source Set
 
