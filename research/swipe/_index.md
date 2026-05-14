@@ -23,6 +23,7 @@ status: draft
 | Date | Platform | Creator / Source | Topic | Status | Link |
 |---|---|---|---|---|---|
 | 2026-05-14 | X + Threads | Official docs | Ranking / recommendation signals for Card #001 | draft | [official platform pass](./2026-05-14_x-threads-card-001-official-platform-pass.md) · [HTML review](./reviews/2026-05-14_x-threads-card-001-platform-pass_review.html) |
+| 2026-05-15 | Threads | UI pattern / screenshots + long-form text attachment docs | Native long-form / collapsed-preview pattern for Card #001 | draft | [Threads UI patterns](./2026-05-15_threads-ui-patterns-card-001.md) · [HTML review](./reviews/2026-05-15_threads-ui-patterns-card-001_review.html) |
 
 ## Open Queue
 

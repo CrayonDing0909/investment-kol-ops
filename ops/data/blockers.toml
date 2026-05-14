@@ -7,7 +7,7 @@
 title = "Real swipe examples pending"
 scope = "Card #001"
 type = "gate-pending"
-detail = "Official X/Threads ranking docs have been summarized and preliminary platform versions added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions."
+detail = "Official X/Threads docs and Threads UI pattern pass are summarized; native Threads long-form version added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions."
 
 [[blockers]]
 title = "MediaTek 持倉揭露"

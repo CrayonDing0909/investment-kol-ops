@@ -17,6 +17,9 @@ status: draft
 >
 > Human-facing review surface:
 > [research/swipe/reviews/2026-05-14_x-threads-card-001-platform-pass_review.html](./reviews/2026-05-14_x-threads-card-001-platform-pass_review.html)
+>
+> Supplemental Threads UI pass:
+> [research/swipe/2026-05-15_threads-ui-patterns-card-001.md](./2026-05-15_threads-ui-patterns-card-001.md)
 
 ## Source Set
 
@@ -319,8 +322,13 @@ This official-doc pass supports creating:
 Not yet done in this artifact:
 
 - 5 real swipe entries
-- final X / Threads copy
 - post-publish metric capture
+
+Partially completed after this pass:
+
+- Threads native long-form / collapsed-preview direction is handled in
+  [2026-05-15_threads-ui-patterns-card-001.md](./2026-05-15_threads-ui-patterns-card-001.md).
+- Card #001 now includes both X version and Threads native long-form version.
 
 ## Next Step
 
