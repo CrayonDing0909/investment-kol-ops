@@ -7,12 +7,12 @@
 # and git status; you don't have to edit them here.
 
 next_action = """
-Open the next PR for X + Threads algorithm research and platform adaptation before publishing Card #001. Card #001 is IA1-approved and ready, but not yet platform-adapted or published.
+Review the official X + Threads platform pass and preliminary Card #001 X/Threads versions. Next step after this PR is real swipe examples (3 X + 2 Threads) before publishing.
 """
 
 do_not = [
   "不要改 Card #001 source claims unless new evidence appears",
-  "不要發布 Card #001 before X/Threads algorithm pass",
+  "不要發布 Card #001 before reviewing platform versions and running the real swipe pass",
   "不要寫「散熱占整櫃 42%」",
   "不要開新研究分支（Gap C / D / E / AMD cross-source v2）",
   "不要同時推第二張 card",

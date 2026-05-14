@@ -4,10 +4,10 @@
 # scope: free-form (Card #001, 全部 card, ...)
 
 [[blockers]]
-title = "X/Threads algorithm pass pending"
+title = "Real swipe examples pending"
 scope = "Card #001"
 type = "gate-pending"
-detail = "Card #001 is IA1-approved and ready, but user wants platform/algorithm research before publishing. Next PR should study official X/Threads ranking docs and produce platform-specific versions."
+detail = "Official X/Threads ranking docs have been summarized and preliminary platform versions added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions."
 
 [[blockers]]
 title = "MediaTek 持倉揭露"

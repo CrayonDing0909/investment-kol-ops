@@ -178,6 +178,217 @@ https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
 持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
 
+## Platform Ship Versions
+
+> Status: draft platform adaptation based on official X / Threads ranking docs.
+> Not yet validated against real swipe examples.
+>
+> Source: `research/swipe/2026-05-14_x-threads-card-001-official-platform-pass.md`
+
+### X Version
+
+```text
+GB300 一櫃要花接近 $50K 在液冷上。
+
+這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
+
+先翻成人話。
+
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+
+140kW 是什麼概念？
+
+你可以先不用管工程細節，只要知道：這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。
+
+所以液冷開始從 optional 變 required。
+這就是為什麼散熱開始從「風扇」變成「一整套水路」。
+
+拆開看，大概有幾段：
+
+- cold plate：貼在晶片上，把熱帶到冷卻液
+- CDU：整櫃冷卻液循環的主機
+- manifold：把冷卻液分到不同 tray
+- UQD：快接頭，讓 tray 可以維修又不漏液
+
+公開拆解資料給的量級是：GB300 NVL72 單櫃液冷 BOM 約 $49,860，GB200 約 $41,500。
+
+BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收，但它告訴我：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+對應到公司，先粗分會是：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+所以這條線我會這樣看：
+
+AI 算力需求上升
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商的 ASP / volume 有機會上升
+→ 最後回到法說驗證 revenue、margin、backlog
+
+我目前比較想追三個訊號：
+
+1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
+2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
+3. Vertiv 的 cooling infrastructure backlog 有沒有真的放大
+
+這條線我會先放一個反向檢查點（算一種利多出盡吧）：如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+但至少目前看到的產業資料，方向是 OK 的。
+
+所以統整完上面這些資料，我目前得到的結論是：
+
+散熱開始被市場重新看見，我現在理解比較像是：AI server 變成一櫃一櫃的系統在賣，所以它上面的散熱組件也會被一起綁進去。只要 rack-level system 出貨，cold plate、CDU、manifold 這些東西就會跟著有連帶關係。
+
+如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。反過來，如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。
+
+但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。
+
+如果你也在看 AI server 供應鏈，你會把散熱這條放在「基本面升級」還是「題材輪動」？
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
+```
+
+### Threads Version
+
+```text
+1/
+
+GB300 一櫃要花接近 $50K 在液冷上。
+
+這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
+
+2/
+
+先翻成人話。
+
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
+
+一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+
+3/
+
+140kW 這件事，對我來說重點不是工程數字。
+
+重點是：這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle。你買了很貴的算力，但跑不滿，就是在浪費錢。
+
+4/
+
+所以液冷開始從 optional 變 required。
+
+散熱也不是只有「風扇」。
+
+拆開看，大概有：
+
+- cold plate
+- CDU
+- manifold
+- UQD
+
+這些東西開始變成 AI rack 的必要 BOM。
+
+5/
+
+BOM 就是零件成本表。
+
+公開拆解資料給的量級是：
+
+- GB300 NVL72 單櫃液冷 BOM 約 $49,860
+- GB200 約 $41,500
+
+我不會拿它算很精準的模型，但它至少說明：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+6/
+
+對應到公司，先粗分：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+這不是「看到名字就買」，而是先放進 watchlist。
+
+7/
+
+我會追的訊號：
+
+1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
+2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
+3. Vertiv 的 cooling infrastructure backlog 有沒有真的放大
+
+8/
+
+反向檢查點（算一種利多出盡吧）：
+
+如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+9/
+
+所以我目前的結論是：
+
+散熱不是單純「AI 很熱」的題材。
+
+它比較像是：AI server 變成一櫃一櫃的系統在賣，所以散熱組件也被一起綁進 BOM。
+
+只要 rack-level system 出貨，這些零件就會有連帶關係。
+
+10/
+
+如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。
+
+如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。
+
+但本質上，只要算力還短缺、rack power 還往上，液冷應該會是 AI server 基本面裡一個值得追的支撐點。
+
+11/
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+你會把散熱這條放在「基本面升級」還是「題材輪動」？
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
+```
+
+### Publish Hypothesis
+
+```text
+Concrete BOM number + raw research voice will create more depth signal than a
+generic AI server supply-chain post.
+```
+
+Expected mechanism:
+
+- X: first-line number drives stop/click; question CTA invites replies; author
+  should reply to early comments.
+- Threads: segmented explanation increases read-through and reply likelihood;
+  conversational CTA asks readers to classify the theme.
+
+### Success Metrics
+
+First 72h primary metrics:
+
+- replies with real questions or pushback
+- saves / bookmarks
+- profile clicks / follows
+- library link clicks
+
+Secondary metrics:
+
+- likes
+- reposts
+- impressions
+
 ## CTA + Footer
 
 ```text

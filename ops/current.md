@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
 created_at: 2026-05-14
-last_updated: 2026-05-14 22:54
+last_updated: 2026-05-14 23:07
 generated_by: ops/build_dashboard.py
 ---
 
@@ -18,14 +18,14 @@ generated_by: ops/build_dashboard.py
 
 ## Right Now
 
-- **Next action**: Open the next PR for X + Threads algorithm research and platform adaptation before publishing Card #001. Card #001 is IA1-approved and ready, but not yet platform-adapted or published.
+- **Next action**: Review the official X + Threads platform pass and preliminary Card #001 X/Threads versions. Next step after this PR is real swipe examples (3 X + 2 Threads) before publishing.
 - **Milestone**: `M3` — 內容生產
-- **Branch**: `feat/card-001-learning-ready`
+- **Branch**: `research/x-threads-card-001-platform-pass`
 
 **Do not start**:
 
 - 不要改 Card #001 source claims unless new evidence appears
-- 不要發布 Card #001 before X/Threads algorithm pass
+- 不要發布 Card #001 before reviewing platform versions and running the real swipe pass
 - 不要寫「散熱占整櫃 42%」
 - 不要開新研究分支（Gap C / D / E / AMD cross-source v2）
 - 不要同時推第二張 card
@@ -66,16 +66,16 @@ generated_by: ops/build_dashboard.py
 
 ## Blockers
 
-- **X/Threads algorithm pass pending** (Card #001, `gate-pending`) — Card #001 is IA1-approved and ready, but user wants platform/algorithm research before publishing. Next PR should study official X/Threads ranking docs and produce platform-specific versions.
+- **Real swipe examples pending** (Card #001, `gate-pending`) — Official X/Threads ranking docs have been summarized and preliminary platform versions added. Before publishing, collect 3 real X examples + 2 Threads examples to validate formatting and CTA assumptions.
 - **MediaTek 持倉揭露** (Card #002, `disclosure`) — Frontmatter 留有 placeholder，公開前必須確認。
 
 ## Recently Merged PRs
 
+- PR #19 — Card #001 cooling BOM ready with learning-first flow (https://github.com/CrayonDing0909/investment-kol-ops/pull/19)
 - PR #18 — Clarify reading surface rules (https://github.com/CrayonDing0909/investment-kol-ops/pull/18)
 - PR #17 — Session isolation cowork setup (https://github.com/CrayonDing0909/investment-kol-ops/pull/17)
 - PR #16 — Session A Gap B: upgrade AMD Q1 2026 sourcing to SEC primary (https://github.com/CrayonDing0909/investment-kol-ops/pull/16)
 - PR #15 — Session A: close AMD >50% server CPU share gap with Mercury Q4 2025 (https://github.com/CrayonDing0909/investment-kol-ops/pull/15)
-- PR #14 — Strategy pivot: thesis-card template + 6 AI server card outlines (backbone+card model) (https://github.com/CrayonDing0909/investment-kol-ops/pull/14)
 
 ## Working Rule
 
