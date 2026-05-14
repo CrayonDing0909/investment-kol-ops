@@ -280,7 +280,33 @@
       <li>manifold：把冷卻液分到不同 tray</li>
       <li>UQD：快接頭，讓 tray 可以維修又不漏液</li>
     </ul>
-    <p>對應到公司，先粗分會是：奇鋐 / AVC、雙鴻 / Auras、Vertiv。</p>
+    <p>公開拆解資料給的量級是：GB300 NVL72 單櫃液冷 BOM 約 $49,860，GB200 約 $41,500。</p>
+    <p>BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收，但它告訴我：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。</p>
+    <p>對應到公司，先粗分會是：</p>
+    <ul>
+      <li>奇鋐 / AVC：cold plate、液冷模組</li>
+      <li>雙鴻 / Auras：manifold、液冷 solution</li>
+      <li>Vertiv：rack / data center 層級 cooling infrastructure</li>
+    </ul>
+    <p>所以這條線我會這樣看：</p>
+    <p>AI 算力需求上升<br />
+      → GPU power density 上升<br />
+      → rack cooling 從 optional 變 required<br />
+      → cooling BOM per rack 上升<br />
+      → 對應零件供應商的 ASP / volume 有機會上升<br />
+      → 最後回到法說驗證 revenue、margin、backlog</p>
+    <p>我目前比較想追三個訊號：</p>
+    <ol>
+      <li>NVIDIA 下一代 rack power envelope 有沒有繼續往上</li>
+      <li>奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure</li>
+      <li>Vertiv 的 cooling infrastructure backlog 有沒有真的放大</li>
+    </ol>
+    <p>這條線我會先放一個反向檢查點（算一種利多出盡吧）：如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。</p>
+    <p>但至少目前看到的產業資料，方向是 OK 的。</p>
+    <p>所以統整完上面這些資料，我目前得到的結論是：</p>
+    <p>散熱開始被市場重新看見，我現在理解比較像是：AI server 變成一櫃一櫃的系統在賣，所以它上面的散熱組件也會被一起綁進去。只要 rack-level system 出貨，cold plate、CDU、manifold 這些東西就會跟著有連帶關係。</p>
+    <p>如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。反過來，如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。</p>
+    <p>但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。</p>
     <p>如果你也在看 AI server 供應鏈，你會把散熱這條放在「基本面升級」還是「題材輪動」？</p>
     <p>完整地圖：https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/</p>
     <p class="source">持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。</p>
