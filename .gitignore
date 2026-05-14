@@ -20,3 +20,4 @@ assets/raw/
 *.mov
 *.mp4
 *.psd
+.vercel

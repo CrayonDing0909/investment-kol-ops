@@ -1,0 +1,52 @@
+# Milestone state — single source of truth for dashboard.
+#
+# status: "done" | "active" | "todo"
+# Edit here and re-run: python3 ops/build_dashboard.py
+
+[[milestones]]
+id = "M1"
+label = "投資分析"
+status = "done"
+description = "M1.0 + M1.1 + M1.2 shipped"
+
+[[milestones]]
+id = "M2"
+label = "內部文章"
+status = "done"
+description = "First internal article in markdown + HTML"
+
+[[milestones]]
+id = "M2.1"
+label = "公開化"
+status = "done"
+description = "PR #13 merged; cooling / HBM / passive packets in"
+
+[[milestones]]
+id = "M2.2"
+label = "Tutor UX"
+status = "done"
+description = "Tutor reading template + paired HTML pages"
+
+[[milestones]]
+id = "M2.3"
+label = "Cross-source"
+status = "done"
+description = "Intel v2 reading; AMD Gap A + Gap B"
+
+[[milestones]]
+id = "M3"
+label = "內容生產"
+status = "active"
+description = "Card #001 IA1-approved and ready; next is X/Threads platform adaptation before publish"
+
+[[milestones]]
+id = "M4"
+label = "Scripts"
+status = "todo"
+description = "Cursor commands and small scripts"
+
+[[milestones]]
+id = "M5"
+label = "Metrics"
+status = "todo"
+description = "Metrics, publishing, audience interviews"

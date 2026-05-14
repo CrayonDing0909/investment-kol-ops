@@ -1,0 +1,75 @@
+# .vercelignore — files NOT uploaded to Vercel during deploy.
+#
+# Even with this file, the runtime safety boundary is `outputDirectory: dist`
+# in `vercel.json`: Vercel only serves files under `dist/`. The build script
+# `ops/build_library.sh` copies a whitelisted HTML subset into `dist/`.
+#
+# This file blocks private content from being uploaded at all (defense in
+# depth).
+
+# --- standard junk ---
+.git/
+.gitignore
+.vercel/
+.cursor/
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+.env
+.env.*
+!.env.example
+
+# --- internal cockpit (only ops/build_library.sh stays public-buildable) ---
+ops/sessions/
+ops/decisions/
+ops/data/
+ops/templates/
+ops/dashboard.html
+ops/current.md
+ops/build_dashboard.py
+ops/README.md
+ops/AGENTIC_RUNBOOK.md
+ops/AGENTIC_RUNBOOK.zh.md
+ops/METRICS.md
+ops/RISK_AND_COMPLIANCE.md
+ops/tooling-dashboard-options.md
+
+# --- internal research (raw sources, tutor notes, Q&A, drafts, briefs) ---
+research/source-tutor/
+research/sources/
+research/intake/
+research/questions/
+research/notes/
+research/templates/
+research/swipe/
+research/interviews/
+research/pain-clusters/
+research/ALGORITHM_RESEARCH.md
+research/AUDIENCE_DISCOVERY.md
+
+# --- internal content (cards stay private; drafts publish HTML only) ---
+content/cards/
+content/templates/
+content/drafts/*.md
+
+# --- internal docs / harness ---
+docs/
+AGENTS.md
+Makefile
+LICENSE
+*.zh.md
+README.zh.md
+
+# --- private data buckets ---
+private/
+exports/
+raw-data/
+assets/raw/
+*.mov
+*.mp4
+*.psd
+
+# Build output (Vercel rebuilds on deploy)
+dist/
