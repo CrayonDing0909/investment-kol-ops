@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Now Page — Investment KOL Ops</title>
+<style>
+:root {
+  /* Layout */
+  --maxw: 1120px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+
+  /* Type */
+  --font-sans: "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Noto Sans CJK TC", "Noto Sans TC", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Neutrals (zinc-ish) */
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --surface-2: #f4f4f5;
+  --surface-3: #e9eaec;
+
+  --text: #18181b;
+  --text-2: #3f3f46;
+  --muted: #71717a;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+
+  /* Accent (indigo) */
+  --accent: #4f46e5;
+  --accent-soft: #eef2ff;
+  --accent-line: #c7d2fe;
+
+  /* Status */
+  --status-active-bg: #fef3c7;
+  --status-active-text: #92400e;
+  --status-active-line: #fcd34d;
+
+  --status-blocked-bg: #fee2e2;
+  --status-blocked-text: #991b1b;
+  --status-blocked-line: #fca5a5;
+
+  --status-done-bg: #dcfce7;
+  --status-done-text: #166534;
+  --status-done-line: #86efac;
+
+  --status-paused-bg: #f4f4f5;
+  --status-paused-text: #52525b;
+  --status-paused-line: #d4d4d8;
+
+  --status-draft-bg: #ffedd5;
+  --status-draft-text: #9a3412;
+  --status-draft-line: #fdba74;
+
+  --shadow-xs: 0 1px 2px rgba(24, 24, 27, 0.04);
+  --shadow-sm: 0 1px 2px rgba(24, 24, 27, 0.05), 0 1px 3px rgba(24, 24, 27, 0.04);
+  --shadow-md: 0 4px 12px rgba(24, 24, 27, 0.06), 0 1px 3px rgba(24, 24, 27, 0.04);
+
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a1d;
+    --surface: #232327;
+    --surface-2: #2e2e33;
+    --surface-3: #3a3a40;
+
+    --text: #fafafa;
+    --text-2: #e4e4e7;
+    --muted: #a1a1aa;
+    --line: #353539;
+    --line-strong: #4a4a52;
+
+    --accent: #a5b4fc;
+    --accent-soft: #2a2570;
+    --accent-line: #4338ca;
+
+    --status-active-bg: #3a2510;
+    --status-active-text: #fde68a;
+    --status-active-line: #b85e1a;
+
+    --status-blocked-bg: #4a1717;
+    --status-blocked-text: #fecaca;
+    --status-blocked-line: #c43d3d;
+
+    --status-done-bg: #0e3a1f;
+    --status-done-text: #bbf7d0;
+    --status-done-line: #2d7a47;
+
+    --status-paused-bg: #2a2a30;
+    --status-paused-text: #d4d4d8;
+    --status-paused-line: #4a4a52;
+
+    --status-draft-bg: #4a2a14;
+    --status-draft-text: #fed7aa;
+    --status-draft-line: #c47331;
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.32);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.32), 0 1px 3px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.28);
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  padding: 40px 28px 56px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+code { background: var(--surface-2); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; color: var(--text); }
+
+.topbar { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.topbar .left { display: flex; align-items: baseline; gap: 10px; }
+.topbar .brand { font-weight: 600; font-size: 13px; letter-spacing: -0.01em; color: var(--text); }
+.topbar .crumb { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+.topbar .right { font-size: 12px; color: var(--muted); font-family: var(--font-mono); }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 32px 0 12px;
+}
+.section-label:first-of-type { margin-top: 24px; }
+
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); }
+.hero .eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero .eyebrow::after { content: ""; height: 1px; flex: 1; background: var(--line); max-width: 60px; }
+.hero h1 { margin: 0 0 20px; font-size: 26px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em; color: var(--text); }
+.hero h1 code { font-size: 0.85em; padding: 1px 7px; }
+.hero .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+.hero .donot {
+  margin-top: 16px; padding: 12px 14px;
+  background: var(--status-blocked-bg);
+  border: 1px solid var(--status-blocked-line);
+  border-radius: var(--radius);
+  font-size: 13px; line-height: 1.55; color: var(--status-blocked-text);
+}
+.hero .donot .key {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-right: 8px;
+}
+.hero .donot ul { margin: 6px 0 0; padding-left: 20px; }
+.hero .donot li { margin-bottom: 2px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--text-2);
+  font-family: var(--font-mono);
+}
+.chip .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.chip.active { background: var(--status-active-bg); color: var(--status-active-text); border-color: var(--status-active-line); }
+.chip.draft { background: var(--status-draft-bg); color: var(--status-draft-text); border-color: var(--status-draft-line); }
+.chip.done { background: var(--status-done-bg); color: var(--status-done-text); border-color: var(--status-done-line); }
+.chip.paused { background: var(--status-paused-bg); color: var(--status-paused-text); border-color: var(--status-paused-line); }
+
+.pill {
+  display: inline-flex; align-items: center; padding: 1px 8px; border-radius: 999px;
+  font-size: 11px; font-weight: 500; font-family: var(--font-mono);
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--text-2);
+  text-transform: lowercase; white-space: nowrap;
+}
+.pill.active { background: var(--status-active-bg); color: var(--status-active-text); border-color: var(--status-active-line); }
+.pill.draft { background: var(--status-draft-bg); color: var(--status-draft-text); border-color: var(--status-draft-line); }
+.pill.blocked { background: var(--status-blocked-bg); color: var(--status-blocked-text); border-color: var(--status-blocked-line); }
+.pill.done { background: var(--status-done-bg); color: var(--status-done-text); border-color: var(--status-done-line); }
+.pill.paused { background: var(--status-paused-bg); color: var(--status-paused-text); border-color: var(--status-paused-line); }
+
+.progress {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-xs);
+}
+.track { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-top: 4px; }
+.step {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 0 0 auto; min-width: 64px; padding: 4px 6px;
+}
+.step .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--surface-3); border: 2px solid var(--surface-3); }
+.step .name { font-size: 11px; font-weight: 600; font-family: var(--font-mono); color: var(--muted); letter-spacing: 0.02em; }
+.step .sub { font-size: 11px; color: var(--muted); }
+.step.done .dot { background: var(--status-done-text); border-color: var(--status-done-text); }
+.step.done .name { color: var(--text-2); }
+.step.active .dot { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft), 0 0 0 5px var(--accent-line); }
+.step.active .name { color: var(--accent); }
+.step.todo .dot { background: var(--surface); border-color: var(--line-strong); }
+.connector { flex: 1 1 12px; min-width: 12px; height: 2px; background: var(--surface-3); margin-top: -22px; border-radius: 1px; }
+.connector.done { background: var(--status-done-line); }
+
+.lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.lane { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow-xs); }
+.lane header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.lane h3 { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+.lane h3 .dot-mark { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.lane.active h3 .dot-mark { background: var(--status-active-line); }
+.lane.blocked h3 .dot-mark { background: var(--status-blocked-line); }
+.lane.done h3 .dot-mark { background: var(--status-done-line); }
+.lane .count { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+
+.item {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 8px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+.item:last-child { margin-bottom: 0; }
+.item:hover { box-shadow: var(--shadow-sm); border-color: var(--line-strong); transform: translateY(-1px); }
+.item .head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.item .title { font-weight: 600; font-size: 13.5px; letter-spacing: -0.005em; color: var(--text); }
+.item .title a { color: inherit; }
+.item .title a:hover { color: var(--accent); text-decoration: none; }
+.item .desc { font-size: 12.5px; line-height: 1.55; color: var(--text-2); }
+.item .desc code { font-size: 0.92em; }
+.item .footer { font-size: 11px; color: var(--muted); font-family: var(--font-mono); margin-top: 8px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+.reference { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.ref-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow-xs); }
+.ref-block h3 { margin: 0 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; color: var(--muted); }
+.ref-block ul { margin: 0; padding-left: 0; list-style: none; }
+.ref-block li {
+  font-size: 13px; line-height: 1.6; padding: 6px 0; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.ref-block li:last-child { border-bottom: none; }
+.ref-block li .label { color: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.ref-block .small { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.ref-block pre {
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm);
+  padding: 12px 14px; overflow-x: auto; font-family: var(--font-mono);
+  font-size: 12px; line-height: 1.6; margin: 0; color: var(--text-2);
+}
+
+footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+.generated-banner { font-size: 11px; color: var(--muted); font-family: var(--font-mono); margin-bottom: 8px; }
+
+@media (max-width: 920px) {
+  .lanes { grid-template-columns: 1fr; }
+  .reference { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body { padding: 24px 16px 40px; }
+  .hero { padding: 22px 20px; }
+  .hero h1 { font-size: 21px; }
+  .step { min-width: 56px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- DO NOT EDIT. Generated by ops/build_dashboard.py. -->
+
+<div class="topbar">
+  <div class="left">
+    <span class="brand">Now Page</span>
+    <span class="crumb">/ ops / investment-kol-ops</span>
+  </div>
+  <div class="right">最後更新 2026-05-14 22:54 · 自動生成 from frontmatter + data/*.toml</div>
+</div>
+
+<section class="hero" aria-label="現在該做什麼">
+  <div class="eyebrow">下一步 · one next action</div>
+  <h1>Open the next PR for X + Threads algorithm research and platform adaptation before publishing Card #001. Card #001 is IA1-approved and ready, but not yet platform-adapted or published.</h1>
+  <div class="chips">
+    <span class="chip active"><span class="label">milestone</span> M3 active</span>
+    <span class="chip"><span class="label">branch</span> <code>feat/card-001-learning-ready</code></span>
+  </div>
+  <div class="donot">
+    <span class="key">不要做</span>
+    <ul><li>不要改 Card #001 source claims unless new evidence appears</li><li>不要發布 Card #001 before X/Threads algorithm pass</li><li>不要寫「散熱占整櫃 42%」</li><li>不要開新研究分支（Gap C / D / E / AMD cross-source v2）</li><li>不要同時推第二張 card</li><li>不要新增 worktree</li><li>先把 #001 推到 ready 或明確 archive</li></ul>
+  </div>
+</section>
+
+<div class="section-label">Milestone 進度</div>
+<section class="progress" aria-label="Milestone 進度">
+  <div class="track">
+    <div class="step done"><span class="dot"></span><span class="name">M1</span><span class="sub">投資分析</span></div>
+    <div class="connector done"></div>
+    <div class="step done"><span class="dot"></span><span class="name">M2</span><span class="sub">內部文章</span></div>
+    <div class="connector done"></div>
+    <div class="step done"><span class="dot"></span><span class="name">M2.1</span><span class="sub">公開化</span></div>
+    <div class="connector done"></div>
+    <div class="step done"><span class="dot"></span><span class="name">M2.2</span><span class="sub">Tutor UX</span></div>
+    <div class="connector done"></div>
+    <div class="step done"><span class="dot"></span><span class="name">M2.3</span><span class="sub">Cross-source</span></div>
+    <div class="connector"></div>
+    <div class="step active"><span class="dot"></span><span class="name">M3</span><span class="sub">內容生產</span></div>
+    <div class="connector"></div>
+    <div class="step todo"><span class="dot"></span><span class="name">M4</span><span class="sub">Scripts</span></div>
+    <div class="connector"></div>
+    <div class="step todo"><span class="dot"></span><span class="name">M5</span><span class="sub">Metrics</span></div>
+  </div>
+</section>
+
+<div class="section-label">三欄狀態 · active / blocked / done</div>
+<div class="lanes">
+<section class="lane active" aria-label="進行中">
+  <header>
+    <h3><span class="dot-mark"></span>進行中</h3>
+    <span class="count">0 items</span>
+  </header>
+  <div class="desc" style="color:var(--muted)">無</div>
+</section>
+<section class="lane blocked" aria-label="阻塞中">
+  <header>
+    <h3><span class="dot-mark"></span>阻塞中</h3>
+    <span class="count">2 items</span>
+  </header>
+  <div class="item">
+    <div class="head">
+      <span class="title">X/Threads algorithm pass pending · Card #001</span>
+      <span class="pill blocked">gate-pending</span>
+    </div>
+    <div class="desc">Card #001 is IA1-approved and ready, but user wants platform/algorithm research before publishing. Next PR should study official X/Threads ranking docs and produce platform-specific versions.</div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">MediaTek 持倉揭露 · Card #002</span>
+      <span class="pill blocked">disclosure</span>
+    </div>
+    <div class="desc">Frontmatter 留有 placeholder，公開前必須確認。</div>
+  </div>
+</section>
+<section class="lane done" aria-label="近期完成">
+  <header>
+    <h3><span class="dot-mark"></span>近期完成</h3>
+    <span class="count">5 items</span>
+  </header>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/18">PR #18 · Clarify reading surface rules</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>docs/reading-surface-rule-main</code> → <code>main</code></div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/17">PR #17 · Session isolation cowork setup</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>chore/session-isolation-cowork</code> → <code>main</code></div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/16">PR #16 · Session A Gap B: upgrade AMD Q1 2026 sourcing to SEC primary</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>feat/session-a-amd-q1-primary-upgrade</code> → <code>main</code></div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/15">PR #15 · Session A: close AMD &gt;50% server CPU share gap with Mercury Q4 2025</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>feat/session-a-amd-share-gap</code> → <code>main</code></div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/14">PR #14 · Strategy pivot: thesis-card template + 6 AI server card outlines (backbone+card model)</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>feat/strategy-thesis-card-template</code> → <code>main</code></div>
+  </div>
+</section>
+</div>
+
+<div class="section-label">Sessions · Cards · 守則 · 入口</div>
+<div class="reference">
+<div class="ref-block">
+  <h3>Sessions</h3>
+  <ul>
+    <li><span class="pill paused">paused</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/sessions/2026-05-13_session-a-source-tutor.md">Session A — Source Tutor / AMD Claim Reading</a></li>
+    <li><span class="pill done">completed</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/sessions/2026-05-13_session-b-thesis-cards.md">Session B — Thesis Cards / Content Production</a></li>
+    <li><span class="pill done">completed</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/sessions/2026-05-13_session-c-card-001.md">Session C — Card #001 Cooling BOM</a></li>
+  </ul>
+</div>
+<div class="ref-block">
+  <h3>Cards · AI Server Supply Chain v1</h3>
+  <ul>
+    <li><span class="pill active">ready</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">#001 GB300 一櫃液冷 BOM 接近 $50K，先別急著喊散熱概念股</a> <span class="label">資金 · bull-kill</span></li>
+    <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_fundamentals-mediatek-2b_002.md">#002 MediaTek $2B AI ASIC 是 management expectation，不是已實現營收</a> <span class="label">基本面 · bear-falsify</span></li>
+    <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_why-cpu-back_003.md">#003 CPU 不是 GPU 的對手，是 agent AI 的瓶頸</a> <span class="label">為什麼 · bull-kill</span></li>
+    <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_trigger-apple-intel_004.md">#004 Apple-Intel preliminary deal 是訊號，但「preliminary」這個字現在做什麼還太早</a> <span class="label">啟動 · bear-falsify</span></li>
+    <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_break-cpu-thesis_005.md">#005 3 個會讓我下調 AI server CPU 復興 thesis 的具體數字</a> <span class="label">破局 · bull-kill</span></li>
+    <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/2026-05-13_ai-server_meta-passive-evidence_006.md">#006 5 篇 DigiTimes 報導 = 1 個 publisher = 不算 source-backed</a> <span class="label">meta · n/a-meta-method</span></li>
+  </ul>
+</div>
+<div class="ref-block">
+  <h3>工作守則</h3>
+<pre>1. 開 ops/dashboard.html，先讀 Hero。
+2. 在 active branch 上只做那一件下一步。
+3. 停下來前更新對應 markdown frontmatter，再跑：
+   python3 ops/build_dashboard.py  (or `make dashboard`)
+4. 想開新研究分支或 worktree 時 → STOP，
+   先回去看 Hero 區的「不要做」。</pre>
+  <p class="small">一個 active task = 一條 branch。Session 是 chat 邊界，不是 branch。</p>
+</div>
+<div class="ref-block">
+  <h3>常用入口</h3>
+  <ul>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/primers/ai-server-components.html">research/knowledge/ai-server-supply-chain/primers/ai-server-components.html</a> · Step 1 · AI Server 元件 Primer（先學 domain 概念）</li>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/readings/cooling-bom.html">research/knowledge/ai-server-supply-chain/readings/cooling-bom.html</a> · Step 2 · Cooling BOM 學習頁（讀 source）</li>
+    <li><span class="label">html</span> <a href="../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html</a> · Step 3 · Card #001 審稿頁 — 回兩個 reviewer 問題</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md">ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md</a> · Card #001 IA1 decision file</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/decisions/2026-05-14_card-writing-voice-lessons.md">ops/decisions/2026-05-14_card-writing-voice-lessons.md</a> · Card writing voice lessons（future #002/#003 先讀）</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/current.md">ops/current.md</a> · 本頁的 markdown 來源</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/content/cards/_index.md">content/cards/_index.md</a> · Cards 規範與全表</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/sessions/_index.md">ops/sessions/_index.md</a> · Sessions 規範與全表</li>
+    <li><span class="label">html</span> <a href="../content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html">content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html</a> · Backbone article</li>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/index.html">research/knowledge/ai-server-supply-chain/index.html</a> · Knowledge map</li>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/readings/index.html">research/knowledge/ai-server-supply-chain/readings/index.html</a> · Readings index（所有 source tutor 學習頁）</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/docs/IMPLEMENTATION_PLAN.md">docs/IMPLEMENTATION_PLAN.md</a> · Implementation plan</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/build_dashboard.py">ops/build_dashboard.py</a> · Dashboard generator 程式</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/data/now.toml">ops/data/now.toml</a> · Hero 文案（next_action / do_not）</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/data/milestones.toml">ops/data/milestones.toml</a> · Milestone 狀態</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops-card001-pr/ops/data/blockers.toml">ops/data/blockers.toml</a> · Blockers 清單</li>
+  </ul>
+</div>
+</div>
+
+<footer>Static HTML cockpit · 由 <code>ops/build_dashboard.py</code> 自動生成 · 編輯 markdown frontmatter 與 <code>ops/data/*.toml</code> 後重跑即可。</footer>
+
+</body>
+</html>

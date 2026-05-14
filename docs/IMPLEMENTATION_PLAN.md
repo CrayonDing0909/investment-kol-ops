@@ -476,6 +476,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M2.3 - AI server supply chain coverage expanded with 4 new source packets and 3 structural layers (manufacturing capacity, procurement & tightness, geopolitics & policy); Intel Q1 2026 source-tutor reading note added
 2026-05-13 - M2.3 - Cross-source synthesis mode added to source-tutor (template + Cursor rule + workflow + role); Intel full-thesis v2 cross-source reading note authored and used as validation case
 2026-05-13 - M2.3 - Reading surface rules clarified to preserve canonical data while keeping HTML as the default rendered view
+2026-05-14 - M3 - Card #001 cooling BOM completed learning-first flow (domain primer, source tutor, HTML review, IA1 approved) and marked ready for X/Threads platform adaptation
 ```
 
 ### Per-Skill Status Grid Footnotes

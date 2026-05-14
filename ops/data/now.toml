@@ -1,0 +1,21 @@
+# "Right now" hero content for the dashboard.
+#
+# next_action: one sentence (the single thing to do next)
+# do_not:      bullet list (what to NOT start)
+#
+# Active milestone / branch / card / session are auto-derived from frontmatter
+# and git status; you don't have to edit them here.
+
+next_action = """
+Open the next PR for X + Threads algorithm research and platform adaptation before publishing Card #001. Card #001 is IA1-approved and ready, but not yet platform-adapted or published.
+"""
+
+do_not = [
+  "不要改 Card #001 source claims unless new evidence appears",
+  "不要發布 Card #001 before X/Threads algorithm pass",
+  "不要寫「散熱占整櫃 42%」",
+  "不要開新研究分支（Gap C / D / E / AMD cross-source v2）",
+  "不要同時推第二張 card",
+  "不要新增 worktree",
+  "先把 #001 推到 ready 或明確 archive",
+]
