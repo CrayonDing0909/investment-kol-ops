@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>散熱系列 第二集 — 一櫃 GB300 為什麼要花 $50K 在液冷上（撰寫中）</title>
+<style>
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9; --surface: #ffffff; --surface-muted: #edf1f5; --text: #24272d;
+    --muted: #68707d; --line: #d8dee6; --link: #315f9f;
+    --accent-bg: #e8efff; --accent-text: #1f3e8a; --accent-line: #c5d3f0;
+    --warn-bg: #fff4dc; --warn-text: #6b4b00;
+    --good-bg: #e9f5ec; --good-text: #1f6b3a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17191d; --surface: #20242a;
+    --surface-muted: #2a3038; --text: #e2e8f0; --muted: #a8b1bd; --line: #3a424e;
+    --link: #91b7ff; --accent-bg: #1d2740; --accent-text: #b5cbff;
+    --accent-line: #2f3e60; --warn-bg: #332813; --warn-text: #f1d18a;
+    --good-bg: #1c3326; --good-text: #9ed7af; } }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.75; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); font-size: 16px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 22px; }
+  header .crumb { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 6px; }
+  header .crumb a { color: var(--muted); }
+  header h1 { margin: 6px 0 4px; font-size: 26px; line-height: 1.4; }
+  header .subtitle { margin: 4px 0 12px; font-size: 15px; color: var(--muted); }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); margin-right: 4px; }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .pill.accent { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-bg); }
+  .series-strip { display: flex; align-items: center; gap: 8px; margin: 14px 0 4px; font-family: var(--mono); font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+  .series-strip .step { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .series-strip .step.current { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-line); font-weight: 600; }
+  .series-strip .step.done { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .series-strip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+  .series-strip .step.current .dot { background: var(--accent-text); }
+  .series-strip .step.done .dot { background: var(--good-text); }
+  .series-strip .sep { color: var(--line); }
+  h2 { font-size: 20px; margin: 28px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  .stub-banner { background: var(--warn-bg); color: var(--warn-text); border: 1px solid var(--warn-bg); border-radius: 10px; padding: 14px 18px; margin: 18px 0; }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  a { color: var(--link); }
+  .siblings { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .siblings .slot { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 4px; }
+  .siblings .slot:hover { border-color: var(--link); }
+  .siblings .slot.disabled { opacity: 0.45; cursor: not-allowed; }
+  .siblings .slot .role { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+  .siblings .slot .title { font-size: 14px; line-height: 1.4; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 28px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  @media (max-width: 700px) { body { padding: 20px; } h1 { font-size: 22px; } .siblings { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb">
+    <a href="../../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp;
+    <a href="index.html">散熱系列</a> &nbsp;/&nbsp;
+    第二集
+  </div>
+  <h1>一櫃 GB300 為什麼要花 $50K 在液冷上</h1>
+  <div class="subtitle">散熱系列：第二集 · mechanism · 拆零件 + BOM 結構，仍無個股</div>
+  <div class="series-strip">
+    <span class="step done"><span class="dot"></span>Ep1 · 電費 ✓</span>
+    <span class="sep">→</span>
+    <span class="step current"><span class="dot"></span>Ep2 · BOM 拆解</span>
+    <span class="sep">→</span>
+    <span class="step"><span class="dot"></span>Ep3 · 公司 + 觀點</span>
+  </div>
+  <div style="margin-top:8px;">
+    <span class="pill warn">撰寫中 · outline only</span>
+    <span class="pill">mechanism phase</span>
+  </div>
+</header>
+
+<section>
+  <div class="stub-banner">
+    <strong>本集還沒寫完整版。</strong>下面是 outline，列出這集會講什麼、會用什麼證據。Ep1 ship 後且 metrics 健康才開始寫 full draft，預計 1-2 週內。
+  </div>
+</section>
+
+<section>
+  <h2>會講的段落</h2>
+  <table>
+    <thead><tr><th>段</th><th>重點</th></tr></thead>
+    <tbody>
+      <tr><td>Recap Ep1</td><td>一櫃 130kW 變熱，所以必須液冷</td></tr>
+      <tr><td>液冷四件套</td><td>cold plate / CDU / manifold / UQD 各做什麼</td></tr>
+      <tr><td>BOM 拆解</td><td>$50K 怎麼分（~40 / 30 / 15 / 10）</td></tr>
+      <tr><td>為什麼是 $50K</td><td>比較對照：~3% rack 成本（<strong>不是</strong> 42%）</td></tr>
+      <tr><td>Tease Ep3</td><td>下一集會講錢流到哪幾家、為什麼還不急著喊散熱概念股</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>會用的數字</h2>
+  <table>
+    <thead><tr><th>數字</th><th>來源</th><th>用法</th></tr></thead>
+    <tbody>
+      <tr><td>$49,860 / 櫃</td><td>LianLi Work 引 Morgan Stanley supply-chain data</td><td>BOM 總額</td></tr>
+      <tr><td>$49,860 / $600,000 ≈ 8.3%</td><td>簡單算術</td><td>修正坊間誤傳「42%」</td></tr>
+      <tr><td>40 / 30 / 15 / 10</td><td>EE Times China teardown</td><td>cold plate / CDU / UQD / manifold 比例</td></tr>
+      <tr><td>+20% vs GB200</td><td>LianLi Work 對照</td><td>世代升級量級</td></tr>
+      <tr><td>GB300 占 70-80% 出貨</td><td>TrendForce / Taipei Times</td><td>規模感</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>不會講的</h2>
+  <div class="box">
+    <ul>
+      <li>公司名稱（奇鋐 / 雙鴻 / Vertiv 等留給 Ep3）</li>
+      <li>投資 thesis（誰受惠、買賣判斷留給 Ep3）</li>
+      <li>Position disclosure（沒有 claim 就不需要 disclosure）</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Full canonical</h2>
+  <p>完整 outline 與來源在 <a href="../../../../../content/cards/2026-05-15_thermal-series_ep2-bom.md">md source（content/cards/）</a>。</p>
+</section>
+
+<nav class="siblings">
+  <a class="slot" href="ep1-electricity.html">
+    <span class="role">← 上一集</span>
+    <span class="title">為什麼一台 AI server 一個月電費比 Model S 還貴</span>
+  </a>
+  <a class="slot" href="index.html">
+    <span class="role">系列地圖</span>
+    <span class="title">散熱系列 · 共 3 集</span>
+  </a>
+  <a class="slot disabled" aria-disabled="true">
+    <span class="role">下一集 →</span>
+    <span class="title">Ep3 outline · 公司 + 觀點</span>
+  </a>
+</nav>
+
+<footer>
+  ai-server-thermal · ep2 · mechanism · outline only · canonical: content/cards/2026-05-15_thermal-series_ep2-bom.md
+</footer>
+
+</body>
+</html>
