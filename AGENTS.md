@@ -100,6 +100,21 @@ done that way before the LLM is involved.
 - Do not send the user directly from an HTML page into raw Markdown unless it is
   explicitly labeled as fallback.
 
+## Knowledge Layering Rule
+
+- Treat the repo as a file-first knowledge wiki. The layered model lives in
+  [docs/KNOWLEDGE_MANAGEMENT.md](docs/KNOWLEDGE_MANAGEMENT.md).
+- Raw sources (`research/sources/**`, `research/intake/**`) are immutable; the
+  maintained wiki layer (`research/notes/**`, `research/source-tutor/**`,
+  `research/knowledge/**`, `content/cards/**`, `content/drafts/**`) is where
+  synthesis lives.
+- New evidence updates the wiki, not only the artifact that triggered the
+  update. When a thesis card learns something new, update the backbone and the
+  affected tutor note in the same pass.
+- Reusable answers must land as wiki artifacts. Do not let synthesis stay in
+  chat.
+- Do not introduce a database, vector store, or external CMS without revisiting
+  the explicit deferrals in `docs/KNOWLEDGE_MANAGEMENT.md`.
 
 ## MVP Rules
 

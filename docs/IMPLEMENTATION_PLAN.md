@@ -475,6 +475,9 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M2.2 - Source tutor upgraded with sentence-level reading chain, internalization artifacts, Cursor rule, and AMD canonical example
 2026-05-13 - M2.3 - AI server supply chain coverage expanded with 4 new source packets and 3 structural layers (manufacturing capacity, procurement & tightness, geopolitics & policy); Intel Q1 2026 source-tutor reading note added
 2026-05-13 - M2.3 - Cross-source synthesis mode added to source-tutor (template + Cursor rule + workflow + role); Intel full-thesis v2 cross-source reading note authored and used as validation case
+2026-05-13 - M3 - Repo-native dashboard cockpit shipped (ops/build_dashboard.py + data/*.toml + templates/dashboard.css; auto-generates ops/dashboard.html and ops/current.md from frontmatter)
+2026-05-13 - M3 - Card #001 (cooling BOM) outline -> draft; removed unsafe "42% of rack cost" hook after spotting denominator conflict, pre-publish blockers recorded
+2026-05-13 - M3 - Vercel library deployed (https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/); ops/build_library.sh + vercel.json + .vercelignore in place; only HTML reading subset uploaded, private trees blocked; Card #001 CTA wired to production URL
 2026-05-13 - M2.3 - Reading surface rules clarified to preserve canonical data while keeping HTML as the default rendered view
 2026-05-14 - M3 - Card #001 cooling BOM completed learning-first flow (domain primer, source tutor, HTML review, IA1 approved) and marked ready for X/Threads platform adaptation
 2026-05-14 - M3 - X/Threads official ranking docs summarized for Card #001; preliminary platform versions, publish hypothesis, and success metrics added before real swipe validation

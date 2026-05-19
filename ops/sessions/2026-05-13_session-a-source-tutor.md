@@ -3,6 +3,8 @@ artifact_type: session-status
 created_at: 2026-05-13
 last_updated: 2026-05-13T18:45+08:00
 status: paused
+branch: ""
+scope: AMD share gap + Q1 primary upgrade (PR #15, #16 merged)
 ---
 
 # Session Status: Session A — Source Tutor / AMD Claim Reading
