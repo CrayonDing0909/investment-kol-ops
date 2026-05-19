@@ -1,7 +1,7 @@
 ---
 artifact_type: cards-index
 created_at: 2026-05-13
-last_updated: 2026-05-13T19:02+08:00
+last_updated: 2026-05-14T22:30+08:00
 ---
 
 # Thesis Cards Index
@@ -26,7 +26,7 @@ last_updated: 2026-05-13T19:02+08:00
 
 | ID | Date | Topic | Lens | Platform | Status | Counter Dir | Notes |
 |----|------|-------|------|----------|--------|-------------|-------|
-| 001 | 2026-05-13 | ai-server / 散熱 BOM 流向 | 資金 | x+threads | draft | bull-kill | Draft created; blocked on cooling BOM denominator conflict before ready |
+| 001 | 2026-05-13 | ai-server / 散熱 BOM 流向 | 資金 | x+threads | ready | bull-kill | IA1 approved; ready to schedule / publish |
 | 002 | 2026-05-13 | ai-server / MediaTek $2B 拆 expectation vs revenue | 基本面 | x+threads | outline | bear-falsify | 從 backbone MediaTek 4 risks 段萃出 |
 | 003 | 2026-05-13 | ai-server / 為什麼 CPU 又被討論 | 為什麼 | x+threads | outline | bull-kill | 從 backbone CPU + Intel 段萃出 |
 | 004 | 2026-05-13 | ai-server / Apple-Intel preliminary deal 怎麼讀 | 啟動 | x+threads | outline | bear-falsify | 從 backbone Manufacturing layer 段萃出 |

@@ -4,18 +4,6 @@
 # scope: free-form (Card #001, 全部 card, ...)
 
 [[blockers]]
-title = "BOM 分母衝突"
-scope = "Card #001"
-type = "blocker"
-detail = "`$49,860 / $600,000 = 8.31%`，但 EE Times China 寫 `$380K / 42%`。發布前不要用「占整櫃 42%」。"
-
-[[blockers]]
-title = "IA1 gate"
-scope = "Card #001"
-type = "gate-pending"
-detail = "含投資宣稱的 card 上 ready 前要走 IA1。"
-
-[[blockers]]
 title = "MediaTek 持倉揭露"
 scope = "Card #002"
 type = "disclosure"

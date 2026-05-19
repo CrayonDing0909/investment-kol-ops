@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
-created_at: 2026-05-13
-last_updated: 2026-05-13 22:14
+created_at: 2026-05-14
+last_updated: 2026-05-14 22:29
 generated_by: ops/build_dashboard.py
 ---
 
@@ -18,14 +18,16 @@ generated_by: ops/build_dashboard.py
 
 ## Right Now
 
-- **Next action**: 對 Card #001（Cooling BOM）跑 IA1 gate；CTA URL 已敲定 Vercel library，下一步是 IA1 + 解 BOM 分母衝突（或維持較安全的 ~$49,860 / rack 寫法）。
+- **Next action**: Schedule / publish Card #001. IA1 is approved and content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md is now ready. Next action: decide X-only vs X+Threads, then publish manually and paste post URLs back into the card.
 - **Milestone**: `M3` — 內容生產
 - **Branch**: `feat/card-001-cooling-bom`
-- **Task**: Card #001 `draft` — GB300 一櫃液冷 BOM 接近 $50K，這個錢 2026 流去哪幾家
+- **Task**: Card #001 `ready` — GB300 一櫃液冷 BOM 接近 $50K，先別急著喊散熱概念股
 - **Session**: Session C `active`
 
 **Do not start**:
 
+- 不要改 Card #001 source claims unless new evidence appears
+- 不要寫「散熱占整櫃 42%」
 - 不要開新研究分支（Gap C / D / E / AMD cross-source v2）
 - 不要同時推第二張 card
 - 不要新增 worktree
@@ -56,7 +58,7 @@ generated_by: ops/build_dashboard.py
 
 | ID | Title | Lens | Status | Counter |
 |---|---|---|---|---|
-| 001 | [GB300 一櫃液冷 BOM 接近 $50K，這個錢 2026 流去哪幾家](content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md) | 資金 | draft | bull-kill |
+| 001 | [GB300 一櫃液冷 BOM 接近 $50K，先別急著喊散熱概念股](content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md) | 資金 | ready | bull-kill |
 | 002 | [MediaTek $2B AI ASIC 是 management expectation，不是已實現營收](content/cards/2026-05-13_ai-server_fundamentals-mediatek-2b_002.md) | 基本面 | outline | bear-falsify |
 | 003 | [CPU 不是 GPU 的對手，是 agent AI 的瓶頸](content/cards/2026-05-13_ai-server_why-cpu-back_003.md) | 為什麼 | outline | bull-kill |
 | 004 | [Apple-Intel preliminary deal 是訊號，但「preliminary」這個字現在做什麼還太早](content/cards/2026-05-13_ai-server_trigger-apple-intel_004.md) | 啟動 | outline | bear-falsify |
@@ -65,17 +67,15 @@ generated_by: ops/build_dashboard.py
 
 ## Blockers
 
-- **BOM 分母衝突** (Card #001, `blocker`) — `$49,860 / $600,000 = 8.31%`，但 EE Times China 寫 `$380K / 42%`。發布前不要用「占整櫃 42%」。
-- **IA1 gate** (Card #001, `gate-pending`) — 含投資宣稱的 card 上 ready 前要走 IA1。
 - **MediaTek 持倉揭露** (Card #002, `disclosure`) — Frontmatter 留有 placeholder，公開前必須確認。
 
 ## Recently Merged PRs
 
+- PR #18 — Clarify reading surface rules (https://github.com/CrayonDing0909/investment-kol-ops/pull/18)
 - PR #17 — Session isolation cowork setup (https://github.com/CrayonDing0909/investment-kol-ops/pull/17)
 - PR #16 — Session A Gap B: upgrade AMD Q1 2026 sourcing to SEC primary (https://github.com/CrayonDing0909/investment-kol-ops/pull/16)
 - PR #15 — Session A: close AMD >50% server CPU share gap with Mercury Q4 2025 (https://github.com/CrayonDing0909/investment-kol-ops/pull/15)
 - PR #14 — Strategy pivot: thesis-card template + 6 AI server card outlines (backbone+card model) (https://github.com/CrayonDing0909/investment-kol-ops/pull/14)
-- PR #13 — M2.1 public-readiness: HBM/cooling/passive packets + analysis-reasoning rule + article rewrite (https://github.com/CrayonDing0909/investment-kol-ops/pull/13)
 
 ## Working Rule
 

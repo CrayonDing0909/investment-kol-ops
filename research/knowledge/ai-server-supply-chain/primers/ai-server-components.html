@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Server Components Primer — AI Server Supply Chain</title>
+<style>
+  :root {
+    --maxw: 1080px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-muted: #edf1f5;
+    --surface-2: #f4f4f5;
+    --text: #24272d;
+    --text-2: #3f3f46;
+    --muted: #68707d;
+    --line: #d8dee6;
+    --line-strong: #c2c8d2;
+    --link: #315f9f;
+    --accent: #4f46e5;
+    --accent-soft: #eef2ff;
+
+    --layer-1-bg: #f0f4ff;
+    --layer-1-text: #2a3f8f;
+    --layer-1-line: #c4d2ff;
+    --layer-2-bg: #f0f9ff;
+    --layer-2-text: #1f5582;
+    --layer-2-line: #b7d8ee;
+    --layer-3-bg: #f0faf4;
+    --layer-3-text: #1f6b3a;
+    --layer-3-line: #b9dec5;
+    --layer-4-bg: #fffbeb;
+    --layer-4-text: #8a5a05;
+    --layer-4-line: #edd699;
+    --layer-5-bg: #fff5ee;
+    --layer-5-text: #8a4017;
+    --layer-5-line: #f0c4a6;
+    --layer-6-bg: #f9f0f9;
+    --layer-6-text: #6f2470;
+    --layer-6-line: #d8b6d8;
+
+    --up-bg: #f0f7ff;
+    --up-text: #1f4f82;
+    --up-line: #b7d2ee;
+    --mid-bg: #f3f0fa;
+    --mid-text: #3a3072;
+    --mid-line: #c8bce6;
+    --down-bg: #f0f9f2;
+    --down-text: #1f6b3a;
+    --down-line: #b9dec5;
+
+    --warn-bg: #fff4dc;
+    --warn-text: #6b4b00;
+    --bad-bg: #fdecec;
+    --bad-text: #842525;
+    --bad-line: #f3c0c0;
+    --good-bg: #e9f5ec;
+    --good-text: #1f6b3a;
+    --good-line: #b9dec5;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --surface-2: #2e2e33;
+      --text: #e2e8f0;
+      --text-2: #c8cdd6;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --line-strong: #515967;
+      --link: #91b7ff;
+      --accent: #a5b4fc;
+      --accent-soft: #2a2570;
+
+      --layer-1-bg: #1f2240;
+      --layer-1-text: #b8c4f7;
+      --layer-1-line: #3e4585;
+      --layer-2-bg: #1f2e3a;
+      --layer-2-text: #a5cbe4;
+      --layer-2-line: #345a72;
+      --layer-3-bg: #1c2e26;
+      --layer-3-text: #a4d4b4;
+      --layer-3-line: #2f5a44;
+      --layer-4-bg: #3a2e10;
+      --layer-4-text: #e2c984;
+      --layer-4-line: #6b552a;
+      --layer-5-bg: #3a261b;
+      --layer-5-text: #e2b08c;
+      --layer-5-line: #6f4524;
+      --layer-6-bg: #2c1f2c;
+      --layer-6-text: #d9aedb;
+      --layer-6-line: #6a3e6c;
+
+      --up-bg: #1c2c3a;
+      --up-text: #a4c2e0;
+      --up-line: #345671;
+      --mid-bg: #28253a;
+      --mid-text: #c1b6e3;
+      --mid-line: #4d4271;
+      --down-bg: #1b2e22;
+      --down-text: #a4d4b4;
+      --down-line: #2f5a44;
+
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      --bad-bg: #3a1f1f;
+      --bad-text: #f5b4b4;
+      --bad-line: #6f3939;
+      --good-bg: #1c3326;
+      --good-text: #9ed7af;
+      --good-line: #2f5a44;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .lede { font-size: 16px; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+
+  section { margin: 32px 0; }
+  section > h2 { font-size: 22px; margin: 0 0 16px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section h3 { font-size: 17px; margin: 18px 0 8px; }
+  section p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+
+  /* Step indicator at top */
+  .step-strip {
+    display: flex; align-items: stretch; gap: 0;
+    border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden; margin: 14px 0;
+  }
+  .step-strip .step {
+    flex: 1; padding: 10px 14px; font-size: 13px;
+    background: var(--surface-muted); color: var(--muted);
+    border-right: 1px solid var(--line);
+  }
+  .step-strip .step:last-child { border-right: none; }
+  .step-strip .step.current { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .step-strip .step .n {
+    display: inline-block; width: 18px; height: 18px; line-height: 18px;
+    text-align: center; border-radius: 999px; font-size: 11px;
+    background: var(--surface); border: 1px solid var(--line); margin-right: 6px;
+    font-family: var(--mono);
+  }
+  .step-strip .step.current .n { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* Common pills */
+  .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 999px;
+    font-size: 12px; font-family: var(--mono);
+    background: var(--surface-muted); border: 1px solid var(--line); color: var(--text);
+    margin-right: 4px; white-space: nowrap;
+  }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.bad { background: var(--bad-bg); color: var(--bad-text); border-color: var(--bad-line); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-line); }
+
+  /* Boxes */
+  .box { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .box.bad { background: var(--bad-bg); color: var(--bad-text); border-color: var(--bad-line); }
+  .box.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-line); }
+  .box h3 { margin-top: 0; }
+  .flow-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  .flow-chain .node {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+  .flow-chain .arrow {
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+  .analogy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .analogy-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .analogy-card strong { display: block; margin-bottom: 2px; }
+  .qna-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .qna-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .qna-card .q {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .qna-card .a {
+    color: var(--text-2);
+    font-size: 13.5px;
+  }
+  .logic-chain {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 12px 0;
+  }
+  .logic-chain ol { margin: 0; }
+  .logic-chain li { margin-bottom: 8px; }
+  .logic-chain li:last-child { margin-bottom: 0; }
+  .money-flow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .money-flow .step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  .money-flow .step strong { color: var(--text); }
+
+  /* TOC */
+  .toc { background: var(--surface); border: 1px solid var(--line); padding: 12px 16px; border-radius: 8px; }
+  .toc ol { margin: 6px 0 0; }
+
+  /* Inline */
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; }
+  blockquote { border-left: 3px solid var(--muted); margin: 12px 0; padding: 4px 12px; color: var(--muted); }
+
+  /* ====== Module 1: 6-Layer Stack ====== */
+  .layer-stack { display: flex; flex-direction: column; gap: 0; margin: 12px 0; }
+  .layer-row {
+    display: grid; grid-template-columns: 70px 1fr 220px; gap: 12px;
+    align-items: stretch; padding: 12px 14px;
+    border: 1px solid var(--line); border-radius: 10px; margin-bottom: 6px;
+    background: var(--surface);
+  }
+  .layer-row .badge {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 8px; padding: 6px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  }
+  .layer-row .badge .num { font-size: 18px; line-height: 1; }
+  .layer-row .desc { font-size: 14px; }
+  .layer-row .desc .title { font-weight: 600; margin-bottom: 2px; font-size: 15px; }
+  .layer-row .desc .sub { color: var(--muted); font-size: 13px; }
+  .layer-row .players { display: flex; flex-wrap: wrap; gap: 4px; align-items: flex-start; }
+  .layer-row .players .pill { font-size: 11px; padding: 1px 7px; }
+
+  .layer-row.l1 .badge { background: var(--layer-1-bg); color: var(--layer-1-text); border: 1px solid var(--layer-1-line); }
+  .layer-row.l2 .badge { background: var(--layer-2-bg); color: var(--layer-2-text); border: 1px solid var(--layer-2-line); }
+  .layer-row.l3 .badge { background: var(--layer-3-bg); color: var(--layer-3-text); border: 1px solid var(--layer-3-line); }
+  .layer-row.l4 .badge { background: var(--layer-4-bg); color: var(--layer-4-text); border: 1px solid var(--layer-4-line); }
+  .layer-row.l5 .badge { background: var(--layer-5-bg); color: var(--layer-5-text); border: 1px solid var(--layer-5-line); }
+  .layer-row.l6 .badge { background: var(--layer-6-bg); color: var(--layer-6-text); border: 1px solid var(--layer-6-line); }
+
+  /* ====== Module 2: Upstream / Midstream / Downstream swimlane ====== */
+  .chain {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+    margin: 12px 0;
+  }
+  .lane {
+    border-radius: 10px; padding: 14px; border: 1px solid var(--line);
+  }
+  .lane.up { background: var(--up-bg); border-color: var(--up-line); }
+  .lane.mid { background: var(--mid-bg); border-color: var(--mid-line); }
+  .lane.down { background: var(--down-bg); border-color: var(--down-line); }
+  .lane h3 { margin: 0 0 6px; font-size: 15px; }
+  .lane.up h3 { color: var(--up-text); }
+  .lane.mid h3 { color: var(--mid-text); }
+  .lane.down h3 { color: var(--down-text); }
+  .lane .who { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .lane .group { margin-top: 10px; }
+  .lane .group .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); font-family: var(--mono); margin-bottom: 4px; display: block;
+  }
+  .lane .group ul { padding-left: 18px; margin: 0; }
+  .lane .group li { font-size: 13px; line-height: 1.6; }
+
+  .chain-flow {
+    text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted);
+    margin: -2px 0 14px;
+  }
+
+  /* ====== Module 3: Component cards grid ====== */
+  .components {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+    margin: 14px 0;
+  }
+  .ccard {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px 18px;
+    display: flex; flex-direction: column;
+    transition: transform 120ms ease, border-color 120ms ease;
+  }
+  .ccard:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+  .ccard .ctop { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; gap: 6px; }
+  .ccard .ctitle { font-size: 16px; font-weight: 600; }
+  .ccard .ctitle a { color: var(--text); text-decoration: none; border-bottom: 1px dashed transparent; }
+  .ccard .ctitle a:hover { border-bottom-color: var(--link); color: var(--link); }
+  .ccard .one-liner { font-size: 13px; color: var(--text-2); margin-bottom: 8px; line-height: 1.6; }
+  .ccard .anchor { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-top: 4px; }
+  .ccard .anchor strong { color: var(--text); }
+  .ccard .confuse { margin-top: 10px; font-size: 12px; color: var(--bad-text); background: var(--bad-bg); border: 1px solid var(--bad-line); border-radius: 6px; padding: 6px 8px; }
+  .ccard .layer-pill {
+    display: inline-block; padding: 1px 7px; border-radius: 999px;
+    font-size: 11px; font-family: var(--mono); white-space: nowrap;
+  }
+  .ccard.l1 .layer-pill { background: var(--layer-1-bg); color: var(--layer-1-text); border: 1px solid var(--layer-1-line); }
+  .ccard.l2 .layer-pill { background: var(--layer-2-bg); color: var(--layer-2-text); border: 1px solid var(--layer-2-line); }
+  .ccard.l3 .layer-pill { background: var(--layer-3-bg); color: var(--layer-3-text); border: 1px solid var(--layer-3-line); }
+  .ccard.l4 .layer-pill { background: var(--layer-4-bg); color: var(--layer-4-text); border: 1px solid var(--layer-4-line); }
+  .ccard.l5 .layer-pill { background: var(--layer-5-bg); color: var(--layer-5-text); border: 1px solid var(--layer-5-line); }
+  .ccard.l6 .layer-pill { background: var(--layer-6-bg); color: var(--layer-6-text); border: 1px solid var(--layer-6-line); }
+  .ccard.cross .layer-pill { background: var(--surface-muted); color: var(--text); border: 1px solid var(--line); }
+
+  /* ====== Confusion visual contrast ====== */
+  .confuse-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin: 12px 0;
+  }
+  .confuse-row { display: contents; }
+  .cwrong, .cright {
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13px;
+  }
+  .cwrong { background: var(--bad-bg); color: var(--bad-text); border-color: var(--bad-line); }
+  .cright { background: var(--good-bg); color: var(--good-text); border-color: var(--good-line); }
+  .cwrong::before { content: "易錯  "; font-size: 11px; font-family: var(--mono); color: var(--bad-text); opacity: 0.8; }
+  .cright::before { content: "正解  "; font-size: 11px; font-family: var(--mono); color: var(--good-text); opacity: 0.8; }
+
+  /* ====== Min memorize numbered cards ====== */
+  .min-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+    margin: 14px 0;
+  }
+  .min-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px 14px; font-size: 14px; line-height: 1.55;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .min-card .n {
+    width: 24px; height: 24px; line-height: 24px; text-align: center;
+    border-radius: 999px; font-family: var(--mono); font-size: 12px; font-weight: 600;
+    background: var(--accent-soft); color: var(--accent); flex-shrink: 0;
+  }
+
+  /* ====== Detail sections ====== */
+  details {
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 6px 14px; margin: 8px 0; background: var(--surface);
+  }
+  details > summary { cursor: pointer; font-weight: 600; padding: 6px 0; font-size: 14px; }
+  details[open] > summary { border-bottom: 1px dashed var(--line); margin-bottom: 10px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+
+  /* Source links */
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .components { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .chain { grid-template-columns: 1fr; }
+    .layer-row { grid-template-columns: 60px 1fr; }
+    .layer-row .players { grid-column: 1 / -1; margin-top: 6px; }
+    .min-grid { grid-template-columns: 1fr; }
+    .confuse-grid { grid-template-columns: 1fr; }
+    .analogy-grid { grid-template-columns: 1fr; }
+    .qna-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    body { padding: 18px; }
+    h1 { font-size: 24px; }
+    h2 { font-size: 19px; }
+    .components { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <span>Primer</span></div>
+  <h1>AI Server 元件 Primer</h1>
+  <p class="lede">
+    在讀 source、寫 card、過 IA1 之前先看這份。一頁學會「散熱、BOM、GB300 整櫃、HBM、被動元件、ASIC BOM」是什麼、各在哪一層、上中下游分別誰在做。
+  </p>
+  <div class="meta">
+    Status: <span class="pill">draft</span> ·
+    Artifact: <span class="pill">domain-primer</span> ·
+    Theme: <span class="pill">ai-server-supply-chain</span> ·
+    Source confidence: <span class="pill warn">unverified（常識整理 + agent inference，未經 source-tutor 驗證）</span> ·
+    Canonical: <a href="../../../notes/2026-05-13_ai-server-components-primer.md">markdown canonical</a>
+  </div>
+
+  <div class="step-strip" aria-label="三步學習順序">
+    <div class="step current"><span class="n">1</span>Primer（你在這）</div>
+    <div class="step"><span class="n">2</span><a href="../readings/cooling-bom.html" style="color: inherit; text-decoration: none;">Cooling BOM Source Tutor</a></div>
+    <div class="step"><span class="n">3</span><a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html" style="color: inherit; text-decoration: none;">Card #001 審稿</a></div>
+  </div>
+</header>
+
+<section>
+  <h2>0. 本頁地圖</h2>
+  <div class="toc">
+    <ol class="tight">
+      <li><a href="#mental-model">先建立 Mental Model — AI server 6 層架構</a></li>
+      <li><a href="#chain">產業上中下游（板塊圖）</a></li>
+      <li><a href="#components">6 個關鍵元件（卡片速覽）</a></li>
+      <li><a href="#deep">每個元件深入解釋</a></li>
+      <li><a href="#background">必要背景（4 點心法）</a></li>
+      <li><a href="#confusion">容易混淆的點（易錯 vs 正解）</a></li>
+      <li><a href="#checklist">寫稿 / 看文章前的自檢</a></li>
+      <li><a href="#min">最小可記住版本（10 條）</a></li>
+      <li><a href="#next">讀完後該往哪裡走</a></li>
+    </ol>
+  </div>
+</section>
+
+<section id="mental-model">
+  <h2>1. 先建立 Mental Model — AI Server 6 層架構</h2>
+  <p>AI server 不是「一張 GPU」。它是一整套工業設備，真的就是一層一層堆起來：晶片先放到封裝上，封裝後焊到主板，主板裝進可抽換的 tray，多個 tray 裝成一櫃 rack，很多 rack 放進 data center。</p>
+
+  <div class="flow-chain" aria-label="AI server physical stack">
+    <span class="node">Chip 晶片</span>
+    <span class="arrow">→</span>
+    <span class="node">Package 封裝</span>
+    <span class="arrow">→</span>
+    <span class="node">Board / PCB 主板</span>
+    <span class="arrow">→</span>
+    <span class="node">Compute Tray 運算托盤</span>
+    <span class="arrow">→</span>
+    <span class="node">Rack 機櫃</span>
+    <span class="arrow">→</span>
+    <span class="node">Data Center 資料中心</span>
+  </div>
+
+  <p>你可以先用這個比喻記：</p>
+  <div class="analogy-grid">
+    <div class="analogy-card"><strong>CPU / GPU</strong>引擎，真正做運算。</div>
+    <div class="analogy-card"><strong>Package 封裝</strong>引擎底座，把 GPU、HBM 放得很近。</div>
+    <div class="analogy-card"><strong>PCB 主板</strong>車架和電線，把電與訊號送到各處。</div>
+    <div class="analogy-card"><strong>Tray 運算托盤</strong>可抽換的引擎模組，壞了可以維修。</div>
+    <div class="analogy-card"><strong>Rack 機櫃</strong>一整台賽車，裡面有很多 tray。</div>
+    <div class="analogy-card"><strong>Data Center</strong>整個賽車場，供電、散熱、網路都在這層。</div>
+  </div>
+
+  <p>下面這張圖從底層往上看，<strong>越上面越貴、越下游、越接近 capex；越下面越小、越上游、越接近物理</strong>。</p>
+
+  <div class="layer-stack">
+    <div class="layer-row l6">
+      <div class="badge"><span class="num">6</span><span>L6</span></div>
+      <div class="desc">
+        <div class="title">Data Center 資料中心</div>
+        <div class="sub">很多 rack 放在一起的「賽車場」：供電、散熱、網路都在這層。AI 單站功耗從 30MW 走向 1GW+。</div>
+      </div>
+      <div class="players">
+        <span class="pill">Hyperscaler 自建</span>
+        <span class="pill">Equinix</span>
+      </div>
+    </div>
+    <div class="layer-row l5">
+      <div class="badge"><span class="num">5</span><span>L5</span></div>
+      <div class="desc">
+        <div class="title">Rack 機櫃</div>
+        <div class="sub">一整台「賽車」：GB300 NVL72 是 72 GPU + Grace CPU + 散熱 + 電源的 rack-level system。132-140kW、~$600K/櫃。</div>
+      </div>
+      <div class="players">
+        <span class="pill">NVIDIA</span>
+        <span class="pill">Vertiv (CDU)</span>
+        <span class="pill">Foxconn</span>
+        <span class="pill">Quanta</span>
+      </div>
+    </div>
+    <div class="layer-row l4">
+      <div class="badge"><span class="num">4</span><span>L4</span></div>
+      <div class="desc">
+        <div class="title">Compute Tray 運算托盤</div>
+        <div class="sub">可抽換的「引擎模組」。裡面有 GPU、Grace CPU、HBM、冷板、電源、連接器、快接頭。UQD 讓 tray 維修時不漏液。</div>
+      </div>
+      <div class="players">
+        <span class="pill">奇鋐 (cold plate)</span>
+        <span class="pill">雙鴻 (manifold)</span>
+        <span class="pill">OEM/ODM</span>
+      </div>
+    </div>
+    <div class="layer-row l3">
+      <div class="badge"><span class="num">3</span><span>L3</span></div>
+      <div class="desc">
+        <div class="title">Board / PCB 主板</div>
+        <div class="sub">車架和電線：封裝後的晶片焊到 PCB，主板靠 traces / connector 接訊號與電。MLCC 像小型穩壓水庫，AI 主板高階用量 5-10x。</div>
+      </div>
+      <div class="players">
+        <span class="pill">Yageo 國巨</span>
+        <span class="pill">村田</span>
+        <span class="pill">太陽誘電</span>
+      </div>
+    </div>
+    <div class="layer-row l2">
+      <div class="badge"><span class="num">2</span><span>L2</span></div>
+      <div class="desc">
+        <div class="title">Package 封裝</div>
+        <div class="sub">引擎底座：GPU 要跟 HBM 很近地放在一起，靠 CoWoS 接起來。CoWoS 產能不夠，就算有 GPU + HBM 也組不出完整 AI chip。</div>
+      </div>
+      <div class="players">
+        <span class="pill">TSMC (CoWoS)</span>
+        <span class="pill">ABF 載板 (味之素)</span>
+        <span class="pill">日月光</span>
+      </div>
+    </div>
+    <div class="layer-row l1">
+      <div class="badge"><span class="num">1</span><span>L1</span></div>
+      <div class="desc">
+        <div class="title">Chip 晶片</div>
+        <div class="sub">真正做運算的引擎：GPU / CPU / ASIC / HBM。TDP = 滿載時散熱系統要排掉多少熱；700W → 1400W 代表單顆 GPU 熱量變 2 倍。</div>
+      </div>
+      <div class="players">
+        <span class="pill">NVIDIA</span>
+        <span class="pill">AMD</span>
+        <span class="pill">Intel</span>
+        <span class="pill">Broadcom</span>
+        <span class="pill">SK hynix (HBM)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <strong>關鍵心法：</strong>AI server 投資不是「GPU 受惠」這一條，是 <strong>6 層 × 各自玩家 × 各自瓶頸</strong> 的網狀故事。任何只看一層的分析都太粗。
+  </div>
+</section>
+
+<section id="chain">
+  <h2>2. 產業上中下游（板塊圖）</h2>
+  <p>另一個切法是「錢和物料怎麼流」。上中下游不是「所有原料清單」，而是看一筆 hyperscaler capex 怎麼一路變成各家供應商的收入。</p>
+
+  <div class="chain-flow">上游 (製造能力 / 關鍵材料 / 關鍵產能) &nbsp;&rarr;&nbsp; 中游 (晶片設計 / 模組 / 系統零件) &nbsp;&rarr;&nbsp; 下游 (整機組裝 / hyperscaler 採購 / 算力使用)</div>
+
+  <div class="chain">
+    <div class="lane up">
+      <h3>上游 Upstream</h3>
+      <div class="who">不是「所有原料」，而是 AI server 能不能做出來的關鍵供應瓶頸。</div>
+
+      <div class="group">
+        <span class="label">晶圓 + 封裝</span>
+        <ul>
+          <li>TSMC（GPU / ASIC / HBM 都要走這）</li>
+          <li>TSMC CoWoS（先進封裝瓶頸）</li>
+          <li>日月光、Amkor（傳統封裝）</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">記憶體</span>
+        <ul>
+          <li>SK hynix（HBM 龍頭）</li>
+          <li>Samsung（HBM 追趕）</li>
+          <li>Micron（HBM 受美國政策加分）</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">載板與被動料</span>
+        <ul>
+          <li>味之素 ABF substrate</li>
+          <li>欣興、南電 ABF 載板代工</li>
+          <li>Yageo、村田、太陽誘電（高階 MLCC）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lane mid">
+      <h3>中游 Midstream</h3>
+      <div class="who">把上游能力轉成可出貨的晶片、模組、系統零件。</div>
+
+      <div class="group">
+        <span class="label">GPU / CPU 設計</span>
+        <ul>
+          <li>NVIDIA（GPU + Grace CPU + rack reference design）</li>
+          <li>AMD（EPYC CPU + Instinct GPU）</li>
+          <li>Intel（Xeon CPU + Gaudi）</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">ASIC 設計合作</span>
+        <ul>
+          <li>Broadcom（Google TPU、Meta MTIA）</li>
+          <li>Marvell（AWS Trainium 2）</li>
+          <li>Alchip、GUC（亞洲 ASIC 設計服務）</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">散熱模組</span>
+        <ul>
+          <li>奇鋐 AVC（cold plate）</li>
+          <li>雙鴻 Auras（manifold / liquid module）</li>
+          <li>Vertiv（rack-level CDU / 整合）</li>
+          <li>建準 Sunon（hybrid air/liquid）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lane down">
+      <h3>下游 Downstream</h3>
+      <div class="who">把 rack 組出來、賣給 hyperscaler，最後變成可用算力。</div>
+
+      <div class="group">
+        <span class="label">ODM 整機組裝</span>
+        <ul>
+          <li>Foxconn 鴻海</li>
+          <li>Quanta 廣達</li>
+          <li>Wistron 緯創</li>
+          <li>Supermicro</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">Hyperscaler（真正的買方）</span>
+        <ul>
+          <li>Microsoft Azure</li>
+          <li>Meta</li>
+          <li>Google Cloud</li>
+          <li>Amazon AWS</li>
+          <li>Oracle / CoreWeave（neo-cloud）</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <span class="label">最終買單</span>
+        <ul>
+          <li>AI 模型公司（OpenAI、Anthropic 等）</li>
+          <li>企業 SaaS 整合</li>
+          <li>政府 / 主權 AI 採購</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <strong>讀法：</strong>同一家公司可能跨多層（NVIDIA 同時做 chip + reference rack design），但分析「誰受惠」時，要先放到正確的位置。例如奇鋐是中游零件廠，Vertiv 是中游系統整合，Foxconn 是下游 ODM，不能直接比百分比。
+  </div>
+
+  <h3>錢怎麼流？從 hyperscaler capex 到供應商收入</h3>
+  <div class="money-flow">
+    <div class="step"><strong>1. Hyperscaler capex</strong>：Microsoft / Meta / Google / Amazon 決定多買 AI 算力。</div>
+    <div class="step"><strong>2. NVIDIA rack order</strong>：買的不只是 GPU，是 GB300 / NVL72 這種整櫃 reference design。</div>
+    <div class="step"><strong>3. ODM 組裝</strong>：Foxconn / Quanta / Wistron / Supermicro 把整櫃組出來。</div>
+    <div class="step"><strong>4. NVIDIA reference design 指定零件</strong>：rack 裡需要 HBM、CoWoS、ABF、MLCC、cold plate、CDU、manifold、UQD。</div>
+    <div class="step"><strong>5. 上游 / 中游供應商出貨</strong>：SK hynix 出 HBM，TSMC 出 CoWoS，奇鋐 / 雙鴻 / Vertiv 出液冷相關零件，國巨 / 村田出高階被動元件。</div>
+    <div class="step"><strong>6. 最後看財報驗證</strong>：真的有沒有反映到 revenue、gross margin、backlog、客戶暴露比例。</div>
+  </div>
+  <p>所以一篇投資內容不應該停在「誰在供應鏈」。它要回答：<strong>這家公司卡在哪個必要環節？那個環節的 BOM / ASP / volume 有沒有變大？財報能不能驗證？</strong></p>
+</section>
+
+<section id="components">
+  <h2>3. 6 個關鍵元件（卡片速覽）</h2>
+  <p>下面 6 張卡片是 Card #001 / 未來 cards 會反覆引用的關鍵詞。每張卡：一句定義 + 一個關鍵數字 + 一個易錯點。詳細解釋見 <a href="#deep">§4</a>。</p>
+
+  <div class="components">
+    <a class="ccard l4" href="#c-cooling" aria-label="散熱">
+      <div class="ctop">
+        <span class="ctitle">散熱 Cooling</span>
+        <span class="layer-pill">L4-L6</span>
+      </div>
+      <div class="one-liner">把晶片產生的熱搬走。AI rack 功耗破 130kW，風冷帶不走，必須切液冷。</div>
+      <div class="anchor"><strong>關鍵數</strong> GB300 一櫃液冷 BOM ~$50K</div>
+      <div class="confuse">易錯：「散熱概念股」太粗。拆 cold plate / CDU / manifold / UQD 四段。</div>
+    </a>
+
+    <a class="ccard cross" href="#c-bom" aria-label="BOM">
+      <div class="ctop">
+        <span class="ctitle">BOM 物料清單</span>
+        <span class="layer-pill">跨層概念</span>
+      </div>
+      <div class="one-liner">一台設備的零件成本表。每個零件多少錢、占整台百分比。不是公司營收。</div>
+      <div class="anchor"><strong>關鍵數</strong> GB200→GB300 cooling BOM $41.5K → $49.86K（+20%）</div>
+      <div class="confuse">易錯：把 BOM 數字當 revenue。BOM = 零件成本，revenue = 公司營收。</div>
+    </a>
+
+    <a class="ccard l5" href="#c-gb300" aria-label="GB300 整櫃">
+      <div class="ctop">
+        <span class="ctitle">GB300 整櫃 NVL72</span>
+        <span class="layer-pill">L5</span>
+      </div>
+      <div class="one-liner">NVIDIA 賣的不是「一張 GPU」，是整套 rack-level system（72 GPU + 36 Grace + 散熱 + 電源）。</div>
+      <div class="anchor"><strong>關鍵數</strong> 一櫃 ~$600K、132-140kW、~1500kg</div>
+      <div class="confuse">易錯：把 GPU 單片價格跟整櫃價格混為一談。</div>
+    </a>
+
+    <a class="ccard l1" href="#c-hbm" aria-label="HBM">
+      <div class="ctop">
+        <span class="ctitle">HBM 高頻寬記憶體</span>
+        <span class="layer-pill">L1-L2</span>
+      </div>
+      <div class="one-liner">3D 堆疊放在 GPU 旁邊的記憶體，解決 memory wall。HBM ≠ 一般 DRAM。</div>
+      <div class="anchor"><strong>關鍵數</strong> 比 DDR 貴 5-10x；SK / Samsung / Micron 三家</div>
+      <div class="confuse">易錯：「HBM 漲價 = DRAM 漲價」。HBM 是高階 niche，跟 commodity DRAM 兩條曲線。</div>
+    </a>
+
+    <a class="ccard l3" href="#c-passive" aria-label="被動元件">
+      <div class="ctop">
+        <span class="ctitle">被動元件</span>
+        <span class="layer-pill">L3</span>
+      </div>
+      <div class="one-liner">電容 / 電阻 / 電感。不是 IC，但高功耗 AI 主板需要 5-10x 高階料來穩定供電。</div>
+      <div class="anchor"><strong>關鍵數</strong> AI 主板高階 MLCC 用量 5-10x 一般 server</div>
+      <div class="confuse">易錯：「被動元件 = 低附加價值」。高階 MLCC ASP 拉動明顯，毛利不低。</div>
+    </a>
+
+    <a class="ccard l1" href="#c-asic" aria-label="ASIC BOM">
+      <div class="ctop">
+        <span class="ctitle">ASIC BOM</span>
+        <span class="layer-pill">L1（平行）</span>
+      </div>
+      <div class="one-liner">Hyperscaler 自研晶片（TPU、Trainium、MTIA、Maia）。整套 BOM 跟 GPU 是平行供應鏈。</div>
+      <div class="anchor"><strong>關鍵數</strong> 設計合作：Broadcom (Google/Meta)、Marvell (AWS)</div>
+      <div class="confuse">易錯：把 ASIC 寫成「GPU 外溢」。兩條 BOM 各自獨立，不是延伸。</div>
+    </a>
+  </div>
+</section>
+
+<section id="deep">
+  <h2>4. 每個元件深入解釋</h2>
+  <p>下面 6 個 details 是上面卡片的深入版本。預設折疊，按需要打開。</p>
+
+  <details open id="c-cooling">
+    <summary>散熱（Cooling）— L4 至 L6</summary>
+    <p><strong>是什麼</strong>：把晶片產生的熱搬走，讓晶片不會 thermal throttle 或燒掉。</p>
+    <p><strong>在哪層</strong>：橫跨 L1（晶片表面）、L4（tray 內管路）、L5（rack 級 CDU）、L6（data center 冷卻塔）。</p>
+    <p><strong>thermal throttle 是什麼</strong>：晶片太熱時，為了不燒掉會自動降頻。你花大錢買 GPU，但熱排不出去，它就自己降速保命，算力跑不滿。所以散熱不是「讓機器涼一點」而已，而是保證昂貴 GPU 可以長時間滿載運轉。</p>
+    <p><strong>為什麼變大事</strong>：</p>
+    <ul class="tight">
+      <li>H100 700W → B200 1000W → B300 1400W per GPU</li>
+      <li>GB300 NVL72 滿配整櫃約 132-140kW</li>
+      <li>空氣冷卻單顆極限 ~700W；超過就帶不走熱</li>
+      <li>液冷的傳熱效率比空氣高 1000 倍以上</li>
+    </ul>
+
+    <h3>散熱拆 4 段（投資 lens 從這裡開始）</h3>
+    <table>
+      <thead><tr><th>段</th><th>是什麼</th><th>角色</th><th>玩家</th></tr></thead>
+      <tbody>
+        <tr><td>Cold Plate</td><td>水冷板，直接貼晶片</td><td>晶片 → 冷卻液的第一站</td><td>奇鋐 / 雙鴻 / Cooler Master</td></tr>
+        <tr><td>CDU</td><td>Coolant Distribution Unit，rack 級分配</td><td>整櫃的「心臟」</td><td>Vertiv / Schneider</td></tr>
+        <tr><td>Manifold</td><td>管路歧管</td><td>rack 內部分流</td><td>雙鴻</td></tr>
+        <tr><td>UQD</td><td>快接頭，tray 維修不漏液</td><td>tray 維修介面</td><td>安費諾</td></tr>
+      </tbody>
+    </table>
+
+    <h3>它到底怎麼散熱？</h3>
+    <div class="flow-chain" aria-label="liquid cooling flow">
+      <span class="node">GPU 發熱</span>
+      <span class="arrow">→</span>
+      <span class="node">熱傳到 cold plate</span>
+      <span class="arrow">→</span>
+      <span class="node">冷卻液帶走熱</span>
+      <span class="arrow">→</span>
+      <span class="node">manifold 分流到不同 tray</span>
+      <span class="arrow">→</span>
+      <span class="node">CDU 控制整櫃循環</span>
+      <span class="arrow">→</span>
+      <span class="node">熱進 data center 冷卻系統</span>
+    </div>
+    <p>可以想成水冷電腦，但 scale 放大 100 倍，而且要 enterprise-grade：不能漏水、不能停機、tray 還要能抽換維修。</p>
+
+    <h3>怎麼從工程元件變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>需求不是從散熱開始，是從 AI 算力開始。</strong>Hyperscaler 要更多 AI 算力，所以 NVIDIA 推更強 GPU。</li>
+        <li><strong>更強 GPU 帶來更高功耗。</strong>H100 700W → B300 1400W，單顆 GPU 熱量大幅上升。</li>
+        <li><strong>熱排不出去，GPU 就跑不滿。</strong>散熱不夠會 thermal throttle，昂貴算力無法 full utilization。</li>
+        <li><strong>所以液冷從 optional 變成必要。</strong>風扇不夠了，必須用 cold plate、CDU、manifold、UQD。</li>
+        <li><strong>必要零件變多，BOM 變大。</strong>以前 server 散熱是風扇 + heat sink；現在一整櫃要一套液冷 plumbing，單櫃 cooling BOM 接近 $50K。</li>
+        <li><strong>BOM 變大，供應商收入機會變大。</strong>如果 GB300 rack 出貨增加，每一櫃都要這套液冷，零件廠的訂單量和 ASP 可能上升。</li>
+        <li><strong>所以才看公司，但只是 watchlist。</strong>cold plate → 奇鋐 / 雙鴻；manifold → 雙鴻；CDU / rack cooling → Vertiv；hybrid fan → 建準。接下來要看法說有沒有證實 NVDA 平台暴露、backlog、毛利。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>AI 很熱 → 散熱股買。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>AI 算力需求上升 → GPU power density 上升 → rack cooling 從 optional 變 required → cooling BOM per rack 上升 → 指定零件供應商 ASP / volume 有機會上升 → 用公司法說驗證 revenue / margin / backlog。</div>
+  </details>
+
+  <details id="c-bom">
+    <summary>BOM（Bill of Materials）— 跨層概念</summary>
+    <p><strong>是什麼</strong>：一台設備的零件成本表。每個零件多少錢、占整台百分比。</p>
+    <table>
+      <thead><tr><th>BOM</th><th>不是</th></tr></thead>
+      <tbody>
+        <tr><td>零件採購成本</td><td>公司營收（revenue）</td></tr>
+        <tr><td>系統內每個零件的權重</td><td>公司利潤（margin）</td></tr>
+        <tr><td>「GB300 cooling BOM ~$50K」= NVIDIA 採購整套液冷的成本</td><td>不等於某家供應商賺 $50K</td></tr>
+      </tbody>
+    </table>
+    <p><strong>BOM uplift</strong>：新一代產品比上一代貴多少。例：GB200 → GB300 cooling BOM 從 ~$41.5K → ~$49.86K，整體散熱供應鏈水位往上。</p>
+    <p><strong>為什麼投資人關心</strong>：BOM 占比高的零件，零件廠 ASP 容易跟產品升級一起上漲。但賺多少要看「ASP × shipment × market share」，不是直接拿 BOM 數字。</p>
+    <h3>怎麼從成本表變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>先找產品升級。</strong>例如 GB200 → GB300，不只是 GPU 更強，整櫃散熱、電源、連接器都變複雜。</li>
+        <li><strong>再看哪個零件的 content per unit 變大。</strong>如果每櫃散熱 BOM 從 $41.5K → $49.86K，代表每賣一櫃，散熱供應鏈拿到的內容價值變大。</li>
+        <li><strong>接著問誰拿到這段 BOM。</strong>cold plate / CDU / manifold / UQD 各有不同供應商，不是一家公司吃全部。</li>
+        <li><strong>最後回財報驗證。</strong>看 ASP、shipment、gross margin、backlog 是否跟 BOM uplift 同步改善。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>BOM 變大 → 供應商一定賺更多。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>BOM 變大 → 找出哪個零件 content 變大 → 找到供應商 → 用 ASP / volume / margin / backlog 驗證。</div>
+  </details>
+
+  <details id="c-gb300">
+    <summary>GB300 整櫃（NVL72）— L5</summary>
+    <p><strong>是什麼</strong>：NVIDIA 把 Grace CPU + Blackwell Ultra (B300) GPU + NVLink switch + 散熱 + 電源整合成一個 rack。</p>
+    <div class="box warn">GB300 <strong>不是「一張 GPU」</strong>。NVIDIA 已經 <strong>不再賣單片 GPU 給 AI</strong>。賣的是 rack-level system。</div>
+    <h3>規格</h3>
+    <ul class="tight">
+      <li>72 顆 B300 GPU + 36 顆 Grace CPU + 9 個 NVSwitch tray</li>
+      <li>整櫃功耗 132-140kW、重量 ~1500kg</li>
+      <li>整櫃售價（業界拆解）約 600,000 美元</li>
+    </ul>
+    <h3>跟之前的差別</h3>
+    <table>
+      <thead><tr><th>過去</th><th>現在 GB300</th></tr></thead>
+      <tbody>
+        <tr><td>採購單位：一張 H100</td><td>採購單位：一個 NVL72 rack</td></tr>
+        <tr><td>散熱：風扇 + heat sink</td><td>散熱：cold plate + CDU + manifold + UQD 一整套</td></tr>
+        <tr><td>主板：標準</td><td>主板：高階 MLCC 5-10x、ABF 載板</td></tr>
+      </tbody>
+    </table>
+    <h3>怎麼從整櫃系統變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>NVIDIA 從 chip seller 變 rack system seller。</strong>買方不只買 GPU，而是買一整套 reference design。</li>
+        <li><strong>Reference design 指定一整串零件。</strong>散熱、電源、HBM、CoWoS、ABF、被動元件都跟著整櫃出貨。</li>
+        <li><strong>每一櫃出貨都帶動一包供應鏈。</strong>不是單一 GPU 出貨，而是一組 rack-level BOM 出貨。</li>
+        <li><strong>所以看 GB300 ramp 時，要看每層供應商。</strong>ODM 組裝、散熱零件、HBM、被動元件、電源都會被拉動，但彈性不同。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>GB300 很貴 → NVIDIA 以外所有供應鏈都大賺。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>GB300 整櫃化 → 每櫃固定需要一整套 BOM → 找 content per rack 提升最大的環節 → 看實際 shipment / margin。</div>
+  </details>
+
+  <details id="c-hbm">
+    <summary>HBM（High Bandwidth Memory）— L1 至 L2</summary>
+    <p><strong>是什麼</strong>：高頻寬記憶體。3D 堆疊 + TSV（穿矽通孔）放在 GPU 旁邊。</p>
+    <div class="box warn">HBM ≠ 一般 DRAM。HBM 比 DDR 貴 5-10 倍。跟 commodity DRAM 是兩條曲線。</div>
+    <p><strong>解決什麼問題</strong>：memory wall — GPU 算力越來越快，但 DRAM 餵料速度跟不上。HBM 把記憶體頻寬拉到 TB/s 等級，讓 GPU 不用等資料。</p>
+    <table>
+      <thead><tr><th>廠商</th><th>地位</th></tr></thead>
+      <tbody>
+        <tr><td>SK hynix</td><td>NVIDIA 主要供應，HBM3E 領先</td></tr>
+        <tr><td>Micron</td><td>追趕中，受美國政策加分</td></tr>
+        <tr><td>Samsung</td><td>HBM3E / HBM4 認證進度落後</td></tr>
+      </tbody>
+    </table>
+    <p><strong>節奏</strong>：HBM3 → HBM3E (current) → HBM4 (2026-2027)。</p>
+    <h3>怎麼從記憶體變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>GPU 算力提升後，資料餵不進去會浪費算力。</strong>這就是 memory wall。</li>
+        <li><strong>HBM 把記憶體貼近 GPU。</strong>頻寬提升，GPU 比較不會等資料。</li>
+        <li><strong>HBM 供給變成 GPU 出貨瓶頸。</strong>GPU 有了，如果 HBM 或 CoWoS 不夠，整顆 AI chip 還是出不了貨。</li>
+        <li><strong>所以看 HBM 廠，不只看 DRAM 景氣。</strong>要看 NVIDIA / AMD 配額、HBM3E / HBM4 認證、ASP、毛利。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>AI 帶動 HBM → DRAM 全部都漲。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>AI 算力需要高頻寬 → HBM 變必要瓶頸 → 看 SK hynix / Micron / Samsung 的 HBM 配額、認證、ASP、margin。</div>
+  </details>
+
+  <details id="c-passive">
+    <summary>被動元件（Passive Components）— L3</summary>
+    <p><strong>是什麼</strong>：電容（capacitor）、電阻（resistor）、電感（inductor）。不是 IC，但每塊主板都需要。</p>
+    <h3>為什麼 AI server 需要更多 / 更高階</h3>
+    <ul class="tight">
+      <li>CPU + GPU 同時拉電，供電瞬間電壓波動大</li>
+      <li>高階 MLCC（多層陶瓷電容）才能穩定供電</li>
+      <li>AI server 主板高階 MLCC 數量比一般 server 多 5-10 倍</li>
+    </ul>
+    <h3>玩家</h3>
+    <table>
+      <thead><tr><th>地區</th><th>廠商</th></tr></thead>
+      <tbody>
+        <tr><td>日本</td><td>村田、太陽誘電</td></tr>
+        <tr><td>台灣</td><td>Yageo（國巨）、華新科、信昌電</td></tr>
+        <tr><td>韓國</td><td>Samsung Electro-Mechanics</td></tr>
+      </tbody>
+    </table>
+    <h3>怎麼從小零件變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>AI 主板功耗上升。</strong>CPU + GPU 同時拉大電流，供電瞬間波動變大。</li>
+        <li><strong>電壓不能亂跳。</strong>否則晶片不穩、訊號不穩、系統容易出錯。</li>
+        <li><strong>高階 MLCC / 電感需求變大。</strong>用量變多，規格變高，content per board 上升。</li>
+        <li><strong>投資驗證看高階產品 mix。</strong>不是看整個被動元件景氣，而是看 AI server / high-end MLCC 是否拉 ASP、毛利、交期。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>AI server 要更多零件 → 被動元件全部受惠。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>高功耗主板 → 高階 MLCC / 電感用量與規格上升 → 看高階料 ASP / mix / 交期，不看低階 commodity。</div>
+  </details>
+
+  <details id="c-asic">
+    <summary>ASIC BOM — L1（平行於 GPU）</summary>
+    <p><strong>是什麼</strong>：ASIC = Application-Specific Integrated Circuit，客製化晶片。</p>
+    <table>
+      <thead><tr><th>Hyperscaler</th><th>自研 ASIC</th><th>設計合作</th></tr></thead>
+      <tbody>
+        <tr><td>Google</td><td>TPU</td><td>Broadcom</td></tr>
+        <tr><td>AWS</td><td>Trainium / Inferentia</td><td>Marvell（Trainium 2）/ Alchip</td></tr>
+        <tr><td>Meta</td><td>MTIA</td><td>Broadcom</td></tr>
+        <tr><td>Microsoft</td><td>Maia</td><td>內部 + 外部</td></tr>
+      </tbody>
+    </table>
+    <h3>跟 GPU 的差別</h3>
+    <table>
+      <thead><tr><th>面向</th><th>GPU</th><th>ASIC</th></tr></thead>
+      <tbody>
+        <tr><td>通用性</td><td>什麼 model 都能跑</td><td>為特定 workload 優化</td></tr>
+        <tr><td>perf/W</td><td>普通</td><td>更好</td></tr>
+        <tr><td>客戶</td><td>所有人</td><td>就是 hyperscaler 自己</td></tr>
+        <tr><td>賣方</td><td>NVIDIA / AMD</td><td>hyperscaler + 設計合作夥伴</td></tr>
+      </tbody>
+    </table>
+    <div class="box bad">
+      <strong>ASIC BOM ≠ GPU BOM</strong>：ASIC 是 <strong>平行</strong> 的供應鏈，不是 GPU 外溢。Google TPU 用 Broadcom 設計 + TSMC 製造 + 自家 HBM 配額；跟 NVIDIA GB300 是 <strong>兩條完全不同的 BOM</strong>。把 ASIC 寫成「GPU 外溢」是錯誤類比。
+    </div>
+    <h3>怎麼從自研晶片變成投資線索？</h3>
+    <div class="logic-chain">
+      <ol>
+        <li><strong>Hyperscaler 不想完全依賴 NVIDIA。</strong>GPU 好用但貴，毛利大多被 NVIDIA 拿走。</li>
+        <li><strong>自家 workload 可以用專用晶片優化。</strong>例如 inference 固定、模型架構固定，就能用 ASIC 換更好的 perf/W。</li>
+        <li><strong>但 hyperscaler 不一定自己做完。</strong>它們定義需求，Broadcom / Marvell / Alchip / GUC 幫忙設計，TSMC 幫忙製造。</li>
+        <li><strong>ASIC 仍吃共用瓶頸。</strong>TSMC 先進製程、CoWoS、HBM 都可能跟 NVIDIA GPU 搶產能。</li>
+        <li><strong>投資驗證看設計 win + 量產時點。</strong>不是「有 ASIC 需求」就算數，要看 customer、project size、ramp schedule。</li>
+      </ol>
+    </div>
+    <div class="box bad"><strong>錯誤投資邏輯：</strong>hyperscaler 做 ASIC → Broadcom / Marvell 全部受惠。</div>
+    <div class="box good"><strong>正確投資邏輯：</strong>hyperscaler 自研需求 → 設計合作商拿 design win → TSMC / HBM / CoWoS 配額能跟上 → project ramp 進 revenue。</div>
+  </details>
+</section>
+
+<section id="background">
+  <h2>5. 必要背景（4 點心法）</h2>
+  <ul>
+    <li><strong>rack-scale vs box-scale 思維</strong>：AI server 是 rack 級系統。任何「GPU 受惠」分析如果只看單片 GPU，就漏掉 rack 一半的故事。</li>
+    <li><strong>NVIDIA reference design 決定供應鏈分配</strong>：hyperscaler 通常照 NVIDIA reference 採購，NVIDIA 一改 spec，整條供應鏈跟著動。</li>
+    <li><strong>真正的買方是 hyperscaler</strong>：Microsoft / Meta / Google / Amazon 的 capex 才是這條 thesis 的真正驅動。</li>
+    <li><strong>TSMC 是 single point of failure</strong>：B300、Trainium、TPU、AMD Instinct 全在 TSMC 做。TSMC 產能分配 = 誰能出貨。</li>
+  </ul>
+</section>
+
+<section id="confusion">
+  <h2>6. 容易混淆的點（易錯 vs 正解）</h2>
+
+  <div class="confuse-grid">
+    <div class="cwrong">「NVIDIA 一張 GPU 賣多少」</div>
+    <div class="cright">NVIDIA 現在以 rack 為單位出貨，一櫃 ~$600K</div>
+
+    <div class="cwrong">BOM = 公司營收</div>
+    <div class="cright">BOM = 零件成本表，跟公司營收兩件事</div>
+
+    <div class="cwrong">TrendForce 預期 = 已實現</div>
+    <div class="cright">Forecast vs reported-fact 兩種等級，永遠先看時態</div>
+
+    <div class="cwrong">「散熱概念股」</div>
+    <div class="cright">拆 cold plate / CDU / manifold / UQD 四段，市占口徑不同</div>
+
+    <div class="cwrong">Component 跟 system integrator 比百分比</div>
+    <div class="cright">奇鋐（中游零件）vs Vertiv（中游系統）不能直接比</div>
+
+    <div class="cwrong">ASIC 受惠 = GPU 外溢</div>
+    <div class="cright">ASIC 是平行 BOM，不是 GPU 衍生</div>
+
+    <div class="cwrong">HBM 漲價 = 一般 DRAM 漲價</div>
+    <div class="cright">HBM 是高階 niche，跟 commodity DRAM 兩條曲線</div>
+
+    <div class="cwrong">被動元件 = 低附加價值</div>
+    <div class="cright">AI 主板高階 MLCC 用量翻倍，ASP 拉動明顯</div>
+  </div>
+</section>
+
+<section id="checklist">
+  <h2>7. 寫稿 / 看文章前的自檢</h2>
+  <div class="box">
+    <p>下次看到任何 AI server 相關文章 / 自己準備寫前，跑這個 checklist：</p>
+    <ul class="tight">
+      <li>講「散熱概念股」？停一下，是 cold plate / CDU / manifold / UQD 哪一段？</li>
+      <li>引用 BOM 數字？確認它是 BOM 還是 revenue？</li>
+      <li>引用市占百分比？確認 component 還是 system 口徑？</li>
+      <li>引用未來預測？確認 reported-fact 還是 forecast？</li>
+      <li>把 ASIC 寫成「GPU 外溢」？拆開，兩條供應鏈不同。</li>
+      <li>把 HBM 寫成「DRAM 漲」？HBM 跟 commodity DRAM 是兩條曲線。</li>
+      <li>把整櫃 $600K 寫成「GPU 漲價」？錯，是整套 system 售價。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="min">
+  <h2>8. 最小可記住版本（10 條）</h2>
+  <div class="min-grid">
+    <div class="min-card"><span class="n">1</span>AI server 不是 GPU 一張，是 rack 一台。</div>
+    <div class="min-card"><span class="n">2</span>GB300 一櫃 ~$600K，包含 72 GPU + Grace + 散熱 + 電源。</div>
+    <div class="min-card"><span class="n">3</span>BOM = 零件成本表，不是公司營收。</div>
+    <div class="min-card"><span class="n">4</span>散熱從旁料變大 BOM，因為 rack 功耗破 130kW。</div>
+    <div class="min-card"><span class="n">5</span>散熱拆 4 段：cold plate / CDU / manifold / UQD。</div>
+    <div class="min-card"><span class="n">6</span>HBM 解決 memory wall；SK / Samsung / Micron 三家。</div>
+    <div class="min-card"><span class="n">7</span>被動元件是電容電阻電感；AI 主板高階料用量翻倍。</div>
+    <div class="min-card"><span class="n">8</span>ASIC 是 hyperscaler 自研晶片；BOM 結構平行於 GPU（不是外溢）。</div>
+    <div class="min-card"><span class="n">9</span>Forecast 跟 fact 永遠分開；看時態。</div>
+    <div class="min-card"><span class="n">10</span>Component supplier（奇鋐）跟 system integrator（Vertiv）不能直接比百分比。</div>
+  </div>
+</section>
+
+<section id="next">
+  <h2>9. 讀完後該往哪裡走</h2>
+  <p>按下面順序走完 Card #001 ship 流程：</p>
+  <ol>
+    <li>下一步 → <a href="../readings/cooling-bom.html">Cooling BOM Cross-Source Reading</a>（用 primer 概念去檢查 source 數字）</li>
+    <li>之後審稿 → <a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">Card #001 HTML 審稿頁</a></li>
+    <li>最後 IA1 → <a href="../../../../ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md">md source — IA1 decision file</a></li>
+  </ol>
+
+  <h3>想深挖任一元件</h3>
+  <table>
+    <thead><tr><th>主題</th><th>下一頁</th></tr></thead>
+    <tbody>
+      <tr><td>整個產業地圖</td><td><a href="../index.html">AI Server 主題地圖</a></td></tr>
+      <tr><td>所有 readings</td><td><a href="../readings/index.html">Readings index</a></td></tr>
+      <tr><td>所有 sources</td><td><a href="../sources.html">Sources Reading Shelf</a></td></tr>
+      <tr><td>CPU 復興（AMD / Intel）</td><td><a href="../cpu.html">CPU topic page</a></td></tr>
+      <tr><td>ASIC 故事</td><td><a href="../asic.html">ASIC topic page</a></td></tr>
+      <tr><td>HBM</td><td><a href="../memory.html">Memory / HBM topic page</a></td></tr>
+      <tr><td>被動元件</td><td><a href="../passive-components.html">Passive components topic page</a></td></tr>
+      <tr><td>散熱主題深入</td><td><a href="../cooling.html">Cooling topic page</a></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>10. Canonical Pair · Source Confidence</h2>
+  <div class="box">
+    <h3>這份 primer 的可信度</h3>
+    <p><strong>Source confidence</strong>：<span class="pill warn">unverified</span>。這份 primer 是 <strong>常識整理 + agent inference</strong>，未經 source-tutor 驗證。任何具體投資結論必須走 source tutor 流程。</p>
+    <p><strong>Canonical pair</strong>：</p>
+    <ul class="tight">
+      <li>Reading surface（你正在看）：<code>research/knowledge/ai-server-supply-chain/primers/ai-server-components.html</code></li>
+      <li>Canonical record（完整 frontmatter + 全文 markdown）：<a href="../../../notes/2026-05-13_ai-server-components-primer.md">markdown canonical</a></li>
+    </ul>
+    <p>HTML 與 markdown 內容對等。markdown 是 git diff 友善的完整 record；HTML 是給人讀的視覺面。</p>
+  </div>
+</section>
+
+<section>
+  <h2>11. 下一步閱讀（Reading Surface Navigation）</h2>
+  <div class="step-strip" aria-label="三步學習順序提醒">
+    <div class="step"><span class="n">1</span>Primer（已完成 ✓）</div>
+    <div class="step current"><span class="n">2</span><a href="../readings/cooling-bom.html" style="color: inherit; text-decoration: none;">→ Cooling BOM Source Tutor</a></div>
+    <div class="step"><span class="n">3</span><a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html" style="color: inherit; text-decoration: none;">Card #001 審稿</a></div>
+  </div>
+  <p>讀完這份 primer 後，回到 Card #001 流程：</p>
+  <ol class="tight">
+    <li>Step 2 → <a href="../readings/cooling-bom.html">Cooling BOM Cross-Source Reading</a>（用 primer 概念去檢查 source 數字）</li>
+    <li>Step 3 → <a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">Card #001 HTML 審稿頁</a></li>
+    <li>結尾 → <a href="../../../../ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md">markdown canonical — IA1 decision file</a></li>
+  </ol>
+</section>
+
+<footer>
+  AI Server 元件 Primer · reading surface for domain onboarding ·
+  canonical: <a href="../../../notes/2026-05-13_ai-server-components-primer.md">markdown canonical</a> ·
+  back to <a href="../index.html">theme map</a>
+</footer>
+
+</body>
+</html>

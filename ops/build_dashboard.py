@@ -527,11 +527,17 @@ def render_reference(
 
     # Pointers
     pointers = [
+        ("html", "research/knowledge/ai-server-supply-chain/primers/ai-server-components.html", "Step 1 · AI Server 元件 Primer（先學 domain 概念）"),
+        ("html", "research/knowledge/ai-server-supply-chain/readings/cooling-bom.html", "Step 2 · Cooling BOM 學習頁（讀 source）"),
+        ("html", "content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html", "Step 3 · Card #001 審稿頁 — 回兩個 reviewer 問題"),
+        ("md", "ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md", "Card #001 IA1 decision file"),
+        ("md", "ops/decisions/2026-05-14_card-writing-voice-lessons.md", "Card writing voice lessons（future #002/#003 先讀）"),
         ("md", "ops/current.md", "本頁的 markdown 來源"),
         ("md", "content/cards/_index.md", "Cards 規範與全表"),
         ("md", "ops/sessions/_index.md", "Sessions 規範與全表"),
         ("html", "content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html", "Backbone article"),
         ("html", "research/knowledge/ai-server-supply-chain/index.html", "Knowledge map"),
+        ("html", "research/knowledge/ai-server-supply-chain/readings/index.html", "Readings index（所有 source tutor 學習頁）"),
         ("md", "docs/IMPLEMENTATION_PLAN.md", "Implementation plan"),
         ("md", "ops/tooling-dashboard-options.md", "Tooling options survey"),
         ("md", "ops/build_dashboard.py", "Dashboard generator 程式"),

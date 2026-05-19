@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cooling BOM — Cross-Source Reading · AI Server Supply Chain</title>
+<style>
+  :root {
+    --maxw: 880px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-muted: #edf1f5;
+    --text: #24272d;
+    --muted: #68707d;
+    --line: #d8dee6;
+    --link: #315f9f;
+    --warn-bg: #fff4dc;
+    --warn-text: #6b4b00;
+    --bad-bg: #fdecec;
+    --bad-text: #842525;
+    --good-bg: #e9f5ec;
+    --good-text: #1f6b3a;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      --bad-bg: #3a1f1f;
+      --bad-text: #f5b4b4;
+      --good-bg: #1c3326;
+      --good-text: #9ed7af;
+      color-scheme: dark;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .lede { font-size: 16px; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 12px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section h3 { font-size: 17px; margin: 18px 0 8px; }
+  section p { margin: 8px 0; }
+  ul, ol { padding-left: 22px; }
+  ul.tight li, ol.tight li { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  .pill { background: var(--surface-muted); display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; font-family: var(--mono); }
+  .pill.warn { color: var(--warn-text); background: var(--warn-bg); border-color: var(--warn-bg); }
+  .pill.bad { color: var(--bad-text); background: var(--bad-bg); border-color: var(--bad-bg); }
+  .pill.good { color: var(--good-text); background: var(--good-bg); border-color: var(--good-bg); }
+  .box { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .box.bad { background: var(--bad-bg); color: var(--bad-text); border-color: var(--bad-bg); }
+  .box.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .box h3 { margin-top: 0; }
+  blockquote { border-left: 3px solid var(--muted); margin: 12px 0; padding: 4px 12px; color: var(--muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; }
+  .toc { background: var(--surface); border: 1px solid var(--line); padding: 12px 16px; border-radius: 8px; }
+  .toc ol { margin: 6px 0 0; }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  @media (max-width: 600px) { body { padding: 18px; } h1 { font-size: 24px; } h2 { font-size: 19px; } .meta, .source { font-size: 11px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb"><a href="../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp; <a href="./index.html">Readings</a> &nbsp;/&nbsp; Cooling BOM</div>
+  <h1>GB300 液冷 BOM Cross-Source Reading</h1>
+  <p class="lede">
+    把 Card #001 引用的 4 份散熱 source 一次讀懂。教你怎麼讀「industry teardown」這種二手 source，並把目前最刺眼的「$49,860 vs $600K vs 42%」分母衝突明確標成 <code>open</code>。讀完後你應該知道哪幾個數字可以寫進貼文、哪幾個只能當「方向感」、哪幾個必須完全避開。
+  </p>
+  <div class="meta">
+    Status: <span class="pill">draft</span> ·
+    Reading mode: <span class="pill">cross-source-synthesis</span> ·
+    Source quality: <span class="pill warn">secondary</span> (+ tertiary aggregation) ·
+    Theme: <span class="pill">cooling</span> ·
+    Step: <span class="pill">2 of 3</span> ·
+    Canonical: <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_cooling-bom-reading.md">markdown canonical</a>
+  </div>
+</header>
+
+<section>
+  <div class="box warn">
+    <h3>這頁是第 2 步。先讀 primer。</h3>
+    <p>如果你還不知道 <strong>BOM、GB300 rack、cold plate、CDU、UQD、HBM、被動元件、ASIC BOM</strong> 是什麼，先讀 <a href="../primers/ai-server-components.html">AI Server 元件 Primer</a> 再回來這頁。Primer 教 domain 概念；這頁假設你已經懂概念，所以開始拆 source 信心。</p>
+    <p>正確 3 步順序：<strong>primer → 本頁（source tutor）→ <a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">card #001 review</a></strong></p>
+  </div>
+</section>
+
+<section>
+  <h2>0. 在開始之前</h2>
+  <p>這頁有兩個 mission：</p>
+  <ol>
+    <li><strong>學會讀「industry teardown」這類二手 source</strong>。不是讀單一公司財報；是讀「分析師把散落在供應鏈各家的數字拼成 BOM 總圖」的那類報告。讀法跟讀 AMD 法說完全不一樣。</li>
+    <li><strong>內化 Card #001 引用的數字</strong>，知道哪些能直接寫進貼文、哪些要打折、哪些不能引用。</li>
+  </ol>
+  <p>讀完這頁，你應該有能力被路人質疑時自己反駁，不是「我看了 4 份報告所以信」這種說法。</p>
+
+  <div class="toc">
+    <strong>本頁地圖</strong>
+    <ol class="tight">
+      <li><a href="#sources">4 份 source 是什麼</a></li>
+      <li><a href="#conflict">最刺眼的衝突：42% vs 8.31%</a></li>
+      <li><a href="#lens">讀 industry teardown 的 4 個原則</a></li>
+      <li><a href="#thesis">每條 thesis 多硬？</a></li>
+      <li><a href="#donts">哪些數字不能寫</a></li>
+      <li><a href="#proves">這份 set 能證明什麼 / 不能證明什麼</a></li>
+      <li><a href="#mental">Mental model 升級</a></li>
+      <li><a href="#watchlist">後續驗證 watchlist</a></li>
+      <li><a href="#card001">回到 Card #001：你現在該回的問題</a></li>
+    </ol>
+  </div>
+</section>
+
+<section id="sources">
+  <h2>1. 4 份 source 是什麼</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Source</th><th>Source class</th><th>Quality</th><th>它獨家貢獻什麼</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><a href="https://cn.lianliwork.com/news/nvidia-gb300-liquid-cooling-cost-breakdown-2026">LianLi Work — GB300 單櫃比黃金還貴</a></td>
+        <td>news / industry teardown 引 Morgan Stanley</td>
+        <td><span class="pill warn">tertiary aggregation</span></td>
+        <td>Morgan Stanley supply-chain 框架 + 整櫃 $600K + 132-140kW rack power</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><a href="https://www.eet-china.com/mp/a468082.html">EE Times China — GB200/GB300 散熱系統成本分析</a></td>
+        <td>產業電子媒體報告</td>
+        <td><span class="pill warn">high-quality-secondary</span></td>
+        <td>散熱系統 4 大零件 cost mix（cold plate / CDU / UQD / manifold 百分比）+ UQD 單顆價格變化</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a href="https://www.taipeitimes.com/News/biz/archives/2026/01/20/2003850873">TrendForce / Taipei Times — GB300 to lead AI servers</a></td>
+        <td>news 引 industry research</td>
+        <td><span class="pill warn">secondary-quoted-from-primary</span></td>
+        <td>GB300 share + 液冷滲透率 2026 forecast</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><a href="https://vocus.cc/article/6760e08dfd897800011ad609">Vocus — 液冷散熱供應鏈深入剖析</a></td>
+        <td>industry research blog（台廠視角）</td>
+        <td><span class="pill warn">secondary</span></td>
+        <td>台廠（奇鋐 / 雙鴻 / 建準）角色定位 + 中文圈視角</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="source">
+    對應 source packet（markdown canonical）：<a href="../../../sources/ai-server-supply-chain/reports/2026-05-13_cooling-source-packet.md">md source — cooling-source-packet</a> ·
+    跟著本頁讀的 markdown tutor note：<a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_cooling-bom-reading.md">md source — cooling-bom-reading</a>
+  </p>
+
+  <div class="box warn">
+    <h3>重點：4 份 source 沒有任何一份是 primary</h3>
+    <p>NVIDIA / Vertiv / 奇鋐 / 雙鴻 都沒在這 4 份裡。也就是說：<strong>所有結論都帶 secondary 上限</strong>。我們可以用，但每一條都要標明來源等級。</p>
+  </div>
+</section>
+
+<section id="conflict">
+  <h2>2. 最刺眼的衝突：「占整櫃 42%」根本算不通</h2>
+
+  <div class="box bad">
+    <h3>不要寫「散熱占 GB300 整櫃成本 42%」</h3>
+    <p><code>$49,860 / $600,000 = 8.31%</code>，這跟「占 42%」差超過 5 倍。內部就算術不通。</p>
+    <p><strong>這不是我們自己算出來的。</strong>這句話來自二手 source：EE Times China / 產業拆解文章在講 GB300 散熱系統時出現了「約 $49,860 / 櫃，約占整櫃價值 42%」這類說法；LianLi Work 也提到接近 $50K / 櫃，並說引用 Morgan Stanley / supply-chain data。</p>
+    <p>問題是：如果同時採用 <code>cooling BOM = $49,860</code> 和 <code>total rack = $600,000</code>，計算結果是 <code>8.31%</code>，不是 42%。所以這不是「我們整理錯一點點」，而是 source 內部可能混用了不同母體。</p>
+    <p>可能原因有四種：(a) EE Times / LianLi 抄錯或混用不同口徑；(b) <code>$600K</code> 不是用來算 42% 的分母；(c) <code>$49,860</code> 只是一部分 cooling BOM，<code>$380K</code> 是另一個更大口徑 cooling system；(d) Morgan Stanley 原文裡有不同機櫃配置，但二手文章混在一起。</p>
+    <p>不管哪一種，<strong>結論一樣：發貼文不要引用 42% 這個百分比</strong>，因為任何人按計算機都會發現算不通。</p>
+  </div>
+
+  <h3>這個衝突在教我們什麼？</h3>
+  <ul>
+    <li><strong>Industry teardown 要逐條校對</strong>：拿到任何 BOM 拆解，自己先按一遍百分比。</li>
+    <li><strong>分析師會把不同口徑的數字放在同一段</strong>：「$49,860 cooling BOM」與「occupies 42% of $600K rack」可能來自兩個不同口徑的拆解，但被同一篇文章拼在一起。讀者沒注意就會以為是一回事。</li>
+    <li><strong>safer wording 是給絕對金額，不給百分比</strong>：Card #001 改成「GB300 一櫃液冷 BOM 接近 $50K」，避開比例。</li>
+  </ul>
+</section>
+
+<section id="lens">
+  <h2>3. 讀 Industry Teardown 的 4 個原則</h2>
+
+  <p>這是「跨二手源整合」的閱讀方法。可以直接套到 HBM、被動元件、ASIC BOM 等任何「industry analyst 拼出來的數字」上。</p>
+
+  <ol>
+    <li>
+      <strong>獨立 evidence chain 才算多源。</strong><br />
+      LianLi 引 Morgan Stanley、Vocus 自己整理，但這兩家可能都在引用同一份 Morgan Stanley note。<strong>真正獨立的 secondary 大概只有 2 條，不是 4 條。</strong>
+    </li>
+    <li>
+      <strong>Source class 階層不變。</strong><br />
+      primary > high-quality-secondary > secondary > tertiary。這份 set 沒有 primary，所以結論天花板是 secondary。
+    </li>
+    <li>
+      <strong>分析師重複的 framing 不能跨源累加。</strong><br />
+      「散熱占 42%」這句話被多家轉述，不代表它變成事實。如果原始就是一份 Morgan Stanley note 算錯，後面所有人轉述都會錯。
+    </li>
+    <li>
+      <strong>Forward-looking 不能因為被多家轉述就升等。</strong><br />
+      TrendForce 的「GB300 占 70-80%」是 2026 全年 forecast。即使 LianLi 也轉述，仍是 forward-looking，不是 reported-fact。
+    </li>
+  </ol>
+</section>
+
+<section id="thesis">
+  <h2>4. 每條 thesis 多硬？</h2>
+
+  <p>這裡的「多硬」不是股價強弱，也不是投資機會大小，而是：<strong>這句話有多可信，能不能拿去公開寫？</strong></p>
+
+  <div class="box">
+    <h3>怎麼看 strong / medium / weak / open conflict</h3>
+    <table>
+      <thead><tr><th>強度</th><th>意思</th><th>通常長怎樣</th><th>公開寫法</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="pill good">strong</span></td>
+          <td>可以比較安心公開寫</td>
+          <td>有 primary source / reported fact / 多 source 一致 / 沒有內部矛盾</td>
+          <td>可直接寫，但仍保留時間與來源</td>
+        </tr>
+        <tr>
+          <td><span class="pill warn">medium</span></td>
+          <td>可以寫，但要加來源標籤或 caveat</td>
+          <td>二手 source、industry estimate、forecast、多 source 但可能同源</td>
+          <td>寫「公開拆解 / TrendForce 預期 / secondary」</td>
+        </tr>
+        <tr>
+          <td><span class="pill bad">weak</span></td>
+          <td>不建議寫成精確事實</td>
+          <td>單一二手來源、市占百分比、口徑不清楚、沒有公司 IR / 法說支撐</td>
+          <td>避開百分比，改寫角色定位或方向</td>
+        </tr>
+        <tr>
+          <td><span class="pill bad">open conflict</span></td>
+          <td>不能寫，不是「弱」而是目前矛盾</td>
+          <td>同組數字彼此算不通，或來源自相矛盾</td>
+          <td>不寫；若必要，寫成「口徑衝突」</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>你看這張表不是要背起來，而是要判斷 Card #001 哪些句子能留、哪些要改寫、哪些要刪掉。</p>
+  </div>
+
+  <p>下面把 Card #001 用到的每條 thesis 拆開，看支持 source、強度、能不能公開引用。</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Thesis 線</th><th>支持 sources</th><th>強度</th><th>可公開引用？</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>GB300 滿配 rack 132-140kW、B300 GPU 1400W</td>
+        <td>Source 1 + NVIDIA 公開 spec</td>
+        <td><span class="pill good">strong</span></td>
+        <td><span class="pill good">可</span> 屬於公開 spec 範圍</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>GB300 一櫃液冷 BOM 約 $49,860（GB200 約 $41,500）</td>
+        <td>Source 1 + Source 2（可能同源 Morgan Stanley）</td>
+        <td><span class="pill warn">medium</span></td>
+        <td><span class="pill warn">可，但標 secondary</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>cold plate 40-45% / CDU 30-35% / UQD 15-20% / manifold 5-10%</td>
+        <td>Source 2 only</td>
+        <td><span class="pill warn">medium</span></td>
+        <td><span class="pill warn">可，要明確標 EE Times China</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>UQD 單顆 $80 → $45（NVUQD03），數量翻倍</td>
+        <td>Source 2 only</td>
+        <td><span class="pill warn">medium</span></td>
+        <td><span class="pill warn">可，要承認沒對 NVIDIA / Vertiv 原始 BOM</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>GB300 占 2026 AI rack shipments 70-80%</td>
+        <td>Source 3 (TrendForce)</td>
+        <td><span class="pill warn">medium</span></td>
+        <td><span class="pill warn">寫「TrendForce 預期」，不能寫成已 reported</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>2026 液冷滲透率突破 50%</td>
+        <td>Source 3 + Source 4</td>
+        <td><span class="pill warn">medium</span></td>
+        <td><span class="pill warn">標「TrendForce 預期」；補「2026 仍以 liquid-to-air 過渡為主」</span></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Vertiv 在液冷 ecosystem 拿 35%+ 份額</td>
+        <td>Source 2 only</td>
+        <td><span class="pill bad">weak</span></td>
+        <td><span class="pill warn">避開百分比，改寫「主力之一」</span></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>奇鋐 cold plate 30%+ 市占</td>
+        <td>Source 4 + Source 1（可能同源）</td>
+        <td><span class="pill bad">weak（口徑未驗證）</span></td>
+        <td><span class="pill warn">避開百分比；不要直接寫 30%</span></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>雙鴻是 manifold / 液冷模組主玩家</td>
+        <td>Source 4 + Source 2</td>
+        <td><span class="pill warn">medium（角色定位）</span></td>
+        <td><span class="pill good">可寫角色定位</span></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td><strong>散熱占整 GB300 機櫃 42%</strong></td>
+        <td>Source 1 + Source 2 引用，但算術不通</td>
+        <td><span class="pill bad">open conflict</span></td>
+        <td><span class="pill bad">不要寫</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="donts">
+  <h2>5. 哪些數字不能直接拿去公開寫</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>原本想寫的數字</th><th>為什麼有風險</th><th>safer wording</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>「散熱占 GB300 整櫃 42%」</td>
+        <td>$49,860 / $600,000 = 8.31%，算術不通</td>
+        <td>不用百分比；改用「~$50K / 櫃」絕對金額</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>「整櫃成本 $600K」</td>
+        <td>LianLi 同篇文章又出現 $380K，母體不一致</td>
+        <td>不引整櫃成本，只引「cooling BOM 約 $49,860」</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>「奇鋐 cold plate 30%+ 市占」</td>
+        <td>口徑（NVDA-only / 全平台 / 含 ASIC）未驗證</td>
+        <td>「奇鋐 / AVC 是 cold plate 主要供應商之一」</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>「Vertiv 拿液冷 ecosystem 35%+」</td>
+        <td>EE Times 單一 secondary 估計，無第二源獨立驗證</td>
+        <td>「Vertiv 是 rack / data center 層級 cooling infrastructure 主力之一」</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>「GB300 占 2026 rack shipments 70-80%」</td>
+        <td>TrendForce forecast；2026 還沒過完</td>
+        <td>「TrendForce 預期 GB300 將是 2026 主流」，不寫具體百分比</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>「液冷滲透率突破 50%」</td>
+        <td>TrendForce forecast；2026 主要還是 liquid-to-air 過渡</td>
+        <td>「液冷滲透率往 50% 走，但 2026 仍以 liquid-to-air 過渡為主」</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="proves">
+  <h2>6. 這份 set 能證明什麼 / 不能證明什麼</h2>
+
+  <div class="box good">
+    <h3>能直接公開引用的</h3>
+    <ul>
+      <li>AI server 機櫃從風冷切到液冷後，散熱從風扇 + heat sink 變成 cold plate + CDU + manifold + UQD 一整套 plumbing（公開事實）。</li>
+      <li>GB300 一櫃液冷 BOM 在 $40K-$50K 量級（兩個獨立 secondary 一致，方向感對）。</li>
+      <li>GB300 滿配 rack 功耗 132-140kW、B300 GPU 1400W（NVIDIA 公開 spec 一致）。</li>
+      <li>奇鋐 / 雙鴻 / Vertiv 是液冷供應鏈裡有明確角色定位的玩家（角色 OK，百分比 not OK）。</li>
+    </ul>
+  </div>
+
+  <div class="box bad">
+    <h3>這份 set 不能證明的</h3>
+    <ul>
+      <li><strong>散熱占整櫃 42%</strong> — 算術衝突，不是事實。</li>
+      <li>奇鋐冷板市占的精確口徑（NVDA-only？全平台？含 ASIC？）。</li>
+      <li>Vertiv 35%+ 是真的、還是分析師估計。</li>
+      <li>GB300 mass-deployment 真正 ramp 月份。</li>
+      <li>純液冷 vs 過渡液冷 2026 真正比重。</li>
+    </ul>
+  </div>
+</section>
+
+<section id="mental">
+  <h2>7. Mental Model 升級</h2>
+  <ul>
+    <li>
+      <strong>AI server 散熱 = 物理瓶頸 + 系統級 BOM</strong>。<br />
+      Rack 功耗從 ~50kW 跳到 132-140kW，風冷物理上不夠，散熱從旁料變必要系統零件。這條被 NVIDIA primary spec 支持，可長期套用到任何 AI server 公司分析。
+    </li>
+    <li>
+      <strong>Industry teardown 要逐條校對，不能整套引用</strong>。<br />
+      Source 1 自己內部就有 $49,860 / $600K 與 42% 算術衝突。教訓：拿到任何 BOM 拆解，先自己按計算機。
+    </li>
+    <li>
+      <strong>「多源一致」要看是不是獨立 evidence chain</strong>。<br />
+      4 份散熱 source 表面互相支持，但 LianLi 跟 Vocus 可能引同一份 Morgan Stanley note。真正獨立的 secondary 大概只有 2 條。
+    </li>
+    <li>
+      <strong>供應鏈受惠要拆零件，不能講「散熱概念股」</strong>。<br />
+      cold plate / CDU / manifold / UQD 四段各自市占不同；奇鋐、雙鴻、Vertiv、建準位置不同。公開寫作必須對應到具體角色。
+    </li>
+  </ul>
+</section>
+
+<section id="watchlist">
+  <h2>8. 後續驗證 Watchlist</h2>
+  <table>
+    <thead><tr><th>#</th><th>Signal</th><th>為什麼重要</th><th>cadence</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>NVIDIA 下一代 rack power envelope</td><td>Rubin 往 160kW+ 走則液冷必要性更高；反之觸發 bull-kill Counter</td><td>event-driven</td></tr>
+      <tr><td>2</td><td>奇鋐 / 雙鴻 / Vertiv 季報 NVDA 平台暴露百分比</td><td>把「角色定位」升級成「實際營收暴露」</td><td>quarterly</td></tr>
+      <tr><td>3</td><td>Vertiv 法說 liquid cooling backlog</td><td>先行指標</td><td>quarterly</td></tr>
+      <tr><td>4</td><td>NVIDIA GTC / OCP 公開 BOM 拆解</td><td>可把 $50K / 櫃從 secondary 升級到 primary</td><td>event-driven</td></tr>
+      <tr><td>5</td><td>Morgan Stanley 原文</td><td>可解 $50K vs 42% 衝突</td><td>event-driven</td></tr>
+      <tr><td>6</td><td>2026 AI rack mix（liquid-to-air vs direct-to-chip vs immersion）</td><td>驗證 forecast 與 Counter</td><td>quarterly</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="card001">
+  <h2>9. 回到 Card #001：你現在該回的問題</h2>
+
+  <p>讀完這頁，你應該有底氣回答 Card #001 ship 前的兩個關鍵問題：</p>
+
+  <div class="box">
+    <h3>問題 A：BOM 數字怎麼寫？</h3>
+    <p>三個選項：</p>
+    <ul>
+      <li><strong>(a) 保守版</strong>（目前 draft）：只寫「GB300 一櫃液冷 BOM 接近 $50K」，不講百分比。<span class="pill good">最安全</span></li>
+      <li><strong>(b) 透明版</strong>：caveat 段加「公開拆解對分母不一致，所以我用較保守口徑」。<span class="pill warn">教育性高，但變複雜</span></li>
+      <li><strong>(c) 延後</strong>：暫不 ship，等 Morgan Stanley 原文 / Vertiv investor day / NVIDIA OCP 拆解。<span class="pill warn">可能等不到</span></li>
+    </ul>
+    <p>我（agent）建議 (a)。你看完這頁，應該也會傾向 (a) — 因為這份 set 不會升到 primary，等也不會有更硬的數字。</p>
+  </div>
+
+  <div class="box">
+    <h3>問題 B：持倉揭露</h3>
+    <p>Card #001 提到 3 家公司：</p>
+    <ul>
+      <li>奇鋐（3017.TW）</li>
+      <li>雙鴻（3324.TW）</li>
+      <li>Vertiv（VRT）</li>
+    </ul>
+    <p>per <code>ops/RISK_AND_COMPLIANCE.md</code>「Disclose positions or conflicts when relevant」，要在 card 加一行：</p>
+    <ul>
+      <li>如果完全沒持倉：「作者目前未持有 奇鋐、雙鴻、Vertiv，且 30 天內無交易」</li>
+      <li>如果有任一張持倉：明確揭露公司、方向（多 / 空）、大致時點</li>
+    </ul>
+  </div>
+
+  <p class="source">
+    回去動作：<br />
+    1. 開 <a href="../../../../content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">md source — card #001</a> 確認你看到的「Draft Post（X Long Post）」段落。<br />
+    2. 看 Card #001 的 <strong>HTML review page</strong>（即將建立）做最終公開稿審查。<br />
+    3. 回 IA1 decision file 給 verdict（approve / edit / defer）。
+  </p>
+</section>
+
+<section>
+  <h2>10. Canonical Pair · Source Confidence</h2>
+  <div class="box">
+    <h3>這頁的可信度</h3>
+    <p><strong>Source confidence</strong>：<span class="pill warn">secondary</span> + tertiary aggregation。4 份 source 沒有任何一份是 primary（NVIDIA / Vertiv / 奇鋐 / 雙鴻 法說都不在），所有結論帶 secondary 上限。</p>
+    <p><strong>Canonical pair</strong>：</p>
+    <ul class="tight">
+      <li>Reading surface（你正在看）：<code>research/knowledge/ai-server-supply-chain/readings/cooling-bom.html</code></li>
+      <li>Canonical record（完整 frontmatter + sentence-level reading chain + claim ledger）：<a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_cooling-bom-reading.md">markdown canonical</a></li>
+      <li>Underlying source packet：<a href="../../../sources/ai-server-supply-chain/reports/2026-05-13_cooling-source-packet.md">markdown source packet</a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>11. 下一步閱讀（Reading Surface Navigation）</h2>
+  <div class="box">
+    <p>三步學習順序：</p>
+    <ol class="tight">
+      <li>← <a href="../primers/ai-server-components.html">Step 1 · AI Server 元件 Primer</a>（如需回頭複習 domain 概念）</li>
+      <li><strong>Step 2 · 本頁</strong>（你在這）</li>
+      <li>→ <a href="../../../../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">Step 3 · Card #001 HTML 審稿頁</a></li>
+    </ol>
+    <p class="source">
+      其他相關閱讀：
+      <a href="../cooling.html">散熱主題頁（topic page，needs follow-up）</a> ·
+      <a href="./index.html">Readings index</a> ·
+      <a href="../sources.html">Sources reading shelf</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  Cooling BOM Cross-Source Reading · reading surface for cooling source set ·
+  canonical: <a href="../../../source-tutor/ai-server-supply-chain/2026-05-13_cooling-bom-reading.md">markdown canonical</a> ·
+  back to <a href="./index.html">readings index</a> ·
+  <a href="../index.html">theme map</a>
+</footer>
+
+</body>
+</html>

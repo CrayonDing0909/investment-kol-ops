@@ -284,21 +284,21 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
     <span class="brand">Now Page</span>
     <span class="crumb">/ ops / investment-kol-ops</span>
   </div>
-  <div class="right">最後更新 2026-05-13 22:14 · 自動生成 from frontmatter + data/*.toml</div>
+  <div class="right">最後更新 2026-05-14 22:29 · 自動生成 from frontmatter + data/*.toml</div>
 </div>
 
 <section class="hero" aria-label="現在該做什麼">
   <div class="eyebrow">下一步 · one next action</div>
-  <h1>對 Card #001（Cooling BOM）跑 IA1 gate；CTA URL 已敲定 Vercel library，下一步是 IA1 + 解 BOM 分母衝突（或維持較安全的 ~$49,860 / rack 寫法）。</h1>
+  <h1>Schedule / publish Card #001. IA1 is approved and content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md is now ready. Next action: decide X-only vs X+Threads, then publish manually and paste post URLs back into the card.</h1>
   <div class="chips">
     <span class="chip active"><span class="label">milestone</span> M3 active</span>
     <span class="chip"><span class="label">branch</span> <code>feat/card-001-cooling-bom</code></span>
-    <span class="chip draft"><span class="label">task</span> Card #001 draft</span>
+    <span class="chip active"><span class="label">task</span> Card #001 ready</span>
     <span class="chip active"><span class="label">session</span> Session C</span>
   </div>
   <div class="donot">
     <span class="key">不要做</span>
-    <ul><li>不要開新研究分支（Gap C / D / E / AMD cross-source v2）</li><li>不要同時推第二張 card</li><li>不要新增 worktree</li><li>先把 #001 推到 ready 或明確 archive</li></ul>
+    <ul><li>不要改 Card #001 source claims unless new evidence appears</li><li>不要寫「散熱占整櫃 42%」</li><li>不要開新研究分支（Gap C / D / E / AMD cross-source v2）</li><li>不要同時推第二張 card</li><li>不要新增 worktree</li><li>先把 #001 推到 ready 或明確 archive</li></ul>
   </div>
 </section>
 
@@ -328,7 +328,7 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
 <section class="lane active" aria-label="進行中">
   <header>
     <h3><span class="dot-mark"></span>進行中</h3>
-    <span class="count">2 items</span>
+    <span class="count">1 items</span>
   </header>
   <div class="item">
     <div class="head">
@@ -338,33 +338,12 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
     <div class="desc">Move Card #001 from outline toward first publishable draft</div>
     <div class="footer"><span>branch <code>feat/card-001-cooling-bom</code></span></div>
   </div>
-  <div class="item">
-    <div class="head">
-      <span class="title"><a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">Card #001 · GB300 一櫃液冷 BOM 接近 $50K，這個錢 2026 流去哪幾家</a></span>
-      <span class="pill draft">draft</span>
-    </div>
-    <div class="desc">lens：資金 · counter：bull-kill · risk：high</div>
-  </div>
 </section>
 <section class="lane blocked" aria-label="阻塞中">
   <header>
     <h3><span class="dot-mark"></span>阻塞中</h3>
-    <span class="count">3 items</span>
+    <span class="count">1 items</span>
   </header>
-  <div class="item">
-    <div class="head">
-      <span class="title">BOM 分母衝突 · Card #001</span>
-      <span class="pill blocked">blocker</span>
-    </div>
-    <div class="desc"><code>$49,860 / $600,000 = 8.31%</code>，但 EE Times China 寫 <code>$380K / 42%</code>。發布前不要用「占整櫃 42%」。</div>
-  </div>
-  <div class="item">
-    <div class="head">
-      <span class="title">IA1 gate · Card #001</span>
-      <span class="pill blocked">gate-pending</span>
-    </div>
-    <div class="desc">含投資宣稱的 card 上 ready 前要走 IA1。</div>
-  </div>
   <div class="item">
     <div class="head">
       <span class="title">MediaTek 持倉揭露 · Card #002</span>
@@ -378,6 +357,13 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
     <h3><span class="dot-mark"></span>近期完成</h3>
     <span class="count">5 items</span>
   </header>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/18">PR #18 · Clarify reading surface rules</a></span>
+      <span class="pill done">merged</span>
+    </div>
+    <div class="desc"><code>docs/reading-surface-rule-main</code> → <code>main</code></div>
+  </div>
   <div class="item">
     <div class="head">
       <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/17">PR #17 · Session isolation cowork setup</a></span>
@@ -406,13 +392,6 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
     </div>
     <div class="desc"><code>feat/strategy-thesis-card-template</code> → <code>main</code></div>
   </div>
-  <div class="item">
-    <div class="head">
-      <span class="title"><a href="https://github.com/CrayonDing0909/investment-kol-ops/pull/13">PR #13 · M2.1 public-readiness: HBM/cooling/passive packets + analysis-reasoning rule + article rewrite</a></span>
-      <span class="pill done">merged</span>
-    </div>
-    <div class="desc"><code>feat/m21-public-readiness-complete</code> → <code>main</code></div>
-  </div>
 </section>
 </div>
 
@@ -429,7 +408,7 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
 <div class="ref-block">
   <h3>Cards · AI Server Supply Chain v1</h3>
   <ul>
-    <li><span class="pill draft">draft</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">#001 GB300 一櫃液冷 BOM 接近 $50K，這個錢 2026 流去哪幾家</a> <span class="label">資金 · bull-kill</span></li>
+    <li><span class="pill active">ready</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">#001 GB300 一櫃液冷 BOM 接近 $50K，先別急著喊散熱概念股</a> <span class="label">資金 · bull-kill</span></li>
     <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_fundamentals-mediatek-2b_002.md">#002 MediaTek $2B AI ASIC 是 management expectation，不是已實現營收</a> <span class="label">基本面 · bear-falsify</span></li>
     <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_why-cpu-back_003.md">#003 CPU 不是 GPU 的對手，是 agent AI 的瓶頸</a> <span class="label">為什麼 · bull-kill</span></li>
     <li><span class="pill">outline</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/2026-05-13_ai-server_trigger-apple-intel_004.md">#004 Apple-Intel preliminary deal 是訊號，但「preliminary」這個字現在做什麼還太早</a> <span class="label">啟動 · bear-falsify</span></li>
@@ -450,11 +429,17 @@ footer { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 32px;
 <div class="ref-block">
   <h3>常用入口</h3>
   <ul>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/primers/ai-server-components.html">research/knowledge/ai-server-supply-chain/primers/ai-server-components.html</a> · Step 1 · AI Server 元件 Primer（先學 domain 概念）</li>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/readings/cooling-bom.html">research/knowledge/ai-server-supply-chain/readings/cooling-bom.html</a> · Step 2 · Cooling BOM 學習頁（讀 source）</li>
+    <li><span class="label">html</span> <a href="../content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html">content/cards/reviews/2026-05-13_card-001-cooling-bom_review.html</a> · Step 3 · Card #001 審稿頁 — 回兩個 reviewer 問題</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md">ops/decisions/2026-05-13_ia1_card-001-cooling-bom.md</a> · Card #001 IA1 decision file</li>
+    <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/decisions/2026-05-14_card-writing-voice-lessons.md">ops/decisions/2026-05-14_card-writing-voice-lessons.md</a> · Card writing voice lessons（future #002/#003 先讀）</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/current.md">ops/current.md</a> · 本頁的 markdown 來源</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/content/cards/_index.md">content/cards/_index.md</a> · Cards 規範與全表</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/sessions/_index.md">ops/sessions/_index.md</a> · Sessions 規範與全表</li>
     <li><span class="label">html</span> <a href="../content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html">content/drafts/2026-05-12_ai-server-supply-chain_internal-article.html</a> · Backbone article</li>
     <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/index.html">research/knowledge/ai-server-supply-chain/index.html</a> · Knowledge map</li>
+    <li><span class="label">html</span> <a href="../research/knowledge/ai-server-supply-chain/readings/index.html">research/knowledge/ai-server-supply-chain/readings/index.html</a> · Readings index（所有 source tutor 學習頁）</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/docs/IMPLEMENTATION_PLAN.md">docs/IMPLEMENTATION_PLAN.md</a> · Implementation plan</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/tooling-dashboard-options.md">ops/tooling-dashboard-options.md</a> · Tooling options survey</li>
     <li><span class="label">md</span> <a href="cursor://file//Users/dylanting/personal/investment-kol-ops/ops/build_dashboard.py">ops/build_dashboard.py</a> · Dashboard generator 程式</li>

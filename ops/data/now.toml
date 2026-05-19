@@ -7,10 +7,12 @@
 # and git status; you don't have to edit them here.
 
 next_action = """
-對 Card #001（Cooling BOM）跑 IA1 gate；CTA URL 已敲定 Vercel library，下一步是 IA1 + 解 BOM 分母衝突（或維持較安全的 ~$49,860 / rack 寫法）。
+Schedule / publish Card #001. IA1 is approved and content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md is now ready. Next action: decide X-only vs X+Threads, then publish manually and paste post URLs back into the card.
 """
 
 do_not = [
+  "不要改 Card #001 source claims unless new evidence appears",
+  "不要寫「散熱占整櫃 42%」",
   "不要開新研究分支（Gap C / D / E / AMD cross-source v2）",
   "不要同時推第二張 card",
   "不要新增 worktree",
