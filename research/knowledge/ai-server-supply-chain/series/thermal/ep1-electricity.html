@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>散熱系列 第一集 — 為什麼一台 AI server 一個月電費比一台 Model S 還貴</title>
+<meta name="description" content="散熱系列第一集（純科普）：用 Tesla Model S 的電費對比，30 秒看懂 AI server 為什麼突然變成散熱題。" />
+<style>
+  :root {
+    --maxw: 760px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-muted: #edf1f5;
+    --text: #24272d;
+    --muted: #68707d;
+    --line: #d8dee6;
+    --link: #315f9f;
+    --accent-bg: #e8efff;
+    --accent-text: #1f3e8a;
+    --accent-line: #c5d3f0;
+    --good-bg: #e9f5ec;
+    --good-text: #1f6b3a;
+    --warn-bg: #fff4dc;
+    --warn-text: #6b4b00;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --accent-bg: #1d2740;
+      --accent-text: #b5cbff;
+      --accent-line: #2f3e60;
+      --good-bg: #1c3326;
+      --good-text: #9ed7af;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif;
+    line-height: 1.8;
+    padding: 28px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16.5px;
+  }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 4px; }
+  header .crumb { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 6px; }
+  header .crumb a { color: var(--muted); }
+  header h1 { margin: 6px 0 4px; font-size: 26px; line-height: 1.4; }
+  header .subtitle { margin: 4px 0 12px; font-size: 15px; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); margin-right: 4px; }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .pill.accent { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-bg); }
+
+  /* Series progress strip */
+  .series-strip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 4px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .series-strip .step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  .series-strip .step.current {
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    border-color: var(--accent-line);
+    font-weight: 600;
+  }
+  .series-strip .step.done {
+    background: var(--good-bg);
+    color: var(--good-text);
+    border-color: var(--good-bg);
+  }
+  .series-strip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+  .series-strip .step.current .dot { background: var(--accent-text); }
+  .series-strip .step.done .dot { background: var(--good-text); }
+  .series-strip .sep { color: var(--line); }
+
+  h2 { font-size: 21px; margin: 32px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  h3 { font-size: 17px; margin: 22px 0 8px; }
+
+  .hook {
+    background: var(--accent-bg);
+    color: var(--accent-text);
+    border: 1px solid var(--accent-line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 18px 0;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .hook strong { font-size: 18px; }
+
+  .compare {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .compare-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--line);
+    padding: 6px 0;
+    font-size: 15px;
+  }
+  .compare-row:last-child { border-bottom: 0; }
+  .compare-row .label { color: var(--muted); }
+  .compare-row .value { font-family: var(--mono); font-weight: 600; }
+  .compare-row.highlight .value { color: var(--accent-text); font-size: 17px; }
+
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  .box.note { background: var(--surface-muted); }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); font-size: 13px; }
+
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 14px; }
+  a { color: var(--link); text-underline-offset: 2px; }
+  p { margin: 10px 0; }
+
+  /* Bottom sibling nav */
+  .siblings {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .siblings .slot {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .siblings .slot:hover { border-color: var(--link); }
+  .siblings .slot.disabled { opacity: 0.45; cursor: not-allowed; }
+  .siblings .slot .role { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+  .siblings .slot .title { font-size: 14px; line-height: 1.4; }
+
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 28px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+  @media (max-width: 700px) {
+    body { padding: 20px; font-size: 16px; }
+    h1 { font-size: 22px; }
+    h2 { font-size: 19px; }
+    .siblings { grid-template-columns: 1fr; }
+    .compare-row { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb">
+    <a href="../../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp;
+    <a href="index.html">散熱系列</a> &nbsp;/&nbsp;
+    第一集
+  </div>
+  <h1>為什麼一台 AI server 一個月電費比一台 Model S 還貴</h1>
+  <div class="subtitle">散熱系列：第一集 · 純科普開場，沒有任何個股 / 投資判斷</div>
+  <div class="series-strip">
+    <span class="step current"><span class="dot"></span>Ep1 · 電費</span>
+    <span class="sep">→</span>
+    <span class="step"><span class="dot"></span>Ep2 · BOM 拆解</span>
+    <span class="sep">→</span>
+    <span class="step"><span class="dot"></span>Ep3 · 公司 + 觀點</span>
+  </div>
+  <div class="meta" style="margin-top:8px;">
+    <span class="pill good">已發布</span>
+    <span class="pill">explainer phase</span>
+    <span class="pill">無持股 disclosure（無 claim）</span>
+  </div>
+</header>
+
+<section>
+  <div class="hook">
+    你知道一台 Tesla Model S 一年充電大概用多少電嗎？<br />
+    大概 <strong>4,000 度</strong>。<br /><br />
+    那一台 AI server 機櫃，一個月吃多少？<br />
+    → 大概 <strong>95,000 度</strong>。<br /><br />
+    一櫃 AI server 跑一個月，等於一台 Tesla 開了 <strong>24 年</strong>的電。
+  </div>
+
+  <p>最近整理 GB300 散熱這條，我原本想直接看一櫃接近 $50K 的液冷 BOM 到底分去哪。</p>
+  <p>但整理到一半發現，如果一開始沒有先把「一櫃 AI server 到底多會吃電」想清楚，後面的 cold plate、CDU、manifold、UQD 其實都會變成零件名詞而已。</p>
+  <p>所以我決定先不急著跳到公司名單。我想先把自己目前理解到的順序整理清楚。</p>
+</section>
+
+<section>
+  <h2>先用 Tesla 當尺</h2>
+  <p>一台 Tesla Model S 開一年，大概會充 ~4,000 度電。換成電費，看你在哪個州、哪個時段，大概落在 US$500–700 一年。</p>
+  <div class="compare">
+    <div class="compare-row"><span class="label">一年充電量</span><span class="value">~4,000 度</span></div>
+    <div class="compare-row"><span class="label">換算電費</span><span class="value">~US$500–700／年</span></div>
+    <div class="compare-row highlight"><span class="label">→ 平均一個月</span><span class="value">~US$50–60</span></div>
+  </div>
+  <p>不算太恐怖，車本來就是吃電大戶。</p>
+</section>
+
+<section>
+  <h2>再看一櫃 AI server</h2>
+  <p>NVIDIA 最新一代 GB300 NVL72，一櫃 72 顆 GPU。整櫃滿載運轉的功耗大概 ~132 kW。</p>
+  <div class="compare">
+    <div class="compare-row"><span class="label">整櫃功耗</span><span class="value">~132 kW</span></div>
+    <div class="compare-row"><span class="label">每天 24 小時 × 30 天</span><span class="value">720 小時</span></div>
+    <div class="compare-row highlight"><span class="label">→ 月用電量</span><span class="value">~95,000 度</span></div>
+  </div>
+  <p>對比一下：</p>
+  <div class="compare">
+    <div class="compare-row"><span class="label">Tesla 一年</span><span class="value">4,000 度</span></div>
+    <div class="compare-row"><span class="label">AI rack 一個月</span><span class="value">95,000 度</span></div>
+    <div class="compare-row highlight"><span class="label">→ 倍數</span><span class="value">~24 倍</span></div>
+  </div>
+  <p>一台 GB300 跑一個月，差不多等於一台 Tesla 開了 24 年的電。這個對比我覺得比直接講 132 kW 更有感。</p>
+  <p>因為這已經不是一台電腦變熱一點，而是一整櫃高密度算力 24 小時一直吃電。</p>
+</section>
+
+<section>
+  <h2>問題不只是「會熱」</h2>
+  <p>這裡開始是我真正想拆的地方：電最後都會變成熱。</p>
+  <p>132 kW 的電灌進一個機櫃，最後幾乎都會變成熱要被擠出去。而且這個熱是 24×7 的，沒有「下班」這件事。</p>
+  <p>以前很多 server rack 的直覺比較像：機器會熱，所以機房要有空調，機櫃要有風扇。但到 100kW+ 這個量級，我感覺問題已經不是「風夠不夠冷」，而是整個 rack 的設計要不要換一種方式。</p>
+  <p>因為風扇不是免費的。它也吃電、佔空間、產生噪音，而且越靠空氣去帶走熱，整個機櫃裡可以塞的東西就越受限制。這不是說空冷不能用，而是當 rack power 一直往上走，空冷會越來越像一個卡住系統設計的瓶頸。</p>
+</section>
+
+<section>
+  <h2>為什麼會開始看液冷</h2>
+  <p>這也是為什麼我現在比較理解 liquid cooling 為什麼會被拉出來講。</p>
+  <p>它不是因為名字比較酷，也不是因為大家突然喜歡水冷。而是如果你要讓熱更快離開 GPU，最直覺的做法就是讓冷卻介質離熱源更近。</p>
+  <p>所以才會開始看到 cold plate 這種東西直接貼到晶片附近，把熱先帶到冷卻液，再交給 CDU、manifold 這些東西去處理。</p>
+  <p>（不然就會變成只是在背零件名單。）</p>
+</section>
+
+<section>
+  <h2>如果散熱不夠會怎樣</h2>
+  <p>撐不住會發生什麼？GPU 會降頻，也就是 thermal throttle。簡單說就是你買了一張很貴的卡，跑一陣子之後它自己「限速」。</p>
+  <p>如果只有一張卡，這可能只是效能差一點。但 GB300 NVL72 是一櫃 72 顆 GPU。72 顆一起被熱影響，問題就不是某張卡跑慢，而是整櫃算力利用率被打折。</p>
+  <div class="box note">
+    到這裡我覺得邏輯就比較清楚了：你買的不是「GPU 本身」而已。你買的是一整櫃能不能穩定跑滿的算力。散熱如果處理不好，最後影響的不是機房舒服不舒服，而是這櫃算力到底跑不跑得滿。
+  </div>
+  <p>（這也是我一開始覺得散熱題材很難懂的地方：它聽起來像機房問題，但其實會打到算力利用率。）</p>
+</section>
+
+<section>
+  <h2>這一集先收在這裡</h2>
+  <p>所以整理到這裡，我目前會這樣 recap：</p>
+  <p>AI server 散熱開始變重要，不是因為「液冷」這個詞突然變熱門，而是因為 rack power 拉上去之後，每一櫃都變成很密集的用電系統。</p>
+  <p>用電越高，熱就越高；熱處理不好，GPU 就跑不滿；GPU 跑不滿，買來的算力利用率就被打折。</p>
+  <div class="box note">
+    所以這就是為什麼散熱開始變重要：不是因為 liquid cooling 聽起來很新，而是每一櫃 AI server 能不能把算力跑滿，開始跟散熱綁在一起。<br /><br />
+    如果這個邏輯成立，那散熱就不是附屬配件，而是 AI server 裡面一個必須被拆開看的成本項目。
+  </div>
+</section>
+
+<section>
+  <h2>下一集</h2>
+  <div class="box">
+    <p>下一集會拆這個成本項目。一櫃液冷 BOM 接近 $50K，這個錢具體分到哪些零件，是我目前還在追的東西。</p>
+    <p>至於誰賺到這筆錢，會放到第三集。在搞清楚成本結構之前，直接跳到公司名單，順序不太對。</p>
+  </div>
+</section>
+
+<section>
+  <div class="box warn">
+    ※ 這篇沒有任何持股 disclosure，因為這篇不講任何個股、不下任何投資判斷。第三集講公司時會補完整 disclosure。
+  </div>
+</section>
+
+<nav class="siblings">
+  <a class="slot disabled" aria-disabled="true">
+    <span class="role">← 上一集</span>
+    <span class="title">這是第一集</span>
+  </a>
+  <a class="slot" href="index.html">
+    <span class="role">系列地圖</span>
+    <span class="title">散熱系列 · 共 3 集</span>
+  </a>
+  <a class="slot" href="ep2-bom.html">
+    <span class="role">下一集 →</span>
+    <span class="title">一櫃 GB300 為什麼要花 $50K 在液冷上</span>
+  </a>
+</nav>
+
+<footer>
+  ai-server-thermal · ep1 · explainer · canonical: content/cards/2026-05-15_thermal-series_ep1-electricity.md
+</footer>
+
+</body>
+</html>

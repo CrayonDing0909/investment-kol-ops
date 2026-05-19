@@ -7,15 +7,14 @@
 # and git status; you don't have to edit them here.
 
 next_action = """
-Open the next PR for X + Threads algorithm research and platform adaptation before publishing Card #001. Card #001 is IA1-approved and ready, but not yet platform-adapted or published.
+打開新的散熱系列在 browser 驗 UX 順暢度：file:///Users/dylanting/personal/investment-kol-ops-card001-pr/research/knowledge/ai-server-supply-chain/series/thermal/index.html — 確認 Tesla 對比合理、Ep1 → Ep2 → Ep3 導覽通、系列入口從 AI Server 主地圖能找到。看完回報 OK / 哪邊要改。
 """
 
 do_not = [
-  "不要改 Card #001 source claims unless new evidence appears",
-  "不要發布 Card #001 before X/Threads algorithm pass",
+  "不要在 Ep1 主貼文塞外部連結（要等 M6.0 之後）",
   "不要寫「散熱占整櫃 42%」",
-  "不要開新研究分支（Gap C / D / E / AMD cross-source v2）",
-  "不要同時推第二張 card",
+  "不要在 Ep1 ship 前開始寫 Ep2 / Ep3 full draft（保留 outline 即可）",
+  "不要開新研究分支",
   "不要新增 worktree",
-  "先把 #001 推到 ready 或明確 archive",
+  "不要把舊 Card #001 的 BOM 內容刪掉（已轉到 Ep2 outline 保留）",
 ]

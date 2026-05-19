@@ -47,6 +47,12 @@ description = "Cursor commands and small scripts"
 
 [[milestones]]
 id = "M5"
-label = "Metrics"
+label = "Metrics + Publishing"
 status = "todo"
-description = "Metrics, publishing, audience interviews"
+description = "Publishing cadence, post-publish metrics, audience interviews"
+
+[[milestones]]
+id = "M6"
+label = "社群 Funnel"
+status = "todo"
+description = "Bio/pin → 社群群組(TG/DC/LINE) → 詐騙防範 → newsletter 副帳號；參考 @10m.engineer.investor 6 個月 timeline"

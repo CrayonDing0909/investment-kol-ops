@@ -165,6 +165,48 @@ AI 算力需求上升
 → 最後回到法說驗證 revenue、margin、backlog
 ```
 
+### 6.5 用讀者已經有的生活物件當「尺」，不要丟工程規格
+
+寫公開稿提到 Tesla / iPhone / 一杯星巴克 / 一台冷氣這類物件時，重點是
+**拉近距離感**，不是 spec sheet。錨點要放在讀者真的會感覺的東西：
+
+- 錢（月帳單、年費用、一杯咖啡多少錢）
+- 時間（一晚充電、一個月會用幾次）
+- 重複習慣（每天通勤、每週採買）
+
+不要錨在工程數字：
+
+- 規格表（電池 100 度、續航 400 km）
+- 平均統計值（年里程 15,000 英里）
+- 內部換算鏈（mi ÷ mi/kWh = kWh）
+
+如果一定要用到，把它藏進 source verification 區或括號內，主文留給「感覺」。
+
+弱（spec sheet）：
+
+```text
+Tesla Model S 滿電 ~100 度，能跑 ~400 公里。
+美國車主平均一年 ~15,000 英里，換算下來大概充電 ~4,000 度。
+```
+
+好（felt cost）：
+
+```text
+一台 Tesla Model S 開一年，大概會充 ~4,000 度電。
+換成電費，大概 US$500–700 一年。
+平均下來一個月 $50–60 — 不算太恐怖，車本來就是吃電大戶。
+```
+
+技巧名稱：**reader proximity anchor**。挑的物件要滿足：
+
+- 讀者很可能看過 / 用過 / 想過
+- 有一個和「錢 / 時間 / 月帳單」綁定的習慣性數字
+- 那個數字落在讀者心中已有的對照範圍（$50/月 是有感的；24 kWh/天 不是）
+
+Ep1 candidate validated 通過這個 pattern：Tesla 月電費 $50–60 是有感的，
+然後我們再用 24× 倍率把它擴張到 AI rack 量級，讓不熟 AI server 的讀者
+也能感覺到它有多重。
+
 ### 7. 結尾要讓讀者覺得「有學到」
 
 弱：
@@ -209,13 +251,18 @@ Before sending a card draft to user:
 
 - [ ] 第一行有記憶點嗎？
 - [ ] 第一段講的是「我為什麼在整理這件事」嗎？
-- [ ] 有沒有 AI 句型：`不再只是...而是`、`這不是 primary source...`、`為什麼 X...？`
+- [ ] 有沒有 AI 句型：`不再只是...而是`、`這不是 primary source...`、`為什麼 X...？`、
+  `optional 變 required`、`為了保護自己`、`以熱的形式燒掉`、`大企業在算這條經濟帳`
 - [ ] Source caveat 有服務於判斷嗎？還是只是審稿註解？
 - [ ] 有沒有保留使用者心聲 / 括號？
 - [ ] 是否有起承轉合？
 - [ ] 是否有「所以統整完...」的 conclusion？
 - [ ] 投資邏輯有沒有走 demand → bottleneck → required capability → BOM/ASP/volume → company → financial verification → counter？
 - [ ] 是否避免把 internal framework 字眼直接丟到公開稿（Hook / Observation / Counter / bull-case kill）？
+- [ ] 引用的生活物件（Tesla / iPhone / etc.）錨在電費 / 月帳單 / 時間等讀者有感的量，
+  而不是 spec sheet（電池容量、續航、年里程）？
+- [ ] 寫進公開稿的句子是直接從上一輪 chat 共識的版本搬過來，不是重新發明的？
+  （reason: 我有「寫作 vs 編輯切兩個 buffer」的歷史 bug，導致好句子留在 chat、檔案裡又出現抽象版）
 
 ## Rule Promotion Candidate
 
