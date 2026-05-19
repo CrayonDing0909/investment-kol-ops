@@ -478,6 +478,10 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M3 - Repo-native dashboard cockpit shipped (ops/build_dashboard.py + data/*.toml + templates/dashboard.css; auto-generates ops/dashboard.html and ops/current.md from frontmatter)
 2026-05-13 - M3 - Card #001 (cooling BOM) outline -> draft; removed unsafe "42% of rack cost" hook after spotting denominator conflict, pre-publish blockers recorded
 2026-05-13 - M3 - Vercel library deployed (https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/); ops/build_library.sh + vercel.json + .vercelignore in place; only HTML reading subset uploaded, private trees blocked; Card #001 CTA wired to production URL
+2026-05-13 - M2.3 - Reading surface rules clarified to preserve canonical data while keeping HTML as the default rendered view
+2026-05-14 - M3 - Card #001 cooling BOM completed learning-first flow (domain primer, source tutor, HTML review, IA1 approved) and marked ready for X/Threads platform adaptation
+2026-05-14 - M3 - X/Threads official ranking docs summarized for Card #001; preliminary platform versions, publish hypothesis, and success metrics added before real swipe validation
+2026-05-15 - M3 - Threads breakout deep-dive (@10m.engineer.investor 0→24K in 1 month via 9-episode series) authored; series-narrative-architecture rule + phased link-placement policy derived; Card #001 pivoted into 3-episode 散熱系列 (Ep1 ready w/ Tesla electricity hook, Ep2/Ep3 outline); M6 社群 Funnel milestone added; ops dashboard regenerated
 ```
 
 ### Per-Skill Status Grid Footnotes

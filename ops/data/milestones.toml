@@ -37,7 +37,7 @@ description = "Intel v2 reading; AMD Gap A + Gap B"
 id = "M3"
 label = "內容生產"
 status = "active"
-description = "First card from outline to ship; #001 draft"
+description = "Card #001 IA1-approved and ready; next is X/Threads platform adaptation before publish"
 
 [[milestones]]
 id = "M4"
@@ -47,6 +47,12 @@ description = "Cursor commands and small scripts"
 
 [[milestones]]
 id = "M5"
-label = "Metrics"
+label = "Metrics + Publishing"
 status = "todo"
-description = "Metrics, publishing, audience interviews"
+description = "Publishing cadence, post-publish metrics, audience interviews"
+
+[[milestones]]
+id = "M6"
+label = "社群 Funnel"
+status = "todo"
+description = "Bio/pin → 社群群組(TG/DC/LINE) → 詐騙防範 → newsletter 副帳號；參考 @10m.engineer.investor 6 個月 timeline"

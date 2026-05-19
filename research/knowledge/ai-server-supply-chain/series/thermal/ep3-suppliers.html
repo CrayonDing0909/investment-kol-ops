@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>散熱系列 第三集 — 這筆錢流到哪幾家公司（outline only）</title>
+<style>
+  :root { --maxw: 760px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9; --surface: #ffffff; --surface-muted: #edf1f5; --text: #24272d;
+    --muted: #68707d; --line: #d8dee6; --link: #315f9f;
+    --accent-bg: #e8efff; --accent-text: #1f3e8a; --accent-line: #c5d3f0;
+    --warn-bg: #fff4dc; --warn-text: #6b4b00;
+    --good-bg: #e9f5ec; --good-text: #1f6b3a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17191d; --surface: #20242a;
+    --surface-muted: #2a3038; --text: #e2e8f0; --muted: #a8b1bd; --line: #3a424e;
+    --link: #91b7ff; --accent-bg: #1d2740; --accent-text: #b5cbff;
+    --accent-line: #2f3e60; --warn-bg: #332813; --warn-text: #f1d18a;
+    --good-bg: #1c3326; --good-text: #9ed7af; } }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.75; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); font-size: 16px; }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 22px; }
+  header .crumb { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 6px; }
+  header .crumb a { color: var(--muted); }
+  header h1 { margin: 6px 0 4px; font-size: 26px; line-height: 1.4; }
+  header .subtitle { margin: 4px 0 12px; font-size: 15px; color: var(--muted); }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); margin-right: 4px; }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .pill.accent { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-bg); }
+  .series-strip { display: flex; align-items: center; gap: 8px; margin: 14px 0 4px; font-family: var(--mono); font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+  .series-strip .step { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+  .series-strip .step.current { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-line); font-weight: 600; }
+  .series-strip .step.done { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .series-strip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+  .series-strip .step.current .dot { background: var(--accent-text); }
+  .series-strip .step.done .dot { background: var(--good-text); }
+  .series-strip .sep { color: var(--line); }
+  h2 { font-size: 20px; margin: 28px 0 10px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  .stub-banner { background: var(--warn-bg); color: var(--warn-text); border: 1px solid var(--warn-bg); border-radius: 10px; padding: 14px 18px; margin: 18px 0; }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  a { color: var(--link); }
+  .quote { background: var(--surface-muted); border-left: 3px solid var(--link); padding: 12px 14px; margin: 10px 0; font-size: 14px; }
+  .siblings { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .siblings .slot { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 4px; }
+  .siblings .slot:hover { border-color: var(--link); }
+  .siblings .slot.disabled { opacity: 0.45; cursor: not-allowed; }
+  .siblings .slot .role { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+  .siblings .slot .title { font-size: 14px; line-height: 1.4; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 28px; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  @media (max-width: 700px) { body { padding: 20px; } h1 { font-size: 22px; } .siblings { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb">
+    <a href="../../index.html">AI Server Supply Chain</a> &nbsp;/&nbsp;
+    <a href="index.html">散熱系列</a> &nbsp;/&nbsp;
+    第三集
+  </div>
+  <h1>這筆錢流到哪幾家公司，為什麼我還不急著喊散熱概念股</h1>
+  <div class="subtitle">散熱系列：第三集 · thesis · 含 counter-first 結構 + 完整持股 disclosure</div>
+  <div class="series-strip">
+    <span class="step done"><span class="dot"></span>Ep1 · 電費 ✓</span>
+    <span class="sep">→</span>
+    <span class="step"><span class="dot"></span>Ep2 · BOM 拆解</span>
+    <span class="sep">→</span>
+    <span class="step current"><span class="dot"></span>Ep3 · 公司 + 觀點</span>
+  </div>
+  <div style="margin-top:8px;">
+    <span class="pill warn">outline only</span>
+    <span class="pill">thesis phase · IA1 gate required</span>
+  </div>
+</header>
+
+<section>
+  <div class="stub-banner">
+    <strong>本集還沒寫完整版。</strong>第一集、第二集都 ship 後才會開始寫，必須通過 IA1 gate。第三集是整個系列裡<strong>唯一</strong>包含投資判斷的一集。
+  </div>
+</section>
+
+<section>
+  <h2>會講的段落</h2>
+  <table>
+    <thead><tr><th>段</th><th>重點</th></tr></thead>
+    <tbody>
+      <tr><td>Recap Ep1+Ep2</td><td>電變熱、熱要液冷、液冷一櫃 $50K</td></tr>
+      <tr><td><strong>Counter first</strong></td><td>反向檢查點：液冷 adoption 卡過渡方案的話會怎樣</td></tr>
+      <tr><td>零件 → 公司 mapping</td><td>cold plate→奇鋐/AVC、CDU→Vertiv、manifold→雙鴻 等</td></tr>
+      <tr><td>我目前在追什麼</td><td>法說 backlog、margin、單櫃 ASP 三條觀察線</td></tr>
+      <tr><td>Position disclosure + CTA</td><td>持股聲明 + 系列地圖回鏈 + 完整供應鏈地圖</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>預定的 Counter-first 開場</h2>
+  <div class="quote">
+    這條線我會先放一個反向檢查點（算一種利多出盡吧）：<br /><br />
+    如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。<br /><br />
+    （但至少目前看到的產業資料跟資訊是 OK 的。）
+  </div>
+  <p>依 <code>series-narrative-architecture</code> 規則，thesis 集必須 counter 先於 bull，不能直接展開買進論述。</p>
+</section>
+
+<section>
+  <h2>會用的供應商對應（preserved）</h2>
+  <table>
+    <thead><tr><th>零件</th><th>主要供應商 / 受惠</th><th>證據強度</th></tr></thead>
+    <tbody>
+      <tr><td>Cold plate</td><td>奇鋐、AVC、雙鴻 / Auras</td><td>LianLi Work 供應鏈圖 + 法說交叉確認</td></tr>
+      <tr><td>CDU</td><td>Vertiv、Boyd</td><td>公開新聞 + Vertiv 法說</td></tr>
+      <tr><td>Manifold</td><td>雙鴻 / Auras（部分）</td><td>secondary estimate</td></tr>
+      <tr><td>UQD</td><td>CPC / Stäubli / Parker</td><td>國際零件商，台廠 exposure 較低</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>IA1 Gate 要求</h2>
+  <div class="box">
+    <p>從 outline → draft → ready 時必須重跑 IA1。必須通過：</p>
+    <ul>
+      <li>Counter-first 結構（counter 必須先於 bull）</li>
+      <li>Position disclosure 完整、明示</li>
+      <li>零件→公司 mapping 至少一條 primary source（法說／公告）</li>
+    </ul>
+    <p>必須拒絕：</p>
+    <ul>
+      <li>明確 buy / sell 用語</li>
+      <li>特定價位推薦</li>
+      <li>forward-looking 收益保證</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Full canonical</h2>
+  <p>完整 outline 在 <a href="../../../../../content/cards/2026-05-15_thermal-series_ep3-suppliers.md">md source（content/cards/）</a>。</p>
+</section>
+
+<nav class="siblings">
+  <a class="slot" href="ep2-bom.html">
+    <span class="role">← 上一集</span>
+    <span class="title">一櫃 GB300 為什麼要花 $50K 在液冷上</span>
+  </a>
+  <a class="slot" href="index.html">
+    <span class="role">系列地圖</span>
+    <span class="title">散熱系列 · 共 3 集</span>
+  </a>
+  <a class="slot" href="../../index.html">
+    <span class="role">→ 完整供應鏈地圖</span>
+    <span class="title">AI Server Supply Chain 主頁</span>
+  </a>
+</nav>
+
+<footer>
+  ai-server-thermal · ep3 · thesis · outline only · canonical: content/cards/2026-05-15_thermal-series_ep3-suppliers.md
+</footer>
+
+</body>
+</html>

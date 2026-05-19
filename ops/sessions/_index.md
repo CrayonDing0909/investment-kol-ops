@@ -1,7 +1,7 @@
 ---
 artifact_type: sessions-index
 created_at: 2026-05-13
-last_updated: 2026-05-13T19:10+08:00
+last_updated: 2026-05-14T22:30+08:00
 ---
 
 # Session Status Index
@@ -57,4 +57,4 @@ Use `ops/templates/session-status.md` as the template.
 |---|---|---|---|---|
 | [Session A — Source Tutor / AMD](./2026-05-13_session-a-source-tutor.md) | paused | Gap A PR #15 merged; Gap B PR #16 merged; no active research branch | AMD `>50% server CPU revenue share` gap closure + Q1 2026 primary-source upgrade | 2026-05-13T18:45+08:00 |
 | [Session B — Thesis Cards Scaffold](./2026-05-13_session-b-thesis-cards.md) | completed | PR #14 merged to `main` | Thesis-card template + 6 outline cards scaffolded | 2026-05-13T18:58+08:00 |
-| [Session C — Card #001 Cooling BOM](./2026-05-13_session-c-card-001.md) | active | `feat/card-001-cooling-bom` | Move Card #001 from outline toward first publishable draft | 2026-05-13T18:58+08:00 |
+| [Session C — Card #001 Cooling BOM](./2026-05-13_session-c-card-001.md) | completed | `feat/card-001-learning-ready` | Card #001 moved from outline to IA1-approved ready state; not yet published | 2026-05-14T22:30+08:00 |

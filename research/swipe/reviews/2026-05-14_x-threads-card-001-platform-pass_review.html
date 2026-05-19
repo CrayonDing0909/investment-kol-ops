@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>X + Threads Platform Pass — Review Surface</title>
+<style>
+  :root {
+    --maxw: 920px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-muted: #edf1f5;
+    --text: #24272d;
+    --muted: #68707d;
+    --line: #d8dee6;
+    --link: #315f9f;
+    --warn-bg: #fff4dc;
+    --warn-text: #6b4b00;
+    --good-bg: #e9f5ec;
+    --good-text: #1f6b3a;
+    --bad-bg: #fdecec;
+    --bad-text: #842525;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191d;
+      --surface: #20242a;
+      --surface-muted: #2a3038;
+      --text: #e2e8f0;
+      --muted: #a8b1bd;
+      --line: #3a424e;
+      --link: #91b7ff;
+      --warn-bg: #332813;
+      --warn-text: #f1d18a;
+      --good-bg: #1c3326;
+      --good-text: #9ed7af;
+      --bad-bg: #3a1f1f;
+      --bad-text: #f5b4b4;
+    }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .lede { font-size: 16px; color: var(--muted); }
+  header .meta { font-size: 12px; font-family: var(--mono); color: var(--muted); margin-top: 6px; }
+  section { margin: 28px 0; }
+  section h2 { font-size: 22px; margin: 0 0 12px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  section h3 { font-size: 17px; margin: 18px 0 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); color: var(--text); }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; margin-right: 4px; font-family: var(--mono); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .pill.bad { background: var(--bad-bg); color: var(--bad-text); border-color: var(--bad-bg); }
+  .box { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; border-radius: 8px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+  .card h3 { margin: 0 0 8px; }
+  .post-frame { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin: 12px 0; font-size: 15px; }
+  .post-frame p { margin: 11px 0; }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 0.92em; }
+  pre { background: var(--surface-muted); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.6; white-space: pre-wrap; }
+  .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  a { color: var(--link); text-underline-offset: 2px; }
+  ul, ol { padding-left: 22px; }
+  @media (max-width: 700px) { body { padding: 18px; } .grid { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="crumb">Research / Swipe / Review / X + Threads Card #001</div>
+  <h1>X + Threads 平台研究審閱頁</h1>
+  <p class="lede">這頁是給你 review 的，不是要你相信 markdown 裡的整理。它把官方 resource links、整理結論、Card #001 的 X / Threads 版本、還沒完成的 swipe 工作放在一起。</p>
+  <div class="meta">
+    Status: <span class="pill warn">draft</span> ·
+    Phase: <span class="pill">official docs only</span> ·
+    Next: <span class="pill warn">real swipe examples pending</span> ·
+    Canonical: <a href="../2026-05-14_x-threads-card-001-official-platform-pass.md">markdown canonical</a>
+  </div>
+</header>
+
+<section>
+  <h2>0. 這一頁要你 review 什麼？</h2>
+  <div class="box warn">
+    <strong>這不是最後發布版本。</strong> 這是「官方演算法 / ranking 文件」整理後，先做出的平台化方向。下一步還要看真實爆文 / swipe examples 才能確認格式。
+  </div>
+  <ol>
+    <li>官方資料來源是否可信、是否引用正確。</li>
+    <li>X / Threads 的平台推論是否合理。</li>
+    <li>Card #001 的 X / Threads 版本方向是否符合你的語氣。</li>
+    <li>下一步是不是該做 3 個 X + 2 個 Threads 真實 swipe examples。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>1. 官方 Resources</h2>
+  <table>
+    <thead><tr><th>#</th><th>Source</th><th>Class</th><th>這份提供什麼</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><a href="https://raw.githubusercontent.com/twitter/the-algorithm/main/README.md">X Recommendation Algorithm README</a></td>
+        <td><span class="pill good">official open-source repo</span></td>
+        <td>For You 架構：candidate sourcing → ranking / heavy ranker → filtering。也列出 user signals / SimClusters / TwHIN / Real Graph 等元件。</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><a href="https://raw.githubusercontent.com/twitter/the-algorithm/main/RETREIVAL_SIGNALS.md">X Retrieval Signals</a></td>
+        <td><span class="pill good">official open-source repo</span></td>
+        <td>候選內容來源用的 signals：like、retweet、quote、reply、share、bookmark、tweet click、video watch、negative feedback。</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a href="https://raw.githubusercontent.com/twitter/the-algorithm-ml/main/projects/home/recap/README.md">X Heavy Ranker README</a></td>
+        <td><span class="pill good">official open-source repo</span></td>
+        <td>Heavy Ranker 預測不同 engagement：reply、profile click、good click、reply engaged by author、negative feedback 等。權重是 2023 example，不可當最新 live formula。</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><a href="https://transparency.meta.com/features/explaining-ranking/ig-threads-feed">Meta Transparency Center — Threads Feed</a></td>
+        <td><span class="pill good">official transparency doc</span></td>
+        <td>Threads Feed 的 inventory / signals / ranking。明確列出 like、scroll past、profile click、reply、post click、viewing time 等 prediction targets。</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><a href="https://transparency.meta.com/features/explaining-ranking">Meta approach to ranking</a></td>
+        <td><span class="pill good">official transparency doc</span></td>
+        <td>Meta 通用 ranking 說明：多模型、input signals、個人化、動態調整。提醒我們不要相信固定公式。</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>2. 官方資料整理出來的方向</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>X</h3>
+      <ul>
+        <li>重點不是單純 likes，而是 reply、profile click、good click、dwell。</li>
+        <li>第一行要強，否則沒有 click / profile curiosity。</li>
+        <li>link 不應該太早放，避免打斷 conversation。</li>
+        <li>結尾要有能回覆的問題，不只是 CTA。</li>
+        <li>作者應該回早期留言，因為 reply engaged by author 曾是重要 prediction output。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Threads</h3>
+      <ul>
+        <li>官方文件強調 feed viewing time、post click、profile tap、reply。</li>
+        <li>Threads 比 X 更像對話，不應直接貼 X 長文。</li>
+        <li>分段比一大段更適合，讓每段只講一個概念。</li>
+        <li>問題 CTA 可以偏「你怎麼分類這條線？」而不是「點連結」。</li>
+        <li>source caveat 可以少一點，深入內容放 library。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>3. Signal → 內容改動對照</h2>
+  <p>這一段是本頁最重要的部分：不是列出演算法關鍵字，而是說明「因為哪個平台訊號，所以我們改了 Card #001 哪一段」。</p>
+  <table>
+    <thead><tr><th>平台</th><th>官方 signal / prediction</th><th>內容動作</th><th>改到哪裡</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>X</td>
+        <td>reply / reply engaged by author</td>
+        <td>結尾放可回答問題</td>
+        <td>加「基本面升級 vs 題材輪動？」</td>
+        <td>X 官方模型明確預測 reply；作者後續回覆早期留言也符合互動方向。</td>
+      </tr>
+      <tr>
+        <td>X</td>
+        <td>good profile click / good click</td>
+        <td>第一行用強數字</td>
+        <td>「GB300 一櫃要花接近 $50K 在液冷上」</td>
+        <td>具體數字比「最近整理散熱」更容易讓人停下、點開、看作者是誰。</td>
+      </tr>
+      <tr>
+        <td>X</td>
+        <td>bookmark / tweet click</td>
+        <td>保留可保存的推理鏈</td>
+        <td>需求 → 功耗 → cooling BOM → supplier ASP/volume → 財報驗證</td>
+        <td>這種框架比較像讀者會收藏的東西，不只是 ticker list。</td>
+      </tr>
+      <tr>
+        <td>X</td>
+        <td>negative feedback / report</td>
+        <td>避免喊單感</td>
+        <td>保留持倉揭露、watchlist、驗證訊號，不寫「買」</td>
+        <td>投資內容如果像 pumping，長期信任和平台回饋都會受傷。</td>
+      </tr>
+      <tr>
+        <td>Threads</td>
+        <td>reply creation</td>
+        <td>分段 conversational format</td>
+        <td>Threads version 拆成 11 段</td>
+        <td>每段只講一個概念，回覆門檻比較低。</td>
+      </tr>
+      <tr>
+        <td>Threads</td>
+        <td>post click / profile click / viewing time</td>
+        <td>用概念階梯提高 read-through</td>
+        <td>number → rack → heat → liquid cooling → BOM → companies → watchlist → counter</td>
+        <td>直接貼 X 長文會太密；分段能讓人一段一段看完。</td>
+      </tr>
+      <tr>
+        <td>Threads</td>
+        <td>engagement with similar content/accounts</td>
+        <td>保留白話研究口吻</td>
+        <td>「先翻成人話」「這不是看到名字就買」</td>
+        <td>Threads 更像對話場，不適合太報告語氣。</td>
+      </tr>
+      <tr>
+        <td>Both</td>
+        <td>negative feedback / trust</td>
+        <td>不把 42% 寫進公開稿</td>
+        <td>42% 衝突只留在 source tutor / review</td>
+        <td>短期吸睛不能犧牲 source discipline。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box">
+    <strong>一句話結論：</strong>X 版是「強第一句 + 完整推理鏈 + 可回覆問題」；Threads 版是「分段教學 + 每段一個概念 + 低門檻問題」。
+  </div>
+</section>
+
+<section>
+  <h2>4. 下一步 Real Swipe 要查什麼</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>X swipe 要回答</h3>
+      <ul>
+        <li>強第一行通常是數字、反直覺、還是個人觀察？</li>
+        <li>長文的 link 通常放最後、回覆、還是 profile？</li>
+        <li>投資內容的 CTA 通常是問問題、請收藏、還是引導 newsletter？</li>
+        <li>有 source caveat 的文章，會不會降低互動？</li>
+        <li>作者是否回早期留言？回覆是補資料還是聊天？</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Threads swipe 要回答</h3>
+      <ul>
+        <li>好的 Threads 長文是一則長 post，還是多則串？</li>
+        <li>每則最佳長度大概多長？</li>
+        <li>分段標號（1/、2/）是否常見？</li>
+        <li>投資 / 科技內容要不要放 ticker？</li>
+        <li>CTA 問題更像「你怎麼看」還是「你會怎麼分類」？</li>
+      </ul>
+    </div>
+  </div>
+  <p>每個 swipe 最後都要回答：<strong>這個例子會讓我們改 Card #001 的哪一段？</strong>如果不能回答，就不是有效 swipe。</p>
+</section>
+
+<section>
+  <h2>5. Card #001 — X Version</h2>
+  <div class="post-frame">
+    <p><strong>GB300 一櫃要花接近 $50K 在液冷上。</strong></p>
+    <p>這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。</p>
+    <p>GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。</p>
+    <p>140kW 是什麼概念？</p>
+    <p>你可以先不用管工程細節，只要知道：這一櫃本質上就是一個很貴、很密集的熱源。</p>
+    <p>熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。</p>
+    <p>所以液冷開始從 optional 變 required。這就是為什麼散熱開始從「風扇」變成「一整套水路」。</p>
+    <p>拆開看，大概有幾段：</p>
+    <ul>
+      <li>cold plate：貼在晶片上，把熱帶到冷卻液</li>
+      <li>CDU：整櫃冷卻液循環的主機</li>
+      <li>manifold：把冷卻液分到不同 tray</li>
+      <li>UQD：快接頭，讓 tray 可以維修又不漏液</li>
+    </ul>
+    <p>公開拆解資料給的量級是：GB300 NVL72 單櫃液冷 BOM 約 $49,860，GB200 約 $41,500。</p>
+    <p>BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收，但它告訴我：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。</p>
+    <p>也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。這套系統不是只有一顆風扇，而是 cold plate、CDU、manifold、UQD 這些零件加起來的一包 BOM。</p>
+    <p>對應到公司，先粗分會是：</p>
+    <ul>
+      <li>奇鋐 / AVC：cold plate、液冷模組</li>
+      <li>雙鴻 / Auras：manifold、液冷 solution</li>
+      <li>Vertiv：rack / data center 層級 cooling infrastructure</li>
+    </ul>
+    <p>所以這條線我就會這樣理解：</p>
+    <p>現在很明顯大家都在用 AI，算力需求上升這件事應該是不爭的事實<br />
+      → GPU power density 上升<br />
+      → rack cooling 從 optional 變 required<br />
+      → cooling BOM per rack 上升<br />
+      → 對應零件供應商的 ASP / volume 有機會上升<br />
+      → 最後回到法說驗證 revenue、margin、backlog</p>
+    <p>如果要進行後續追蹤的話，我目前比較想追三個訊號：</p>
+    <ol>
+      <li>NVIDIA 下一代 rack power envelope 有沒有繼續往上</li>
+      <li>奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure</li>
+      <li>Vertiv 的 cooling infrastructure backlog 有沒有真的放大</li>
+    </ol>
+    <p>這條線我會先放一個反向檢查點（算一種利多出盡吧）：如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。</p>
+    <p>但至少目前看到的產業資料，方向是 OK 的。</p>
+    <p>所以統整完上面這些資料，我目前得到的結論是：</p>
+    <p>散熱開始被市場重新看見，我現在理解比較像是：AI server 變成一櫃一櫃的系統在賣，所以它上面的散熱組件也會被一起綁進去。只要 rack-level system 出貨，cold plate、CDU、manifold 這些東西就會跟著有連帶關係。</p>
+    <p>如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。反過來，如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。</p>
+    <p>但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。</p>
+    <p>這邊我比較好奇的是：如果你也在看 AI server 供應鏈，你會先追散熱、HBM，還是 ASIC 這幾條線？</p>
+    <p>完整地圖：https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/</p>
+    <p class="source">持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。</p>
+  </div>
+</section>
+
+<section>
+  <h2>6. Card #001 — Threads Version（分段）</h2>
+  <pre>1/
+
+GB300 一櫃要花接近 $50K 在液冷上。
+
+這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
+
+我先從整櫃這件事講起。
+
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
+
+一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
+
+2/
+
+140kW 這件事，對我來說重點不是工程數字，而是它代表這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle。你買了很貴的算力，但跑不滿，就是在浪費錢。
+
+3/
+
+所以液冷開始從 optional 變 required。
+
+這也是我覺得「散熱」不能只用風扇概念股去看的原因。
+
+拆開看，它其實有幾段：
+
+- cold plate：貼在晶片上，把熱帶到冷卻液
+- CDU：整櫃冷卻液循環的主機
+- manifold：把冷卻液分到不同 tray
+- UQD：快接頭，讓 tray 可以維修又不漏液
+
+這些東西加起來，才是 AI rack 裡的液冷系統。
+
+公開拆解資料給的量級是：
+
+- GB300 NVL72 單櫃液冷 BOM 約 $49,860
+- GB200 約 $41,500
+
+BOM 就是零件成本表。這組數字我不會拿來算很精準的模型，但至少說明：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。這套系統不是只有一顆風扇，而是 cold plate、CDU、manifold、UQD 這些零件加起來的一包 BOM。
+
+4/
+
+對應到公司，先粗分：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+這不是「看到名字就買」，而是先放進 watchlist。
+
+因為真正要驗證的是：它們在 AI rack 裡的 exposure，有沒有轉成 revenue、margin、backlog。
+
+5/
+
+所以這條線我就會這樣理解：
+
+AI 算力需求上升
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商的 ASP / volume 有機會上升
+→ 最後回到法說驗證 revenue、margin、backlog
+
+如果要進行後續追蹤，我會看三個訊號：
+
+1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
+2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
+3. Vertiv 的 cooling infrastructure backlog 有沒有真的放大
+
+6/
+
+反向檢查點（算一種利多出盡吧）：
+
+如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+但至少目前看到的產業資料，方向是 OK 的。
+
+所以統整完上面這些資料，我目前得到的結論是：
+
+散熱開始被市場重新看見，我現在理解比較像是：AI server 變成一櫃一櫃的系統在賣，所以散熱組件也被一起綁進 BOM。
+
+只要 rack-level system 出貨，cold plate、CDU、manifold 這些東西就會有連帶關係。
+
+如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。
+
+如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。
+
+但我目前覺得本質沒有變。
+
+只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。
+
+7/
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+如果你也在看 AI server 供應鏈，你會先追散熱、HBM，還是 ASIC 這幾條線？
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。</pre>
+</section>
+
+<section>
+  <h2>7. Publish Hypothesis / Metrics</h2>
+  <div class="box">
+    <p><strong>Hypothesis</strong>：具體 BOM 數字 + raw research voice，比 generic AI server supply-chain post 更容易帶來 depth signal。</p>
+    <p><strong>Primary metrics (first 72h)</strong>：</p>
+    <ul>
+      <li>有問題或反駁的 replies</li>
+      <li>saves / bookmarks</li>
+      <li>profile clicks / follows</li>
+      <li>library link clicks</li>
+    </ul>
+    <p><strong>Secondary metrics</strong>：likes、reposts、impressions。</p>
+  </div>
+</section>
+
+<section>
+  <h2>8. Review Questions</h2>
+  <ol>
+    <li>X 版第一行夠不夠停住人？</li>
+    <li>Threads 版切成 7 段是否太長？</li>
+    <li>CTA 問「基本面升級 vs 題材輪動」是否會引發回覆？</li>
+    <li>是否要先等 5 個 real swipe examples 再改最後版本？</li>
+  </ol>
+</section>
+
+<section>
+  <h2>9. Canonical / Next Step</h2>
+  <p class="source">
+    Canonical markdown: <a href="../2026-05-14_x-threads-card-001-official-platform-pass.md">official platform pass</a><br />
+    Card source: <a href="../../content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md">Card #001 markdown</a><br />
+    Next step: collect 3 X examples + 2 Threads examples before publishing.
+  </p>
+</section>
+
+<footer>
+  X + Threads platform pass review · official docs phase · real swipe pending
+</footer>
+
+</body>
+</html>

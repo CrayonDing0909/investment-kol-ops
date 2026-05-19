@@ -4,7 +4,19 @@
 # scope: free-form (Card #001, 全部 card, ...)
 
 [[blockers]]
-title = "MediaTek 持倉揭露"
-scope = "Card #002"
-type = "disclosure"
-detail = "Frontmatter 留有 placeholder，公開前必須確認。"
+title = "散熱系列 Ep1 UX review pending"
+scope = "Series ep1"
+type = "gate-pending"
+detail = "Ep1 全文 + Ep2/Ep3 stub + 系列地圖 + 主地圖入口都已建。等使用者在 browser 走過 UX flow 才能 ship。入口：research/knowledge/ai-server-supply-chain/series/thermal/index.html"
+
+[[blockers]]
+title = "舊 Card #001 (cooling-bom) 處置"
+scope = "Card archive"
+type = "decision"
+detail = "舊的 thesis-only Card #001 內容已拆進 Ep2 / Ep3 outline。需要決定：保留作為 archive、改 frontmatter 標 superseded、或合併進新 Ep。Ep1 ship 前決定即可。"
+
+[[blockers]]
+title = "M6.0 bio / pin 策略"
+scope = "Audience funnel"
+type = "decision"
+detail = "Ep1 主貼文無連結策略已定（rule 內 phased policy）。但 bio 連結要不要先放（M6.0 第一步）、Ep1 要不要釘選都還沒定。建議 Ep1 發出後 24 小時看 metrics 再決定。"

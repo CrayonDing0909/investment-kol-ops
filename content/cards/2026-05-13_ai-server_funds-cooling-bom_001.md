@@ -116,9 +116,10 @@ GB300 一櫃要花接近 **$50K** 在液冷上。
 
 這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
 
-先翻成人話。
+我先從整櫃這件事講起。
 
-GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。
+一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
 
 140kW 是什麼概念？
 
@@ -126,7 +127,7 @@ GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃�
 
 熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。
 
-所以液冷開始從 optional 變 required。  
+所以液冷開始從 optional 變 required。
 這就是為什麼散熱開始從「風扇」變成「一整套水路」。
 
 拆開看，大概有幾段：
@@ -148,11 +149,11 @@ BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收�
 
 所以這條線我會這樣看：
 
-AI 算力需求上升  
-→ GPU power density 上升  
-→ rack cooling 從 optional 變 required  
-→ cooling BOM per rack 上升  
-→ 對應零件供應商的 ASP / volume 有機會上升  
+AI 算力需求上升
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商的 ASP / volume 有機會上升
 → 最後回到法說驗證 revenue、margin、backlog
 
 我目前比較想追三個訊號：
@@ -173,10 +174,223 @@ AI 算力需求上升
 
 但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。
 
-完整 AI server 供應鏈地圖（CPU / ASIC / HBM / 散熱 / 被動 + 3 條結構性 layer）：  
+完整 AI server 供應鏈地圖（CPU / ASIC / HBM / 散熱 / 被動 + 3 條結構性 layer）：
 https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
 
 持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
+
+## Platform Ship Versions
+
+> Status: draft platform adaptation based on official X / Threads ranking docs
+> plus 5+5 real swipe examples. Still not published.
+>
+> Sources:
+> - `research/swipe/2026-05-14_x-threads-card-001-official-platform-pass.md`
+> - `research/swipe/2026-05-15_x-real-swipe-card-001.md`
+> - `research/swipe/2026-05-15_threads-real-swipe-card-001.md`
+> - `research/swipe/2026-05-15_threads-ui-patterns-card-001.md`
+
+### X Version
+
+```text
+GB300 一櫃要花接近 $50K 在液冷上。
+
+這是我最近整理 AI server 供應鏈時，覺得最有記憶點的一個數字。
+
+先翻成人話。
+
+GB300 NVL72 不是一張 GPU，而是 NVIDIA 新一代 AI server rack。一櫃裡面有 72 顆 B300 GPU，滿載功耗大概 132-140kW。
+
+140kW 是什麼概念？
+
+你可以先不用管工程細節，只要知道：這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。
+
+所以液冷開始從 optional 變 required。
+這就是為什麼散熱開始從「風扇」變成「一整套水路」。
+
+拆開看，大概有幾段：
+
+- cold plate：貼在晶片上，把熱帶到冷卻液
+- CDU：整櫃冷卻液循環的主機
+- manifold：把冷卻液分到不同 tray
+- UQD：快接頭，讓 tray 可以維修又不漏液
+
+公開拆解資料給的量級是：GB300 NVL72 單櫃液冷 BOM 約 $49,860，GB200 約 $41,500。
+
+BOM 就是零件成本表。這個數字不是某家公司直接賺到的營收，但它告訴我：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。這套系統不是只有一顆風扇，而是 cold plate、CDU、manifold、UQD 這些零件加起來的一包 BOM。
+
+對應到公司，先粗分會是：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+所以這條線我就會這樣理解：
+
+現在很明顯大家都在用 AI，算力需求上升這件事應該是不爭的事實
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商的 ASP / volume 有機會上升
+→ 最後回到法說驗證 revenue、margin、backlog
+
+如果要進行後續追蹤的話，我目前比較想追三個訊號：
+
+1. NVIDIA 下一代 rack power envelope 有沒有繼續往上
+2. 奇鋐 / 雙鴻法說有沒有講 AI rack / NVDA 平台 exposure
+3. Vertiv 的 cooling infrastructure backlog 有沒有真的放大
+
+這條線我會先放一個反向檢查點（算一種利多出盡吧）：如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+但至少目前看到的產業資料，方向是 OK 的。
+
+所以統整完上面這些資料，我目前得到的結論是：
+
+散熱開始被市場重新看見，我現在理解比較像是：AI server 變成一櫃一櫃的系統在賣，所以它上面的散熱組件也會被一起綁進去。只要 rack-level system 出貨，cold plate、CDU、manifold 這些東西就會跟著有連帶關係。
+
+如果未來一切都很美好，AI rack 繼續往更高功耗走，這條線會繼續值得追。反過來，如果液冷 adoption 卡在過渡方案，或供應商法說沒有轉成 backlog / margin，那就要小心一點。
+
+但我目前覺得本質沒有變。只要算力還在短缺，rack power 還在往上，液冷應該就是 AI server 基本面裡一個很好的支撐點。
+
+這邊我比較好奇的是：如果你也在看 AI server 供應鏈，你會先追散熱、HBM，還是 ASIC 這幾條線？
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
+```
+
+### Threads Native Long-Form Version
+
+```text
+Outer post:
+
+GB300 一櫃要花接近 $50K 在液冷上。
+
+我原本以為這只是散熱概念股，整理完覺得不是這樣。
+
+Text attachment:
+
+你第一個反應可能是：
+
+「散熱不就是風扇嗎？」
+「又是 AI server 題材？」
+「最重要的不還是 GPU？」
+
+我一開始也差不多。
+
+但整理完 GB300 這條，感覺真正的變化不是「散熱突然很重要」，而是 AI server 已經變成一櫃一櫃的系統在賣。
+
+GB300 NVL72 不是一張 GPU。
+
+它是一台 rack-level system。一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
+
+140kW 對我來說不是工程數字。
+
+它比較像是在提醒：這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。
+
+你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。
+
+所以液冷開始從 optional 變 required。
+
+拆開看，大概有幾段：
+
+- cold plate：貼在晶片上，把熱帶到冷卻液
+- CDU：整櫃冷卻液循環的主機
+- manifold：把冷卻液分到不同 tray
+- UQD：快接頭，讓 tray 可以維修又不漏液
+
+公開拆解資料給的量級是：
+
+- GB300 NVL72 單櫃液冷 BOM 約 $49,860
+- GB200 約 $41,500
+
+BOM 是零件成本表。
+
+這不是某家公司直接賺到的營收，但它說明一件事：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。
+
+對應到公司，先粗分：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+但這不是看到名字就買。
+
+我會先把它們放進 watchlist，看後面法說有沒有真的轉成 revenue / margin / backlog。
+
+所以這條線我目前會這樣理解：
+
+AI 算力需求上升
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商 ASP / volume 有機會上升
+→ 最後回到法說驗證
+
+反向檢查點（算一種利多出盡吧）：
+
+如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+但目前看到的產業資料，方向是 OK 的。
+
+所以我目前不是把它當成「買哪一檔」。
+
+我比較像是把散熱放進 AI server 基本面支線裡追。
+
+如果 rack power 繼續往上，這條線值得繼續看。
+如果法說沒有轉成 backlog / margin，那就降級。
+
+CTA:
+
+你會先追散熱、HBM，還是 ASIC 這幾條線？
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。
+```
+
+### Publish Hypothesis
+
+```text
+Concrete BOM number + raw research voice + saveable mechanism chain will create
+more depth signal than a generic AI server supply-chain post. Threads should use
+native long-form attachment rather than a fragmented multi-reply thread.
+```
+
+Expected mechanism:
+
+- X: first-line number drives stop/click; mechanism chain drives saves; question
+  CTA invites replies; author should reply to early comments.
+- Threads: native long-form text attachment keeps the full reasoning intact
+  while the outer post and gray preview create a stronger feed hook; CTA asks
+  readers which AI server branch they would follow first.
+- Real swipe check: X examples favor concrete numbers / saveable maps; Threads
+  examples favor outer hook + gray long-form text attachment.
+
+### Success Metrics
+
+First 72h primary metrics:
+
+- replies with real questions or pushback
+- saves / bookmarks
+- profile clicks / follows
+- library link clicks
+
+Secondary metrics:
+
+- likes
+- reposts
+- impressions
 
 ## CTA + Footer
 
@@ -244,8 +458,8 @@ metrics:
   follows_attributed:
   link_clicks:
   qualitative:
-    - 
+    -
   reflection:
-    repeat_pattern: 
-    drop_pattern: 
+    repeat_pattern:
+    drop_pattern:
 ```

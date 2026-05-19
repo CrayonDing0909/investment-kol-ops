@@ -8,14 +8,14 @@ related_artifacts:
   - ops/decisions/2026-05-19_card-002-readiness-dry-run.md
 created_at: 2026-05-19
 reviewer: CrayonDing0909
-promotion_gate: "ship Ep1 → review Ep1 metrics → ship Ep2 → confirm same structure → reconcile with series-narrative-architecture.mdc from PR #20 → only then promote to .cursor/rules/"
+promotion_gate: "ship Ep1 → review Ep1 metrics → ship Ep2 → confirm same structure → reconcile with series-narrative-architecture.mdc → only then promote to .cursor/rules/"
 reconciliation_note: |
-  PR #20 (sibling worktree at /Users/dylanting/personal/investment-kol-ops-card001-pr,
-  branch research/x-threads-card-001-platform-pass) already carries
-  .cursor/rules/series-narrative-architecture.mdc. The two drafts below were
-  written in the docs/reading-surface-rule branch before that fact was clear.
-  Do not promote either draft to .cursor/rules/ in this workspace without
-  reconciling against series-narrative-architecture.mdc first.
+  PR #20 has now been merged into main, and
+  .cursor/rules/series-narrative-architecture.mdc is present in this branch
+  after merging origin/main. The two drafts below remain intentionally
+  unpromoted: they should not become .cursor/rules/ until Ep1 and Ep2 have
+  both shipped and the series rule has been tested against real publishing
+  behavior.
 ---
 
 # Thesis Card Rule Drafts (not promoted)
@@ -27,8 +27,9 @@ stability pass — but it is too early to freeze them as rules:
 
 - Ep1 (Card #001 cooling-BOM) just shipped its review pass; Ep2 / Ep3 have
   not been drafted yet.
-- PR #20 carries a separate `series-narrative-architecture.mdc` rule that
-  needs reconciliation before either of these drafts is promoted here.
+- `series-narrative-architecture.mdc` is now the only promoted content-series
+  rule in `.cursor/rules/`; these drafts must stay advisory until the series
+  rule has been tested through Ep1 and Ep2.
 - The voice lessons in
   [2026-05-14_card-writing-voice-lessons.md](2026-05-14_card-writing-voice-lessons.md)
   explicitly say to wait 2-3 cards before promotion.

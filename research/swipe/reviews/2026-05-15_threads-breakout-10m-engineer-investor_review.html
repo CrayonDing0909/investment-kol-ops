@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Threads Breakout Deep Dive — @10m.engineer.investor</title>
+<style>
+  :root { --maxw: 920px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9; --surface: #ffffff; --surface-muted: #edf1f5; --text: #24272d;
+    --muted: #68707d; --line: #d8dee6; --link: #315f9f; --warn-bg: #fff4dc;
+    --warn-text: #6b4b00; --good-bg: #e9f5ec; --good-text: #1f6b3a;
+    --accent-bg: #e8efff; --accent-text: #1f3e8a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17191d; --surface: #20242a;
+    --surface-muted: #2a3038; --text: #e2e8f0; --muted: #a8b1bd; --line: #3a424e;
+    --link: #91b7ff; --warn-bg: #332813; --warn-text: #f1d18a; --good-bg: #1c3326;
+    --good-text: #9ed7af; --accent-bg: #1d2740; --accent-text: #b5cbff; } }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb, .meta, .source { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+  h1 { margin: 4px 0 8px; font-size: 28px; }
+  h2 { font-size: 22px; margin: 32px 0 12px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  h3 { font-size: 17px; margin: 18px 0 8px; }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .pill.accent { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-bg); }
+  .box, .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .box.accent { background: var(--accent-bg); color: var(--accent-text); border-color: var(--accent-bg); }
+  .quote { background: var(--surface-muted); border-left: 3px solid var(--link); padding: 12px 14px; margin: 10px 0; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  pre { background: var(--surface-muted); border: 1px solid var(--line); border-radius: 6px; padding: 12px; overflow-x: auto; font-size: 13px; line-height: 1.5; }
+  a { color: var(--link); text-underline-offset: 2px; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  .timeline { font-family: var(--mono); font-size: 13px; background: var(--surface-muted); padding: 14px; border-radius: 6px; overflow-x: auto; white-space: pre; line-height: 1.5; }
+  @media (max-width: 700px) { body { padding: 18px; } .grid { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb">Research / Swipe / Breakout Case Studies / @10m.engineer.investor</div>
+  <h1>Threads Breakout Deep Dive — <code>@10m.engineer.investor</code></h1>
+  <p>單帳號歷史考古：他怎麼從幾百 follower 在一個月內衝到 24K，後續又長成 33K 的穩定 deep-dive 帳號。重點不是抄一篇貼文，而是**整個第一個月的內容結構**。</p>
+  <div class="meta">
+    Status: <span class="pill warn">draft</span> ·
+    Type: <span class="pill">case study</span> ·
+    Canonical: <a href="../2026-05-15_threads-breakout-10m-engineer-investor_deep-dive.md">md source</a> ·
+    Related: <a href="2026-05-15_real-swipe-card-001_review.html">earlier 5+5 swipe</a>
+  </div>
+</header>
+
+<section>
+  <h2>1. 一句話結論</h2>
+  <div class="box accent">
+    <strong>他的爆發不是因為某一篇炸開，是因為「9 集量子計算系列」這個結構。</strong><br />
+    第一個月做了 ~70% 的 lifetime follower 成長，靠的是「純科普 8 集 + 投資反向觀點 1 集」。Card #001 應該改成系列第一集，先做純科普 hook（如 Tesla 電費比喻），把投資分析留到第二、第三集。
+  </div>
+</section>
+
+<section>
+  <h2>2. 重建時間軸</h2>
+  <p>日期推論自 Threads 公開 post + post ID 字典序排列。月份等級可信，日期等級為近似。</p>
+
+  <div class="timeline">followers
+ 33K -|                                            *  (May 2026, ~33K)
+      |                                       *
+      |                              *
+ 24K -|             *  (1-month mark, ~Oct 2025, 24K)
+      |          *
+      |       *
+      |    *
+  0K -|  *  (~Sep 2025, account created)
+      +-------------------------------------------------> time
+       Sep  Oct  Nov  Dec  Jan  Feb  Mar  Apr  May</div>
+
+  <p><strong>關鍵觀察：</strong>第一個月帶來 ~70% 的終生 follower 成長。Oct 2025 之後寫的所有東西，都是發在已被算法供應好的 audience 上面。</p>
+</section>
+
+<section>
+  <h2>3. 第一個月實際發了什麼：量子計算系列</h2>
+  <p>9 集，標題 <code>【量子系列：第一集】</code> 到 <code>【量子系列：第九集】</code>。</p>
+
+  <h3>Episode 1（純科普開場）</h3>
+  <div class="quote">
+    傳統電腦，我們的數位世界，都建立在最基本的單位——「位元」（Bit）之上，非0即1，就像開關一樣，只有開或關兩種狀態。你現在看到的這篇文章，背後也是無數個0和1的組合。<br /><br />
+    但「量子計算」或「量子電腦」卻從根本上顛覆了這個概念！它最基本的單位是「量子位元」（Qubit），它不再單純是0或1，而是可以同時是0、是1，我們可以理解成每一個量子位元代表的，是一個概率，比方說30%是1，70%是0。
+  </div>
+  <p><strong>互動數</strong>：61 likes / 3 replies / 12 reposts（outer post）。</p>
+  <p>看出來什麼：</p>
+  <ul>
+    <li>沒有 ticker、沒有股票名、沒有投資 claim</li>
+    <li>熟悉模型（開關）→ 反差（但...）</li>
+    <li>用「30% 是 1, 70% 是 0」這種概率比喻取代 superposition 術語</li>
+    <li>「我們」不是「你」</li>
+    <li>「第一集」標籤讓讀者知道後面還有</li>
+  </ul>
+
+  <h3>Episode 9（系列收尾才出投資觀點）</h3>
+  <div class="quote">
+    第一部分：我對量子技術的想法<br /><br />
+    在撰寫這個系列之前，我對量子技術其實只有一個模糊的概念...我認為，量子技術更像是一種專門的計算機器...這有點像現在的 GPU...它是否真的會徹底改變整個計算生態，就存在很大的疑問了。這完全取決於最終 QPU 的價格能降到多低...
+  </div>
+  <p><strong>關鍵</strong>：投資觀點 episode 開頭直接承認「自己原本不懂」，並且給的是<strong>反向 / 保留意見</strong>，不是 buy call。這個動作把短期 hype 換成中期信任。</p>
+</section>
+
+<section>
+  <h2>4. 八個 breakout pattern</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Pattern</th><th>證據</th><th>Card #001 可用度</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Niche 身分：工程師 + 投資</td><td>bio「早上工程師，晚上想當巴菲特」+ 1 個月文重申「非財務專業工程師」</td><td><span class="pill good">high</span></td></tr>
+      <tr><td>2</td><td>科普先，thesis 後</td><td>9 集裡 8 集無 ticker，第 9 集才談投資且是保留意見</td><td><span class="pill good">high（若改系列）</span></td></tr>
+      <tr><td>3</td><td>系列結構作為 retention 引擎</td><td>「第一集 ~ 第九集」清楚編號，讀者會回來看下一集</td><td><span class="pill good">high（若改系列）</span></td></tr>
+      <tr><td>4</td><td>熟悉模型 + 小驚奇</td><td>Bit = 開關 → Qubit = 30/70 概率</td><td><span class="pill good">high</span>（Tesla 電費比喻就是這個 pattern）</td></tr>
+      <tr><td>5</td><td>「我們」不是「你」</td><td>「我們的數位世界」「我們可以理解成」</td><td><span class="pill accent">已部分有</span></td></tr>
+      <tr><td>6</td><td>編號連發 long-form post，不用 attachment</td><td>每集都是多則編號 post，不是 outer + text attachment</td><td><span class="pill good">high（這條改變方向）</span></td></tr>
+      <tr><td>7</td><td>晚變現：6 個月後才開副帳號</td><td>newsletter <code>@10m_investment</code> 2026 Apr 才上</td><td><span class="pill">later</span></td></tr>
+      <tr><td>8</td><td>反向觀點建立可信度</td><td>第 9 集開頭「我持有保留態度」+ 詐騙警告置頂</td><td><span class="pill good">high</span>（你目前 counter 已對齊）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>5. 改變方向的發現（覆蓋舊結論）</h2>
+  <table>
+    <thead>
+      <tr><th>舊結論</th><th>新發現</th><th>原因</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Threads 長文 = outer post + text attachment</td><td>教育型長內容用「編號連發 post」更強</td><td>這帳號整個爆發都是編號 post，不是 attachment</td></tr>
+      <tr><td>Card #001 單篇 thesis 直接 ship</td><td>Card #001 改成系列第一集，第一集是純科普</td><td>9 集弧線是 Threads 上已驗證的結構</td></tr>
+      <tr><td>Hook = 一個強數字（$50K）</td><td>Hook = 跨領域比喻 + 數字（Tesla 電費 / AI server）</td><td>Quantum Series 用比喻不是赤裸數字</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>6. 對 Card #001 的具體含義</h2>
+  <div class="box accent">
+    <strong>3 個動作（這頁是研究，動作下一步才提案）：</strong>
+    <ol>
+      <li>Card #001 改名「散熱系列：第一集」，預留第二集 / 第三集 slot</li>
+      <li>第一集重寫成純科普：「為什麼一台 AI server 一個月電費比一台 Model S 還貴」← 用 Tesla 當熟悉模型</li>
+      <li>現有 BOM 內容保留為第二集 draft，公司 mapping / thesis 留到第三集</li>
+    </ol>
+  </div>
+  <p>細節 outline 會在下一個 review turn 給你，不在這個檔裡。</p>
+</section>
+
+<section>
+  <h2>7. 沒驗證到的部分（誠實標限制）</h2>
+  <div class="box warn">
+    <ul>
+      <li>確切的開帳日期（只有從 1-month 文反推）</li>
+      <li>算法推爆是否有花錢 boost 或外部交叉導流</li>
+      <li>香港 / 粵語背景（搜尋結果不一致，對我們複製模式不關鍵）</li>
+      <li>早期發文頻率（每日 / 隔日 / 不規律？）— 對 cadence 設計可能重要，目前不明</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>8. 來源</h2>
+  <table>
+    <tbody>
+      <tr><td>帳號首頁</td><td><a href="https://www.threads.com/@10m.engineer.investor">threads.com/@10m.engineer.investor</a></td></tr>
+      <tr><td>Quantum Ep1</td><td><code>DPg_swsgXFI</code></td></tr>
+      <tr><td>Quantum Ep9</td><td><code>DP6uG8OksQ6</code>（2025-10-17）</td></tr>
+      <tr><td>1-month milestone</td><td><code>DPIfsSvEbYc</code></td></tr>
+      <tr><td>Newsletter spin-off</td><td><a href="https://www.threads.com/@10m_investment">@10m_investment</a></td></tr>
+      <tr><td>Blog stub</td><td><a href="https://10mblog.com/">10mblog.com</a>（目前是空殼 calendar UI）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  Threads breakout deep dive · subject @10m.engineer.investor · for Card #001 strategy discussion · evidence quality: mixed (public posts only)
+</footer>
+</body>
+</html>

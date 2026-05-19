@@ -1,7 +1,7 @@
 ---
 artifact_type: current-status
-created_at: 2026-05-14
-last_updated: 2026-05-14 22:29
+created_at: 2026-05-15
+last_updated: 2026-05-15 16:22
 generated_by: ops/build_dashboard.py
 ---
 
@@ -18,20 +18,18 @@ generated_by: ops/build_dashboard.py
 
 ## Right Now
 
-- **Next action**: Schedule / publish Card #001. IA1 is approved and content/cards/2026-05-13_ai-server_funds-cooling-bom_001.md is now ready. Next action: decide X-only vs X+Threads, then publish manually and paste post URLs back into the card.
+- **Next action**: 打開新的散熱系列在 browser 驗 UX 順暢度：file:///Users/dylanting/personal/investment-kol-ops-card001-pr/research/knowledge/ai-server-supply-chain/series/thermal/index.html — 確認 Tesla 對比合理、Ep1 → Ep2 → Ep3 導覽通、系列入口從 AI Server 主地圖能找到。看完回報 OK / 哪邊要改。
 - **Milestone**: `M3` — 內容生產
-- **Branch**: `feat/card-001-cooling-bom`
-- **Task**: Card #001 `ready` — GB300 一櫃液冷 BOM 接近 $50K，先別急著喊散熱概念股
-- **Session**: Session C `active`
+- **Branch**: `research/x-threads-card-001-platform-pass`
 
 **Do not start**:
 
-- 不要改 Card #001 source claims unless new evidence appears
+- 不要在 Ep1 主貼文塞外部連結（要等 M6.0 之後）
 - 不要寫「散熱占整櫃 42%」
-- 不要開新研究分支（Gap C / D / E / AMD cross-source v2）
-- 不要同時推第二張 card
+- 不要在 Ep1 ship 前開始寫 Ep2 / Ep3 full draft（保留 outline 即可）
+- 不要開新研究分支
 - 不要新增 worktree
-- 先把 #001 推到 ready 或明確 archive
+- 不要把舊 Card #001 的 BOM 內容刪掉（已轉到 Ep2 outline 保留）
 
 ## Milestones
 
@@ -42,17 +40,18 @@ generated_by: ops/build_dashboard.py
 | M2.1 公開化 | done | PR #13 merged; cooling / HBM / passive packets in |
 | M2.2 Tutor UX | done | Tutor reading template + paired HTML pages |
 | M2.3 Cross-source | done | Intel v2 reading; AMD Gap A + Gap B |
-| M3 內容生產 | active | First card from outline to ship; #001 draft |
+| M3 內容生產 | active | Card #001 IA1-approved and ready; next is X/Threads platform adaptation before publish |
 | M4 Scripts | todo | Cursor commands and small scripts |
-| M5 Metrics | todo | Metrics, publishing, audience interviews |
+| M5 Metrics + Publishing | todo | Publishing cadence, post-publish metrics, audience interviews |
+| M6 社群 Funnel | todo | Bio/pin → 社群群組(TG/DC/LINE) → 詐騙防範 → newsletter 副帳號；參考 @10m.engineer.investor 6 個月 timeline |
 
 ## Sessions
 
 | Session | Status | Branch | Scope |
 |---|---|---|---|
-| [Session C — Card #001 Cooling BOM](ops/sessions/2026-05-13_session-c-card-001.md) | active | `feat/card-001-cooling-bom` | Move Card #001 from outline toward first publishable draft |
-| [Session A — Source Tutor / AMD Claim Reading](ops/sessions/2026-05-13_session-a-source-tutor.md) | paused | — | AMD share gap + Q1 primary upgrade (PR #15, #16 merged) |
+| [Session A — Source Tutor / AMD Claim Reading](ops/sessions/2026-05-13_session-a-source-tutor.md) | paused | — |  |
 | [Session B — Thesis Cards / Content Production](ops/sessions/2026-05-13_session-b-thesis-cards.md) | completed | — | Thesis-card template + 6 outline cards scaffolded (PR #14 merged) |
+| [Session C — Card #001 Cooling BOM](ops/sessions/2026-05-13_session-c-card-001.md) | completed | `feat/card-001-learning-ready` | Card #001 moved from outline to IA1-approved ready state; not yet published |
 
 ## Cards
 
@@ -64,18 +63,27 @@ generated_by: ops/build_dashboard.py
 | 004 | [Apple-Intel preliminary deal 是訊號，但「preliminary」這個字現在做什麼還太早](content/cards/2026-05-13_ai-server_trigger-apple-intel_004.md) | 啟動 | outline | bear-falsify |
 | 005 | [3 個會讓我下調 AI server CPU 復興 thesis 的具體數字](content/cards/2026-05-13_ai-server_break-cpu-thesis_005.md) | 破局 | outline | bull-kill |
 | 006 | [5 篇 DigiTimes 報導 = 1 個 publisher = 不算 source-backed](content/cards/2026-05-13_ai-server_meta-passive-evidence_006.md) | meta | outline | n/a-meta-method |
+| 2026-05-15_thermal-series_ep1-electricity | [散熱系列：第一集 — 為什麼一台 AI server 一個月電費比一台 Model S 還貴](content/cards/2026-05-15_thermal-series_ep1-electricity.md) | 教育-explainer | ready | n/a (no thesis claim in this episode) |
+| 2026-05-15_thermal-series_ep2-bom | [散熱系列：第二集 — 一櫃 GB300 為什麼要花 $50K 在液冷上](content/cards/2026-05-15_thermal-series_ep2-bom.md) | 資金-mechanism | outline | n/a (mechanism episode, thesis lives in Ep3) |
+| 2026-05-15_thermal-series_ep3-suppliers | [散熱系列：第三集 — 這筆錢流到哪幾家公司，為什麼我還不急著喊散熱概念股](content/cards/2026-05-15_thermal-series_ep3-suppliers.md) | 資金-thesis | outline | bull-kill (counter-first framing required) |
 
 ## Blockers
 
-- **MediaTek 持倉揭露** (Card #002, `disclosure`) — Frontmatter 留有 placeholder，公開前必須確認。
+- **散熱系列 Ep1 UX review pending** (Series ep1, `gate-pending`) — Ep1 全文 + Ep2/Ep3 stub + 系列地圖 + 主地圖入口都已建。等使用者在 browser 走過 UX flow 才能 ship。入口：research/knowledge/ai-server-supply-chain/series/thermal/index.html
+- **舊 Card #001 (cooling-bom) 處置** (Card archive, `decision`) — 舊的 thesis-only Card #001 內容已拆進 Ep2 / Ep3 outline。需要決定：保留作為 archive、改 frontmatter 標 superseded、或合併進新 Ep。Ep1 ship 前決定即可。
+- **M6.0 bio / pin 策略** (Audience funnel, `decision`) — Ep1 主貼文無連結策略已定（rule 內 phased policy）。但 bio 連結要不要先放（M6.0 第一步）、Ep1 要不要釘選都還沒定。建議 Ep1 發出後 24 小時看 metrics 再決定。
 
 ## Recently Merged PRs
 
+- PR #19 — Card #001 cooling BOM ready with learning-first flow (https://github.com/CrayonDing0909/investment-kol-ops/pull/19)
 - PR #18 — Clarify reading surface rules (https://github.com/CrayonDing0909/investment-kol-ops/pull/18)
 - PR #17 — Session isolation cowork setup (https://github.com/CrayonDing0909/investment-kol-ops/pull/17)
 - PR #16 — Session A Gap B: upgrade AMD Q1 2026 sourcing to SEC primary (https://github.com/CrayonDing0909/investment-kol-ops/pull/16)
 - PR #15 — Session A: close AMD >50% server CPU share gap with Mercury Q4 2025 (https://github.com/CrayonDing0909/investment-kol-ops/pull/15)
-- PR #14 — Strategy pivot: thesis-card template + 6 AI server card outlines (backbone+card model) (https://github.com/CrayonDing0909/investment-kol-ops/pull/14)
+
+## Open PRs
+
+- PR #20 — Algorithm research: X and Threads platform pass for Card #001 (https://github.com/CrayonDing0909/investment-kol-ops/pull/20)
 
 ## Working Rule
 

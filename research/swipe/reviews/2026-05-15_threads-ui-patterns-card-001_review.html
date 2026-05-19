@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Threads UI Patterns — Card #001 Review</title>
+<style>
+  :root { --maxw: 900px; --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --bg: #f6f7f9; --surface: #ffffff; --surface-muted: #edf1f5; --text: #24272d;
+    --muted: #68707d; --line: #d8dee6; --link: #315f9f; --warn-bg: #fff4dc;
+    --warn-text: #6b4b00; --good-bg: #e9f5ec; --good-text: #1f6b3a; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #17191d; --surface: #20242a; --surface-muted: #2a3038; --text: #e2e8f0;
+      --muted: #a8b1bd; --line: #3a424e; --link: #91b7ff; --warn-bg: #332813;
+      --warn-text: #f1d18a; --good-bg: #1c3326; --good-text: #9ed7af; }
+  }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Noto Sans CJK TC", sans-serif; line-height: 1.7; padding: 28px; max-width: var(--maxw); margin: 0 auto; background: var(--bg); color: var(--text); }
+  header { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 28px; }
+  header .crumb { font-size: 13px; color: var(--muted); }
+  header h1 { margin: 4px 0 8px; font-size: 28px; }
+  header .lede { font-size: 16px; color: var(--muted); }
+  .meta, .source { font-size: 12px; font-family: var(--mono); color: var(--muted); }
+  section { margin: 28px 0; }
+  h2 { font-size: 22px; margin: 0 0 12px; padding-bottom: 4px; border-bottom: 1px dashed var(--line); }
+  h3 { font-size: 17px; margin: 18px 0 8px; }
+  .pill { display: inline-block; background: var(--surface-muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-family: var(--mono); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .pill.good { background: var(--good-bg); color: var(--good-text); border-color: var(--good-bg); }
+  .box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  .box.warn { background: var(--warn-bg); color: var(--warn-text); border-color: var(--warn-bg); }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+  .thread-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .outer-post { border-left: 3px solid var(--link); padding-left: 12px; margin-bottom: 14px; }
+  .attachment { background: var(--surface-muted); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; white-space: pre-wrap; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; display: block; overflow-x: auto; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface-muted); }
+  code { font-family: var(--mono); background: var(--surface-muted); padding: 1px 5px; border-radius: 4px; }
+  a { color: var(--link); text-underline-offset: 2px; }
+  footer { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 32px; font-size: 12px; color: var(--muted); }
+  @media (max-width: 700px) { body { padding: 18px; } .grid { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="crumb">Research / Swipe / Threads UI Patterns / Card #001</div>
+  <h1>Threads UI Pattern Review — Card #001</h1>
+  <p class="lede">這頁補的是官方 ranking docs 沒講的東西：Threads 現場長文卡、灰底 preview、點開全文、文字用法。重點不是再背演算法，而是把 Card #001 改成更像 Threads 原生內容。</p>
+  <div class="meta">
+    Status: <span class="pill warn">draft</span> ·
+    Phase: <span class="pill">UI pattern / long-form attachment</span> ·
+    Canonical: <a href="../2026-05-15_threads-ui-patterns-card-001.md">markdown canonical</a>
+  </div>
+</header>
+
+<section>
+  <h2>1. 這次新增的 Threads 現場觀察</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>你的截圖觀察</h3>
+      <ul>
+        <li>Feed 裡是短外文 + 灰底長文卡 preview。</li>
+        <li>preview 用問題開頭，故意切在 open loop。</li>
+        <li>點開後是完整長文，不是 10 段留言。</li>
+        <li>互動 bar 保留在長文閱讀底部。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>公開資料觀察</h3>
+      <ul>
+        <li>Threads 支援 up to 10,000 characters text attachment。</li>
+        <li>灰底卡可展開 read more。</li>
+        <li>支援 bold / italic / underline / strikethrough / highlight。</li>
+        <li>可在 attachment 末端放 source link。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2. Signal → UI Pattern → Card Change</h2>
+  <table>
+    <thead><tr><th>觀察</th><th>對 Card #001 的改法</th><th>為什麼</th></tr></thead>
+    <tbody>
+      <tr><td>Feed preview 只露出外文 + 長文卡片前幾行</td><td>Outer post 要短，text attachment 前 3 行要開 loop</td><td>讀者在 feed 先決定要不要點開</td></tr>
+      <tr><td>灰底卡讓長文有視覺停頓</td><td>不要拆成 7-11 段留言，改成一張 long-form attachment</td><td>更像 Threads native 長文 UI</td></tr>
+      <tr><td>熱門長文用「你第一個反應是什麼」</td><td>Attachment 用心理 first reaction 開頭</td><td>先抓讀者心裡直覺，再翻轉成你的分析</td></tr>
+      <tr><td>Threads 重視 reply / post click / viewing time</td><td>保留完整推理，但 outer CTA 問「你先追哪條線？」</td><td>問題更貼近內容，也更容易回覆</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>3. Recommended Threads Native Version</h2>
+  <div class="thread-card">
+    <div class="outer-post">
+      <strong>Outer post</strong>
+      <p>GB300 一櫃要花接近 $50K 在液冷上。</p>
+      <p>我原本以為這只是散熱概念股，整理完覺得不是這樣。</p>
+    </div>
+    <div class="attachment">你第一個反應可能是：
+
+「散熱不就是風扇嗎？」
+「又是 AI server 題材？」
+「最重要的不還是 GPU？」
+
+我一開始也差不多。
+
+但整理完 GB300 這條，感覺真正的變化不是「散熱突然很重要」，而是 AI server 已經變成一櫃一櫃的系統在賣。
+
+GB300 NVL72 不是一張 GPU。
+
+它是一台 rack-level system。一櫃裡面有 72 顆名字叫 B300 的 GPU，滿載功耗大概 132-140kW。
+
+140kW 對我來說不是工程數字。
+
+它比較像是在提醒：這一櫃本質上就是一個很貴、很密集的熱源。
+
+熱排不出去，GPU 會 thermal throttle，也就是自己降速保命。
+
+你買了很貴的算力，但跑不滿，就是在浪費錢。大企業當然不會讓這種事發生。
+
+所以液冷開始從 optional 變 required。
+
+拆開看，大概有幾段：
+
+- cold plate：貼在晶片上，把熱帶到冷卻液
+- CDU：整櫃冷卻液循環的主機
+- manifold：把冷卻液分到不同 tray
+- UQD：快接頭，讓 tray 可以維修又不漏液
+
+公開拆解資料給的量級是：
+
+- GB300 NVL72 單櫃液冷 BOM 約 $49,860
+- GB200 約 $41,500
+
+BOM 是零件成本表。
+
+這不是某家公司直接賺到的營收，但它說明一件事：每一櫃 AI server 裡，散熱這個 category 的 content 變大了。
+
+也就是說，NVIDIA 每賣出一台 AI server rack，上面就會綁一套液冷系統。
+
+對應到公司，先粗分：
+
+- 奇鋐 / AVC：cold plate、液冷模組
+- 雙鴻 / Auras：manifold、液冷 solution
+- Vertiv：rack / data center 層級 cooling infrastructure
+
+但這不是看到名字就買。
+
+我會先把它們放進 watchlist，看後面法說有沒有真的轉成 revenue / margin / backlog。
+
+所以這條線我目前會這樣理解：
+
+AI 算力需求上升
+→ GPU power density 上升
+→ rack cooling 從 optional 變 required
+→ cooling BOM per rack 上升
+→ 對應零件供應商 ASP / volume 有機會上升
+→ 最後回到法說驗證
+
+反向檢查點（算一種利多出盡吧）：
+
+如果未來兩年 AI rack 還是以過渡型液冷為主，沒有更快走向 direct-to-chip / 全液冷，那 cold plate、manifold、CDU 這些零件的成長速度可能就沒有想像中快。
+
+但目前看到的產業資料，方向是 OK 的。
+
+所以我目前不是把它當成「買哪一檔」。
+
+我比較像是把散熱放進 AI server 基本面支線裡追。
+
+如果 rack power 繼續往上，這條線值得繼續看。
+如果法說沒有轉成 backlog / margin，那就降級。</div>
+  </div>
+</section>
+
+<section>
+  <h2>4. CTA / Link / Disclosure</h2>
+  <pre>你會先追散熱、HBM，還是 ASIC 這幾條線？
+
+完整 AI server 供應鏈地圖：
+https://investment-kol-ops.vercel.app/library/ai-server-supply-chain/
+
+持倉揭露：作者可能持有文中提及個股，內容僅作研究紀錄，不構成投資建議。</pre>
+</section>
+
+<section>
+  <h2>5. Next Swipe Checks</h2>
+  <ul>
+    <li>高互動 Threads 長文是否真的用 outer post + gray attachment？</li>
+    <li>外文 hook 要放 $50K，還是放「你第一個反應可能是...」？</li>
+    <li>CTA 應該放 outer post、attachment 結尾，還是留言？</li>
+    <li>finance / investing 類 Threads 是否會在外文放 ticker？</li>
+  </ul>
+</section>
+
+<footer>
+  Threads UI pattern review · text attachment / collapsed preview pass · real swipe pending
+</footer>
+</body>
+</html>
