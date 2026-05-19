@@ -212,26 +212,25 @@
     一櫃 AI server 跑一個月，等於一台 Tesla 開了 <strong>24 年</strong>的電。
   </div>
 
-  <p>最近在拆 GB300 這代 AI server 的時候，我一直在想一個很基本的問題：</p>
-  <p>為什麼過去十年我們用風扇就可以對付伺服器，到了 2025-2026 年，cold plate、CDU、UQD 這些字才突然出現在所有法說裡？</p>
-  <p>讓我先用一個我自己能理解的方式講。</p>
+  <p>最近整理 GB300 散熱這條，我原本想直接看一櫃接近 $50K 的液冷 BOM 到底分去哪。</p>
+  <p>但整理到一半發現，如果一開始沒有先把「一櫃 AI server 到底多會吃電」想清楚，後面的 cold plate、CDU、manifold、UQD 其實都會變成零件名詞而已。</p>
+  <p>所以我決定先不急著跳到公司名單。我想先把自己目前理解到的順序整理清楚。</p>
 </section>
 
 <section>
-  <h2>一台 Tesla 一年要用多少電？</h2>
-  <p>Tesla Model S 滿電 ~100 度，能跑 ~400 公里。美國車主平均一年 ~15,000 英里，換算下來：</p>
+  <h2>先用 Tesla 當尺</h2>
+  <p>一台 Tesla Model S 開一年，大概會充 ~4,000 度電。換成電費，看你在哪個州、哪個時段，大概落在 US$500–700 一年。</p>
   <div class="compare">
-    <div class="compare-row"><span class="label">電池容量</span><span class="value">~100 度</span></div>
-    <div class="compare-row"><span class="label">滿電續航</span><span class="value">~400 km / 250 mi</span></div>
-    <div class="compare-row"><span class="label">平均年里程</span><span class="value">~15,000 mi</span></div>
-    <div class="compare-row highlight"><span class="label">→ 年充電量</span><span class="value">~4,000 度</span></div>
+    <div class="compare-row"><span class="label">一年充電量</span><span class="value">~4,000 度</span></div>
+    <div class="compare-row"><span class="label">換算電費</span><span class="value">~US$500–700／年</span></div>
+    <div class="compare-row highlight"><span class="label">→ 平均一個月</span><span class="value">~US$50–60</span></div>
   </div>
-  <p>這個數字記一下，等下要對比。</p>
+  <p>不算太恐怖，車本來就是吃電大戶。</p>
 </section>
 
 <section>
-  <h2>一台 AI server 機櫃一個月要用多少電？</h2>
-  <p>NVIDIA 最新一代 GB300 NVL72，一櫃 72 顆 GPU。整櫃滿載運轉的功耗：~132 kW。</p>
+  <h2>再看一櫃 AI server</h2>
+  <p>NVIDIA 最新一代 GB300 NVL72，一櫃 72 顆 GPU。整櫃滿載運轉的功耗大概 ~132 kW。</p>
   <div class="compare">
     <div class="compare-row"><span class="label">整櫃功耗</span><span class="value">~132 kW</span></div>
     <div class="compare-row"><span class="label">每天 24 小時 × 30 天</span><span class="value">720 小時</span></div>
@@ -243,46 +242,52 @@
     <div class="compare-row"><span class="label">AI rack 一個月</span><span class="value">95,000 度</span></div>
     <div class="compare-row highlight"><span class="label">→ 倍數</span><span class="value">~24 倍</span></div>
   </div>
-  <p>一台 GB300 跑一個月，等於一台 Tesla 開了 24 年的電。</p>
+  <p>一台 GB300 跑一個月，差不多等於一台 Tesla 開了 24 年的電。這個對比我覺得比直接講 132 kW 更有感。</p>
+  <p>因為這已經不是一台電腦變熱一點，而是一整櫃高密度算力 24 小時一直吃電。</p>
 </section>
 
 <section>
-  <h2>為什麼要在意這個數字？</h2>
-  <p>因為這代表 AI server 已經不能用一台「伺服器」的直覺去想了。</p>
-  <p>它的能量密度比較接近<strong>一座小型發電站</strong>，只是它住在資料中心大樓裡。</p>
-  <p>而能量密度高，物理上一定會遇到一個老問題：</p>
+  <h2>問題不只是「會熱」</h2>
+  <p>這裡開始是我真正想拆的地方：電最後都會變成熱。</p>
+  <p>132 kW 的電灌進一個機櫃，最後幾乎都會變成熱要被擠出去。而且這個熱是 24×7 的，沒有「下班」這件事。</p>
+  <p>以前很多 server rack 的直覺比較像：機器會熱，所以機房要有空調，機櫃要有風扇。但到 100kW+ 這個量級，我感覺問題已經不是「風夠不夠冷」，而是整個 rack 的設計要不要換一種方式。</p>
+  <p>因為風扇不是免費的。它也吃電、佔空間、產生噪音，而且越靠空氣去帶走熱，整個機櫃裡可以塞的東西就越受限制。這不是說空冷不能用，而是當 rack power 一直往上走，空冷會越來越像一個卡住系統設計的瓶頸。</p>
+</section>
+
+<section>
+  <h2>為什麼會開始看液冷</h2>
+  <p>這也是為什麼我現在比較理解 liquid cooling 為什麼會被拉出來講。</p>
+  <p>它不是因為名字比較酷，也不是因為大家突然喜歡水冷。而是如果你要讓熱更快離開 GPU，最直覺的做法就是讓冷卻介質離熱源更近。</p>
+  <p>所以才會開始看到 cold plate 這種東西直接貼到晶片附近，把熱先帶到冷卻液，再交給 CDU、manifold 這些東西去處理。</p>
+  <p>（不然就會變成只是在背零件名單。）</p>
+</section>
+
+<section>
+  <h2>如果散熱不夠會怎樣</h2>
+  <p>撐不住會發生什麼？GPU 會降頻，也就是 thermal throttle。簡單說就是你買了一張很貴的卡，跑一陣子之後它自己「限速」。</p>
+  <p>如果只有一張卡，這可能只是效能差一點。但 GB300 NVL72 是一櫃 72 顆 GPU。72 顆一起被熱影響，問題就不是某張卡跑慢，而是整櫃算力利用率被打折。</p>
   <div class="box note">
-    <strong>→ 電 → 熱</strong><br />
-    132 kW 的電進去，幾乎 100% 最後都會變成熱要被帶出來。<br />
-    （GPU 的工作是把電轉成計算，但計算的副產品就是熱，跑不掉。）
+    到這裡我覺得邏輯就比較清楚了：你買的不是「GPU 本身」而已。你買的是一整櫃能不能穩定跑滿的算力。散熱如果處理不好，最後影響的不是機房舒服不舒服，而是這櫃算力到底跑不跑得滿。
+  </div>
+  <p>（這也是我一開始覺得散熱題材很難懂的地方：它聽起來像機房問題，但其實會打到算力利用率。）</p>
+</section>
+
+<section>
+  <h2>這一集先收在這裡</h2>
+  <p>所以整理到這裡，我目前會這樣 recap：</p>
+  <p>AI server 散熱開始變重要，不是因為「液冷」這個詞突然變熱門，而是因為 rack power 拉上去之後，每一櫃都變成很密集的用電系統。</p>
+  <p>用電越高，熱就越高；熱處理不好，GPU 就跑不滿；GPU 跑不滿，買來的算力利用率就被打折。</p>
+  <div class="box note">
+    所以這就是為什麼散熱開始變重要：不是因為 liquid cooling 聽起來很新，而是每一櫃 AI server 能不能把算力跑滿，開始跟散熱綁在一起。<br /><br />
+    如果這個邏輯成立，那散熱就不是附屬配件，而是 AI server 裡面一個必須被拆開看的成本項目。
   </div>
 </section>
 
 <section>
-  <h2>風扇能解決多少熱？</h2>
-  <p>過去那種一櫃 20-30 kW 的伺服器，風扇 + 房間空調（CRAC）撐得住。到了 130 kW 的 AI rack，風扇要把這些熱抽出去，你要嘛：</p>
-  <ul>
-    <li>開到尖叫等級的噪音（資料中心噪音規範會擋）</li>
-    <li>塞滿一整個房間都是風扇（沒空間）</li>
-    <li>光是風扇本身的耗電就吃掉整體 10-15% 的電</li>
-  </ul>
-  <p>不可行。</p>
-</section>
-
-<section>
-  <h2>物理跑不動之後會發生什麼</h2>
-  <p>GPU 開始「<strong>熱降頻</strong>」（thermal throttle）。</p>
-  <p>意思是 GPU 為了保護自己不燒掉，會自動降速。你買了一台 ~$40,000 的 GPU，結果它只跑出 70% 的算力。</p>
-  <p>那筆錢不是在「沒花完」，那筆錢是<strong>正在以熱的形式燒掉，卻只換回更少的計算</strong>。</p>
-  <p>大企業在算這條經濟帳，所以才會把「液冷」從 optional 變成 required。</p>
-</section>
-
-<section>
-  <h2>下一集會講什麼</h2>
+  <h2>下一集</h2>
   <div class="box">
-    <p>下一集會拆：<strong>一台 GB300 機櫃，光是液冷的零件清單，要花掉接近 $50,000 美金。</strong></p>
-    <p>這個錢具體分到哪些零件？（cold plate / CDU / manifold / UQD 各佔多少）</p>
-    <p>但「誰賺到這筆錢」這條線我刻意放到第三集，因為在搞清楚「這 $50K 怎麼分」之前，直接跳到公司名單我覺得不是好的順序。</p>
+    <p>下一集會拆這個成本項目。一櫃液冷 BOM 接近 $50K，這個錢具體分到哪些零件，是我目前還在追的東西。</p>
+    <p>至於誰賺到這筆錢，會放到第三集。在搞清楚成本結構之前，直接跳到公司名單，順序不太對。</p>
   </div>
 </section>
 

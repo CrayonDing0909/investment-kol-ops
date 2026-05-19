@@ -478,6 +478,7 @@ YYYY-MM-DD - <milestone> - <task>
 2026-05-13 - M2.3 - Reading surface rules clarified to preserve canonical data while keeping HTML as the default rendered view
 2026-05-14 - M3 - Card #001 cooling BOM completed learning-first flow (domain primer, source tutor, HTML review, IA1 approved) and marked ready for X/Threads platform adaptation
 2026-05-14 - M3 - X/Threads official ranking docs summarized for Card #001; preliminary platform versions, publish hypothesis, and success metrics added before real swipe validation
+2026-05-15 - M3 - Threads breakout deep-dive (@10m.engineer.investor 0→24K in 1 month via 9-episode series) authored; series-narrative-architecture rule + phased link-placement policy derived; Card #001 pivoted into 3-episode 散熱系列 (Ep1 ready w/ Tesla electricity hook, Ep2/Ep3 outline); M6 社群 Funnel milestone added; ops dashboard regenerated
 ```
 
 ### Per-Skill Status Grid Footnotes
