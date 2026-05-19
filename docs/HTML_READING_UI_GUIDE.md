@@ -1,43 +1,30 @@
-# HTML Reading UI Guide
+# Reading Surface Guide
 
-Purpose: define how human-facing HTML reading pages should be built in this repo.
+Purpose: define how human-facing reading surfaces should be built in this repo.
+Self-contained HTML is the current default under `research/knowledge/**`, but
+the deeper goal is readable, navigable, traceable knowledge artifacts.
 
 This is not a visual design system. The goal is reading quality: fast scanning,
-clear confidence labels, source traceability, and low cognitive load.
-
-## Scope
-
-This guide applies to **knowledge reading artifacts** under `research/knowledge/**`
-and any other HTML pages whose primary job is "read this content carefully":
-
-- Knowledge maps, topic pages, tutor Q&A views.
-- Source reading views and individual source packet pages.
-- Intake pages.
-- Cross-source reading notes.
-
-It does **not** apply to:
-
-- Ops / cockpit dashboards (e.g. `ops/dashboard.html`).
-- Decision log dashboards or ops index pages.
-- Status / monitoring views whose primary job is "scan and act."
-
-Those follow [Ops Dashboard UI](#ops-dashboard-ui-different-rules) below, with
-more visual freedom. The reasoning: research pages are read slowly and need
-flat, predictable typography; ops dashboards are scanned quickly and benefit
-from elevation, hover affordances, and a bit of polish.
+clear confidence labels, source traceability, complete canonical data, useful
+indexes, and low cognitive load.
 
 ## Core Principle
 
 ```text
-Human reading path: HTML first
-Canonical source / metadata: Markdown
+Human reading path: rendered reading surface first (HTML by default today)
+Canonical source / metadata: complete Markdown or structured source files
 ```
 
 If the user is expected to read, learn, review, or revisit an artifact, it needs
-an HTML reading page. Markdown remains the canonical machine-readable source and
-the git-friendly metadata layer.
+a reading surface. Under `research/knowledge/**`, that surface is usually a
+self-contained HTML page today. Markdown or structured source files remain the
+canonical machine-readable source and the git-friendly metadata layer.
 
-## What Needs an HTML Reading Page
+The reading surface must not replace or compress away canonical detail. It
+should make complete source material easier to scan, revisit, index, and
+cross-link.
+
+## What Needs a Reading Surface
 
 Required:
 
@@ -109,7 +96,7 @@ Must include:
 - Direct quote when useful.
 - Reliability label.
 - Follow-up tasks.
-- HTML source / HTML intake links first.
+- Rendered source / rendered intake links first.
 - Markdown source links only as fallback, explicitly labeled `md source`.
 
 ### Individual Source Page
@@ -127,7 +114,7 @@ Must include:
 - Original source links to the company IR page, filing, paper, transcript,
   article, or PDF.
 - Next reading step so the user knows what to open after this page.
-- HTML intake link first.
+- Rendered intake link first.
 - Markdown source packet link second.
 
 ### Tutor Q&A Page
@@ -148,7 +135,9 @@ Must include:
 
 ## Link Rules
 
-Human-facing HTML pages must prefer HTML links.
+Human-facing HTML pages should prefer rendered links to other reading surfaces.
+Markdown links remain useful as canonical fallbacks, but must be labeled that
+way.
 
 Good:
 
@@ -193,9 +182,11 @@ For high-risk claims, write the warning in plain language, not only as a badge.
 
 ## Layout Rules
 
-- Static HTML only in M1-M2.
-- Inline CSS only.
-- No framework.
+For current self-contained HTML pages:
+
+- Prefer static HTML in M1-M2.
+- Prefer inline CSS while the repo has no shared reading renderer.
+- Avoid framework dependencies unless the workflow explicitly supports them.
 - No external assets.
 - No JS unless a later milestone explicitly requires collapsible sections.
 - Max content width around `760px-920px`.
@@ -281,61 +272,14 @@ Before delivery:
 
 ## Review Checklist
 
-Before committing a new HTML reading page:
+Before committing a new reading surface:
 
 - [ ] Does it answer what the user needs to understand?
 - [ ] Is the first screen enough to orient the reader?
 - [ ] Are primary vs secondary sources clearly separated?
 - [ ] Are follow-up questions visible?
 - [ ] Are Markdown links explicitly labeled as fallback?
+- [ ] Does the canonical Markdown or structured source still preserve the full
+      record?
 - [ ] Is the page useful without opening the markdown file?
-
-## Ops Dashboard UI (Different Rules)
-
-Pages under `ops/` whose primary job is to scan status and act
-(e.g. `ops/dashboard.html`) follow a separate, looser set of rules.
-
-### Why a Separate Set
-
-Research pages must be readable, calm, and slow — so they stay close to
-plain typographic text. Ops dashboards must surface "what is happening now"
-in 3 seconds, which benefits from elevation, status colors, hover
-affordances, and a modern visual hierarchy. Forcing both to share one rule
-makes one of them worse.
-
-### Allowed (Ops Only)
-
-- Subtle box-shadows for cards and hero (light elevation, not heavy).
-- Hover transitions on interactive cards (lift, border highlight).
-- Modern accent color (e.g. indigo) used sparingly for status emphasis.
-- Multiple status colors (active / blocked / done / paused / draft) with
-  paired bg + text + border tokens.
-- Inter-first system font stack with antialiasing.
-- Larger maximum content width (`~1120px`) and denser layout.
-- Sticky topbars or progress strips if they actually help scanning.
-- Slightly larger headline in a hero section that names the one next action.
-
-### Still Forbidden (Ops Too)
-
-- External assets (no remote fonts, images, or CSS).
-- JavaScript, unless a milestone explicitly approves it.
-- Decorative gradients across whole surfaces (a 1-2px accent strip is fine).
-- Emoji as functional icons.
-- Marketing-style copy or vague status words ("amazing progress").
-
-### Required (Ops Dashboards)
-
-- Top hero section that states the single next action in plain words.
-- Visible milestone / pipeline status, ideally as a progress strip.
-- Clear separation between active, blocked, and done work.
-- Pointer block back to canonical markdown sources.
-- Last-updated timestamp.
-- Inline CSS only; one self-contained HTML file.
-
-### Canonical Pair
-
-Each ops dashboard should have a markdown canonical companion
-(e.g. `ops/current.md` for `ops/dashboard.html`). Update both manually until
-M4 introduces a generator. If they drift, the markdown wins for facts; the
-HTML wins for "what should I look at first."
 
