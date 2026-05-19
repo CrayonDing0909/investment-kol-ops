@@ -85,17 +85,36 @@ done that way before the LLM is involved.
 - Prefer clear, useful content over vague market commentary.
 - Record learnings after publishing.
 
-## HTML Reading UI Rule
+## Reading Surface Rule
 
-- Human-facing knowledge artifacts are HTML-first. Follow
+- Human-facing knowledge artifacts need a readable surface. Follow
   [docs/HTML_READING_UI_GUIDE.md](docs/HTML_READING_UI_GUIDE.md).
 - If the user is expected to read, learn, review, or revisit an artifact, create
-  or update an HTML reading page.
-- Markdown remains the canonical source / metadata layer and must be labeled as
-  fallback (`md source`, `markdown intake`, `markdown canonical`) inside HTML.
+  or update a reading surface. Self-contained HTML is the current default under
+  `research/knowledge/**`, but the goal is readability, navigation,
+  traceability, and reviewability.
+- Markdown or structured source files remain the canonical source / metadata
+  layer and must preserve the full record.
+- Markdown links inside HTML must be labeled as fallback (`md source`,
+  `markdown intake`, `markdown canonical`).
 - Do not send the user directly from an HTML page into raw Markdown unless it is
   explicitly labeled as fallback.
 
+## Knowledge Layering Rule
+
+- Treat the repo as a file-first knowledge wiki. The layered model lives in
+  [docs/KNOWLEDGE_MANAGEMENT.md](docs/KNOWLEDGE_MANAGEMENT.md).
+- Raw sources (`research/sources/**`, `research/intake/**`) are immutable; the
+  maintained wiki layer (`research/notes/**`, `research/source-tutor/**`,
+  `research/knowledge/**`, `content/cards/**`, `content/drafts/**`) is where
+  synthesis lives.
+- New evidence updates the wiki, not only the artifact that triggered the
+  update. When a thesis card learns something new, update the backbone and the
+  affected tutor note in the same pass.
+- Reusable answers must land as wiki artifacts. Do not let synthesis stay in
+  chat.
+- Do not introduce a database, vector store, or external CMS without revisiting
+  the explicit deferrals in `docs/KNOWLEDGE_MANAGEMENT.md`.
 
 ## MVP Rules
 
