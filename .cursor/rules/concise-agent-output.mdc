@@ -1,0 +1,209 @@
+---
+description: Lite concise output style for agent chat responses, with explicit exceptions for investment analysis, content drafts, and gated artifacts
+alwaysApply: true
+---
+
+# Concise Agent Output Rule
+
+Default to a **lite terse style** for chat responses in this workspace. The goal
+is to cut filler and repeated framing, not to compress reasoning or skip the
+structure that this repo's other rules require.
+
+This rule governs chat output style only. It does **not** override the content
+rules in [analysis-reasoning.mdc](mdc:.cursor/rules/analysis-reasoning.mdc),
+[content-voice-raw-research.mdc](mdc:.cursor/rules/content-voice-raw-research.mdc),
+[git-workflow.mdc](mdc:.cursor/rules/git-workflow.mdc), or any other rule. When
+those rules require structure or completeness, follow them in full.
+
+## Default Behavior (Lite Mode)
+
+- Lead with the answer, finding, or decision in the first 1-2 lines.
+- Drop filler, repeated framing, excessive hedging, and long acknowledgements.
+- Keep normal grammar and professional tone — this is "lite", not full caveman.
+- Status updates after work: 1-3 lines covering what changed, verification
+  result, remaining risk.
+- For simple Q&A and lookup ("where is X", "what does Y do"), answer directly
+  with a short snippet or path. Do not pad with context the user already has.
+- Skip restating the user's question back to them before answering.
+- "Excessive hedging" means structural avoidance ("maybe I could…", "not sure
+  if this is right…", "我不太確定但…"), **not** research-stage uncertainty
+  markers (`感覺`, `我想像中`, `應該比較像`, `還沒補完`, `不能寫太滿`). The
+  latter must be preserved in investment analysis and research-drafting
+  conversations per
+  [content-voice-raw-research.mdc](mdc:.cursor/rules/content-voice-raw-research.mdc).
+- Match the user's language. Lite mode applies to both Traditional Chinese and
+  English responses. Structural exceptions below (O→M→I, ship-workflow 4
+  parts, content-draft required fields, etc.) are language-agnostic.
+
+## Exceptions (Do Not Compress)
+
+The following always get full structure and reasoning, regardless of how short
+the user's prompt is.
+
+**Order precedence**: when an exception applies, the structural ordering
+required by that rule (e.g. Observation → Mechanism → Implication, or the
+ship-workflow 4 parts) overrides the lite-mode "lead with the answer"
+default. Do not pull Implication or the commit summary to the top just to
+satisfy lite mode. The structure is the answer.
+
+### Investment Analysis Output
+
+**Triggers** — this exception applies when ANY of:
+
+- The user asks for an interpretation, view, scenario, regime call, or
+  positioning call.
+- The response would express a directional opinion (bullish / bearish /
+  risk-on / risk-off / 高檔 / 低檔 / 注意風險 / 偏多 / 偏空).
+- The response touches positioning, sizing, entry/exit, stop, or invalidation
+  conditions.
+- The user is drafting or reviewing a backtest, strategy, or thesis.
+
+It does **not** apply to pure fact / quote lookups ("what is SPY's PE", "when
+does AMD report", "AMD Q1 DC revenue 是多少", "VIX 現在多少"). Those follow
+lite mode.
+
+**Required structure** when triggered:
+
+- Every important observation walks Observation → Mechanism → Implication
+  (and Counter at least once per section) per
+  [analysis-reasoning.mdc](mdc:.cursor/rules/analysis-reasoning.mdc).
+- Backtest discussions must explicitly cover fees, liquidity, drawdown,
+  overfitting, and data quality concerns per `AGENTS.md`.
+- Position-related content, regime calls, and scenario plans state
+  invalidation conditions and uncertainty in full sentences.
+- Never abbreviate disclaimers, risk framing, or "this is not advice" language.
+
+### Content Drafts and Knowledge Artifacts
+
+- Anything destined for `content/cards/**`, `content/drafts/**`,
+  `research/knowledge/**`, `research/notes/**`, `research/source-tutor/**`,
+  or HTML reading surfaces under `research/knowledge/**` keeps full voice and
+  structure per
+  [content-voice-raw-research.mdc](mdc:.cursor/rules/content-voice-raw-research.mdc)
+  and [html-reading-ui.mdc](mdc:.cursor/rules/html-reading-ui.mdc).
+- Each published-post draft preserves audience, hook, platform, format, CTA,
+  and success metric per the Content Rules in `AGENTS.md`.
+
+### Human Gate Decisions and Risk Calls
+
+- High-risk artifacts (investment claims, position-related content, backtest
+  claims, MVP launches, public corrections, paid offers) get full rationale,
+  not a one-liner. See `docs/HUMAN_GATES.md`.
+- Risk classifier output names the risk, the gate, and the reason.
+- Any "this might be unsafe / irreversible" warning is a full sentence with
+  the specific consequence.
+
+### Ship-Workflow Proposals
+
+Per [git-workflow.mdc](mdc:.cursor/rules/git-workflow.mdc), every commit
+proposal shows in full:
+
+1. Branch decision (direct to `main` or branch name + prefix).
+2. Files staged, grouped by area.
+3. One or more commit messages in conventional format.
+4. Whether to push and to which branch.
+
+Never compress this to "ready to commit, ok?". Show the four parts.
+
+### Workflow Routing and Context Pack Loading
+
+When picking a workflow from `docs/WORKFLOW_PATTERNS.md` or a context pack
+from `docs/CONTEXT_STRATEGY.md`, state the choice explicitly and why. Do not
+silently load a pack.
+
+### Session Boundary (Per session-isolation.mdc)
+
+Before substantial work, state intent, branch/worktree, files expected to be
+touched, and write vs read-only mode. This is not compressible.
+
+When editing system-affecting paths — `.cursor/rules/**`, `AGENTS.md`,
+`docs/WORKFLOW_PATTERNS.md`, `docs/CONTEXT_STRATEGY.md`, `docs/HUMAN_GATES.md`,
+or shared templates under `content/templates/`, `research/templates/`,
+`ops/templates/` — explicitly raise the system-affecting flag **before**
+editing, per [session-isolation.mdc](mdc:.cursor/rules/session-isolation.mdc).
+Do not compress this flag into a one-liner.
+
+## Compression Targets (Safe to Compress)
+
+- Status updates ("done, X passes, no remaining warnings").
+- Simple lookups ("`docs/AGENTIC_HARNESS.md` line 42").
+- Commit message draft body (one or two short lines).
+- Routine `ls` / `grep` / file-existence answers.
+- Progress Log line in `IMPLEMENTATION_PLAN.md`.
+- Repeated context the user already provided in the same turn.
+
+## Examples
+
+### Lite (correct)
+
+```text
+User: 這個 rule 在哪？
+Agent: `.cursor/rules/analysis-reasoning.mdc`，含 Observation→Mechanism→
+Implication 三段要求 + 一個 Counter。
+```
+
+### Over-compressed (wrong — strips required structure)
+
+```text
+User: 評估一下 AMD 最新一季
+Agent: DC +57% YoY 強，看多。
+```
+
+This breaks `analysis-reasoning.mdc`. Required form:
+
+```text
+Observation: AMD Q1 2026 DC segment $5.8B, +57% YoY.
+Mechanism:   Hyperscaler AI capex rotating from GPU-only to GPU + EPYC head
+             node + ASIC adjacency …
+Implication: Q2 watch — AMD server CPU growth (>70% YoY target), Mercury
+             Research share, Intel DCAI Xeon defense, AMD non-GAAP GM trend.
+Counter:     If hyperscalers consolidate inference on ASIC + cheaper x86,
+             EPYC mix story stalls.
+```
+
+### Lite status update (correct)
+
+```text
+新增 `.cursor/rules/concise-agent-output.mdc`，lite + 例外清單 7 條。
+未跑 lints。未 commit。下一步：A/B 對照驗證。
+```
+
+### Over-hedged (wrong)
+
+```text
+好的，根據您的指示，我已經完成了規則的新增。我想跟您報告一下我做了
+什麼，希望這對您有幫助。我新增了一個檔案……
+```
+
+## Review Checklist
+
+Before sending a response, verify:
+
+- [ ] First 1-2 lines lead with the answer, finding, or decision.
+- [ ] No filler intros ("好的，我來看一下…"), no question restating, no
+      excessive hedging.
+- [ ] If output is investment analysis, the Observation → Mechanism →
+      Implication structure is present.
+- [ ] If output is a content draft, voice and required fields (audience,
+      hook, CTA, metric) are preserved.
+- [ ] If proposing a commit, all four ship-workflow parts are shown.
+- [ ] If touching `.cursor/rules/**`, `AGENTS.md`, `docs/WORKFLOW_PATTERNS.md`,
+      `docs/CONTEXT_STRATEGY.md`, `docs/HUMAN_GATES.md`, or shared templates,
+      the system-affecting flag is raised before editing.
+- [ ] Risk warnings, gate decisions, and disclaimers are full sentences.
+
+## Verification Plan
+
+- **Smoke**: Open a new chat, ask "list active rules" — should include
+  `concise-agent-output`.
+- **A/B**: Ask a simple lookup question in a fresh chat. Response should be
+  noticeably shorter and lead with the answer.
+- **Boundary test (mandatory)**: Ask for a market observation on any ticker.
+  Response **must** still walk Observation → Mechanism → Implication. If the
+  response is "SPY 高檔，注意風險" or similar, this rule is over-applying and
+  needs to be relaxed.
+- **Boundary test (mandatory)**: Ask to draft a tweet. Response **must** still
+  contain audience, hook, CTA, and success metric. If those fields are missing,
+  this rule is over-applying.
+- **Boundary test (mandatory)**: Ask to commit a change. Response **must** show
+  branch decision, staged files, commit messages, and push target.
