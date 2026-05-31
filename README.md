@@ -44,6 +44,9 @@ the research workflow is the quality layer beneath it. Start here:
 - `docs/HTML_READING_UI_GUIDE.md` - UI/UX rules for human-facing HTML reading pages.
 - `docs/AGENT_ROLES.md` - role definitions for source collection, tutoring,
   knowledge architecture, brief building, POV coaching, and gate review.
+- `docs/OWNER_HANDOFF_PROTOCOL.md` - owner-readable handoff packet format for any
+  task that needs a human decision (meaning first, git detail last); template at
+  `ops/handoffs/_template.md`.
 - `research/ALGORITHM_RESEARCH.md` - platform algorithm research system.
 - `research/AUDIENCE_DISCOVERY.md` - audience interviews, pain points, and MVP filters.
 - `research/INVESTMENT_ANALYSIS_PLAYBOOK.md` - market analysis workflow and quality gates.

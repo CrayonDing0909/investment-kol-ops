@@ -9,6 +9,18 @@ M1-M2 階段，這些 roles 是 harness 裡的操作指令，不一定要馬上�
 formal skill。只有當某個 role 重複跑過至少 3 次，而且 input / output 穩定後，才升級
 成真正 skill / agent。
 
+## Owner Handoff 規則
+
+本檔裡任何 role 走到「需要**人類決定**」的步驟時，必須先給一份 **Owner Handoff
+Packet**，才show技術輸出（git status、diff、SHA、檔案樹）。這份 packet 以 owner 看得
+懂為先、意義優先：現在在哪、白話做了什麼、該 review 什麼（≤3 個檔案）、要做的決定加
+一個建議、還沒在做什麼、一個可點頭的下一步 —— git / 機器細節只放最後的 appendix。
+完整格式與觸發條件見
+[docs/OWNER_HANDOFF_PROTOCOL.zh.md](OWNER_HANDOFF_PROTOCOL.zh.md)。這特別適用於 Gate
+Reviewer Role，以及任何以 `approve / edit / reject / defer` 收尾、或跨越 publish /
+commit / push 邊界的 role。handoff 只報告狀態；它不會自己核准 gate，也不會把
+`public_status` 改成 `ready`。
+
 ## Active Now vs Later（artifact-first 優先序）
 
 在 artifact-first 操作模型下（[docs/NORTH_STAR.zh.md](NORTH_STAR.zh.md)、
@@ -331,6 +343,8 @@ ops/decisions/YYYY-MM-DD_<gate>_<subject>.md
 - HUMAN-WRITTEN sections 空白時，不 approve IA1。
 - 不把一份 podcast summary 當成足夠 source coverage。
 - HTML knowledge pages 是人類閱讀層；markdown intake/source files 是機器可讀層。
+- 需要人類決定時，用 Owner Handoff Packet 交接（意義優先，git 細節放 appendix）。
+  見 [docs/OWNER_HANDOFF_PROTOCOL.zh.md](OWNER_HANDOFF_PROTOCOL.zh.md)。
 
 ## 先不要做的事
 

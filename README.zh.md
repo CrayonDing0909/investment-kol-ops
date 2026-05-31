@@ -40,6 +40,8 @@ MVP demo，以及管理發文、文章、圖片、影片、產品的整套發布
 - `docs/HTML_READING_UI_GUIDE.md` - 人類閱讀用 HTML 頁面的 UI/UX 規則。
 - `docs/AGENT_ROLES.md` - source collection、tutor、knowledge architecture、
   brief building、POV coaching、gate review 的 role 定義。
+- `docs/OWNER_HANDOFF_PROTOCOL.md` - 任何需要人類決定的任務，交接時用的 owner 看得懂
+  packet 格式（意義優先，git 細節放最後）；模板在 `ops/handoffs/_template.md`。
 - `research/ALGORITHM_RESEARCH.md` - 平台演算法研究系統。
 - `research/AUDIENCE_DISCOVERY.md` - 觀眾訪談、痛點、MVP 篩選。
 - `research/INVESTMENT_ANALYSIS_PLAYBOOK.md` - 市場分析流程與品質 gate。

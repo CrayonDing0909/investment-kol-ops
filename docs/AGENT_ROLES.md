@@ -7,6 +7,21 @@ be separate Cursor agents or formal skills yet. We should only promote a role
 into a real Cursor skill/agent after it has repeated successfully at least 3
 times and its inputs/outputs have stabilized.
 
+## Owner Handoff Rule
+
+Any role in this file that reaches a step requiring a **human decision** must
+produce an **Owner Handoff Packet** before showing technical output (git status,
+diffs, SHAs, file trees). The packet is owner-readable and meaning-first:
+Current Stage, what changed in plain language, what to review (≤3 files), the
+decision with one recommendation, what is NOT happening, and a single approvable
+next action — with git/machine detail only in an appendix at the end. The full
+format and triggers live in
+[docs/OWNER_HANDOFF_PROTOCOL.md](OWNER_HANDOFF_PROTOCOL.md). This applies
+especially to the Gate Reviewer Role and to any role that ends in `approve /
+edit / reject / defer` or crosses a publish / commit / push boundary. A handoff
+reports state; it never approves a gate or sets `public_status: ready` on its
+own.
+
 ## Active Now vs Later (artifact-first priority)
 
 Under the artifact-first operating model
@@ -457,6 +472,9 @@ Add to agent behavior, no separate skill required yet:
 - Do not treat one podcast summary as sufficient source coverage.
 - HTML knowledge pages are the human reading layer; markdown intake/source files
   are the machine-readable layer.
+- When a human decision is required, hand off with an Owner Handoff Packet
+  (meaning first, git detail in an appendix). See
+  [docs/OWNER_HANDOFF_PROTOCOL.md](OWNER_HANDOFF_PROTOCOL.md).
 
 ## What Should Wait
 

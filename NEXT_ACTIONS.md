@@ -4,6 +4,18 @@
 > 視覺 cockpit：`ops/dashboard.html`（由 `ops/build_dashboard.py` 生成，勿手改）。
 > 方向錨點：[docs/NORTH_STAR.zh.md](docs/NORTH_STAR.zh.md)。
 
+## Current Stage（一眼看現在在哪）
+
+> 對齊 [docs/OWNER_HANDOFF_PROTOCOL.zh.md](docs/OWNER_HANDOFF_PROTOCOL.zh.md) 的
+> packet 第 1 段。手動維護，描述「目前最該被 owner 看見的單一狀態」。
+
+- Track（軌道）：Repo 操作層
+- Item（項目）：A0.6 Owner Handoff Protocol
+- State（狀態）：protocol update drafted, awaiting owner review / commit
+- Gate（關卡）：not applicable
+- Public status：internal docs only
+- 你現在的角色：review and commit A0.6, then return to A1 branch for A1-001 review
+
 ## 本週（最多 3）
 
 1. 完成 A0.5 repo refinement
