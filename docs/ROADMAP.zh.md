@@ -20,6 +20,16 @@ branch 策略）放在 [docs/IMPLEMENTATION_PLAN.zh.md](IMPLEMENTATION_PLAN.zh.m
 Artifact -> 公開內容 -> 受眾訊號 -> 研究深化 -> 產品
 ```
 
+Milestone 命名規則（先讀這段避免混淆）：
+
+- **Artifact 軌道用 `A` 前綴（A0.5、A1、A2……）。** 描述這個 overlay 的
+  artifact-first 重新排序。
+- **工程 / dashboard milestone 維持 `M` 前綴（M0-M6）。** 那些是本檔下方、
+  [docs/IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) 以及生成的
+  `ops/current.md` / `ops/dashboard.html` 裡既有的 milestone，維持有效、不變。
+
+`A` overlay 只是重排優先序，不會重編號或取代 `M` milestone。
+
 下面原本的 milestone（M0-M6）仍然有效，作為研究品質層與基礎設施層。它們本身不再
 是「立刻要做的下一步」，而是服務 artifact 迴圈。深度 source-backed 研究
 milestone（IMPLEMENTATION_PLAN 的 M1.1/M1.2 型工作）是研究品質層，不應擋住公開
@@ -28,12 +38,12 @@ artifact 測試。
 往後的 artifact-first milestone 順序：
 
 ```text
-M0.5 Repo Refinement          (這個 overlay + operating layer)
-M1   Artifact Engine MVP       (5 個可發布 artifact)
-M2   Research Packet Lite       (只深化表現好的 artifact)
-M3   Public Distribution Loop   (穩定的每週發布節奏)
-M4   Landing Page + Private Traffic
-M5   First Interactive Prototype
+A0.5 Repo Refinement          (這個 overlay + operating layer)
+A1   Artifact Engine MVP       (5 個可發布 artifact)
+A2   Research Packet Lite       (只深化表現好的 artifact)
+A3   Public Distribution Loop   (穩定的每週發布節奏)
+A4   Landing Page + Private Traffic
+A5   First Interactive Prototype
 ```
 
 這些是「重用」而非「取代」下面的系統：內容生產走
@@ -44,7 +54,7 @@ Gate A，投資觀點走 Gate B）；metrics 用 [ops/METRICS.md](../ops/METRICS
 `ops/decisions/` 的 post-publish checklist。工作 backlog 與 milestone spec 放在
 [ops/backlog.md](../ops/backlog.md)。
 
-## Milestone 0.5 - Repo Refinement
+## A0.5 - Repo Refinement（artifact 軌道）
 
 成果：repo 讀起來像 artifact-led KOL operating system，不是只有研究流程。純
 additive，不移除任何既有系統。

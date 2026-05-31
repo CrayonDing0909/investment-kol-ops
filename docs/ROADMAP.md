@@ -18,6 +18,18 @@ The repo is now read artifact-first. The loop we optimize for is:
 Artifact -> Public content -> Audience signal -> Research deepening -> Product
 ```
 
+Milestone vocabulary (read this to avoid confusion):
+
+- **Artifact-track labels use the `A` prefix (A0.5, A1, A2, ...).** They describe
+  the artifact-first re-prioritization in this overlay.
+- **Engineering / dashboard milestones keep the `M` prefix (M0-M6).** Those are
+  the existing milestones in this file below, in
+  [docs/IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md), and in the generated
+  `ops/current.md` / `ops/dashboard.html`. They remain valid and unchanged.
+
+The `A` overlay re-orders priority; it does not renumber or replace the `M`
+milestones.
+
 The original milestones below (M0-M6) remain valid as the research-quality and
 infrastructure layer. They are no longer the immediate next step on their own;
 they serve the artifact loop. The deep source-backed research milestones
@@ -27,12 +39,12 @@ must not block public artifact testing.
 Artifact-first milestone order going forward:
 
 ```text
-M0.5 Repo Refinement          (this overlay + operating layer)
-M1   Artifact Engine MVP       (5 publishable artifacts)
-M2   Research Packet Lite       (deepen only the artifacts that performed)
-M3   Public Distribution Loop   (steady weekly publishing cadence)
-M4   Landing Page + Private Traffic
-M5   First Interactive Prototype
+A0.5 Repo Refinement          (this overlay + operating layer)
+A1   Artifact Engine MVP       (5 publishable artifacts)
+A2   Research Packet Lite       (deepen only the artifacts that performed)
+A3   Public Distribution Loop   (steady weekly publishing cadence)
+A4   Landing Page + Private Traffic
+A5   First Interactive Prototype
 ```
 
 These reuse, not replace, the systems below: content production runs through
@@ -44,7 +56,7 @@ for investment views); metrics use
 `ops/decisions/`. Working backlog and milestone specs live in
 [ops/backlog.md](../ops/backlog.md).
 
-## Milestone 0.5 - Repo Refinement
+## A0.5 - Repo Refinement (artifact track)
 
 Outcome: the repo reads as an artifact-led KOL operating system, not a
 research-only workflow. Additive only; no existing system removed.

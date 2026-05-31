@@ -8,37 +8,42 @@
 > [docs/ARTIFACT_SYSTEM.md](../docs/ARTIFACT_SYSTEM.md). Milestone overlay:
 > [docs/ROADMAP.md](../docs/ROADMAP.md).
 
+> Milestone vocabulary: artifact-track milestones use the `A` prefix
+> (A0.5, A1, ...) to stay distinct from the existing engineering / dashboard
+> `M`-numbered milestones (M0-M6), which remain valid and unchanged. See
+> [docs/ROADMAP.md](../docs/ROADMAP.md).
+
 ## Milestones (artifact-first)
 
 ```text
-M0.5 Repo Refinement          - artifact-first overlay + operating layer (this PR)
-M1   Artifact Engine MVP       - 5 publishable artifacts, each with source note + 2 public versions + metrics log
-M2   Research Packet Lite       - deepen only the 2 best-performing M1 artifacts into source-backed packets
-M3   Public Distribution Loop   - 4 weeks of steady weekly publishing + weekly review + metrics
-M4   Landing Page + Private Traffic - one-page site, email signup, first lead magnet
-M5   First Interactive Prototype - pick one (ETF X-ray / Supply Chain Map / Company Card), test with 10-30 people
+A0.5 Repo Refinement          - artifact-first overlay + operating layer (this PR)
+A1   Artifact Engine MVP       - 5 publishable artifacts, each with source note + 2 public versions + metrics log
+A2   Research Packet Lite       - deepen only the 2 best-performing A1 artifacts into source-backed packets
+A3   Public Distribution Loop   - 4 weeks of steady weekly publishing + weekly review + metrics
+A4   Landing Page + Private Traffic - one-page site, email signup, first lead magnet
+A5   First Interactive Prototype - pick one (ETF X-ray / Supply Chain Map / Company Card), test with 10-30 people
 ```
 
 Note: the deep source-backed research work (IMPLEMENTATION_PLAN M1.1/M1.2-style)
-is reclassified as the research-quality layer under M2; it no longer blocks
+is reclassified as the research-quality layer under A2; it no longer blocks
 public artifact testing.
 
 ## Starter issues (≈10)
 
 ```text
-[M0.5] Add North Star                       -> docs/NORTH_STAR.md (done in M0.5 PR)
-[M0.5] Add NEXT_ACTIONS                      -> NEXT_ACTIONS.md (done)
-[M0.5] Add Artifact System                   -> docs/ARTIFACT_SYSTEM.md (done)
-[M0.5] Add Weekly Review template            -> ops/weekly/_template.md (done)
-[M0.5] Add distribution templates            -> content/templates/{ig-carousel,youtube-shorts,artifact-brief}.md (done)
-[M0.5] Add two-tier gate (A vs B)            -> docs/HUMAN_GATES.md (done)
-[M1]  Convert AI Server Supply Chain into public artifact series
-[M1]  Create AI Server Supply Chain Map v0   (one-map overview, L2)
-[M1]  Draft 3 Threads posts for AI Server series
-[M1]  Create first weekly review + 24h post-publish log for first published artifact
+[A0.5] Add North Star                       -> docs/NORTH_STAR.md (done in A0.5 PR)
+[A0.5] Add NEXT_ACTIONS                      -> NEXT_ACTIONS.md (done)
+[A0.5] Add Artifact System                   -> docs/ARTIFACT_SYSTEM.md (done)
+[A0.5] Add Weekly Review template            -> ops/weekly/_template.md (done)
+[A0.5] Add distribution templates            -> content/templates/{ig-carousel,youtube-shorts,artifact-brief}.md (done)
+[A0.5] Add two-tier gate (A vs B)            -> docs/HUMAN_GATES.md (done)
+[A1]  Convert AI Server Supply Chain into public artifact series
+[A1]  Create AI Server Supply Chain Map v0   (one-map overview, L2)
+[A1]  Draft 3 Threads posts for AI Server series
+[A1]  Create first weekly review + 24h post-publish log for first published artifact
 ```
 
-First batch of M1 artifacts to consider:
+First batch of A1 artifacts to consider:
 
 ```text
 1. AI Server Supply Chain Map v0
