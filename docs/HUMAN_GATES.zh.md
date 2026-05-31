@@ -29,11 +29,59 @@ Harness 的風險分類器會給每個 output 打 tag：
 
 Workflow 可依情境提升風險等級。例如「general」內容若包含具體買賣建議，會升為高風險。
 
+## 兩層發布 Gate：A vs B
+
+不是每個公開 artifact 都要走重量級投資觀點審查。依 artifact 宣稱什麼來路由，
+對齊 [docs/ARTIFACT_SYSTEM.zh.md](ARTIFACT_SYSTEM.zh.md) 的分級。
+
+- **Gate A - Artifact Publish（輕量，預設）。** 給教育型 / 視覺型 artifact：
+  供應鏈地圖、公司卡、ETF X-ray、explainer、名詞視覺化。大多數 L1/L2 artifact。
+- **Gate B - Investment View（重量級）。** 給方向 / 部位內容：市場方向 call、
+  個股買賣判斷、bull/base/bear、winner/loser、回測 / 策略結果。既有的 **IA1**
+  與 **IA2** 就是 Gate B 家族。
+
+路由：
+
+```text
+這個 artifact 有沒有做方向 / 部位 / 買賣 / 回測宣稱？
+  沒有 -> Gate A（checklist 過了就能發）
+  有   -> Gate B（IA1，若涉策略 / 回測再加 IA2）
+```
+
+不確定就往上走 Gate B。一個教育型 artifact 若暗示了一筆交易，就變成 Gate B。
+
+### Gate A - Artifact Publish
+
+Trigger：任何不做方向、部位、買賣、目標價、回測宣稱的公開教育 / 視覺型 artifact。
+
+給人類看：
+
+- Artifact（圖 / 地圖 / 卡 / 腳本）與它的公開版本。
+- Source note：每個關鍵宣稱對應至少一個 source。
+- 不確定性 label（哪裡還沒驗證）。
+
+通過條件（全部必填）：
+
+- [ ] 至少有一個 source 且有 label。
+- [ ] 沒有買賣 call。
+- [ ] 沒有目標價。
+- [ ] 沒有個人化投資建議。
+- [ ] 有標不確定性。
+
+決策：approve（發布）、edit、reject。
+
+決策後：
+
+- Approved artifact 可不過 IA1 直接發布。
+- 若 review 發現有方向 / 部位宣稱，升級走 Gate B（IA1），不要用 Gate A approve。
+- 決策像其他 gate 一樣記在 artifact 旁（或 `ops/decisions/`）。
+
 ## 強制 Gate
 
-下列 gate 不能跳過。即使 draft 看起來沒問題，agent 也必須等人類。
+下列 gate 不能跳過。即使 draft 看起來沒問題，agent 也必須等人類。IA1 與 IA2 是
+上面提到的 Gate B 投資觀點家族。
 
-### Gate IA1 - 投資宣稱發布
+### Gate IA1 - 投資宣稱發布（Gate B）
 
 Trigger：任何包含市場方向 call、regime 宣稱、持倉暗示、回測結果、策略結果的公開
 artifact。

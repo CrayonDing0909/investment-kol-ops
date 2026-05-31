@@ -7,6 +7,41 @@ be separate Cursor agents or formal skills yet. We should only promote a role
 into a real Cursor skill/agent after it has repeated successfully at least 3
 times and its inputs/outputs have stabilized.
 
+## Active Now vs Later (artifact-first priority)
+
+Under the artifact-first operating model
+([docs/NORTH_STAR.md](NORTH_STAR.md), [docs/ARTIFACT_SYSTEM.md](ARTIFACT_SYSTEM.md)),
+this is a priority split only. No role below is removed; all definitions remain
+valid and reusable when needed.
+
+Active now (the roles to lean on for the public artifact loop):
+
+- Source Collector
+- Intake Curator
+- Artifact Builder - turns a researched idea into a publishable artifact (map /
+  card / X-ray / explainer) using
+  [content/templates/artifact-brief.md](../content/templates/artifact-brief.md)
+  for L1/L2 and [content/templates/thesis-card.md](../content/templates/thesis-card.md)
+  for L3/L4. Owns the artifact Definition of Done.
+- Content Repurposer - splits one artifact into platform versions (Threads, X,
+  IG carousel, YouTube Shorts) using the content templates.
+- Gate Reviewer - now routes via the two-tier gate: Gate A for educational
+  artifacts, Gate B (IA1/IA2) for investment views.
+
+Not the focus now (keep defined, do not invest in deepening yet):
+
+- POV Coach
+- Scenario Analyzer / Technical Analyst style deep roles
+- Runtime skill system, hooks, automation scripts, growth/traffic agent
+
+Reason: we have not yet built enough content-market feedback. Over-completing the
+investment-analysis pipeline before the audience arrives is the failure mode this
+split guards against. Priority right now is steady, visible artifact output.
+
+Artifact Builder and Content Repurposer are described here as active roles; they
+compose the existing roles below (Source Collector, Intake Curator, Knowledge
+Architecture, Brief Builder) rather than replacing them.
+
 ## Why Roles Before Skills
 
 - Skills are useful when the workflow is stable.

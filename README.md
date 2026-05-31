@@ -6,6 +6,13 @@ This repo is for researching platform algorithms, understanding audience pain po
 turning investment analysis into reliable content, building fast AI-agent MVP demos,
 and managing the publishing workflow across articles, images, videos, and products.
 
+It is run as an artifact-led operating system: the core unit is a publishable
+artifact (a chart, supply-chain map, company card, ETF X-ray, or AI tool), and
+the research workflow is the quality layer beneath it. Start here:
+[docs/NORTH_STAR.md](docs/NORTH_STAR.md) (direction),
+[docs/ARTIFACT_SYSTEM.md](docs/ARTIFACT_SYSTEM.md) (the core unit), and
+[NEXT_ACTIONS.md](NEXT_ACTIONS.md) (what to do today).
+
 ## Core Pillars
 
 1. Algorithm research: what content formats, hooks, interactions, and distribution
@@ -22,6 +29,11 @@ and managing the publishing workflow across articles, images, videos, and produc
 
 ## Repo Map
 
+- `docs/NORTH_STAR.md` - the single direction anchor (positioning, audience, pillars).
+- `docs/ARTIFACT_SYSTEM.md` - the artifact model: types, L1-L4 tiers, lifecycle, DoD.
+- `NEXT_ACTIONS.md` - hand-maintained daily/weekly focus (本週 / 今天 / Not Now).
+- `ops/weekly/` - weekly review ritual and template.
+- `ops/backlog.md` - draft milestone/issue/project-board specs (in-repo, not yet on GitHub).
 - `docs/ROADMAP.md` - product/business milestone plan.
 - `docs/IMPLEMENTATION_PLAN.md` - engineering milestones, per-skill checklist, branch and commit strategy.
 - `docs/CONTENT_STRATEGY.md` - positioning, channels, content formats, and cadence.

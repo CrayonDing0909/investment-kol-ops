@@ -7,6 +7,67 @@ This file holds product/business milestones. Engineering milestones (templates,
 scripts, commands, branch strategy) live in
 [docs/IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md).
 
+## Operating Model (artifact-first overlay)
+
+Direction anchor: [docs/NORTH_STAR.md](NORTH_STAR.md). Core unit:
+[docs/ARTIFACT_SYSTEM.md](ARTIFACT_SYSTEM.md).
+
+The repo is now read artifact-first. The loop we optimize for is:
+
+```text
+Artifact -> Public content -> Audience signal -> Research deepening -> Product
+```
+
+The original milestones below (M0-M6) remain valid as the research-quality and
+infrastructure layer. They are no longer the immediate next step on their own;
+they serve the artifact loop. The deep source-backed research milestones
+(IMPLEMENTATION_PLAN M1.1/M1.2-style work) are the research-quality layer and
+must not block public artifact testing.
+
+Artifact-first milestone order going forward:
+
+```text
+M0.5 Repo Refinement          (this overlay + operating layer)
+M1   Artifact Engine MVP       (5 publishable artifacts)
+M2   Research Packet Lite       (deepen only the artifacts that performed)
+M3   Public Distribution Loop   (steady weekly publishing cadence)
+M4   Landing Page + Private Traffic
+M5   First Interactive Prototype
+```
+
+These reuse, not replace, the systems below: content production runs through
+[content/CONTENT_OPERATING_SYSTEM.md](../content/CONTENT_OPERATING_SYSTEM.md) and
+[content/templates/](../content/templates/); publishing uses the two-tier gate in
+[docs/HUMAN_GATES.md](HUMAN_GATES.md) (Gate A for educational artifacts, Gate B
+for investment views); metrics use
+[ops/METRICS.md](../ops/METRICS.md) and the post-publish checklist in
+`ops/decisions/`. Working backlog and milestone specs live in
+[ops/backlog.md](../ops/backlog.md).
+
+## Milestone 0.5 - Repo Refinement
+
+Outcome: the repo reads as an artifact-led KOL operating system, not a
+research-only workflow. Additive only; no existing system removed.
+
+- Add the direction layer: [docs/NORTH_STAR.md](NORTH_STAR.md).
+- Add the artifact model: [docs/ARTIFACT_SYSTEM.md](ARTIFACT_SYSTEM.md) with
+  L1-L4 tiers.
+- Add the daily/weekly operating layer: [NEXT_ACTIONS.md](../NEXT_ACTIONS.md)
+  and `ops/weekly/`.
+- Add public distribution templates: IG carousel, YouTube Shorts, lightweight
+  artifact brief.
+- Add the two-tier publish gate (Gate A vs Gate B) to
+  [docs/HUMAN_GATES.md](HUMAN_GATES.md).
+- Reframe AI Server Supply Chain as the first public artifact series.
+
+Exit criteria:
+
+- A newcomer can open the repo and know what the project is.
+- `NEXT_ACTIONS.md` tells the user what to do today.
+- Each artifact has a clear lifecycle and Definition of Done.
+- A weekly review ritual exists.
+- The research workflow stays available but no longer blocks public testing.
+
 ## Milestone 0 - Foundation and Agentic Harness
 
 Outcome: the repo becomes the source of truth and runs on a defined harness.
