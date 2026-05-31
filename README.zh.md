@@ -8,6 +8,12 @@
 這個 repo 用來研究平台演算法、了解觀眾痛點、把投資分析轉成可信內容、做 AI agent
 MVP demo，以及管理發文、文章、圖片、影片、產品的整套發布流程。
 
+它以 artifact-led 操作系統運作：核心單位是一個可發布的 artifact（一張圖、供應鏈
+地圖、公司卡、ETF X-ray、AI 工具），研究流程是它底下的品質層。從這裡開始：
+[docs/NORTH_STAR.zh.md](docs/NORTH_STAR.zh.md)（方向）、
+[docs/ARTIFACT_SYSTEM.zh.md](docs/ARTIFACT_SYSTEM.zh.md)（核心單位）、
+[NEXT_ACTIONS.md](NEXT_ACTIONS.md)（今天做什麼）。
+
 ## 核心支柱
 
 1. 演算法研究：什麼樣的內容形式、hook、互動、發布模式會帶來帳號成長。
@@ -19,6 +25,11 @@ MVP demo，以及管理發文、文章、圖片、影片、產品的整套發布
 
 ## Repo Map
 
+- `docs/NORTH_STAR.md` - 唯一方向錨點（定位、受眾、內容支柱）。
+- `docs/ARTIFACT_SYSTEM.md` - artifact 模型：類型、L1-L4 分級、生命週期、DoD。
+- `NEXT_ACTIONS.md` - 手動維護的每日/每週焦點（本週 / 今天 / Not Now）。
+- `ops/weekly/` - 每週 review 儀式與模板。
+- `ops/backlog.md` - 草稿 milestone/issue/project-board spec（在 repo 內，尚未上 GitHub）。
 - `docs/ROADMAP.md` - 產品/業務 milestone 計畫。
 - `docs/IMPLEMENTATION_PLAN.md` - 工程 milestone、各 skill checklist、branch 與 commit 策略。
 - `docs/CONTENT_STRATEGY.md` - 定位、頻道、內容形式、發布節奏。

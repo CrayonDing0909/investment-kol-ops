@@ -30,12 +30,68 @@ The risk classifier in the harness tags each output:
 A workflow may upgrade risk level based on context. For example, a "general"
 content draft becomes high risk if it includes a specific buy/sell suggestion.
 
+## Two-Tier Publish Gate: A vs B
+
+Not every public artifact needs the heavy investment-view review. Route by what
+the artifact claims, per the artifact tiers in
+[docs/ARTIFACT_SYSTEM.md](ARTIFACT_SYSTEM.md).
+
+- **Gate A - Artifact Publish (lightweight, default).** For educational and
+  visual artifacts: supply-chain maps, company cards, ETF X-rays, explainers,
+  glossary visuals. Most L1/L2 artifacts.
+- **Gate B - Investment View (heavy).** For directional or position content:
+  market direction calls, single-stock buy/sell judgment, bull/base/bear,
+  winner/loser, backtest/strategy results. The existing **IA1** and **IA2** gates
+  are the Gate B family.
+
+Router:
+
+```text
+Does the artifact make a direction / position / buy-sell / backtest claim?
+  No  -> Gate A (publishable once checklist passes)
+  Yes -> Gate B (IA1, plus IA2 if strategy/backtest)
+```
+
+If unsure, default up to Gate B. An educational artifact that quietly implies a
+trade has become a Gate B artifact.
+
+### Gate A - Artifact Publish
+
+Trigger: any public educational/visual artifact that does NOT make a direction,
+position, buy/sell, target-price, or backtest claim.
+
+Show to human:
+
+- The artifact (chart/map/card/script) and its public versions.
+- The source note: each key claim mapped to at least one source.
+- The uncertainty label (what is not yet verified).
+
+Pass conditions (all required):
+
+- [ ] At least one source is present and labeled.
+- [ ] No buy/sell call.
+- [ ] No price target.
+- [ ] No personalized investment advice.
+- [ ] Uncertainty is labeled.
+
+Decisions: approve (publish), edit, reject.
+
+Post-decision:
+
+- Approved artifacts can publish without IA1.
+- If review reveals a direction/position claim, escalate to Gate B (IA1) instead
+  of approving under Gate A.
+- Log the decision next to the artifact (or in `ops/decisions/`) like any gate.
+
 ## Mandatory Gates
+
+The IA1, IA2, MVP1, MVP2, AR1, AD1, and PM1 gates below are mandatory. IA1 and
+IA2 are the Gate B investment-view family referenced above.
 
 These gates cannot be skipped. The agent must wait for the human even if the
 content looks ready.
 
-### Gate IA1 - Investment Claim Publish
+### Gate IA1 - Investment Claim Publish (Gate B)
 
 Trigger: any public artifact that contains a market direction call, a regime
 claim, a position implication, a backtest result, or a strategy result.

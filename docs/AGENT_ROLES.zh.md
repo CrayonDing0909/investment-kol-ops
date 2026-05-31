@@ -9,6 +9,39 @@ M1-M2 階段，這些 roles 是 harness 裡的操作指令，不一定要馬上�
 formal skill。只有當某個 role 重複跑過至少 3 次，而且 input / output 穩定後，才升級
 成真正 skill / agent。
 
+## Active Now vs Later（artifact-first 優先序）
+
+在 artifact-first 操作模型下（[docs/NORTH_STAR.zh.md](NORTH_STAR.zh.md)、
+[docs/ARTIFACT_SYSTEM.zh.md](ARTIFACT_SYSTEM.zh.md)），這只是優先序切分。下面沒有
+任何 role 被移除；所有定義都保留、需要時可重用。
+
+現在主力（公開 artifact 迴圈要靠的 role）：
+
+- Source Collector
+- Intake Curator
+- Artifact Builder — 把研究過的想法做成可發布 artifact（地圖 / 卡 / X-ray /
+  explainer）。L1/L2 用
+  [content/templates/artifact-brief.md](../content/templates/artifact-brief.md)，
+  L3/L4 用 [content/templates/thesis-card.md](../content/templates/thesis-card.md)。
+  負責 artifact 的 Definition of Done。
+- Content Repurposer — 把一個 artifact 拆成各平台版本（Threads、X、IG carousel、
+  YouTube Shorts），使用 content templates。
+- Gate Reviewer — 現在用兩層 gate 路由：教育型 artifact 走 Gate A，投資觀點走
+  Gate B（IA1/IA2）。
+
+現在先不重押（保留定義，先不深化）：
+
+- POV Coach
+- Scenario Analyzer / Technical Analyst 這類深度 role
+- Runtime skill system、hooks、自動化 scripts、成長 / 流量 agent
+
+原因：目前還沒累積足夠的內容市場回饋。在受眾還沒進來前就把投資分析流程做到滿，
+正是這個切分要防的失敗模式。現在的優先是穩定、可被看見的 artifact 產出。
+
+Artifact Builder 與 Content Repurposer 在這裡是 active role；它們是「組合」下面
+既有的 role（Source Collector、Intake Curator、Knowledge Architecture、Brief
+Builder），不是取代它們。
+
 ## 為什麼先 Role，不先 Skill
 
 - Skill 適合穩定流程。

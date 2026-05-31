@@ -9,6 +9,73 @@
 本檔聚焦產品/業務 milestone。工程實作 milestone（templates、scripts、commands、
 branch 策略）放在 [docs/IMPLEMENTATION_PLAN.zh.md](IMPLEMENTATION_PLAN.zh.md)。
 
+## 操作模型（artifact-first overlay）
+
+方向錨點：[docs/NORTH_STAR.zh.md](NORTH_STAR.zh.md)。核心單位：
+[docs/ARTIFACT_SYSTEM.zh.md](ARTIFACT_SYSTEM.zh.md)。
+
+這個 repo 現在以 artifact 為先來讀。我們優化的迴圈是：
+
+```text
+Artifact -> 公開內容 -> 受眾訊號 -> 研究深化 -> 產品
+```
+
+Milestone 命名規則（先讀這段避免混淆）：
+
+- **Artifact 軌道用 `A` 前綴（A0.5、A1、A2……）。** 描述這個 overlay 的
+  artifact-first 重新排序。
+- **工程 / dashboard milestone 維持 `M` 前綴（M0-M6）。** 那些是本檔下方、
+  [docs/IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) 以及生成的
+  `ops/current.md` / `ops/dashboard.html` 裡既有的 milestone，維持有效、不變。
+
+`A` overlay 只是重排優先序，不會重編號或取代 `M` milestone。
+
+下面原本的 milestone（M0-M6）仍然有效，作為研究品質層與基礎設施層。它們本身不再
+是「立刻要做的下一步」，而是服務 artifact 迴圈。深度 source-backed 研究
+milestone（IMPLEMENTATION_PLAN 的 M1.1/M1.2 型工作）是研究品質層，不應擋住公開
+artifact 測試。
+
+往後的 artifact-first milestone 順序：
+
+```text
+A0.5 Repo Refinement          (這個 overlay + operating layer)
+A1   Artifact Engine MVP       (5 個可發布 artifact)
+A2   Research Packet Lite       (只深化表現好的 artifact)
+A3   Public Distribution Loop   (穩定的每週發布節奏)
+A4   Landing Page + Private Traffic
+A5   First Interactive Prototype
+```
+
+這些是「重用」而非「取代」下面的系統：內容生產走
+[content/CONTENT_OPERATING_SYSTEM.md](../content/CONTENT_OPERATING_SYSTEM.md) 與
+[content/templates/](../content/templates/)；發布用
+[docs/HUMAN_GATES.zh.md](HUMAN_GATES.zh.md) 的兩層 gate（教育型 artifact 走
+Gate A，投資觀點走 Gate B）；metrics 用 [ops/METRICS.md](../ops/METRICS.md) 與
+`ops/decisions/` 的 post-publish checklist。工作 backlog 與 milestone spec 放在
+[ops/backlog.md](../ops/backlog.md)。
+
+## A0.5 - Repo Refinement（artifact 軌道）
+
+成果：repo 讀起來像 artifact-led KOL operating system，不是只有研究流程。純
+additive，不移除任何既有系統。
+
+- 加方向層：[docs/NORTH_STAR.zh.md](NORTH_STAR.zh.md)。
+- 加 artifact 模型：[docs/ARTIFACT_SYSTEM.zh.md](ARTIFACT_SYSTEM.zh.md)，含
+  L1-L4 分級。
+- 加每日 / 每週 operating layer：[NEXT_ACTIONS.md](../NEXT_ACTIONS.md) 與
+  `ops/weekly/`。
+- 加公域分發 templates：IG carousel、YouTube Shorts、輕量 artifact brief。
+- 在 [docs/HUMAN_GATES.zh.md](HUMAN_GATES.zh.md) 加兩層發布 gate（Gate A vs B）。
+- 把 AI Server Supply Chain reframe 成第一個公開 artifact 系列。
+
+Exit criteria：
+
+- 新人打開 repo 就知道這專案在做什麼。
+- `NEXT_ACTIONS.md` 告訴使用者今天該做什麼。
+- 每個 artifact 有清楚的生命週期與 Definition of Done。
+- 有每週 review 儀式。
+- 研究流程仍可用，但不再擋住公開測試。
+
 ## Milestone 0 - Foundation 與 Agentic Harness
 
 成果：repo 成為 single source of truth，並有定義好的 harness。
