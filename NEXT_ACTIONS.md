@@ -6,15 +6,15 @@
 
 ## 本週（最多 3）
 
-1. 完成 M0.5 repo refinement
+1. 完成 A0.5 repo refinement
 2. 把 AI Server Supply Chain 收斂成第一個 public artifact series（先用既有散熱系列）
 3. 發布 3 則 Threads 測試不同角度
 
 ## 今天（最多 3）
 
-1. Review M0.5 新增的 North Star / Artifact System
+1. Review A0.5 新增的 North Star / Artifact System
 2. 建立本週 weekly review（`ops/weekly/`）
-3. 從 `ops/backlog.md` 挑 1 個 M1 artifact 動工
+3. 從 `ops/backlog.md` 挑 1 個 A1 artifact 動工
 
 ## Not Now（最多 5）
 
