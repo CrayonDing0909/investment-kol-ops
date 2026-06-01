@@ -60,7 +60,9 @@ Trigger：任何不做方向、部位、買賣、目標價、回測宣稱的公�
 - Source note：每個關鍵宣稱對應至少一個 source。
 - 不確定性 label（哪裡還沒驗證）。
 
-通過條件（全部必填）：
+Gate A 有**兩個**必過檢查。**安全不等於可發布** —— 兩個都要過。
+
+**檢查一 — Safety Check（全部必填）：**
 
 - [ ] 至少有一個 source 且有 label。
 - [ ] 沒有買賣 call。
@@ -68,7 +70,21 @@ Trigger：任何不做方向、部位、買賣、目標價、回測宣稱的公�
 - [ ] 沒有個人化投資建議。
 - [ ] 有標不確定性。
 
-決策：approve（發布）、edit、reject。
+**檢查二 — Owner Comprehension Check（全部必填）：**
+
+由 owner（或替身目標讀者）看完 artifact 後回答：
+
+- [ ] 1. 我 5 秒內知道這篇要教我什麼嗎？
+- [ ] 2. 我看完能用一句話講出學到什麼嗎？
+- [ ] 3. 第一屏陌生名詞是否 ≤3 個？（explainer 目標：0）
+- [ ] 4. 這是作品，還是資料堆疊？
+
+**硬規則：** 若 owner 說「我沒學到東西」，Gate A **不能 approve**。Artifact 退回
+**rebuild**（依 [docs/CONTENT_CONVERSION_PIPELINE.zh.md](CONTENT_CONVERSION_PIPELINE.zh.md)
+重開 Episode Contract），不是輕量潤稿。公開 artifact 到達這個 gate 前，必須已經過
+它的 Episode Contract；把知識地圖直接渲染成公開形式，從定義上就過不了 Gate A。
+
+決策：approve（發布）、edit、reject（rebuild）。
 
 決策後：
 

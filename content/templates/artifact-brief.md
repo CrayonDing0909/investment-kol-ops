@@ -20,6 +20,18 @@ created_at: 2026-05-31
 > 系統定義：[docs/ARTIFACT_SYSTEM.md](../../docs/ARTIFACT_SYSTEM.md)。
 > 發布走 Gate A（[docs/HUMAN_GATES.md](../../docs/HUMAN_GATES.md)）。
 
+## 前置條件（生成任何公開產出前必過）
+
+本 brief 屬於
+[docs/CONTENT_CONVERSION_PIPELINE.md](../../docs/CONTENT_CONVERSION_PIPELINE.md)
+的一環。**在生成 HTML / IG / Shorts / 公開貼文之前**，必須先具備：
+
+- [ ] 該系列已核准的 **Series Bible**（[series-bible.md](series-bible.md)）
+- [ ] 該集 owner 核准的 **Episode Contract**（[episode-contract.md](episode-contract.md)）
+
+沒有這兩份，這份 brief 只能停在規格層，**不得產出公開內容**。公開 artifact 不是
+知識地圖的渲染，必須 comprehension-first 重新創作。
+
 ## Frontmatter
 
 ```yaml
@@ -30,6 +42,8 @@ risk: low            # 無買賣判斷才是 low；一旦帶方向判斷 → 升
 artifact_kind: <supply-chain-map | company-card | etf-xray | ai-tool-demo | market-map | glossary-visual>
 core_question: <一句話：這個 artifact 要回答什麼？>
 backbone_ref: <連回 research/knowledge/<theme>/ 的 HTML page（若有）>
+series_bible_ref: <相對路徑到該系列已核准的 series-bible（公開產出前必填）>
+episode_contract_ref: <相對路徑到該集 owner 核准的 episode-contract（公開產出前必填）>
 sources:
   - <source 1 + label（reported-fact / management-expectation / secondary / ...）>
 created_at: YYYY-MM-DD
@@ -80,6 +94,8 @@ public_status: <draft | ready | scheduled | published>
 - [ ] 有一句 human insight（不是投資建議）
 - [ ] 有至少 2 個公域內容版本
 - [ ] 有 metrics tracking hook
+- [ ] 公開產出前：Series Bible + Episode Contract 皆已 owner 核准
+- [ ] Gate A 同時通過 Safety Check 與 Owner Comprehension Check（owner 看完有學到一件事）
 
 ## Disclaimer
 

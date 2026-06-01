@@ -66,7 +66,10 @@ Show to human:
 - The source note: each key claim mapped to at least one source.
 - The uncertainty label (what is not yet verified).
 
-Pass conditions (all required):
+Gate A has **two** required checks. **Safe does not mean publishable** — both
+must pass.
+
+**Check 1 — Safety Check (all required):**
 
 - [ ] At least one source is present and labeled.
 - [ ] No buy/sell call.
@@ -74,7 +77,23 @@ Pass conditions (all required):
 - [ ] No personalized investment advice.
 - [ ] Uncertainty is labeled.
 
-Decisions: approve (publish), edit, reject.
+**Check 2 — Owner Comprehension Check (all required):**
+
+The owner (or a stand-in target reader) answers these after reading the artifact:
+
+- [ ] 1. Do I know what this teaches within 5 seconds?
+- [ ] 2. Can I say what I learned in one sentence?
+- [ ] 3. Does the first screen have ≤3 unfamiliar terms? (explainer target: 0)
+- [ ] 4. Is this a crafted piece, not a data dump?
+
+**Hard rule:** if the owner says "I did not learn anything," Gate A **cannot
+approve**. The artifact returns to **rebuild** (re-open its Episode Contract per
+[docs/CONTENT_CONVERSION_PIPELINE.md](CONTENT_CONVERSION_PIPELINE.md)), not a
+light edit. A public artifact must also have passed its Episode Contract before
+reaching this gate; a knowledge map rendered straight to public form fails Gate A
+by construction.
+
+Decisions: approve (publish), edit, reject (rebuild).
 
 Post-decision:
 
