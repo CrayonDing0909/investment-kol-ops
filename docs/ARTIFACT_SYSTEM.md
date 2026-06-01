@@ -15,6 +15,29 @@ demo, or a market map.
 Research packets and briefs still exist, but they are now the research-quality
 layer underneath artifacts, not the deliverable.
 
+## Internal vs public artifact
+
+Not every artifact is for an audience. Distinguish two classes; they have
+different bars and different homes.
+
+| Class | Optimized for | Lives in | Bar | Examples |
+|-------|---------------|----------|-----|----------|
+| Internal artifact | completeness / correctness | `research/**` | accurate + complete | knowledge map, primer, source-tutor reading, brief |
+| Public artifact | comprehension / worth reading | `content/**`, series reading surfaces | a human learns one thing | Threads, IG carousel, Shorts, public HTML explainer |
+
+Rules:
+
+- A **public artifact is never a render of a knowledge map.** It must be
+  re-authored through the Content Conversion Pipeline
+  ([docs/CONTENT_CONVERSION_PIPELINE.md](CONTENT_CONVERSION_PIPELINE.md)): an
+  internal artifact feeds a Series Bible and an owner-approved Episode Contract
+  before any public output is generated.
+- **Artifact-led means comprehension-first, not completeness-first.** Internal
+  artifacts may be dense; public artifacts must be understandable.
+- A public artifact reaches Gate A only after its Episode Contract is approved,
+  and Gate A requires both a Safety Check and an Owner Comprehension Check
+  ([docs/HUMAN_GATES.md](HUMAN_GATES.md)). Safe does not mean publishable.
+
 ## Artifact types
 
 1. Supply Chain Map

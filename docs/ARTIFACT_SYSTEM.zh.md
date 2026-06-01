@@ -17,6 +17,27 @@ Artifact 是一個可被觀眾看見、理解、保存、分享的金融圖解�
 Research packet 與 brief 仍然存在，但它們現在是 artifact 底下的「研究品質層」，
 不是交付物本身。
 
+## 內部 artifact vs 公開 artifact
+
+不是每個 artifact 都給觀眾看。分成兩類，兩者標準不同、放的地方也不同。
+
+| 類別 | 為什麼最佳化 | 放在 | 標準 | 例子 |
+|------|------|------|------|------|
+| 內部 artifact | 完整 / 正確 | `research/**` | 正確 + 完整 | 知識地圖、primer、source-tutor reading、brief |
+| 公開 artifact | 理解 / 值得看 | `content/**`、系列閱讀面 | 一個人有學到一件事 | Threads、IG carousel、Shorts、公開 HTML explainer |
+
+規則：
+
+- **公開 artifact 永遠不是知識地圖的渲染。** 它必須經過 Content Conversion
+  Pipeline（[docs/CONTENT_CONVERSION_PIPELINE.zh.md](CONTENT_CONVERSION_PIPELINE.zh.md)）
+  重新創作：內部 artifact 餵 Series Bible 與一份 owner 核准的 Episode Contract，
+  之後才生成任何公開產出。
+- **Artifact-led 是理解優先，不是完整優先。** 內部 artifact 可以很密；公開
+  artifact 必須好懂。
+- 公開 artifact 只有在它的 Episode Contract 核准後才到 Gate A；Gate A 同時需要
+  Safety Check 與 Owner Comprehension Check（[docs/HUMAN_GATES.zh.md](HUMAN_GATES.zh.md)）。
+  安全不等於可發布。
+
 ## Artifact 類型
 
 1. 供應鏈地圖（Supply Chain Map）
