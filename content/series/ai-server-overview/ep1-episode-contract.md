@@ -5,8 +5,8 @@ series: ai-server-overview
 episode: 1
 phase: explainer
 series_bible_ref: content/series/ai-server-overview/series-bible.md
-owner_approved: false
-owner_approved_at:
+owner_approved: true
+owner_approved_at: 2026-06-01
 created_at: 2026-06-01
 ---
 
@@ -57,7 +57,8 @@ CDU、manifold、UQD、ASIC、BOM、rack（用「機櫃 / 一整台」代替）�
 
 ## 7. 第一屏術語預算（First-screen jargon budget）
 
-**0**。第一屏（hook + 前兩句）不得出現任何專有名詞或英文縮寫。
+第一屏不出現**新的、未解釋的**術語。允許 anchor terms：**AI server、GPU**。
+除此之外，explainer 第一屏的陌生術語預算 = 0。
 
 ## 8. 理解目標（Comprehension target）
 
@@ -88,8 +89,13 @@ owner 核准合約前，先確認這份合約能導向「可理解的成品」�
 
 ## Owner 核准
 
-- [ ] Owner 已 review 並同意這份 EP1 Episode Contract
+- [x] Owner 已 review 並同意這份 EP1 Episode Contract（2026-06-01）
 - 核准後：`owner_approved: true` + 填日期；**此後才可生成 EP1 公開產出**。
+
+> 註：`owner_approved: true` **只代表 Episode Contract（方向合約）已核准，可以開始
+> 產出 public draft**。它**不代表** Threads draft 已通過 Gate A，也**不代表**可以
+> 發布。正式 Gate A 仍需在成品完成後執行 **Safety Check + Owner Comprehension
+> Check**（見 [docs/HUMAN_GATES.zh.md](../../../docs/HUMAN_GATES.zh.md)）。
 
 ## Disclaimer
 
